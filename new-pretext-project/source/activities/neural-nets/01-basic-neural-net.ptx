@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<worksheet xml:id="basic-neural-net">
+  <introduction>
+        <p>
+            In this exercise we will examine the structure of word embeddings like those used to create the game semantle and pimantle.
+            We will compare two different techniques for reducing dimensionality.
+        </p>
+</introduction>

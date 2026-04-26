@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<worksheet>
+  <exercise>
+    <statement>
+      <p>
+        In Part 2, we modeled regular dosing with the recurrence
+      </p>
+
+      <me>H_{n+1}=aH_n+D.</me>
+
+      <p>
+        Now suppose treatment is interrupted. After the final dose, there are no
+        additional doses, so the concentration only decays.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Let <m>H_0</m> be the concentration immediately after the final dose.
+        After one dosing interval, the concentration becomes
+      </p>
+
+      <me>H_1=aH_0.</me>
+
+      <p>
+        Write formulas for <m>H_2,H_3,H_4</m>. Then write a general formula for
+        <m>H_n</m>.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Suppose that before treatment is interrupted, the concentration is close
+        to the steady state
+      </p>
+
+      <me>H^\ast=\frac{D}{1-a}.</me>
+
+      <p>
+        Under regular dosing, the model predicts that the concentration stays
+        near <m>H^\ast</m>. After interruption, the model becomes
+      </p>
+
+      <me>H_n=a^nH^\ast.</me>
+
+      <p>
+        Use this formula to complete the table below.
+      </p>
+
+      <tabular>
+        <row>
+          <cell><m>n</m></cell>
+          <cell>Regular dosing</cell>
+          <cell>After interruption</cell>
+        </row>
+        <row>
+          <cell><m>0</m></cell>
+          <cell><m>H^\ast</m></cell>
+          <cell><m>H^\ast</m></cell>
+        </row>
+        <row>
+          <cell><m>1</m></cell>
+          <cell><m>H^\ast</m></cell>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>2</m></cell>
+          <cell><m>H^\ast</m></cell>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>3</m></cell>
+          <cell><m>H^\ast</m></cell>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>4</m></cell>
+          <cell><m>H^\ast</m></cell>
+          <cell></cell>
+        </row>
+      </tabular>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Suppose the concentration needs to stay above a threshold <m>L</m>.
+        After interruption, the concentration is modeled by
+      </p>
+
+      <me>H_n=a^nH^\ast.</me>
+
+      <p>
+        We want to know when the concentration falls below <m>L</m>.
+      </p>
+
+      <p>
+        Starting from
+      </p>
+
+      <me>a^nH^\ast \lt L,</me>
+
+      <p>
+        solve for <m>n</m>. Your answer should involve logarithms.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Suppose <m>a=0.545</m>, corresponding approximately to a half-life of
+        <m>8</m> days and a dosing interval of <m>7</m> days. Suppose also that
+        a threshold is <m>25\%</m> of the steady-state concentration:
+      </p>
+
+      <me>L=0.25H^\ast.</me>
+
+      <p>
+        Find the first integer <m>n</m> such that
+      </p>
+
+      <me>a^nH^\ast \lt 0.25H^\ast.</me>
+
+      <p>
+        How many weeks does this represent?
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        The number <m>L</m> in the previous exercises is a simplified threshold.
+        In real clinical contexts, thresholds may depend on the medication,
+        route of administration, lab values, individual physiology, and treatment
+        goals.
+      </p>
+
+      <p>
+        Why is it useful to study threshold models anyway? What can a simplified
+        model show clearly, even when it does not capture every biological
+        detail?
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Some policies or administrative decisions interrupt access to medication
+        by delaying refills, blocking appointments, changing insurance coverage,
+        or restricting care.
+      </p>
+
+      <p>
+        Using the model from this part, explain why a short administrative delay
+        may have consequences that depend on timing. In your answer, refer to at
+        least two of the following:
+      </p>
+
+      <ul>
+        <li>half-life,</li>
+        <li>dosing interval,</li>
+        <li>steady state,</li>
+        <li>threshold crossing,</li>
+        <li>time since last dose.</li>
+      </ul>
+    </statement>
+  </exercise>
+</worksheet>

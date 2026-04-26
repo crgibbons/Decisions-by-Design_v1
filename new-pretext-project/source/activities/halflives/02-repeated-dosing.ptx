@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<worksheet xml:id="repeated-dosing-opening">
+  <exercise>
+    <statement>
+      <p>
+        The model in Part 1 describes what happens after treatment stops. But
+        before treatment stops, medication is usually taken on a schedule. A
+        simple way to model repeated dosing is to update the concentration at
+        regular time intervals.
+      </p>
+
+      <p>
+        Suppose a dose is taken every <m>T</m> days. Between doses, the medication
+        concentration decays exponentially. If the elimination constant is
+        <m>k</m>, then after <m>T</m> days, the concentration is multiplied by
+      </p>
+
+      <me>a = e^{-kT}.</me>
+
+      <p>
+        Then a new dose increases the concentration by an amount <m>D</m>.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Let <m>H_n</m> be the medication concentration immediately after the
+        <m>n</m>th dose.
+      </p>
+
+      <p>
+        Explain why the concentration immediately after the next dose satisfies
+      </p>
+
+      <me>H_{n+1} = aH_n + D.</me>
+
+      <p>
+        In this model, what does each term represent?
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Suppose the half-life is <m>8</m> days and a dose is taken every
+        <m>7</m> days.
+      </p>
+
+      <p>
+        First compute
+      </p>
+
+      <me>k = \frac{\ln 2}{8}</me>
+
+      <p>
+        and then compute
+      </p>
+
+      <me>a = e^{-7k}.</me>
+
+      <p>
+        Interpret the number <m>a</m> in words.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        For simplicity, suppose <m>D=1</m> and <m>H_0=1</m>. Use the recurrence
+      </p>
+
+      <me>H_{n+1}=aH_n+1</me>
+
+      <p>
+        to compute <m>H_1,H_2,H_3,H_4</m>. Round your answers to three decimal
+        places.
+      </p>
+
+      <tabular>
+        <row>
+          <cell><m>n</m></cell>
+          <cell><m>H_n</m></cell>
+        </row>
+        <row>
+          <cell><m>0</m></cell>
+          <cell><m>1</m></cell>
+        </row>
+        <row>
+          <cell><m>1</m></cell>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>2</m></cell>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>3</m></cell>
+          <cell></cell>
+        </row>
+        <row>
+          <cell><m>4</m></cell>
+          <cell></cell>
+        </row>
+      </tabular>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        A <em>steady state</em> for the recurrence
+      </p>
+
+      <me>H_{n+1}=aH_n+D</me>
+
+      <p>
+        is a value <m>H^\ast</m> such that if <m>H_n=H^\ast</m>, then
+        <m>H_{n+1}=H^\ast</m>.
+      </p>
+
+      <p>
+        Find a formula for <m>H^\ast</m> in terms of <m>a</m> and <m>D</m>.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        The recurrence
+      </p>
+
+      <me>H_{n+1}=aH_n+D</me>
+
+      <p>
+        is not a linear transformation because of the added constant <m>D</m>.
+        However, it can be written as a matrix update by adding an extra
+        coordinate:
+      </p>
+
+      <me>
+        \begin{pmatrix}
+        H_{n+1}\\
+        1
+        \end{pmatrix}
+        =
+        \begin{pmatrix}
+        a &amp; D\\
+        0 &amp; 1
+        \end{pmatrix}
+        \begin{pmatrix}
+        H_n\\
+        1
+        \end{pmatrix}.
+      </me>
+
+      <p>
+        Verify that this matrix equation gives the same recurrence.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        In this model, regular dosing does not simply keep the concentration
+        constant. Instead, the concentration moves toward a steady pattern
+        determined by the dose size, dosing interval, and half-life.
+      </p>
+
+      <p>
+        Explain why this matters when thinking about interruptions to medication
+        access. What information would be missing if we only knew whether someone
+        had taken a dose recently?
+      </p>
+    </statement>
+  </exercise>
+</worksheet>

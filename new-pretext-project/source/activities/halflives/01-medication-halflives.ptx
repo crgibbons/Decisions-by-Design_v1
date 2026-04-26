@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- When creating a new activity, make a copy of this file with appropriate name -->
+<worksheet xml:id="worksheet-hormone-halflife">
+  <title>Hormone Half-Lives and Exponential Decay</title>
+
+  <p>
+    In this worksheet, we use differential equations to model how medication
+    levels change over time. Our goal is <em>not</em> to make medical recommendations
+    or predict any individual person’s experience. Instead, we build simplified
+    mathematical models that help us understand how medication levels evolve
+    after treatment changes.
+  </p>
+
+  <p>
+    Gender-affirming hormone therapy provides one example where these questions
+    arise in a social and policy context. Clinical guidelines recommend monitoring
+    hormone levels during treatment because concentrations change gradually over
+    time rather than instantly.
+  </p>
+
+  <exercise xml:id="halflife-model">
+    <statement>
+      <p>
+        Suppose a medication has concentration <m>H(t)</m> in the bloodstream at
+        time <m>t</m>. A simple model assumes the body removes the medication at a
+        rate proportional to the amount currently present:
+      </p>
+
+      <me>\frac{dH}{dt} = -kH.</me>
+
+      <p>
+        Here:
+      </p>
+
+      <ul>
+        <li><m>H(t)</m> is the hormone concentration at time <m>t</m>,</li>
+        <li><m>k &gt; 0</m> is the elimination rate constant,</li>
+        <li><m>t</m> is measured in days.</li>
+      </ul>
+    </statement>
+  </exercise>
+
+  <exercise xml:id="halflife-solution">
+    <statement>
+      <p>
+        Solve the differential equation
+      </p>
+
+      <me>\frac{dH}{dt} = -kH</me>
+
+      <p>
+        with initial condition <m>H(0) = H_0</m>.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise xml:id="halflife-constant">
+    <statement>
+      <p>
+        The <em>half-life</em> of a medication is the time required for its
+        concentration to decrease to half its initial value.
+      </p>
+
+      <p>
+        If the half-life is <m>T_{1/2}</m>, show that the constant <m>k</m> satisfies
+      </p>
+
+      <me>k = \frac{\ln 2}{T_{1/2}}.</me>
+    </statement>
+  </exercise>
+
+  <exercise xml:id="testosterone-example">
+    <statement>
+      <p>
+        A commonly prescribed injectable testosterone formulation has an
+        approximate half-life of <m>8</m> days.
+      </p>
+
+      <p>
+        Using <m>T_{1/2} = 8</m>, compute the value of <m>k</m>. Then write the
+        concentration function in the form
+      </p>
+
+      <me>H(t) = H_0 e^{-kt}.</me>
+    </statement>
+  </exercise>
+
+  <exercise xml:id="percent-remaining">
+    <statement>
+      <p>
+        Suppose a patient has concentration <m>H_0</m> at the moment treatment is
+        stopped.
+      </p>
+
+      <p>
+        How much remains after:
+      </p>
+
+      <ol>
+        <li><m>8</m> days?</li>
+        <li><m>16</m> days?</li>
+        <li><m>24</m> days?</li>
+        <li><m>32</m> days?</li>
+      </ol>
+
+      <p>
+        Express each answer as a percentage of <m>H_0</m>.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise xml:id="policy-reflection">
+    <statement>
+      <p>
+        A policy that abruptly interrupts access to medication may be described
+        informally as “just stopping treatment.”
+      </p>
+
+      <p>
+        Based on the model above, explain why this phrase is mathematically
+        incomplete. Consider the role of half-life, dosage schedule, and the
+        difference between stopping a prescription and the body immediately
+        returning to a previous physiological state.
+      </p>
+    </statement>
+  </exercise>
+
+</worksheet>
