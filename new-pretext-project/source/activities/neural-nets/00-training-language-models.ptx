@@ -1,151 +1,136 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <worksheet xml:id="training-language-models">
-    <title>Training Language Models</title>
-    <description> We will look at the size of training corpora for modern <q>all-purpose</q> language models, and the computational and human resources required to train them. </description>
+  <title>Training Language Models</title>
+
+  <description>
+    We will look at the size of training corpora for modern <q>all-purpose</q> language models, and the computational and human resources required to train them.
+  </description>
+
+  <exercise>
+    <statement>
+      <p>
+        The training corpora for modern language models are huge.
+        For example, the training corpus for GPT-3 contains 300 billion tokens.
+        The rule of thumb for tokens-to-words conversion is that 1 token corresponds to about 0.75 words, so the training corpus for GPT-3 contains about 225 billion words.
+        If this were a book, Wolfram Alpha estimates that it would be about 308 million pages, which would talk about 1600 years of silent reading (2900 years in audio book format, and 7100 years if you were to try to type it out).
+      </p>
+
+      <p>
+        BERT, from 2018, was trained on a corpus of 3.3 billion words from the English Wikipedia, which is about 0.0015\% of the size of the GPT-3 training corpus.
+        Larger models rely on illegally scraped data, which is not publicly available, so we don't know the exact size of their training corpora.
+        But we do know that large libraries, like Library of Congress, contain about 17 million books, which is about 10 billion words, so the training corpora for large language models are at least an order of magnitude larger than the entire Library of Congress.
+      </p>
+
+      <p>
+        The training of large language models is also very expensive.
+        For example, the training of GPT-3 is estimated to have cost about 4.6 million dollars, and the training of GPT-4 is estimated to have cost about 100 million dollars.
+        The training of large language models also requires a lot of computational resources, which are not accessible to most researchers and practitioners.
+        For example, the training of GPT-3 is estimated to have required about 355 years of GPU time, and the training of GPT-4 is estimated to have required about 10,000 years of GPU time.
+      </p>
+
+      <p>
+        The human cost of training large language models is also very high, as it requires a lot of human labor to collect and preprocess the training data, and to fine-tune the models for specific tasks.
+        For example, the training of GPT-3 is estimated to have required about 10,000 hours of human labor, and the training of GPT-4 is estimated to have required about 100,000 hours of human labor.
+        This labor includes tasks such as data collection, data cleaning, data annotation, and model evaluation, which are all essential for the successful training of large language models.
+        Filtering for graphic or inappropriate content is also a significant part of the human labor involved in training large language models, as it is important to ensure that the training data does not contain harmful or offensive content that could be learned by the model and reproduced in its outputs.
+      </p>
+    </statement>
+  </exercise>
+
+
+  <parapgraphs>
+    <title>AI Ethics and the Global Data Supply Chain: A Consolidated Guide</title>
+
+    <p>
+      This section explores the ethical implications of artificial intelligence, ranging from college campus algorithms to the global labor force.
+      Discussion questions and insights based on the Pulitzer Center investigation into the "Platform Proletariat" in Brazil.*
+    </p>
 
     <exercise>
-        <statement>
-            <p> 
-                The training corpora for modern language models are huge. 
-                For example, the training corpus for GPT-3 contains 300 billion tokens.
-                The rule of thumb for tokens-to-words conversion is that 1 token corresponds to about 0.75 words, so the training corpus for GPT-3 contains about 225 billion words. 
-                If this were a book, Wolfram Alpha estimates that it would be about 308 million pages, which would talk about 1600 years of silent reading (2900 years in audio book format, and 7100 years if you were to try to type it out).
-            </p>
-            <p> 
-                BERT, from 2018, was trained on a corpus of 3.3 billion words from the English Wikipedia, which is about 0.0015\% of the size of the GPT-3 training corpus.
-                Larger models rely on illegally scraped data, which is not publicly available, so we don't know the exact size of their training corpora.
-                But we do know that large libraries, like Library of Congress, contain about 17 million books, which is about 10 billion words, so the training corpora for large language models are at least an order of magnitude larger than the entire Library of Congress.
-            </p>
-            <p>
-                The training of large language models is also very expensive.
-                For example, the training of GPT-3 is estimated to have cost about 4.6 million dollars, and the training of GPT-4 is estimated to have cost about 100 million dollars.
-                The training of large language models also requires a lot of computational resources, which are not accessible to most researchers and practitioners.
-                For example, the training of GPT-3 is estimated to have required about 355 years of GPU time, and the training of GPT-4 is estimated to have required about 10,000 years of GPU time.
-            </p>
-            <p>
-                The human cost of training large language models is also very high, as it requires a lot of human labor to collect and preprocess the training data, and to fine-tune the models for specific tasks.
-                For example, the training of GPT-3 is estimated to have required about 10,000 hours of human labor, and the training of GPT-4 is estimated to have required about 100,000 hours of human labor.
-                This labor includes tasks such as data collection, data cleaning, data annotation, and model evaluation, which are all essential for the successful training of large language models.
-                Filtering for graphic or inappropriate content is also a significant part of the human labor involved in training large language models, as it is important to ensure that the training data does not contain harmful or offensive content that could be learned by the model and reproduced in its outputs.
-            </p>
-        </statement>
+      <statement>
+        <p>
+          <ul>
+            <li>
+              <p>
+                <b>The Army of Workers.</b> The <q>magic</q> of AI is an illusion. It does not appear <q>magically</q> through machines; it requires an army of workers to comb through prodigious amounts of data to teach systems what is acceptable.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <b>Modern Assembly Line.</b> Like the Industrial Revolution, workers often perform repetitive <q>microtasks</q> (tightening a bolt) without knowing if they are training systems for <q>surveillance and repression</q>.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <b>Labor Rights and Inequality in the Global South.</b> The AI data supply chain relies on underpaid workers in countries like Brazil rather than Silicon Valley offices.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <b>Precarious Work.</b> Workers are paid pennies for complex tasks and face issues like non-payment and strict NDAs.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <b>Addictive Platforms.</b> Some platforms embed microtasks that <q>addict</q> children and teens who work for hours for very little pay.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <b>Quality vs. Accuracy.</b> Poor working conditions directly impact the quality of AI outputs.
+              </p>
+            </li>
+
+            <li>
+              <p>
+                <b>The Opaque Chain.</b> The <q>chain of command</q> is intentionally secretive, involving tech giants, intermediary platforms (like Appen), and isolated workers
+              </p>
+            </li>
+          </ul>
+        </p>
+      </statement>
     </exercise>
 
+    <exercise>
+      <title>Fact Check Challenge</title>
 
-    <subsection>AI Ethics and the Global Data Supply Chain: A Consolidated Guide</subsection>
-            <p>This section explores the ethical implications of artificial intelligence, ranging from college campus algorithms to the global labor force. Discussion questions and insights based on the Pulitzer Center investigation into the "Platform Proletariat" in Brazil.*
-</p>
+      <statement>
+        <p>
+          Students have exactly 101 seconds to verify each of the following claims:
+          <ol>
+            <li>
+              <p>
+                Meta and Appen publicly announced a joint initiative to ensure all Brazilian fact-checkers are paid a fair living wage of at least $15 USD per hour for combating disaster-related misinformation.
+              </p>
+            </li>
 
-            <exercise>
-                <statement>
-                    <p>
-                        <ul>
-                            <li>
-                                <p>
-                                    <b>The Army of Workers.</b> The <q>magic</q> of AI is an illusion. It does not appear <q>magically</q> through machines; it requires an army of workers to comb through prodigious amounts of data to teach systems what is acceptable. 
-                      
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <b>Modern Assembly Line.</b> Like the Industrial Revolution, workers often perform repetitive <q>microtasks</q> (tightening a bolt) without knowing if they are training systems for <q>surveillance and repression</q>.
+            <li>
+              <p>
+                The house that the Hamilton College President resides in is called the Kirkland House.
+              </p>
+            </li>
 
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <b>Labor Rights and Inequality in the Global South.</b> The AI data supply chain relies on underpaid workers in countries like Brazil rather than Silicon Valley offices.
+            <li>
+              <p>
+                The matrix <m>\begin{matrix} 2.5 \amp 2 \\ 2 \amp 2.5 \end{matrix}</m> has eigenvalues <m>\frac{5}{2}</m> and <m>\frac{1}{2}</m>.
+              </p>
+            </li>
 
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <b>Precarious Work.</b> Workers are paid pennies for complex tasks and face issues like non-payment and strict NDAs.
-                        
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <b>Addictive Platforms.</b> Some platforms embed microtasks that <q>addict</q> children and teens who work for hours for very little pay.
-                       
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <b>Quality vs. Accuracy.</b> Poor working conditions directly impact the quality of AI outputs. 
-                                </p>
-                            </li>
-                            <li>
-                                <p>
-                                    <b>The Opaque Chain.</b> The <q>chain of command</q> is intentionally secretive, involving tech giants, intermediary platforms (like Appen), and isolated workers
-                                                                   </p>
-                            </li>
-                        </ul>
-                    </p>
-                    </statement>
-                </exercise>
-
-                <exercise>
-                    <title>Fact Check Challenge</title>
-                    <statement>
-                        <p>
-                            Students have exactly 101 seconds to verify each of the following claims:
-                            <ol>
-                                <li>
-                                    <p>
-                                        Meta and Appen publicly announced a joint initiative to ensure all Brazilian fact-checkers are paid a fair living wage of at least $15 USD per hour for combating disaster-related misinformation.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        The house that the Hamilton College President resides in is called the Kirkland House.
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        The matrix <m>\begin{matrix} 2.5 \amp 2 \\ 2 \amp 2.5 \end{matrix}</m> has eigenvalues <m>\frac{5}{2}</m> and <m>\frac{1}{2}</m>.   
-                                    </p>
-                                </li>
-                                <li>
-                                    <p>
-                                        The SMOL language model was trained on a corpus of 100 billion tokens.
-                                    </p>
-                                </li>
-
-                            </ol>
-                        </p>
-                    </statement>
-                </exercise>
-                                                       
-<!-- 
-Like the Industrial Revolution, workers often perform repetitive <q>microtasks</q> (tightening a bolt) without knowing if they are training systems for <q>surveillance and repression</q>.
-
-### **
-## Part 3: The 101-Second Fact-Check Challenge
-*A classroom activity designed to simulate the time crunch faced by global data workers.*
-
-### **The Challenge**
-Students have exactly **1 minute and 41 seconds** to verify this claim:
-> "Meta and Appen publicly announced a joint initiative to ensure all Brazilian fact-checkers are paid a fair living wage of at least $15 USD per hour for combating disaster-related misinformation."
-
-### **The Reality (Debrief)**
-*   **The Time Limit:** 101 seconds is the average time workers have to meet the quota of 40 posts per hour.
-*   **The Pay:** Workers are actually paid "less than a dollar" for fact-checking sensitive topics like the 2024 Brazil floods.
-*   **The Secrecy:** Companies often refuse to confirm contracts with intermediaries, and workers are bound by strict NDAs.
-
-
-## Part 4: Ethical & Business Deep Dive
-
-### **The Hunger for Large Corpora**
-AI requires "ever-increasing volumes of data". This creates a "Quality-to-Scale Paradox":
-*   To process "colossal" amounts of data (like ID cards or pictures of children), companies prioritize speed over quality.
-*   Rushed work leads to poor results on a massive scale, baking errors into the foundation of the AI.
-
-### **Business Ethics: Why Companies Do This**
-*   **Cost Minimization:** Subcontracting to the Global South minimizes labor overhead for billion-dollar systems.
-*   **Brand Protection:** Hiding the human labor maintains the high-tech "glamour" of AI.
-*   **Strategic Opacity:** Fragmented work and strict NDAs prevent collective bargaining and shield parent companies from legal or ethical accountability for how the data is used.
-                    -->
-
+            <li>
+              <p>
+                The SMOL language model was trained on a corpus of 100 billion tokens.
+              </p>
+            </li>
+          </ol>
+        </p>
+      </statement>
+    </exercise>
+    <!-- Like the Industrial Revolution, workers often perform repetitive <q>microtasks</q> (tightening a bolt) without knowing if they are training systems for <q>surveillance and repression</q>. ### ** ## Part 3: The 101-Second Fact-Check Challenge *A classroom activity designed to simulate the time crunch faced by global data workers.* ### **The Challenge** Students have exactly **1 minute and 41 seconds** to verify this claim: > "Meta and Appen publicly announced a joint initiative to ensure all Brazilian fact-checkers are paid a fair living wage of at least $15 USD per hour for combating disaster-related misinformation." ### **The Reality (Debrief)** *   **The Time Limit:** 101 seconds is the average time workers have to meet the quota of 40 posts per hour. *   **The Pay:** Workers are actually paid "less than a dollar" for fact-checking sensitive topics like the 2024 Brazil floods. *   **The Secrecy:** Companies often refuse to confirm contracts with intermediaries, and workers are bound by strict NDAs. ## Part 4: Ethical & Business Deep Dive ### **The Hunger for Large Corpora** AI requires "ever-increasing volumes of data". This creates a "Quality-to-Scale Paradox": *   To process "colossal" amounts of data (like ID cards or pictures of children), companies prioritize speed over quality. *   Rushed work leads to poor results on a massive scale, baking errors into the foundation of the AI. ### **Business Ethics: Why Companies Do This** *   **Cost Minimization:** Subcontracting to the Global South minimizes labor overhead for billion-dollar systems. *   **Brand Protection:** Hiding the human labor maintains the high-tech "glamour" of AI. *   **Strategic Opacity:** Fragmented work and strict NDAs prevent collective bargaining and shield parent companies from legal or ethical accountability for how the data is used. -->
+  </parapgraphs>
 </worksheet>
