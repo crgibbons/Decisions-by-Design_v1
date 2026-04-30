@@ -1,0 +1,3 @@
+https://www.scaler.com/topics/tensorflow/tensorflow-word-embeddings/
+ISPL textbook
+nescac hockey

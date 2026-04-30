@@ -48,10 +48,13 @@
       </introduction>
 
       <!-- Remove the example and replace with your own activities -->
-      <xi:include href="./activities/01-medication-halflives.ptx"/>
-      <xi:include href="./activities/02-repeated-dosing.ptx"/>
-      <xi:include href="./activities/03-stopping-medication.ptx"/>
-      <xi:include href="./activities/04-administrative-delay.ptx"/>
+      <xi:include href="./activities/halflives/01-medication-halflives.ptx"/>
+      <xi:include href="./activities/halflives/02-repeated-dosing.ptx"/>
+      <xi:include href="./activities/halflives/03-stopping-medication.ptx"/>
+      <xi:include href="./activities/halflives/04-administrative-delay.ptx"/>
+
+      <xi:include href="./activities/neural-nets/00-training-language-models.ptx"/>
+      <xi:include href="./activities/neural-nets/01-dimensionality-reduction-strategies.ptx"/>
 
       <!-- Add more xi:include files here to include them in the main course -->
     </chapter>

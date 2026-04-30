@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<worksheet>
+
+<worksheet xml:id="coupled-system-opening">
   <exercise>
     <statement>
       <p>
-        In Part 2, we modeled regular dosing with the recurrence
+        So far, we have modeled one medication concentration at a time. But many
+        biological systems involve feedback. For example, one hormone level can
+        influence the production or suppression of another.
       </p>
 
-      <me>H_{n+1}=aH_n+D.</me>
-
       <p>
-        Now suppose treatment is interrupted. After the final dose, there are no
-        additional doses, so the concentration only decays.
+        We now study a simplified two-variable model. Let <m>E(t)</m> represent
+        an estradiol-related concentration and let <m>T(t)</m> represent a
+        testosterone-related concentration.
       </p>
     </statement>
   </exercise>
@@ -18,159 +20,178 @@
   <exercise>
     <statement>
       <p>
-        Let <m>H_0</m> be the concentration immediately after the final dose.
-        After one dosing interval, the concentration becomes
+        Consider the system
       </p>
 
-      <me>H_1=aH_0.</me>
+      <me>
+        \begin{aligned}
+        E' \amp = -aE + u,\\
+        T' \amp = b - cE - dT.
+        \end{aligned}
+      </me>
 
       <p>
-        Write formulas for <m>H_2,H_3,H_4</m>. Then write a general formula for
-        <m>H_n</m>.
-      </p>
-    </statement>
-  </exercise>
-
-  <exercise>
-    <statement>
-      <p>
-        Suppose that before treatment is interrupted, the concentration is close
-        to the steady state
-      </p>
-
-      <me>H^\ast=\frac{D}{1-a}.</me>
-
-      <p>
-        Under regular dosing, the model predicts that the concentration stays
-        near <m>H^\ast</m>. After interruption, the model becomes
-      </p>
-
-      <me>H_n=a^nH^\ast.</me>
-
-      <p>
-        Use this formula to complete the table below.
-      </p>
-
-      <tabular>
-        <row>
-          <cell><m>n</m></cell>
-          <cell>Regular dosing</cell>
-          <cell>After interruption</cell>
-        </row>
-        <row>
-          <cell><m>0</m></cell>
-          <cell><m>H^\ast</m></cell>
-          <cell><m>H^\ast</m></cell>
-        </row>
-        <row>
-          <cell><m>1</m></cell>
-          <cell><m>H^\ast</m></cell>
-          <cell></cell>
-        </row>
-        <row>
-          <cell><m>2</m></cell>
-          <cell><m>H^\ast</m></cell>
-          <cell></cell>
-        </row>
-        <row>
-          <cell><m>3</m></cell>
-          <cell><m>H^\ast</m></cell>
-          <cell></cell>
-        </row>
-        <row>
-          <cell><m>4</m></cell>
-          <cell><m>H^\ast</m></cell>
-          <cell></cell>
-        </row>
-      </tabular>
-    </statement>
-  </exercise>
-
-  <exercise>
-    <statement>
-      <p>
-        Suppose the concentration needs to stay above a threshold <m>L</m>.
-        After interruption, the concentration is modeled by
-      </p>
-
-      <me>H_n=a^nH^\ast.</me>
-
-      <p>
-        We want to know when the concentration falls below <m>L</m>.
+        Here <m>a,b,c,d</m> are positive constants, and <m>u</m> represents a
+        steady external input.
       </p>
 
       <p>
-        Starting from
-      </p>
-
-      <me>a^nH^\ast \lt L,</me>
-
-      <p>
-        solve for <m>n</m>. Your answer should involve logarithms.
-      </p>
-    </statement>
-  </exercise>
-
-  <exercise>
-    <statement>
-      <p>
-        Suppose <m>a=0.545</m>, corresponding approximately to a half-life of
-        <m>8</m> days and a dosing interval of <m>7</m> days. Suppose also that
-        a threshold is <m>25\%</m> of the steady-state concentration:
-      </p>
-
-      <me>L=0.25H^\ast.</me>
-
-      <p>
-        Find the first integer <m>n</m> such that
-      </p>
-
-      <me>a^nH^\ast \lt 0.25H^\ast.</me>
-
-      <p>
-        How many weeks does this represent?
-      </p>
-    </statement>
-  </exercise>
-
-  <exercise>
-    <statement>
-      <p>
-        The number <m>L</m> in the previous exercises is a simplified threshold.
-        In real clinical contexts, thresholds may depend on the medication,
-        route of administration, lab values, individual physiology, and treatment
-        goals.
-      </p>
-
-      <p>
-        Why is it useful to study threshold models anyway? What can a simplified
-        model show clearly, even when it does not capture every biological
-        detail?
-      </p>
-    </statement>
-  </exercise>
-
-  <exercise>
-    <statement>
-      <p>
-        Some policies or administrative decisions interrupt access to medication
-        by delaying refills, blocking appointments, changing insurance coverage,
-        or restricting care.
-      </p>
-
-      <p>
-        Using the model from this part, explain why a short administrative delay
-        may have consequences that depend on timing. In your answer, refer to at
-        least two of the following:
+        Interpret each term in the model:
       </p>
 
       <ul>
-        <li>half-life,</li>
-        <li>dosing interval,</li>
-        <li>steady state,</li>
-        <li>threshold crossing,</li>
-        <li>time since last dose.</li>
+        <li><m>-aE</m></li>
+        <li><m>u</m></li>
+        <li><m>b</m></li>
+        <li><m>-cE</m></li>
+        <li><m>-dT</m></li>
       </ul>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Rewrite the system
+      </p>
+
+      <me>
+        \begin{aligned}
+        E' &amp;= -aE + u,\\
+        T' &amp;= b - cE - dT
+        \end{aligned}
+      </me>
+
+      <p>
+        in matrix form as
+      </p>
+
+      <me>\mathbf{x}' = A\mathbf{x}+\mathbf{r}</me>
+
+      <p>
+        where
+      </p>
+
+      <me>
+        \mathbf{x}=
+        \begin{pmatrix}
+        E\\
+        T
+        \end{pmatrix}.
+      </me>
+
+      <p>
+        Identify the matrix <m>A</m> and the vector <m>\mathbf{r}</m>.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise xml:id="coupled-system-equilibrium">
+    <statement>
+      <p>
+        An equilibrium occurs when <m>E'=0</m> and <m>T'=0</m>.
+      </p>
+
+      <p>
+        Solve the system
+      </p>
+
+      <me>
+        \begin{aligned}
+        0 \amp = -aE + u,\\
+        0 \amp = b - cE - dT
+        \end{aligned}
+      </me>
+
+      <p>
+        to find the equilibrium point <m>(E^\ast,T^\ast)</m>.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        Suppose treatment is interrupted, so the external input changes from
+        <m>u &gt; 0</m> to <m>u=0</m>.
+      </p>
+
+      <p>
+        The new system is
+      </p>
+
+      <me>
+        \begin{aligned}
+        E' &amp;= -aE,\\
+        T' &amp;= b - cE - dT.
+        \end{aligned}
+      </me>
+
+      <p>
+        Find the new equilibrium point.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        To make the system concrete, suppose
+      </p>
+
+      <me>a=0.4,\quad b=1.0,\quad c=0.6,\quad d=0.5.</me>
+
+      <p>
+        First assume regular treatment with <m>u=1.2</m>. Find the equilibrium
+        <m>(E^\ast,T^\ast)</m>.
+      </p>
+
+      <p>
+        Then assume treatment is interrupted, so <m>u=0</m>. Find the new
+        equilibrium.
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        The matrix for the homogeneous part of the system is
+      </p>
+
+      <me>
+        A=
+        \begin{pmatrix}
+        -a &amp; 0\\
+        -c &amp; -d
+        \end{pmatrix}.
+      </me>
+
+      <p>
+        Because this matrix is triangular, its eigenvalues are visible on the
+        diagonal.
+      </p>
+
+      <p>
+        What are the eigenvalues of <m>A</m>? What do they tell us about whether
+        the system moves toward equilibrium or away from it?
+      </p>
+    </statement>
+  </exercise>
+
+  <exercise>
+    <statement>
+      <p>
+        The model in this part is simplified: it uses only two variables, assumes
+        constant parameters, and represents feedback with a linear term. Real
+        endocrine systems are more complex.
+      </p>
+
+      <p>
+        Still, the model shows that interrupting one input can affect more than
+        one quantity. Explain how this changes the interpretation of a phrase like
+        <q>the medication leaves the body after a few half-lives.</q>
+      </p>
     </statement>
   </exercise>
 </worksheet>
