@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <worksheet xml:id="stopping-treatment-opening">
+  <title>Interrupted Dosing</title>
+  
   <exercise>
     <statement>
       <p>
         In Part 2, we modeled regular dosing with the recurrence
-      </p>
-
-      <me>H_{n+1}=aH_n+D.</me>
-
-      <p>
+        <me>H_{n+1}=aH_n+D.</me>
         Now suppose treatment is interrupted. After the final dose, there are no
         additional doses, so the concentration only decays.
       </p>
@@ -21,11 +19,7 @@
       <p>
         Let <m>H_0</m> be the concentration immediately after the final dose.
         After one dosing interval, the concentration becomes
-      </p>
-
-      <me>H_1=aH_0.</me>
-
-      <p>
+        <me>H_1=aH_0.</me>
         Write formulas for <m>H_2,H_3,H_4</m>. Then write a general formula for
         <m>H_n</m>.
       </p>

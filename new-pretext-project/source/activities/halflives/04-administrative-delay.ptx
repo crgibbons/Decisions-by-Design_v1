@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <worksheet xml:id="coupled-system-opening">
+  <title>Interacting Concentrations</title>
+  
   <exercise>
     <statement>
       <p>
@@ -46,6 +48,71 @@
         <li><m>-cE</m></li>
         <li><m>-dT</m></li>
       </ul>
+    </statement>
+  </exercise>
+
+    <exercise xml:id="sage-interactive-hormone-system">
+    <statement>
+      <p>
+        Use the Sage cell below to explore how the solutions change when the
+        parameters change. The graph shows <m>E(t)</m> and <m>T(t)</m> over time
+        after treatment is interrupted.
+      </p>
+
+      <sage>
+        <input>
+# Interactive model for a simplified hormone feedback system
+# E' = -aE + u
+# T' = b - cE - dT
+
+@interact
+def hormone_model(
+    a=slider(0.05, 1.5, 0.05, default=0.4, label="estradiol decay rate a"),
+    b=slider(0.0, 3.0, 0.1, default=1.0, label="baseline testosterone production b"),
+    c=slider(0.0, 2.0, 0.1, default=0.6, label="suppression strength c"),
+    d=slider(0.05, 1.5, 0.05, default=0.5, label="testosterone decay rate d"),
+    u_before=slider(0.0, 3.0, 0.1, default=1.2, label="input before interruption"),
+    tmax=slider(5, 60, 1, default=30, label="days shown")
+):
+    t = var('t')
+
+    # Equilibrium before interruption
+    E0 = u_before/a
+    T0 = (b - c*E0)/d
+
+    # After interruption, u = 0
+    E = E0*exp(-a*t)
+
+    # Solve T' + dT = b - cE(t)
+    T = function('T')(t)
+    sol = desolve(diff(T,t) == b - c*E - d*T, T, ics=[0,T0])
+    T_expr = sol
+
+    p1 = plot(E, (t,0,tmax), legend_label="E(t)", thickness=2)
+    p2 = plot(T_expr, (t,0,tmax), legend_label="T(t)", thickness=2, color='orange', linestyle='--')
+
+    show(p1 + p2, axes_labels=["t", "concentration"])
+
+    print("Initial state at interruption:")
+    print("E(0) =", numerical_approx(E0, digits=4))
+    print("T(0) =", numerical_approx(T0, digits=4))
+
+    print("")
+    print("New equilibrium after interruption:")
+    print("E* = 0")
+    print("T* =", numerical_approx(b/d, digits=4))
+
+    print("")
+    print("Eigenvalues of the homogeneous matrix:")
+    print("-a =", numerical_approx(-a, digits=4))
+    print("-d =", numerical_approx(-d, digits=4))
+        </input>
+      </sage>
+
+      <p>
+        Try increasing and decreasing <m>a</m> and <m>d</m>. How do the graphs
+        change? How does this match the eigenvalues <m>-a</m> and <m>-d</m>?
+      </p>
     </statement>
   </exercise>
 

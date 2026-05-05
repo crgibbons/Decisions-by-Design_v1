@@ -2,20 +2,214 @@
 
 <worksheet>
   <title>Homework 01</title>
+
   <introduction>
     <p>
-      <alert>Instructions:</alert> Complete all the exercises below and submit your work by the due date.
+      <alert>Instructions:</alert> Complete all the exercises below and submit your work by the due date. 
+      Information about the drug Effexor XR and its half-life can be found in the DE Crash Course notes. 
+      The websites <url href="https://www.nigms.nih.gov/education/fact-sheets/Pages/half-life.aspx" /> and <url href="https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=c848a5d8-ba94-4c84-80e3-0bf35fb8e32e" /> provide details about dosing schedules and half-life.
     </p>
   </introduction>
 
+
   <page>
-    <exercise>
+    <exercise xml:id="effexor-withdrawal-model">
       <statement>
         <p>
-          This is the first homework exercise.
+          The medication <term>Effexor XR</term> (extended-release venlafaxine) is commonly prescribed and is known to have a relatively short half-life.
+          For this problem, we model how the concentration of the drug changes after a patient stops taking it.
+        </p>
+
+        <p>
+          Suppose the concentration <m>H(t)</m> (in arbitrary units) satisfies the differential equation
+        </p>
+        <me>
+          \frac{dH}{dt} = -kH.
+        </me>
+
+        <p>
+          The half-life of Effexor XR is approximately <m>11</m> hours.
+        </p>
+
+        <p>
+          Assume that withdrawal symptoms begin when the concentration falls below a threshold <m>L</m>.
+        </p>
+      </statement>
+
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Find the value of <m>k</m> in terms of the half-life, and compute its numerical value (in units of hours<sup>-1</sup>).
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Solve the differential equation with initial condition <m>H(0)=H_0</m>.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Show that the time <m>t</m> at which the concentration falls below <m>L</m> satisfies
+            </p>
+            <me>
+              H_0 e^{-kt} &lt; L.
+            </me>
+          </li>
+
+          <li>
+            <p>
+              Solve this inequality for <m>t</m>.
+              Your answer should be expressed using logarithms.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Suppose a patient has <m>H_0 = 100</m> (arbitrary units) and the threshold is <m>L = 25</m>.
+            </p>
+
+            <p>
+              Compute the time at which withdrawal symptoms begin.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Interpret your answer.
+              How many half-lives have passed when the concentration reaches <m>25\%</m> of its original value?
+            </p>
+          </li>
+
+          <li>
+            <p>
+              In practice, patients often take Effexor XR once per day.
+              Explain why missing even one dose might lead to noticeable changes in concentration.
+              Your answer should refer to the half-life and the exponential decay model.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Now suppose a patient takes their medication once every 24 hours.
+              Compare two scenarios:
+            </p>
+
+            <ul>
+              <li>
+                The patient takes the medication at 8:00 AM each day.
+              </li>
+
+              <li>
+                The patient takes the medication at 8:00 PM each day.
+              </li>
+            </ul>
+
+            <p>
+              In both cases, assume the concentration immediately after a dose is <m>H_0</m>.
+              Use the exponential model to determine the concentration just before the next dose (24 hours later).
+            </p>
+
+            <p>
+              Then consider the following situation: the patient forgets one dose.
+              Compare how long it takes for the concentration to fall below the threshold <m>L</m> in each scenario.
+            </p>
+
+            <p>
+              Explain why the timing of doses (morning vs evening) might affect when symptoms are experienced, even if the total daily dosage is the same.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+
+
+  <page>
+    <exercise xml:id="sage-effexor-missed-dose">
+      <statement>
+        <p>
+          Use the Sage cell below to explore a simplified model of daily Effexor XR dosing with one missed dose.
+          The model assumes exponential decay between doses and an upward jump each time a dose is taken.
+        </p>
+        <sage>
+        <input>
+@interact
+def missed_dose_model(
+    half_life=slider(6, 24, 1, default=11, label="half-life in hours"),
+    D=slider(10, 100, 5, default=50, label="dose increase D"),
+    L=slider(5, 80, 5, default=25, label="withdrawal threshold L"),
+    dose_hour=slider(0, 23, 1, default=8, label="usual dose time: hour of day"),
+    missed_day=slider(1, 5, 1, default=2, label="missed dose on day"),
+    days_shown=slider(2, 7, 1, default=5, label="days shown")
+):
+    t = var('t')
+    k = log(2)/half_life
+    total_hours = 24*days_shown
+    # Dose times measured in hours from the start.
+    # Day 0 dose is included; the missed_day dose is skipped.
+    dose_times = []
+    for day in range(days_shown + 1):
+        dose_time = dose_hour + 24*day
+        if dose_time &lt;= total_hours and day != missed_day:
+            dose_times.append(dose_time)
+    p = Graphics()
+    # Start with no medication before the first dose.
+    current_H = 0
+    current_time = 0
+    after_dose_points = []
+    before_dose_points = []
+    for dose_time in dose_times:
+        if dose_time &gt; current_time:
+            curve = current_H*exp(-k*(t-current_time))
+            p += plot(curve, (t, current_time, dose_time), thickness=2)
+            current_H = current_H*exp(-k*(dose_time-current_time))
+            before_dose_points.append((dose_time, current_H))
+        # Dose jump
+        current_H = current_H + D
+        after_dose_points.append((dose_time, current_H))
+        current_time = dose_time
+    # Continue after the final dose
+    if current_time &lt; total_hours:
+        curve = current_H*exp(-k*(t-current_time))
+        p += plot(curve, (t, current_time, total_hours), thickness=2)
+    # Mark dose jumps
+    p += list_plot(after_dose_points, marker='o', legend_label="after taken doses")
+    p += list_plot(before_dose_points, marker='x', legend_label="just before doses")
+    # Threshold line
+    p += plot(L, (t, 0, total_hours), linestyle='--',
+              thickness=2, legend_label="threshold L")
+    # Mark the missed dose time
+    missed_time = dose_hour + 24*missed_day
+    if missed_time &lt;= total_hours:
+        p += line([(missed_time, 0), (missed_time, max(L, D)*3)],
+                  linestyle=':', thickness=2, legend_label="missed dose time")
+    show(p, axes_labels=["time in hours", "concentration H(t)"])
+    print("Model:")
+    print("Between doses, H(t) = H0 e^(-kt)")
+    print("k = ln(2)/half-life =", numerical_approx(k, digits=4))
+    print("")
+    print("Usual dose time:", dose_hour, ":00")
+    print("Missed dose occurs on day", missed_day)
+    print("Missed dose time =", missed_time, "hours after start")
+    print("")
+    print("Question to investigate:")
+    print("When does the concentration first fall below L after the missed dose?")
+        </input>
+        </sage>
+
+        <p>
+          Use the sliders to compare a morning dose and an evening dose.
+          What changes about the time of day when the concentration falls below the threshold <m>L</m>?
+        </p>
+
+        <p>
+          Explain why the total daily dose is not the only relevant quantity in this model.
+          Your answer should refer to half-life, exponential decay, and the timing of the missed dose.
         </p>
       </statement>
     </exercise>
-
   </page>
 </worksheet>

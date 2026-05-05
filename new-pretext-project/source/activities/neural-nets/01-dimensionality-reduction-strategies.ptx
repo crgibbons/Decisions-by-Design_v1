@@ -3,247 +3,10 @@
 <worksheet xml:id="pca-tsne-toy-examples">
   <title>PCA and <m>t</m>-SNE by Hand: Two Toy Examples</title>
 
-  <introduction>
-    <p>
-      Principal Component Analysis (PCA) and <m>t</m>-distributed Stochastic Neighbor Embedding (<m>t</m>-SNE) are both methods for reducing the dimension of a dataset.
-      However, they preserve different kinds of structure.
-    </p>
-
-    <p>
-      In this worksheet, we compute PCA exactly for a small dataset and then approximate the behavior of t-SNE using neighbor probabilities.
-    </p>
-  </introduction>
-
-
-  <parapgraphs>
-    <title>Principal Component Analysis</title>
-
-    <p>
-      PCA identifies directions of maximum variation in a dataset.
-      It finds the directions in which the data spreads out the most and projects the data onto those directions to reduce its dimension.
-      The linear algebra required to make this happen? Eigenstuff! This allows us to take linear combinations of the <q>features</q> (the measured properties) to create new variables, where fewer variables are needed to explain most of the behavior.
-    </p>
-
-    <definition>
-      <statement>
-        <p>
-          When working with data, we are often interested in measures of central tendency and measures of spread.
-          Informally, these measures help us answer the questions, <q>Where is the middle of the data?</q> and <q>How spread out is the data?</q> Let <m>X</m> be data matrix where each column corresponds to a feature (or variable) and each row corresponds to an observation (or value).
-          We refer to a column of <m>X</m> as a feature vector, denoted <m>\bar{x}</m>.
-          Some measures of central tendency include
-          <ol>
-            <li>
-              <p>
-                The <term>mean</term> for a feature <m>x</m>: <m>\bar{x} = \frac{1}{n} \sum_{i=1}^n x_i</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                The <term>median</term> for a feature <m>x</m>: the value that splits the data into two equal halves.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                The <term>mode</term> for a feature <m>x</m>: the most frequently occurring value.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                The <term>midrange</term> for a feature <m>x</m>: the average of the minimum and maximum values.
-              </p>
-            </li>
-          </ol>
-          Some measures of spread include
-          <ol>
-            <li>
-              <p>
-                The <term>variance</term> for a feature <m>x</m>: <m>\operatorname{Var}(x) = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})^2</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                The <term>standard deviation</term> for a feature <m>x</m>: <m>\operatorname{SD}(x) = \sqrt{\operatorname{Var}(x)}</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                The <term>covariance</term> of two features <m>x</m> and <m>y</m>: <m>\operatorname{Cov}(x,y) = \frac{1}{n} \sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})</m>.
-              </p>
-            </li>
-          </ol>
-          These measures of central tendency and spread are important for understanding the structure of a dataset and for performing dimensionality reduction techniques like PCA.
-          Sometimes we do some preprocessing to make the data easier to work with.
-          Two common transformations are centering and standardizing a feature.
-          These transformations can be expressed in terms of the mean and standard deviation of a feature.
-          <ol>
-            <li>
-              <p>
-                <term>Centering a feature</term>: replacing <m>x_i</m> with <m>x_i - \bar{x}</m> for each <m>x_i \in x</m>.
-              </p>
-            </li>
-
-            <li>
-              <p>
-                <term>Standardizing a feature</term>: replacing <m>x_i</m> with <m>\frac{x_i - \bar{x}}{\operatorname{SD}(x)}</m> for each <m>x_i \in x</m>.
-              </p>
-            </li>
-          </ol>
-        </p>
-      </statement>
-    </definition>
-
     <exercise>
       <statement>
         <p>
-          Prove that, for a centered data matrix <m>X</m>, <m>\operatorname{Cov}(x,y) = \frac{1}{n} x^T y</m>.
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Consider a data matrix
-          <me>
-            X = \begin{bmatrix} -2 \amp -1 \\ -1 \amp -2 \\ 1 \amp  2 \\ 2 \amp  1 \end{bmatrix}.
-          </me>
-          where the columns represent two features and the rows represent four observations.
-        </p>
-
-        <p>
-          We can interpret the rows of <m>X</m> as points in the plane.
-          The first column gives the <m>x</m>-coordinates and the second column gives the <m>y</m>-coordinates.
-        </p>
-
-        <ol>
-          <li>
-            Plot the four points in the plane.
-          </li>
-
-          <li>
-            Determine if the data is centered.
-            If not, center it.
-          </li>
-
-          <li>
-            Determine if the data is standardized.
-            If not, standardize it.
-          </li>
-
-          <li>
-            Form the standardized and centered data matrix.
-            Verify that the columns of this matrix have mean zero and standard deviation one.
-          </li>
-
-          <li>
-            Give a geometric description of the data after plotting it in the plane.
-            Does it appear to have a preferred direction of variation?
-          </li>
-        </ol>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Before doing any calculations, describe the meaning of each entry of the matrix
-          <me>
-            \frac{1}{4} X^T X.
-          </me>
-          This is called the <term>covariance matrix</term> of the dataset.
-        </p>
-
-        <p>
-          Confirm by hand that the covariance matrix is
-          <me>
-            \begin{bmatrix} 2.5 \amp 2 \\ 2 \amp 2.5 \end{bmatrix}.
-          </me>
-        </p>
-
-        <p>
-          What does this tell you about the relationship between the two variables? <!-- y = x -->
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Find the eigenvalues and eigenvectors of the covariance matrix.
-        </p>
-
-        <p>
-          The eigenspaces of the covariance matrix correspond to directions in which the data varies.
-          The eigenvalues give the amount of variation in the direction(s) of the corresponding eigenvector(s).
-          Recall that an eigenspace <m>E_\lambda = \{ v \, | \, Av = \lambda v\}</m>.
-          For working with data, we often choose a basis of linearly independent normalized eigenvectors associated to the eigenvalue <m>\lambda</m>.
-          (Normalized means that the eigenvectors satisfy <m> \sum_{i = 1}^n v_i^2 = 1</m>.) Even though zero is never an eigenvector, we include it in the eigenspace to ensure the eigenspace is a vector space.
-        </p>
-
-        <p>
-          In this case, each eigenspace is one-dimensional, meaning that each eigenspace has a single eigenvector (up to scaling) that forms a basis for the eigenspace.
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          The largest eigenvalue <m>\lambda_1</m> corresponds to the direction of greatest variation in the data.
-          This is called the <term>first principal component</term>.
-        </p>
-
-        <p>
-          It accounts for
-          <me>
-            \frac{\lambda_1}{\lambda_1 + \lambda_2}
-          </me>
-          of the total variation.
-        </p>
-
-        <p>
-          The first principal component term is <fillin characters="5" /> and the first principal component direction (with unit length) is
-        </p>
-        <me>
-          \frac{1}{\sqrt{2}}\begin{bmatrix} 1 \\ 1 \end{bmatrix}.
-        </me>
-
-        <p>
-          Project each data point onto this direction by computing the dot product of each data point with the first principal component direction.
-          This gives a new dataset consisting of one number for each data point, which is the coordinate of the data point in the direction of the first principal component.
-        </p>
-
-        <p>
-          <ol>
-            <li>
-              Compute
-              <me>
-                \frac{x+y}{\sqrt{2}}
-              </me>
-              for each data point in <m>X</m> and draw the projected points on a number line.
-            </li>
-
-            <li>
-              What structure do you observe in the projected dataset?
-            </li>
-
-            <li>
-              Explain how PCA has reduced the dataset from two dimensions to one.
-            </li>
-          </ol>
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Now consider the dataset consisting of four points:
+          Consider the dataset consisting of four points:
         </p>
         <me>
           (0,-0.2), \quad (2,0.4), \quad (4,1.4), \quad (6,2.4).
@@ -300,10 +63,10 @@
       <statement>
         <p>
           Recall that the covariance matrix
-        </p>
         <me>
           \begin{pmatrix} \operatorname{Var}(x) \amp \operatorname{Cov}(x,y) \\ \operatorname{Cov}(x,y) \amp \operatorname{Var}(y) \end{pmatrix}
         </me>
+      </p>
 
         <p>
           describes how the dataset spreads in different directions.
@@ -370,7 +133,7 @@
     <exercise>
       <statement>
         <p>
-          Compare this dataset to the previous one in which the covariance matrix has equal diagonal entries.
+          Compare this dataset to the example in the notes in which the covariance matrix has equal diagonal entries.
         </p>
 
         <ol>
@@ -388,128 +151,6 @@
         </ol>
       </statement>
     </exercise>
-  </parapgraphs>
-
-
-  <parapgraphs>
-    <title><m>t</m>-SNE</title>
-
-    <p>
-      Using <m>t</m>-SNE embeddings, we can visualize high-dimensional data in two or three dimensions while preserving local structure.
-      The key idea is to convert distances between points in the original high-dimensional space into probabilities that represent similarities between points.
-      Then, <m>t</m>-SNE finds a low-dimensional embedding that preserves these similarities as closely as possible.
-    </p>
-
-    <p>
-      Informally, a <m>t</m>-distribution is a probability distribution that has heavier tails than a normal distribution.
-      This means that it assigns more probability to points that are far away from the mean compared to a normal distribution, and that's useful when we don't know the true distribution of the data and want to be more robust to outliers.
-    </p>
-
-    <p>
-      If you have taken statistics, you may have encountered Student's <m>t</m> test, which is a statistical test used to determine if there is a significant difference between the means of two groups.
-      The <m>t</m>-distribution is named for the work of William Sealy Gosset, who published under the pseudonym <q>Student</q> to avoid conflicts with his employer, Guinness Brewery (he held the title of Head Brewer; look what you can do with a math-stats background!) For more fun statistical history, check out the book <em>How Data Happened</em> by Chris Wiggins and Matthew L.
-      Jones.
-      Why was Guinness employing statisticians? They wanted to improve the quality of their beer, and the challenge faced by statisticians employeed by the brewery was that they had very small sample sizes to work with, which made it difficult to draw reliable conclusions about the quality of the beer.
-      Unlike governments at the time, which used census data (and computing, such as it was!) to gather information about the population, Guinness wanted to save money by using small samples to make decisions about their beer production.
-    </p>
-
-    <exercise>
-      <statement>
-        <p>
-          Now consider five points on a number line:
-        </p>
-        <me>
-          A=0,\quad B=1,\quad C=2,\quad D=8,\quad E=9.
-        </me>
-
-        <p>
-          We will approximate how t-SNE measures similarity between nearby points.
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Compute the squared distances from point <m>A</m> to each of the other points.
-        </p>
-
-        <p>
-          Record:
-        </p>
-        <me>
-          d(A,B)^2,\quad d(A,C)^2,\quad d(A,D)^2,\quad d(A,E)^2.
-        </me>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          In t-SNE, similarities are converted into probabilities using the formula
-        </p>
-        <me>
-          P(j \mid A) = \frac{e^{-d(A,j)^2}} {\sum_{k \neq A} e^{-d(A,k)^2}}.
-        </me>
-
-        <ol>
-          <li>
-            Compute approximate values for <m>P(B\mid A)</m> and <m>P(C\mid A)</m>.
-          </li>
-
-          <li>
-            Explain why <m>P(D\mid A)</m> and <m>P(E\mid A)</m> are approximately zero.
-          </li>
-        </ol>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Based on these probabilities, which points should appear close to <m>A</m> in a <m>t</m>-SNE plot?
-        </p>
-
-        <p>
-          Which points should appear far away?
-        </p>
-
-        <p>
-          Sketch a possible two-dimensional arrangement of the five points that preserves these neighbor relationships.
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise>
-      <statement>
-        <p>
-          Compare what PCA preserved in the first example with what t-SNE preserved in the second example.
-        </p>
-
-        <ol>
-          <li>
-            What geometric structure did PCA identify?
-          </li>
-
-          <li>
-            What similarity structure did <m>t</m>-SNE identify?
-          </li>
-
-          <li>
-            When might PCA be preferable to <m>t</m>-SNE?
-          </li>
-
-          <li>
-            When might <m>t</m>-SNE be preferable to PCA?
-          </li>
-        </ol>
-      </statement>
-    </exercise>
-
-    <p>
-      Unlike PCA, <m>t</m>-SNE does not try to find directions of maximum variation.
-      Instead, it tries to keep nearby points close together after reducing the dimension of a dataset.
-    </p>
 
     <exercise>
       <statement>
@@ -622,7 +263,6 @@
         </ol>
       </statement>
     </exercise>
-  </parapgraphs>
 
   <exercise>
     <statement>

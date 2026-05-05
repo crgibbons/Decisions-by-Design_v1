@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <worksheet xml:id="repeated-dosing-opening">
+  <title>Repeated Dosing</title>
   <exercise>
     <statement>
       <p>
@@ -14,11 +15,7 @@
         Suppose a dose is taken every <m>T</m> days. Between doses, the medication
         concentration decays exponentially. If the elimination constant is
         <m>k</m>, then after <m>T</m> days, the concentration is multiplied by
-      </p>
-
-      <me>a = e^{-kT}.</me>
-
-      <p>
+        <me>a = e^{-kT}.</me>
         Then a new dose increases the concentration by an amount <m>D</m>.
       </p>
     </statement>
@@ -164,6 +161,143 @@
       </p>
     </statement>
   </exercise>
+
+    <exercise xml:id="sage-interactive-repeated-dosing">
+  <statement>
+    <p>
+      Use the Sage cell below to explore the repeated dosing model
+      <m>H_{n+1}=aH_n+D</m>. The horizontal axis counts doses or dosing
+      intervals. 
+      This is a simplified model that does not include the continuous decay between doses, 
+      but it captures the overall pattern of how concentration changes with repeated dosing.
+    </p>
+
+    <sage>
+      <input>
+@interact
+def repeated_dosing_model(
+    a=slider(0.05, 0.95, 0.05, default=0.55, label="remaining fraction a"),
+    D=slider(0.0, 5.0, 0.25, default=1.0, label="dose amount D"),
+    H0=slider(0.0, 10.0, 0.25, default=1.0, label="initial concentration H0"),
+    nmax=slider(1, 40, 1, default=20, label="number of dosing intervals")
+):
+    values = [H0]
+    for n in range(nmax):
+        values.append(a*values[-1] + D)
+
+    pts = [(n, values[n]) for n in range(nmax+1)]
+
+    if a != 1:
+        Hstar = D/(1-a)
+    else:
+        Hstar = None
+
+    p = list_plot(
+        pts,
+        plotjoined=True,
+        marker='o',
+        legend_label="H_n",
+        thickness=2
+    )
+
+    if Hstar is not None:
+        p += plot(
+            Hstar,
+            (x, 0, nmax),
+            linestyle='--',
+            thickness=2,
+            legend_label="steady state H*"
+        )
+
+    show(p, axes_labels=["n", "H_n"])
+
+    print("Recurrence:")
+    print("H_(n+1) = a H_n + D")
+    print("")
+    print("a =", numerical_approx(a, digits=4))
+    print("D =", numerical_approx(D, digits=4))
+    print("H0 =", numerical_approx(H0, digits=4))
+
+    if Hstar is not None:
+        print("Steady state H* =", numerical_approx(Hstar, digits=4))
+      </input>
+    </sage>
+
+    <p>
+      Try changing <m>a</m>. What happens when <m>a</m> is close to <m>0</m>?
+      What happens when <m>a</m> is close to <m>1</m>?
+    </p>
+  </statement>
+</exercise>
+
+<exercise xml:id="sage-interactive-repeated-dosing-continuous">
+  <statement>
+    <p>
+      Use the Sage cell below to explore the repeated dosing model with
+      exponential decay between doses. The curve decays continuously between
+      dose times, then jumps upward when a new dose is taken.
+    </p>
+
+    <sage>
+      <input>
+@interact
+def repeated_dosing_continuous(
+    k=slider(0.01, 0.5, 0.01, default=0.09, label="decay rate k"),
+    T=slider(1, 21, 1, default=7, label="days between doses T"),
+    D=slider(0.0, 5.0, 0.25, default=1.0, label="dose amount D"),
+    H0=slider(0.0, 10.0, 0.25, default=1.0, label="initial concentration H0"),
+    nmax=slider(1, 20, 1, default=8, label="number of doses")
+):
+    t = var('t')
+
+    a = exp(-k*T)
+
+    H_after = [H0]
+    for n in range(nmax):
+        H_after.append(a*H_after[-1] + D)
+
+    p = Graphics()
+
+    for n in range(nmax):
+        start = n*T
+        end = (n+1)*T
+        Hn = H_after[n]
+        curve = Hn*exp(-k*(t-start))
+        p += plot(curve, (t, start, end), thickness=2)
+
+        before_next = Hn*exp(-k*T)
+        p += point((end, before_next), size=25)
+        p += point((end, H_after[n+1]), size=25)
+
+    dose_points = [(n*T, H_after[n]) for n in range(nmax+1)]
+    p += list_plot(dose_points, marker='o', legend_label="after each dose")
+
+    Hstar = D/(1-a)
+
+    p += plot(Hstar, (t, 0, nmax*T), linestyle='--',
+              thickness=2, legend_label="steady state after-dose level")
+
+    show(p, axes_labels=["time t", "H(t)"])
+
+    print("Between doses:")
+    print("H(t) = H_n e^(-k(t-nT)) for nT &lt;= t \le (n+1)T")
+    print("")
+    print("Discrete update:")
+    print("H_(n+1) = a H_n + D")
+    print("a = e^(-kT) =", numerical_approx(a, digits=4))
+    print("")
+    print("Steady after-dose level:")
+    print("H* =", numerical_approx(Hstar, digits=4))
+      </input>
+    </sage>
+
+    <p>
+      Try increasing <m>k</m>. What changes about the decay between doses?
+      Try increasing <m>T</m>. What changes about the gap between the peak just
+      after a dose and the trough just before the next dose?
+    </p>
+  </statement>
+</exercise>
 
   <exercise>
     <statement>

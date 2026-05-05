@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<section xml:id="sec-districting">
+  <title>Districting </title>
+
+  <introduction>
+    <p>
+      In this section, we will apply the tools of Part 1 to analyze a real-world problem: how to draw voting districts.
+      The mathematical tools that we will use include graph theory and linear algebra.
+    </p>
+  </introduction>
+
+
+  <subsection xml:id="what-is-gerrymandering">
+    <title>What Is Gerrymandering?</title>
+
+    <definition>
+      <term>Gerrymander (verb)</term>
+      <statement>
+        <p>
+          To manipulate the boundaries of an electoral constituency so as to favor one party or class.
+        </p>
+      </statement>
+    </definition>
+
+    <p>
+      Why is a mathematician talking about this? The American Mathematical Society (AMS) and the American Statistical Association (ASA) have issued statements noting:
+      <ul>
+        <li>
+          Existing districting requirements do not prevent partisan gerrymandering.
+        </li>
+
+        <li>
+          Modern data and computing make partisan manipulation easier.
+        </li>
+
+        <li>
+          Mathematical and statistical tools can detect unfair advantage.
+        </li>
+      </ul>
+    </p>
+
+    <example>
+      <title>A Tiny State Example</title>
+
+      <statement>
+        <p>
+          Suppose a state has 50 voters and 5 districts.
+        </p>
+
+        <figure>
+          <caption>
+          <p>
+            Tiny State
+          </p>
+          </caption>
+
+          <image scale="90%">
+            <latex-image>
+      \draw[step=1cm,gray,very thin] (0,0) grid (5,10);
+      \node at (0.5,9.5) {B};
+      \node at (1.5,9.5) {B};
+      \node at (2.5,9.5) {B};
+      \node at (3.5,9.5) {B};
+      \node at (4.5,9.5) {B};
+      \node at (0.5,8.5) {B};
+      \node at (1.5,8.5) {B};
+      \node at (2.5,8.5) {B};
+      \node at (3.5,8.5) {B};
+      \node at (4.5,8.5) {B};
+      \node at (0.5,7.5) {B};
+      \node at (1.5,7.5) {B};
+      \node at (2.5,7.5) {R};
+      \node at (3.5,7.5) {R};
+      \node at (4.5,7.5) {R};
+      \node at (0.5,6.5) {R};
+      \node at (1.5,6.5) {R};
+      \node at (2.5,6.5) {R};
+      \node at (3.5,6.5) {R};
+      \node at (4.5,6.5) {R};
+            </latex-image>
+          </image>
+        </figure>
+
+        <p>
+          <ul>
+            <li>
+              30 voters (60%) prefer Blue.
+            </li>
+
+            <li>
+              20 voters (40%) prefer Red.
+            </li>
+          </ul>
+        </p>
+
+        <p>
+          Depending on how we draw district lines, we can get very different outcomes:
+          <ul>
+            <li>
+              1 Blue, 4 Red (<q>Anything Goes</q>)
+            </li>
+
+            <li>
+              3 Blue, 2 Red (Proportional Representation)
+            </li>
+
+            <li>
+              5 Blue, 0 Red (Blue Gerrymander)
+            </li>
+
+            <li>
+              2 Blue, 3 Red (Red Gerrymander)
+            </li>
+          </ul>
+          Same voters.
+          Same preferences.
+          Different district lines lead to different outcomes.
+        </p>
+
+        <p>
+          Question: what should <q>fair</q> mean here?
+        </p>
+      </statement>
+    </example>
+  </subsection>
+
+
+  <subsection xml:id="social-criteria">
+    <title>Social and Legal Criteria for Fairness</title>
+
+    <p>
+      Federal requirement (Reynolds v.
+      Sims, 1964):
+    </p>
+
+    <blockquote>
+      The Equal Protection Clause demands substantially equal state legislative representation for all citizens.
+    </blockquote>
+
+    <p>
+      In practice: districts must have roughly equal population (often within 10%).
+    </p>
+
+    <p>
+      Common state-level criteria:
+    </p>
+
+    <ul>
+      <li>
+        Contiguity (districts must be connected).
+      </li>
+
+      <li>
+        Compactness (residents should live reasonably close together).
+      </li>
+
+      <li>
+        Communities of interest.
+      </li>
+
+      <li>
+        Respect for political boundaries (don't split towns/counties).
+      </li>
+    </ul>
+
+    <p>
+      Notice: none of these directly prevent partisan bias.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="mathematical-criteria">
+    <title>Mathematical Criteria for Partisan Fairness</title>
+
+    <ul>
+      <li>
+        Proportionality
+      </li>
+
+      <li>
+        Convexity and Compactness
+      </li>
+
+      <li>
+        Efficiency Gap
+      </li>
+
+      <li>
+        Sampling Methods
+      </li>
+    </ul>
+  </subsection>
+
+
+  <subsection xml:id="proportionality">
+    <title>Proportionality</title>
+
+    <p>
+      If 67% of voters prefer Party X, then roughly 67% of seats should go to Party X.
+    </p>
+
+    <p>
+      In the tiny state example:
+    </p>
+
+    <ul>
+      <li>
+        60% Blue → 3 out of 5 seats seems reasonable.
+      </li>
+    </ul>
+
+    <p>
+      But proportionality is not guaranteed in single-member districts.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="convexity">
+    <title>Convexity and Compactness</title>
+
+    <p>
+      Hope: Convex, compact maps are harder to gerrymander.
+    </p>
+
+    <p>
+      Reality: You can gerrymander using convex districts.
+    </p>
+
+    <theorem xml:id="ham-sandwich">
+      <title>Ham Sandwich Theorem (Planar Version)</title>
+
+      <statement>
+        Given two finite sets of points in the plane (blue and red), each with an even number of points and no three collinear, there exists a line that simultaneously bisects both sets.
+      </statement>
+    </theorem>
+
+    <p>
+      This theorem implies that even convex cuts can be used strategically.
+      Compactness alone does not guarantee fairness.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="efficiency-gap">
+    <title>The Efficiency Gap</title>
+
+    <p>
+      The Efficiency Gap measures wasted votes.
+    </p>
+
+    <definition>
+      <term>Wasted Votes</term>
+      <statement>
+        <ul>
+          <li>
+            All votes for the losing candidate.
+          </li>
+
+          <li>
+            All votes beyond 50% for the winning candidate.
+          </li>
+        </ul>
+      </statement>
+    </definition>
+
+    <p>
+      Efficiency Gap:
+    </p>
+    <me>
+      \operatorname{EG}(P) = \frac{\text{Wasted Votes}_A - \text{Wasted Votes}_B}{\text{Total Votes}}
+    </me>
+
+    <p>
+      Rough guideline: an absolute value of 8% or lower is considered the acceptable range.
+    </p>
+
+    <p>
+      In our tiny state:
+    </p>
+
+    <ul>
+      <li>
+        Proportional plan with small efficiency gap (around 8%).
+      </li>
+
+      <li>
+        Blue gerrymander leads to a large positive efficiency gap (~40%).
+      </li>
+
+      <li>
+        Red gerrymander leads to a large negative efficiency gap (~32%).
+      </li>
+    </ul>
+
+    <p>
+      Drawbacks:
+    </p>
+
+    <ul>
+      <li>
+        Only measures partisan bias.
+      </li>
+
+      <li>
+        False positives/negatives possible.
+      </li>
+
+      <li>
+        Not fully compatible with proportionality.
+      </li>
+    </ul>
+  </subsection>
+
+
+  <subsection xml:id="sampling">
+    <title>Sampling the Space of District Plans</title>
+
+    <p>
+      Instead of scoring a single map, we:
+    </p>
+
+    <ol>
+      <li>
+        Generate many valid district plans (subject to constraints).
+      </li>
+
+      <li>
+        Compute election outcomes for each plan.
+      </li>
+
+      <li>
+        Compare the proposed plan to the distribution.
+      </li>
+    </ol>
+
+    <p>
+      By the Central Limit Theorem, outcomes across many plans tend to form a normal distribution.
+    </p>
+
+    <p>
+      A plan that lies far in the tail is statistically suspicious.
+    </p>
+
+    <p>
+      This approach can test racial, socioeconomic, and partisan hypotheses.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="whos-who">
+    <title>Who's Who in Mathematical Districting</title>
+
+    <ul>
+      <li>
+        Mira Bernstein &amp; Moon Duchin (Tufts) — convex geometry and districting.
+      </li>
+
+      <li>
+        Jonathan Mattingly (Duke) — quantifying gerrymandering.
+      </li>
+
+      <li>
+        Princeton Gerrymandering Project — sampling software.
+      </li>
+
+      <li>
+        AMS Capital Currents Blog (Karen Saxe).
+      </li>
+    </ul>
+  </subsection>
+
+
+  <subsection xml:id="closing">
+    <title>Closing Question</title>
+
+    <p>
+      What should <q>fairness</q> mean in representative democracy?
+    </p>
+
+    <p>
+      Mathematics cannot answer that question, but it can reveal when something is statistically extreme.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="gerrymandering-background">
+    <title>Understanding the Issue</title>
+
+    <!--
+    <figure>
+      <video youtube="bGLRJ12uqmk"> </video>
+      <caption> Gerrymandering, Explained (Washington Post). </caption>
+    </figure>
+    -->
+    <p>
+      <em>Redistricting</em> (in the United States) is the process of drawing new political districts (maps), usually every 10 years, following a U.S. Census. Each district corresponds to (at least one) representative in government, decided by elections among voters living in that district.
+    </p>
+
+    <p>
+      There are a few rules that all states must abide by when drawing their districts:
+      <ul>
+        <li>
+          Districts must be roughly equal in population (<q>one person, one vote</q>).
+        </li>
+
+        <li>
+          Districts must be contiguous (one connected shape).
+        </li>
+
+        <li>
+          Districts must comply with racial fairness via the Voting Rights Act of 1965.
+        </li>
+      </ul>
+      Redistricting can be controversial due to who draws the lines in each state.
+      While some states have independent redistricting commissions comprised of citizens or politicians equally representing the two main political parties, sometimes a state process is controlled by the political party in power of the state government.
+      The manipulation of drawing districts to benefit one group is called <term>gerrymandering</term>.
+      <term>Partisan gerrymandering</term> is the practice of drawing district lines to maximize a political party's advantage in elected representatives.
+      In this type of gerrymandering, voters and representatives of the party in power benefit as an increased delegation directly impacts the laws and policies that are able to pass in government, both on the state and national levels.
+      Meanwhile, voters and representatives of the party not in power suffer from being underrepresented in government and may be victims of a cycle where the opposing party maintains their power through the redistricting process.
+    </p>
+
+    <p>
+      <term>Racial gerrymandering</term> is the practice of drawing district lines to reduce the impact of racial minority voters by limiting their ability to elect candidates of their choice. This practice is illegal in the United States. Historically, in this type of gerrymandering, White people benefit from the drawing of districts that systematically stifle voters of color. Conversely, members of racial minority groups continue to be oppressed and are in a more difficult position to elect representatives to government that may fight for policies on their behalf.
+    </p>
+
+    <p>
+      The Supreme Court of the United States has ruled that partisan gerrymandering is a political question that is not justiciable, meaning that it is not within the jurisdiction of the courts to decide.
+      However, the Court has ruled that racial gerrymandering is unconstitutional and has struck down district plans that were found to be racially gerrymandered.
+      The test for racial gerrymandering established by the Supreme Court is called the <term>Gingles test</term>, which has three prongs:
+      <ol>
+        <li>
+          <p>
+            The racial minority group must be sufficiently large and geographically compact to constitute a majority in a single-member district.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            The racial minority group must be politically cohesive, meaning that its members tend to vote similarly.
+          </p>
+        </li>
+
+        <li>
+          <p>
+            The majority group must vote sufficiently as a bloc to usually defeat the minority's preferred candidate.
+          </p>
+        </li>
+      </ol>
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="gerrymandering-big-problem">
+    <title>Big Problem: Using Mathematics to Determine Fairness</title>
+
+    <p>
+      What is a <q>fair</q> district map?
+    </p>
+
+    <p>
+      Even without partisan or racial bias, the notion of a <q>fair</q> district map may take on different meanings depending on your state and point of view.
+      Perhaps a fair map is one that reliably produces representatives which are proportional to the state's political party populations.
+      Maybe a map with a high number of competitive districts keeps democracy flourishing.
+      Or possibly a state's geography prioritizes compactness of district shapes.
+    </p>
+
+    <p>
+      Historically, math has been used to try to define and quantify forms of <q>fairness</q> as well as measures for detecting partisan or racial gerrymandering.
+      Much like in other social applications, fairness is a mathematically impossible reality to achieve.
+      Eventually, mathematicians and statisticians turned to outlier analysis to show that some district plans were outliers in the space of district plans.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="gerrymandering-math-topic-compactness">
+    <title>Geometry and Compactness</title>
+
+    <introduction>
+      <p>
+        Many discussions about manipulation of district boundaries have focused on the shapes of the districts.
+      </p>
+    </introduction>
+
+    <subsubsection>
+      <title> Three Ways to Measure Compactness of a District </title>
+
+      <remark>
+        There are many different mathematical and geometric approaches for measuring the compactness of a shape.
+        It is important to note that these measures are based entirely on district shapes and do not factor in geography, racial demographics, political party affiliation, or election results.
+        While the shape of a district alone is not indicative of gerrymandering, it can be worthwhile to consider as one potential indicator.
+        We examine a few measures here.
+      </remark>
+
+      <p>
+        To allow for more straighforward computations, we work in <em>square</em> grids in this section, noting that this is a simplification from real-life applications.
+        We start with our square grid and a district plan drawn on the grid: <!-- <figure xml:id="../assets/gerrymandering-square-grid-district">
+        <title>District plan on square grid.</title>
+
+        <image source="../assets/gerrymandering/square-grid-district.png"> Image of district drawn on square grid with edges following grid lines. Region encloses 18 squares and is an irregular shape.
+        </image>
+        <caption> Square grid with district plan. </caption>
+      </figure>
+      -->
+    </p>
+
+    <p>
+      We defined <term>compactness</term> above as a measure of how tightly packed a district is.
+      The most compact district, then, is one that is as tightly packed as possible.
+      If we are constructing our districts from squares in the grid, what shape would be as tightly packed as possible? We would want smooth edges, without any parts sticking out, so we might try to arrange our squares into a rectangular region.
+      But a long, skinny rectangle would not be considered as tightly packed as possible: we could tighten it up even more by getting the side lengths to all be the same.
+      Our most compact shape, then, is a square.
+    </p>
+
+    <p>
+      The first measure of compactness we discuss, the <term>Polsy-Popper </term> measure, is found by comparing the shape of a given district to the <q>ideal</q> shape, a square - more specifically, a square that has the same perimeter as our district.
+    </p>
+
+    <definition xml:id="gerrymandering-PPdef">
+      The <term> Polsby-Popper score </term> is a ratio that compares the area of a district to the area of a square with the same perimeter as the district.
+      Thus we have
+      <me>
+        PP =\displaystyle\frac{\text{Area of district}}{\text{Area of a square with the same perimeter as the district}}
+      </me>.
+    </definition>
+
+    <p>
+      In the following example, we calculate the Polsby-Popper score for the district above.
+    </p>
+
+    <example>
+      Find the Polsby-Popper score for the district above.
+      <hint>
+        Once you have the perimeter of the district (26), what dimensions would a square have with the same perimeter?
+      </hint>
+
+      <answer>
+        <m> PP = \frac{72}{169} \approx 0.426.</m>
+      </answer>
+
+      <solution>
+        <p>
+          Omitting units and simply counting, we note the area of the district is <m>18</m> and its perimeter is <m>26</m>.
+          Since all sides must be equal in length in a square, any square that has perimeter <m>26</m> must have sides of length <m> \frac{26}{4}</m> or <m> \frac{13}{2} </m>.
+          Therefore the area of this square would be <m>\left ( \frac{13}{2} \right )^2 = \frac{169}{4}</m>.
+          Now we find the ratio: <m> PP = \frac{18}{(169/4)}=\frac{72}{169} \approx 0.426.</m>
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      Our second measure of compactness, the <term>Reock score</term>, again compares the given district shape to a square.
+      However, instead of using a square with the same perimeter as the district, the Reock score compares to a <em>minimum-bounding square</em>, which is the smallest square that fully contains the district.
+    </p>
+
+    <definition xml:id="gerrymandering-Rdef">
+      The <term>Reock score</term> is a ratio that compares the district's shape to the minimum-bounding square, the smallest square that fully contains the district.
+      We have
+      <me>
+        R =\displaystyle\frac{\text{Area of district}}{\text{Area of the smallest square containing the district}}
+      </me>.
+    </definition>
+
+    <p>
+      In the image below, we show the district plan together with the smallest square containing the district.
+      <!--
+      <figure xml:id="gerrymandering-district-with-smallest-square">
+        <title>District plan with minimum-bounding square.</title>
+
+        <image source="../assets/gerrymandering/district-with-smallest-square.png"> Image of district together with outline of smallest square containing the district.
+        </image>
+        <caption> District plan with minimum-bounding square. The minimum-bounding square is outlined in dashed line. Because the district is 6 squares wide at its widest point, the minimum-bounding square is 6 units by 6 units. </caption>
+      </figure>
+      -->
+    </p>
+
+    <p>
+      In the next example, we calculate the Reock score for the district above.
+    </p>
+
+    <example>
+      Find the Reock score for the district above.
+      <hint>
+        As noted above, the smallest square that contains the district is 6 units by 6 units.
+        Find its area.
+      </hint>
+
+      <answer>
+        <m> R = 0.5 </m>
+      </answer>
+
+      <solution>
+        <p>
+          Omitting units and simply counting, we note the area of the district is <m>18</m> and area of the smallest square that contains the district is <m>36</m>.
+          In this case, we have <m> R = \frac{18}{36}=\frac{1}{2}=0.5</m>.
+        </p>
+      </solution>
+    </example>
+
+    <p>
+      Finally, the <term> Convex Hull score </term> is a ratio that measures how <q>convex</q> a district shape is.
+      In geometry, a <em> convex </em> shape is one in which any two points in the interior of the shape can be connected by a straight line that stays inside the shape.
+      If there is any pair of interior points connected by a straight line that partially falls outside of the shape, then the shape is known as <em>concave</em>.
+      The picture below shows an example of a convex shape (image a) versus concave shape (image b): <!--
+      <figure xml:id="gerrymandering-ConvexConcave1">
+        <title>Convex and concave shapes.</title>
+
+        <image source="gerrymandering/ConvexConcave1.png" width= "50%"> Image of two shapes. One has a line segment entirely inside the shape; the other shows a line segment partly outside the shape.
+        </image>
+        <caption> Convex and concave shapes. </caption>
+      </figure>
+      -->
+    </p>
+
+    <p>
+      The <em> convex hull </em> of a shape is the original shape together with the minimum additional area needed to make it convex.
+      To visualize the convex hull, imagine placing a rubber band tightly around the perimeter of the shape.
+      If the shape is a square, or a rectangle, the rubber band will fit exactly along the edges of the shape.
+      If the shape is not rectangular, the rubber band will stretch across any gaps created between corners of the shape.
+      This region enclosed by the rubber band is the convex hull.
+      The picture below shows our district together with its convex hull: <!--
+      <figure xml:id="gerrymandering-district-with-convex-hull">
+        <title>District with its convex hull.</title>
+
+        <image source="gerrymandering/district-with-convex-hull.png" > Image of district plan with convex hull, which has an outline like a rubber band stretched around the district border.
+        </image>
+        <caption> District plan with convex hull. The convex hull is outlined in dashed line, and can be thought of like a rubber band stretched around the district border. </caption>
+      </figure>
+      -->
+    </p>
+
+    <definition xml:id="gerrymandering-CHdef">
+      The <term>Convex Hull score</term> is a ratio that compares the district's shape to its convex hull.
+      It is defined as
+      <me>
+        CH =\displaystyle\frac{\textnormal{Area of district}}{\textnormal{Area of convex hull of district}}
+      </me>.
+    </definition>
+
+    <p>
+      In the following example, we compute the Convex Hull score for the given district.
+    </p>
+
+    <example>
+      Find the Convex Hull score for the district above.
+      <hint>
+        The convex hull around the district is outlined in a dashed line.
+        Find the area of this region by combining the area of the enclosed squares with the areas of the triangular regions formed.
+      </hint>
+
+      <answer>
+        <m> CH \approx 0.74 </m>.
+      </answer>
+
+      <solution>
+        <p>
+          Omitting units and simply counting, we note the area of the district is <m>18</m>.
+          The area of the convex hull that contains the district is found in pieces, combining the area of the squares with the areas of the triangular regions formed.
+          For area of the convex hull we get <m>20 + 4 + 0.5</m>.
+          This yields <m> CH = \frac{18}{24.5} \approx  0.74 </m>
+        </p>
+      </solution>
+    </example>
+
+    <remark>
+      The actual formulas for these scores (based in the real world rather than districts composed of squares) vary slightly from those we use here.
+      In particular, the <q>ideal</q> compact shape used for comparison in the first two measures is a circle.
+      In the Polsby-Popper ratio, the ideal shape is a circle with the same perimeter (circumference) as the district.
+      In the Reock ratio, the ideal shape is the minimum-bounding circle, which is the smallest circle containing the district.
+      Our definitions and compactness scores are <em>consistent</em> with the formal scores and allow for more straightforward computations.
+    </remark>
+  </subsubsection>
+
+  <subsubsection>
+    <title> Compactness Criteria </title>
+
+    <p>
+      In these three measures, compactness is a geometric measure that compares the area of a district to some <q>ideal</q> compact shape.
+      In each case we consider, the compactness score is a number between 0 and 1 that measures the compactness of the shape relative to the ideal.
+      Districts close in shape to the ideal shape (more compact) have scores closer to 1, while those less compact (farther from the ideal) score closer to 0.
+      When a district has much greater perimeter than we would expect for the region's area (as happens when the shape has long, skinny pieces branching off or strung together), we may suspect gerrymandering.
+      At this time, 37 states include a compactness requirement for state legislative districts, and 18 establish similar requirements for congressional districts.
+      However, there is no universal measure, and different states have different laws that regulate compactness.
+      In Idaho the redistricting commission is expected to <q>avoid drawing distorted boundaries</q>, while in other states with extensive coastlines (such as Maryland) this is impossible.
+      In fact, most states do not provide details on compactness measures but adopt a  <q>you know it when you see it</q> approach in determinations.
+    </p>
+
+    <p>
+      Compactness in the Courts: Pennsylvania's 7th congressional district adopted in 2011 (shown below) has been widely cited as an example of a district that is far from compact as a result of gerrymandering.
+      In 2018, the state's Supreme Court ruled this (and the rest of the district plan) to be an unconstitutional gerrymander, and required the state to create a new map.
+    </p>
+
+    <p>
+      Among mathematicians and political scientists, the debate about best measures of compactness continues, but consensus has arisen around a few guiding principles:
+      <ul>
+        <li>
+          There is no number threshold for a district being deemed <q>compact</q> - the numbers are used in comparison, not for their standalone values.
+        </li>
+
+        <li>
+          Compactness measures should be used across an entire districting plan, not just a single district.
+        </li>
+
+        <li>
+          Comparisons should be made between districts and plans within the same state, and not across different states as each state's geography is unique.
+        </li>
+
+        <li>
+          Compactness tests should measure the shape and not the size of the district.
+        </li>
+
+        <li>
+          Multiple compactness tests should be used whenever possible.
+        </li>
+
+        <li>
+          Compactness tests should not be the sole factor used to judge district plans.
+        </li>
+      </ul>
+    </p>
+  </subsubsection>
+
+  <p>
+    Ultimately, it's a bit of a moot point.
+    The Brennan Center has gathered several examples of situations like these in this useful analysis: <url href="https://www.brennancenter.org/our-work/analysis-opinion/dont-judge-district-its-shape">Don't judge a district by its shape (opens new tab)</url>.
+    In fact, as the article points out, it is possible for a compact shape to be the result of a gerrymander too! In the following sections, we explore issues of fairness that go beyond geometry.
+  </p>
+</subsection>
+
+
+<subsection xml:id="subsec-districting-algorithms">
+  <title>Districting Algorithms</title>
+
+  <definition>
+    <p>
+      A <term>graph</term> <m>G</m> is pair of sets: <m>V = \{v_1,\dots,v_n\}</m> (the <term>vertex set</term>) and <m>E \subseteq \{\{v_i,v_j\} \, \colon \, 1 \leq i,j \leq n\}</m> (the <term>edge set</term>).
+      A <term>weighted graph</term> has a numerical value associated to each vertex.
+    </p>
+  </definition>
+
+  <example>
+    <p>
+      an example of a graph goes here
+    </p>
+  </example>
+
+  <p>
+    Notice that the way we draw the graph is not part of the graph itself!
+  </p>
+
+  <example>
+    <p>
+      an example of the same graph drawn differently goes here
+    </p>
+  </example>
+
+  <definition>
+    <p>
+      If <m> e = \{v,w\} \in E</m>, we say <m>e</m> is <term>incident</term> to <m>v</m> and <m>w</m> and that <m>v</m> and <m>w</m> are <term>adjacent</term>.
+      The <term>degree</term> of a vertex is the number of edges incident to it.
+    </p>
+  </definition>
+
+  <definition>
+    <p>
+      A <term>cycle</term> is a...
+      , a <term>tree</term> is a graph without cycles; a vertex of degree one in a tree is called a <term>leaf</term>, a path is a tree with only two leaves.
+    </p>
+  </definition>
+
+  <p>
+    Given a graph <m>G</m>, a <term>minimal spanning tree</term> is a tree that reaches all the vertices of <m>G</m>
+  </p>
+</subsection>
+</section>

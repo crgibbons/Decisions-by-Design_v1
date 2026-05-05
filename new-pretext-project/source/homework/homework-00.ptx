@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<worksheet>
+  <title>Apportionment Homework</title>
+
+  <introduction>
+    <p>
+      <alert>Instructions:</alert> Complete these problems.
+    </p>
+  </introduction>
+
+  <page>
+    <exercise>
+      <title>Other Means</title>
+
+      <statement>
+        <ol>
+          <li>
+            <p>
+              The Huntington-Hill method uses the geometric mean,
+              <me>
+                c(L,U) = \sqrt{LU},
+              </me>
+              which generalizes for more than two numbers as
+              <me>
+                c(a_1,a_2,\cdots,a_n) = \sqrt[n]{a_1 a_2 \cdots a_n}.
+              </me>
+              What if we modify Huntington Hill to use
+              <me>
+                c(L_s,Q_s,U_s) = \sqrt[3]{L_sQ_sU_s}
+              </me>
+              where <m>Q_s</m> is the quota for State <m>s</m> from the standard divisor? Try on the coffee data set.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              There are two other means we could try, too.
+              The Harmonic Mean is given by
+              <me>
+                h(L_s,U_s)= \dfrac{2 L_s U_s}{L_s + U_s},
+              </me>
+              and the Quadratic Mean is given by
+              <me>
+                p(L_s,U_s) = \sqrt{\dfrac{L_s^2+U_s^2}{2}}.
+              </me>
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Apply these to the coffee data.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              Describe how to generalize each of these to more than two numbers.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+
+  <page>
+    <exercise>
+      <title>Other Methods</title>
+
+      <statement>
+        <ol>
+          <li>
+            <p>
+              The Adams method rounds up if the quota is above a certain threshold, and rounds down otherwise.
+              What threshold does it use? Try it on the coffee data.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              The Dean method uses the harmonic mean as its threshold.
+              Try it on the coffee data.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+
+  <page>
+    <exercise>
+      <title>Divisor Methods are Equivalent to Rounding Methods</title>
+
+      <statement>
+        <p>
+          Show that for any divisor method, there is an equivalent rounding method that gives the same apportionment, and vice versa.
+        </p>
+      </statement>
+    </exercise>
+  </page>
+
+  <page>
+    <exercise>
+      <title>Quota Methods are Equivalent to Rounding Methods</title>
+
+      <statement>
+        <p>
+          Show that for any quota method, there is an equivalent rounding method that gives the same apportionment, and vice versa.
+        </p>
+      </statement>
+    </exercise>
+  </page>
+
+  <page>
+    <exercise>
+      <title>Finding Paradoxes</title>
+
+      <statement>
+        <p>
+          Find an example of a population distribution that exhibits the Alabama Paradox under the Hamilton method.
+        </p>
+        </statement>
+        </exercise>
+      </page>
+
+      <page>
+        <exercise>
+          <statement>
+            <p>
+              Build an example for every <q>Yes</q> in the table below.
+            </p>
+
+            <table>
+              <title>Summary of all five apportionment methods and their paradoxes</title>
+
+              <tabular>
+                <row>
+                  <cell>Method</cell>
+                  <cell>Quota Rule</cell>
+                  <cell>Alabama</cell>
+                  <cell>Population</cell>
+                  <cell>New-States</cell>
+                </row>
+
+                <row>
+                  <cell>Hamilton</cell>
+                  <cell>No violations</cell>
+                  <cell>Yes</cell>
+                  <cell>Yes</cell>
+                  <cell>Yes</cell>
+                </row>
+
+                <row>
+                  <cell>Jefferson</cell>
+                  <cell>Upper-quota violations</cell>
+                  <cell>No</cell>
+                  <cell>No</cell>
+                  <cell>No</cell>
+                </row>
+
+                <row>
+                  <cell>Adams</cell>
+                  <cell>Lower-quota violations</cell>
+                  <cell>No</cell>
+                  <cell>No</cell>
+                  <cell>No</cell>
+                </row>
+
+                <row>
+                  <cell>Webster</cell>
+                  <cell>Lower- and upper-quota violations</cell>
+                  <cell>No</cell>
+                  <cell>No</cell>
+                  <cell>No</cell>
+                </row>
+
+                <row>
+                  <cell>Huntington-Hill</cell>
+                  <cell>Lower- and upper-quota violations</cell>
+                  <cell>No</cell>
+                  <cell>No</cell>
+                  <cell>No</cell>
+                </row>
+              </tabular>
+            </table>
+          </statement>
+        </exercise>
+      </page>
+
+
+      <page>
+        <exercise>
+          <title>2024 Electoral College.</title>
+
+          <statement>
+            <ol>
+              <li>
+                <p>
+                  Apportioning seats in the House of Representatives also determines each states number of electors in the electoral college.
+                  Use the Harmonic Mean to reapportion the House based on the 2020 census.
+                  Find a break down of the 2024 election results by state, and use the new Electoral College numbers to see if the outcome of the election would have changed.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  In the 2020 election, the Supreme Court of the United States ultimately made a decision because of a voting irregularity (<q>hanging chads</q>).
+                  Would a different apportionment method have made a difference in the outcome of the election, or at least the deciciveness of the election results?
+                </p>
+              </li>
+            </ol>
+          </statement>
+        </exercise>
+      </page>
+
+
+      <page>
+        <p>
+          To dig into the primary source literature about a famous apportionment lawsuit, you will use Google NotebookLM as described in class.
+        </p>
+
+        <exercise>
+          <title> NotebookLM set-up</title>
+
+          <statement>
+            <ul>
+              <li>
+                <p>
+                  One of your group members should use their Hamilton email account to log in at <url href="https://notebooklm.google.com/">Google NotebookLM</url>, then click <q>Create New</q>.
+                  That group members should also upload the SCOTUS transcript and SCOTUS opinion.
+                  Name the notebook something recognizable, like <q>SCOTUS Apportionment</q>.
+                </p>
+
+                <p>
+                  You might also like to add additional webpages from the U.S.
+                  Census Bureau (see Links of Interest below) and the paper on Blackboard by David McCune, but these are optional (and you can toggle whether the notebook interface uses them to respond to a question by clicking the checkboxes on or off.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  The creator of the notebook should share it by adding the Hamilton email addresses of the other group members, with access to the full notebook.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Each group member will come up with a question they would like NotebookLM to answer about the source material, then save the reponse to the question as a note.
+                </p>
+              </li>
+
+              <li>
+                <p>
+                  Finally, each group member will share their question and answer on the course blog, plus their strategy for fact-checking the answer and an assessment of how well NotebookLM did.
+                </p>
+              </li>
+            </ul>
+          </statement>
+        </exercise>
+
+        <p>
+          This is just our first foray into using a generative AI tool to enhance our learning.
+          We will develop more skills to interact with NotebookLM throughout the course.
+        </p>
+      </page>
+
+      <remark>
+        <title>Links of Interest</title>
+        <ul>
+          <li>
+            <p>
+              <url href="https://www.census.gov/topics/public-sector/congressional-apportionment/about.html">About Congressional Apportionment</url> from the U.S. Census Bureau.
+            </p>
+          </li>
+
+          <li>
+            <p>
+              <url href="https://www.census.gov/topics/public-sector/congressional-apportionment/about/computing.html">Computing Apportionment</url> from the U.S. Census Bureau.
+            </p>
+          </li>
+        </ul>
+
+        <p>
+          Note that the public availability of U.S.
+          Census data is important for anyone who wants to see how different apportionment methods would work out!
+        </p>
+      </remark>
+    </worksheet>
