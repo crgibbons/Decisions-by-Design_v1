@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<worksheet>
+  <title>More Dimensionality Reduction</title>
+  <introduction>
+    <p>
+      <alert>Instructions:</alert> Watch the video <url href="https://youtu.be/aNqbADCuA2I?si=ULL6gRq9Xu_csWlL">Quantifying MMA Styles</url> by Trixster Productions.
+    </p>
+  </introduction>
+
+  <page>
+    <exercise workspace="1in">
+      <statement>
+        <p>
+          You have been asked to write a brief summary of the technique used by Trixster Productions to classify mixed martial arts (MMA) fighters as <q>grapplers</q> or <q>strikers</q>.
+          <aside>It's okay if you don't know what these words mean in the context of MMA, but if you are curious, there is a survey paper of performance impact factors available through the National Library of Medicine:
+            <url href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9227211/">Exploratory Systematic Review of Mixed Martial Arts: an Overview of Performance of Importance Factors with over 20,000 Athletes</url>.</aside>
+            Your summary should include the features that are measured for MMA fighters, the source of those features, and the two techniques described that were used to create statistical profiles of each fighter.
+            Include a brief explanation of why the video author prefers one method to the other.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          You can access the UFC fighter statistics from <url href="TODO" />. Use the PCA and t-SNE template notebooks
+          to reduce the data's dimensionality to two dimensions. What do you notice? What do you wonder?
+        </p>
+      </statement>
+    </exercise>
+
+        <exercise>
+      <statement>
+        <p>
+          You can access the UFC fighter statistics from <url href="TODO" />. Use the PCA and t-SNE template notebooks
+          to reduce the data's dimensionality to three dimensions. What do you notice? What do you wonder?
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise>
+      <statement>
+        <p>
+          The t-SNE clustering is crowded. How can you separate the clusters?
+        </p>
+      </statement>
+    </exercise>
+
+  </page>
+</worksheet>

@@ -7,7 +7,8 @@
     <p>
       <alert>Instructions:</alert> Complete all the exercises below and submit your work by the due date. 
       Information about the drug Effexor XR and its half-life can be found in the DE Crash Course notes. 
-      The websites <url href="https://www.nigms.nih.gov/education/fact-sheets/Pages/half-life.aspx" /> and <url href="https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=c848a5d8-ba94-4c84-80e3-0bf35fb8e32e" /> provide details about dosing schedules and half-life.
+      The websites <url href="https://www.nigms.nih.gov/education/fact-sheets/Pages/half-life.aspx">NIGMS Fact Sheets</url> 
+      and <url href="https://dailymed.nlm.nih.gov/dailymed/fda/fdaDrugXsl.cfm?setid=c848a5d8-ba94-4c84-80e3-0bf35fb8e32e">Effexor XR Fact Sheet</url> provide details about dosing schedules and half-life.
     </p>
   </introduction>
 
@@ -79,7 +80,7 @@
           <li>
             <p>
               Interpret your answer.
-              How many half-lives have passed when the concentration reaches <m>25\%</m> of its original value?
+              How many half-lives have passed when the concentration reaches <m>10\%</m> of its original value?
             </p>
           </li>
 
@@ -139,11 +140,11 @@
 @interact
 def missed_dose_model(
     half_life=slider(6, 24, 1, default=11, label="half-life in hours"),
-    D=slider(10, 100, 5, default=50, label="dose increase D"),
-    L=slider(5, 80, 5, default=25, label="withdrawal threshold L"),
+    D=slider(10, 100, 5, default=75, label="dose increase D"),
+    L=slider(5, 80, 5, default=10, label="withdrawal threshold L"),
     dose_hour=slider(0, 23, 1, default=8, label="usual dose time: hour of day"),
     missed_day=slider(1, 5, 1, default=2, label="missed dose on day"),
-    days_shown=slider(2, 7, 1, default=5, label="days shown")
+    days_shown=slider(2, 14, 1, default=5, label="days shown")
 ):
     t = var('t')
     k = log(2)/half_life
@@ -201,7 +202,7 @@ def missed_dose_model(
         </sage>
 
         <p>
-          Use the sliders to compare a morning dose and an evening dose.
+          Use the sliders to compare a missed morning dose and an evening dose.
           What changes about the time of day when the concentration falls below the threshold <m>L</m>?
         </p>
 
