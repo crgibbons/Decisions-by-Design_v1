@@ -1,0 +1,1481 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="apportionment-chapter">
+  <title>Apportionment: Geometry, Fairness, and Representation</title>
+
+  <introduction>
+    <p>
+      Every few years, the United States faces a deceptively simple question:
+    </p>
+
+    <blockquote>
+      <p>
+        How should seats in the House of Representatives be distributed among the states?
+      </p>
+    </blockquote>
+
+    <p>
+      The problem sounds straightforward.
+      States with larger populations should receive more seats.
+      But congressional seats are indivisible: a state cannot receive <m>7.3</m> representatives.
+    </p>
+
+    <p>
+      The challenge of turning ideal fractional shares into whole-number allocations is called <term>apportionment</term>.
+    </p>
+
+    <p>
+      Although the language comes from politics, apportionment appears everywhere:
+    </p>
+
+    <ul>
+      <li>
+        distributing legislative seats,
+      </li>
+
+      <li>
+        allocating funding,
+      </li>
+
+      <li>
+        dividing resources,
+      </li>
+
+      <li>
+        assigning committee members,
+      </li>
+
+      <li>
+        or even sharing coffee.
+      </li>
+    </ul>
+  </introduction>
+
+
+  <!-- <subsection xml:id="coffee-example">
+    <title>Coffee for the Department</title>
+
+    <example xml:id="coffee-box-example">
+      <title>Boxes of Coffee</title>
+
+      <statement>
+        <p>
+          Courtney buys <m>45</m> boxes of coffee for the mathematics department.
+          Each professor will receive some number of boxes to distribute to their students.
+        </p>
+
+        <p>
+          The department decides that the number of boxes each professor receives should depend on the total number of students they teach.
+        </p>
+
+        <table>
+          <title>Faculty Teaching Loads</title>
+
+          <tabular>
+            <row header="yes">
+              <cell>Professor</cell>
+              <cell>Students</cell>
+            </row>
+
+            <row><cell>Ahmed</cell><cell>35</cell></row>
+            <row><cell>Bowman</cell><cell>60</cell></row>
+            <row><cell>Ceniceros</cell><cell>71</cell></row>
+            <row><cell>Cockburn</cell><cell>22</cell></row>
+            <row><cell>Dykstra</cell><cell>38</cell></row>
+            <row><cell>Gibbons</cell><cell>55</cell></row>
+            <row><cell>Kantrowitz</cell><cell>73</cell></row>
+            <row><cell>Kuruwita</cell><cell>45</cell></row>
+            <row><cell>LeMasurier</cell><cell>28</cell></row>
+            <row><cell>Tripp</cell><cell>58</cell></row>
+
+            <row bottom="minor">
+              <cell><em>Total</em></cell>
+              <cell><m>485</m></cell>
+            </row>
+          </tabular>
+        </table>
+
+        <p>
+          What would a <q>fair</q> allocation of the <m>45</m> boxes look like?
+        </p>
+      </statement>
+    </example>
+
+    <p>
+      This is fundamentally the same problem as congressional apportionment.
+      The professors play the role of states, the students play the role of population, and the coffee boxes play the role of seats in Congress.
+    </p>
+
+    <p>
+      The central difficulty is that proportional shares are usually fractional, while the allocations themselves must be whole numbers.
+    </p>
+  </subsection> -->
+
+  <subsection xml:id="coffee-example">
+  <title>Coffee for the Department</title>
+
+  <p>
+    Before discussing congressional representation, we begin with a much smaller allocation problem.
+  </p>
+
+  <p>
+    Suppose the mathematics department has purchased boxes of coffee to distribute among faculty members for their classes.
+    The boxes cannot be subdivided, so each professor must receive a whole number of boxes.
+  </p>
+
+  <p>
+    At first glance, this sounds easy:
+  </p>
+
+  <blockquote>
+    <p>
+      Give more coffee to professors teaching more students.
+    </p>
+  </blockquote>
+
+  <p>
+    But what happens when the <q>fair</q> amount is not a whole number?
+  </p>
+
+  <p>
+    This is the central difficulty of every apportionment problem.
+  </p>
+
+  <example xml:id="coffee-box-example">
+    <title>Boxes of Coffee</title>
+
+    <statement>
+      <p>
+        Courtney buys <m>45</m> boxes of coffee for the mathematics department.
+        The department decides to distribute the boxes proportionally according to the total number of students taught by each professor.
+      </p>
+
+      <p>
+        Assume every professor drinks coffee too, so each professor counts as an additional person.
+      </p>
+
+      <table>
+        <title>Faculty Teaching Loads</title>
+
+        <tabular>
+          <row header="yes">
+            <cell>Professor</cell>
+            <cell>Total Students (plus professor)</cell>
+          </row>
+
+          <row><cell>Ahmed</cell><cell>35</cell></row>
+          <row><cell>Bowman</cell><cell>60</cell></row>
+          <row><cell>Ceniceros</cell><cell>71</cell></row>
+          <row><cell>Cockburn</cell><cell>22</cell></row>
+          <row><cell>Dykstra</cell><cell>38</cell></row>
+          <row><cell>Gibbons</cell><cell>55</cell></row>
+          <row><cell>Kantrowitz</cell><cell>73</cell></row>
+          <row><cell>Kuruwita</cell><cell>45</cell></row>
+          <row><cell>LeMasurier</cell><cell>28</cell></row>
+          <row><cell>Tripp</cell><cell>58</cell></row>
+
+          <row bottom="minor">
+            <cell><em>Total</em></cell>
+            <cell><m>485</m></cell>
+          </row>
+        </tabular>
+      </table>
+
+      <p>
+        Determine a way to distribute the <m>45</m> boxes.
+      </p>
+
+      <p>
+        What would make an allocation seem fair?
+      </p>
+    </statement>
+  </example>
+
+  <discussion xml:id="coffee-first-thoughts">
+    <title>First Attempts</title>
+
+    <p>
+      One natural idea is to divide the total number of students by the total number of boxes:
+    </p>
+
+    <me>
+      \frac{485}{45}\approx 10.78.
+    </me>
+
+    <p>
+      This suggests that each box of coffee should serve about <m>10.78</m> people.
+    </p>
+
+    <p>
+      So Ahmed, with <m>35</m> people, should receive about
+    </p>
+
+    <me>
+      \frac{35}{10.78}\approx 3.25
+    </me>
+
+    <p>
+      boxes.
+    </p>
+
+    <p>
+      Similarly, Kantrowitz should receive about
+    </p>
+
+    <me>
+      \frac{73}{10.78}\approx 6.77
+    </me>
+
+    <p>
+      boxes.
+    </p>
+
+    <p>
+      Immediately, a problem appears:
+    </p>
+
+    <blockquote>
+      <p>
+        Nobody can receive <m>0.25</m> of a box.
+      </p>
+    </blockquote>
+
+    <p>
+      Apportionment problems arise precisely because proportional shares are usually fractional while allocations themselves must be whole numbers.
+    </p>
+  </discussion>
+
+  <definition xml:id="coffee-quotas">
+    <title>Quota</title>
+
+    <p>
+      The ideal proportional share assigned to an entity is called its <term>quota</term>.
+    </p>
+
+    <p>
+      In this example, the quota for professor <m>i</m> is
+    </p>
+
+    <me>
+      q_i
+      =
+      \frac{\text{students taught by }i}{485}(45).
+    </me>
+  </definition>
+
+  <example xml:id="coffee-quotas-table">
+    <title>Computing the Quotas</title>
+
+    <table>
+      <title>Quota Computations</title>
+
+      <tabular>
+        <row header="yes">
+          <cell>Professor</cell>
+          <cell>Population</cell>
+          <cell>Quota</cell>
+        </row>
+
+        <row>
+          <cell>Ahmed</cell>
+          <cell><m>35</m></cell>
+          <cell><m>3.247</m></cell>
+        </row>
+
+        <row>
+          <cell>Bowman</cell>
+          <cell><m>60</m></cell>
+          <cell><m>5.567</m></cell>
+        </row>
+
+        <row>
+          <cell>Ceniceros</cell>
+          <cell><m>71</m></cell>
+          <cell><m>6.588</m></cell>
+        </row>
+
+        <row>
+          <cell>Cockburn</cell>
+          <cell><m>22</m></cell>
+          <cell><m>2.041</m></cell>
+        </row>
+
+        <row>
+          <cell>Dykstra</cell>
+          <cell><m>38</m></cell>
+          <cell><m>3.526</m></cell>
+        </row>
+
+        <row>
+          <cell>Gibbons</cell>
+          <cell><m>55</m></cell>
+          <cell><m>5.103</m></cell>
+        </row>
+
+        <row>
+          <cell>Kantrowitz</cell>
+          <cell><m>73</m></cell>
+          <cell><m>6.773</m></cell>
+        </row>
+
+        <row>
+          <cell>Kuruwita</cell>
+          <cell><m>45</m></cell>
+          <cell><m>4.175</m></cell>
+        </row>
+
+        <row>
+          <cell>LeMasurier</cell>
+          <cell><m>28</m></cell>
+          <cell><m>2.598</m></cell>
+        </row>
+
+        <row>
+          <cell>Tripp</cell>
+          <cell><m>58</m></cell>
+          <cell><m>5.381</m></cell>
+        </row>
+      </tabular>
+    </table>
+  </example>
+
+  <discussion xml:id="rounding-problem">
+    <title>The Rounding Problem</title>
+
+    <p>
+      Once quotas have been computed, we still must decide how to convert them into whole numbers.
+    </p>
+
+    <p>
+      A first attempt might be ordinary rounding:
+    </p>
+
+    <ul>
+      <li>
+        round <m>3.247</m> down to <m>3</m>,
+      </li>
+
+      <li>
+        round <m>5.567</m> up to <m>6</m>,
+      </li>
+
+      <li>
+        and so on.
+      </li>
+    </ul>
+
+    <p>
+      But if we round every quota normally, the totals become:
+    </p>
+
+    <me>
+      3+6+7+2+4+5+7+4+3+5 = 46.
+    </me>
+
+    <p>
+      We only have <m>45</m> boxes.
+    </p>
+
+    <p>
+      So ordinary rounding fails.
+    </p>
+
+    <p>
+      This is the essential mathematical difficulty of apportionment:
+    </p>
+
+    <blockquote>
+      <p>
+        local rounding decisions do not necessarily preserve the global total.
+      </p>
+    </blockquote>
+  </discussion>
+
+  <exercise xml:id="coffee-rounding-exercise">
+    <statement>
+      <p>
+        Suppose the department instead rounded every quota down.
+      </p>
+
+      <ol marker="a">
+        <li>
+          <p>
+            How many boxes would be distributed?
+          </p>
+        </li>
+
+        <li>
+          <p>
+            How many boxes would remain?
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Which professors seem most deserving of the remaining boxes?
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+  <exercise xml:id="coffee-fairness-exercise">
+    <statement>
+      <p>
+        Consider the following two allocations:
+      </p>
+
+      <me>
+        (5,5,5,5,5,5,5,5,5,0)
+      </me>
+
+      <p>
+        and
+      </p>
+
+      <me>
+        (4,4,4,4,4,9,4,4,4,4).
+      </me>
+
+      <p>
+        Both allocations distribute exactly <m>45</m> boxes.
+      </p>
+
+      <p>
+        Explain why neither allocation seems fair.
+      </p>
+    </statement>
+  </exercise>
+
+  <discussion xml:id="coffee-to-congress">
+    <title>From Coffee to Congress</title>
+
+    <p>
+      This coffee problem is structurally identical to congressional apportionment.
+    </p>
+
+    <table>
+      <title>Apportionment Analogy</title>
+
+      <tabular>
+        <row header="yes">
+          <cell>Coffee Problem</cell>
+          <cell>Congressional Apportionment</cell>
+        </row>
+
+        <row>
+          <cell>Professors</cell>
+          <cell>States</cell>
+        </row>
+
+        <row>
+          <cell>Students</cell>
+          <cell>Population</cell>
+        </row>
+
+        <row>
+          <cell>Boxes of coffee</cell>
+          <cell>Seats in the House</cell>
+        </row>
+
+        <row>
+          <cell>Quota</cell>
+          <cell>Ideal representation</cell>
+        </row>
+      </tabular>
+    </table>
+
+    <p>
+      The only difference is scale.
+    </p>
+
+    <p>
+      In the United States House of Representatives, the indivisible objects are seats in Congress instead of coffee boxes.
+    </p>
+
+    <p>
+      The mathematical questions are exactly the same.
+    </p>
+  </discussion>
+</subsection>
+
+  <subsection xml:id="exact-quotas">
+    <title>Exact Quotas</title>
+
+    <p>
+      Suppose:
+    </p>
+
+    <ul>
+      <li>
+        there are <m>n</m> entities,
+      </li>
+
+      <li>
+        the total number of seats is <m>M</m>,
+      </li>
+
+      <li>
+        the population vector is
+        <me>
+          \mathbf p = (p_1,p_2,\dots,p_n),
+        </me>
+      </li>
+
+      <li>
+        and the total population is
+        <me>
+          P = \sum_{i=1}^n p_i.
+        </me>
+      </li>
+    </ul>
+
+    <definition xml:id="exact-quota-definition">
+      <title>Exact Quota</title>
+
+      <p>
+        The <term>exact quota</term> of entity <m>i</m> is
+      </p>
+
+      <me>
+        q_i = \frac{p_i}{P}M.
+      </me>
+
+      <p>
+        The vector
+      </p>
+
+      <me>
+        \mathbf q = (q_1,\dots,q_n)
+      </me>
+
+      <p>
+        is called the <term>quota vector</term>.
+      </p>
+    </definition>
+
+    <p>
+      The quota vector represents the perfectly proportional allocation we would use if seats were divisible.
+    </p>
+
+    <p>
+      But apportionment requires integer allocations:
+    </p>
+
+    <me>
+      \mathbf m = (m_1,\dots,m_n)
+    </me>
+
+    <p>
+      satisfying
+    </p>
+
+    <me>
+      \sum_{i=1}^n m_i = M.
+    </me>
+
+    <p>
+      The entire problem of apportionment is therefore:
+    </p>
+
+    <blockquote>
+      <p>
+        How should we round the quota vector to an integer allocation?
+      </p>
+    </blockquote>
+  </subsection>
+
+
+  <!-- <subsection xml:id="hamilton-method">
+    <title>Hamilton's Method</title>
+
+    <definition xml:id="hamilton-definition">
+      <title>Hamilton's Method</title>
+
+      <ol>
+        <li>
+          Assign every entity its lower quota:
+          <me>
+            \lfloor q_i \rfloor.
+          </me>
+        </li>
+
+        <li>
+          Count how many seats remain.
+        </li>
+
+        <li>
+          Distribute the remaining seats to the entities with the largest fractional remainders.
+        </li>
+      </ol>
+    </definition>
+
+    <example xml:id="coffee-hamilton">
+      <title>Hamilton's Method for Coffee</title>
+
+      <p>
+        Using the coffee data, the quota for Ahmed is
+      </p>
+
+      <me>
+        q_A = \frac{35}{485}(45)\approx 3.247.
+      </me>
+
+      <p>
+        The lower quota is therefore <m>3</m>.
+      </p>
+
+      <p>
+        Repeating this process for all professors gives:
+      </p>
+
+      <ul>
+        <li>
+          lower quota total: <m>41</m> boxes,
+        </li>
+
+        <li>
+          remaining boxes: <m>4</m>.
+        </li>
+      </ul>
+
+      <p>
+        The remaining boxes go to the four largest fractional remainders.
+      </p>
+    </example>
+  </subsection> -->
+
+  <subsection xml:id="hamilton-method">
+  <title>Hamilton's Method and the Origins of Apportionment Paradoxes</title>
+
+  <p>
+    One of the oldest apportionment procedures used in the United States is Hamilton's method, also called the <term>largest remainder method</term>.
+  </p>
+
+  <p>
+    Hamilton's method begins with a natural observation:
+  </p>
+
+  <blockquote>
+    <p>
+      Every entity should first receive the whole-number part of its quota.
+    </p>
+  </blockquote>
+
+  <p>
+    The remaining seats are then distributed according to which entities were <q>closest</q> to receiving another seat.
+  </p>
+
+  <definition xml:id="hamilton-definition">
+    <title>Hamilton's Method</title>
+
+    <p>
+      Given quota vector
+    </p>
+
+    <me>
+      \mathbf q=(q_1,\dots,q_n),
+    </me>
+
+    <p>
+      Hamilton's method proceeds as follows:
+    </p>
+
+    <ol>
+      <li>
+        Assign every entity its lower quota:
+        <me>
+          m_i=\lfloor q_i\rfloor.
+        </me>
+      </li>
+
+      <li>
+        Compute the number of remaining seats.
+      </li>
+
+      <li>
+        Distribute the remaining seats to the entities with the largest fractional remainders
+        <me>
+          q_i-\lfloor q_i\rfloor.
+        </me>
+      </li>
+    </ol>
+  </definition>
+
+  <example xml:id="coffee-hamilton-example">
+    <title>Hamilton's Method for Coffee</title>
+
+    <p>
+      Recall the quota computations for the coffee example.
+    </p>
+
+    <table>
+      <title>Quota Data</title>
+
+      <tabular>
+        <row header="yes">
+          <cell>Professor</cell>
+          <cell>Quota</cell>
+          <cell>Lower Quota</cell>
+          <cell>Fractional Part</cell>
+        </row>
+
+        <row>
+          <cell>Ahmed</cell>
+          <cell><m>3.247</m></cell>
+          <cell><m>3</m></cell>
+          <cell><m>0.247</m></cell>
+        </row>
+
+        <row>
+          <cell>Bowman</cell>
+          <cell><m>5.567</m></cell>
+          <cell><m>5</m></cell>
+          <cell><m>0.567</m></cell>
+        </row>
+
+        <row>
+          <cell>Ceniceros</cell>
+          <cell><m>6.588</m></cell>
+          <cell><m>6</m></cell>
+          <cell><m>0.588</m></cell>
+        </row>
+
+        <row>
+          <cell>Cockburn</cell>
+          <cell><m>2.041</m></cell>
+          <cell><m>2</m></cell>
+          <cell><m>0.041</m></cell>
+        </row>
+
+        <row>
+          <cell>Dykstra</cell>
+          <cell><m>3.526</m></cell>
+          <cell><m>3</m></cell>
+          <cell><m>0.526</m></cell>
+        </row>
+
+        <row>
+          <cell>Gibbons</cell>
+          <cell><m>5.103</m></cell>
+          <cell><m>5</m></cell>
+          <cell><m>0.103</m></cell>
+        </row>
+
+        <row>
+          <cell>Kantrowitz</cell>
+          <cell><m>6.773</m></cell>
+          <cell><m>6</m></cell>
+          <cell><m>0.773</m></cell>
+        </row>
+
+        <row>
+          <cell>Kuruwita</cell>
+          <cell><m>4.175</m></cell>
+          <cell><m>4</m></cell>
+          <cell><m>0.175</m></cell>
+        </row>
+
+        <row>
+          <cell>LeMasurier</cell>
+          <cell><m>2.598</m></cell>
+          <cell><m>2</m></cell>
+          <cell><m>0.598</m></cell>
+        </row>
+
+        <row>
+          <cell>Tripp</cell>
+          <cell><m>5.381</m></cell>
+          <cell><m>5</m></cell>
+          <cell><m>0.381</m></cell>
+        </row>
+      </tabular>
+    </table>
+
+    <p>
+      The lower quotas sum to
+    </p>
+
+    <me>
+      3+5+6+2+3+5+6+4+2+5=41.
+    </me>
+
+    <p>
+      Since there are <m>45</m> boxes total, four boxes remain to distribute.
+    </p>
+
+    <p>
+      The four largest fractional parts are:
+    </p>
+
+    <me>
+      0.773,\quad
+      0.598,\quad
+      0.588,\quad
+      0.567.
+    </me>
+
+    <p>
+      Therefore the remaining boxes go to:
+    </p>
+
+    <ul>
+      <li>
+        Kantrowitz,
+      </li>
+
+      <li>
+        LeMasurier,
+      </li>
+
+      <li>
+        Ceniceros,
+      </li>
+
+      <li>
+        and Bowman.
+      </li>
+    </ul>
+
+    <p>
+      Hamilton's method therefore produces the allocation
+    </p>
+
+    <me>
+      (3,6,7,2,3,5,7,4,3,5).
+    </me>
+  </example>
+
+  <discussion xml:id="hamilton-good-properties">
+    <title>Why Hamilton's Method Feels Fair</title>
+
+    <p>
+      Hamilton's method has an appealing feature:
+    </p>
+
+    <blockquote>
+      <p>
+        every entity receives either its lower quota or upper quota.
+      </p>
+    </blockquote>
+
+    <p>
+      In other words, Hamilton's method always satisfies the quota rule.
+    </p>
+
+    <p>
+      This makes the method feel locally fair.
+      Nobody receives dramatically more or less than their proportional share.
+    </p>
+
+    <p>
+      But global fairness is more subtle.
+    </p>
+  </discussion>
+
+  <subsubsection xml:id="monotonicity">
+    <title>Monotonicity</title>
+
+    <p>
+      One of the central ideas in modern apportionment theory is <term>monotonicity</term>.
+    </p>
+
+    <p>
+      Informally, monotonicity means:
+    </p>
+
+    <blockquote>
+      <p>
+        improving the inputs should not make the outputs worse.
+      </p>
+    </blockquote>
+
+    <p>
+      There are several different kinds of monotonicity relevant to apportionment.
+    </p>
+
+    <definition xml:id="house-monotonicity">
+      <title>House Monotonicity</title>
+
+      <p>
+        An apportionment method is <term>house monotone</term> if increasing the total number of seats cannot cause an entity to lose a seat.
+      </p>
+    </definition>
+
+    <definition xml:id="population-monotonicity">
+      <title>Population Monotonicity</title>
+
+      <p>
+        An apportionment method is <term>population monotone</term> if an entity whose population grows faster than another entity cannot lose a seat to that entity.
+      </p>
+    </definition>
+
+    <p>
+      These properties sound so reasonable that one might expect every fair method to satisfy them automatically.
+    </p>
+
+    <p>
+      Hamilton's method does not.
+    </p>
+  </subsubsection>
+
+  <subsubsection xml:id="alabama-paradox">
+    <title>The Alabama Paradox</title>
+
+    <p>
+      The most famous failure of house monotonicity is called the <term>Alabama paradox</term>.
+    </p>
+
+    <definition xml:id="alabama-definition">
+      <title>Alabama Paradox</title>
+
+      <p>
+        An apportionment method exhibits the <term>Alabama paradox</term> if increasing the total number of seats causes an entity to lose a seat.
+      </p>
+    </definition>
+
+    <p>
+      This phenomenon historically occurred when Congress considered increasing the size of the House of Representatives.
+      Under Hamilton's method, Alabama would actually have lost a seat when the total number of seats increased.
+    </p>
+
+    <p>
+      The paradox seems absurd:
+    </p>
+
+    <blockquote>
+      <p>
+        adding more seats should not punish a state.
+      </p>
+    </blockquote>
+
+    <p>
+      Yet Hamilton's method allows this to happen because increasing the total number of seats changes:
+    </p>
+
+    <ul>
+      <li>
+        the quotas,
+      </li>
+
+      <li>
+        the fractional remainders,
+      </li>
+
+      <li>
+        and therefore the ranking of those remainders.
+      </li>
+    </ul>
+
+    <p>
+      A small global change can completely reshuffle who receives the leftover seats.
+    </p>
+  </subsubsection>
+
+  <subsubsection xml:id="population-paradox-section">
+    <title>The Population Paradox</title>
+
+    <definition xml:id="population-paradox-definition">
+      <title>Population Paradox</title>
+
+      <p>
+        An apportionment method exhibits the <term>population paradox</term> if one entity grows faster than another entity but loses a seat to it anyway.
+      </p>
+    </definition>
+
+    <p>
+      This paradox violates population monotonicity.
+    </p>
+
+    <p>
+      Intuitively:
+    </p>
+
+    <blockquote>
+      <p>
+        growing faster should never hurt your representation.
+      </p>
+    </blockquote>
+
+    <p>
+      But Hamilton's method can produce exactly this behavior because representation depends not only on quotas themselves, but also on the ordering of fractional remainders.
+    </p>
+  </subsubsection>
+
+  <subsubsection xml:id="new-states-paradox">
+    <title>The New States Paradox</title>
+
+    <definition xml:id="new-states-definition">
+      <title>New States Paradox</title>
+
+      <p>
+        An apportionment method exhibits the <term>new states paradox</term> if adding a new entity together with its fair share of seats changes the allocations of previously existing entities.
+      </p>
+    </definition>
+
+    <p>
+      Historically, this paradox appeared when Oklahoma entered the United States.
+    </p>
+
+    <p>
+      Even though new seats were added for Oklahoma itself, some existing states still gained or lost seats.
+    </p>
+
+    <p>
+      Again, the issue comes from global remainder comparisons:
+    </p>
+
+    <blockquote>
+      <p>
+        changing the overall system changes the ranking structure of the remainders.
+      </p>
+    </blockquote>
+  </subsubsection>
+
+  <discussion xml:id="why-paradoxes-matter">
+    <title>Why These Paradoxes Matter</title>
+
+    <p>
+      These paradoxes reveal something important:
+    </p>
+
+    <blockquote>
+      <p>
+        apportionment is not merely about rounding numbers.
+      </p>
+    </blockquote>
+
+    <p>
+      Apportionment methods create complicated global interactions between quotas.
+    </p>
+
+    <p>
+      Tiny changes in:
+    </p>
+
+    <ul>
+      <li>
+        total seats,
+      </li>
+
+      <li>
+        populations,
+      </li>
+
+      <li>
+        or the addition of new entities
+      </li>
+    </ul>
+
+    <p>
+      can move an allocation from one combinatorial regime into another.
+    </p>
+
+    <p>
+      To understand why this happens, it helps to stop thinking of quota vectors as lists of numbers and start thinking of them as points inside a geometric space.
+    </p>
+
+    <p>
+      That geometric viewpoint leads naturally to simplices and barycentric coordinates.
+    </p>
+  </discussion>
+</subsection>
+
+
+  <!-- <subsection xml:id="paradoxes">
+    <title>When Fairness Gets Strange</title>
+
+    <p>
+      Apportionment methods can behave in surprisingly counterintuitive ways.
+    </p>
+
+    <definition xml:id="alabama-paradox">
+      <title>Alabama Paradox</title>
+
+      <p>
+        An apportionment method exhibits the <term>Alabama paradox</term> if increasing the total number of seats causes an entity to lose a seat.
+      </p>
+    </definition>
+
+    <definition xml:id="population-paradox">
+      <title>Population Paradox</title>
+
+      <p>
+        An apportionment method exhibits the <term>population paradox</term> if one entity grows faster than another but loses a seat to it anyway.
+      </p>
+    </definition>
+
+    <definition xml:id="quota-rule">
+      <title>The Quota Rule</title>
+
+      <p>
+        An apportionment method satisfies the <term>quota rule</term> if every entity receives either its lower quota or upper quota.
+      </p>
+    </definition>
+
+    <p>
+      These paradoxes suggest that apportionment is not merely arithmetic.
+      There is deeper geometry hiding underneath the problem.
+    </p>
+  </subsection>-->
+
+
+  <subsection xml:id="simplex-geometry">
+    <title>The Geometry of Quotas</title>
+
+    <p>
+      Notice that every quota vector satisfies
+    </p>
+
+    <me>
+      q_1+q_2+\cdots+q_n=M.
+    </me>
+
+    <p>
+      For example, with three states and <m>M=5</m> seats,
+      every quota vector lies on the plane
+    </p>
+
+    <me>
+      q_1+q_2+q_3=5.
+    </me>
+
+    <p>
+      Together with the conditions
+    </p>
+
+    <me>
+      q_i\ge0,
+    </me>
+
+    <p>
+      this forms a geometric object called a simplex.
+    </p>
+
+    <definition xml:id="quota-simplex">
+      <title>The Quota Simplex</title>
+
+      <p>
+        The <term>quota simplex</term> is
+      </p>
+
+      <me>
+        \mathcal Q_M
+        =
+        \left\{
+        (q_1,\dots,q_n)\in\mathbb R_{\ge0}^n :
+        \sum_{i=1}^n q_i=M
+        \right\}.
+      </me>
+    </definition>
+
+    <p>
+      Every point in the simplex represents a possible exact quota vector.
+    </p>
+
+    <p>
+      The integer allocations are the lattice points inside the simplex.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="barycentric-coordinates">
+    <title>Barycentric Coordinates</title>
+
+    <p>
+      Coordinates inside a simplex are called <term>barycentric coordinates</term>.
+    </p>
+
+    <p>
+      In a triangle, barycentric coordinates measure how far a point lies toward each vertex.
+    </p>
+
+    <example xml:id="barycentric-example">
+      <p>
+        The point
+      </p>
+
+      <me>
+        (2,2,1)
+      </me>
+
+      <p>
+        lies in the simplex
+      </p>
+
+      <me>
+        q_1+q_2+q_3=5.
+      </me>
+
+      <p>
+        Since the coordinates sum to <m>5</m>, the point represents a valid quota vector for an apportionment problem with five seats.
+      </p>
+    </example>
+
+    <p>
+      The simplex perspective turns apportionment into geometry:
+    </p>
+
+    <blockquote>
+      <p>
+        apportionment methods become rules for partitioning simplices into regions.
+      </p>
+    </blockquote>
+  </subsection>
+
+
+  <subsection xml:id="apportionment-functions">
+    <title>Apportionment Functions</title>
+
+    <definition xml:id="apportionment-function-definition">
+      <title>Apportionment Function</title>
+
+      <p>
+        Let
+      </p>
+
+      <me>
+        \mathcal M_M
+        =
+        \left\{
+        (m_1,\dots,m_n)\in\mathbb Z_{\ge0}^n :
+        \sum_{i=1}^n m_i=M
+        \right\}.
+      </me>
+
+      <p>
+        An <term>apportionment function</term> is a function
+      </p>
+
+      <me>
+        F:\mathcal Q_M\to\mathcal M_M
+      </me>
+
+      <p>
+        assigning each quota vector a unique integer allocation.
+      </p>
+    </definition>
+
+    <p>
+      Geometrically, an apportionment function partitions the simplex into regions.
+    </p>
+
+    <p>
+      Every point in a region maps to the same integer allocation.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="hamilton-geometry">
+    <title>Hamilton's Method Geometrically</title>
+
+    <p>
+      Hamilton's method partitions the simplex using:
+    </p>
+
+    <ul>
+      <li>
+        integer slab boundaries,
+      </li>
+
+      <li>
+        remainder comparisons,
+      </li>
+
+      <li>
+        and tie hyperplanes.
+      </li>
+    </ul>
+
+    <p>
+      For example, the condition
+    </p>
+
+    <me>
+      \lfloor q_1\rfloor=3
+      \qquad\text{and}\qquad
+      \lfloor q_2\rfloor=5
+    </me>
+
+    <p>
+      becomes
+    </p>
+
+    <me>
+      3\le q_1&lt;4,
+      \qquad
+      5\le q_2&lt;6.
+    </me>
+
+    <p>
+      These inequalities carve the simplex into rectangular slabs.
+    </p>
+
+    <p>
+      Additional inequalities comparing fractional parts divide the slabs further into polyhedral regions.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="divisor-methods">
+    <title>Divisor Methods</title>
+
+    <p>
+      Hamilton's method uses fractional remainders.
+      Divisor methods instead modify the divisor until rounding produces exactly the correct number of seats.
+    </p>
+
+    <table>
+      <title>Common Divisor Methods</title>
+
+      <tabular>
+        <row header="yes">
+          <cell>Method</cell>
+          <cell>Rounding Rule</cell>
+        </row>
+
+        <row>
+          <cell>Jefferson</cell>
+          <cell>Always round down</cell>
+        </row>
+
+        <row>
+          <cell>Adams</cell>
+          <cell>Always round up</cell>
+        </row>
+
+        <row>
+          <cell>Webster</cell>
+          <cell>Round normally</cell>
+        </row>
+
+        <row>
+          <cell>Huntington–Hill</cell>
+          <cell>Round using geometric means</cell>
+        </row>
+      </tabular>
+    </table>
+
+    <p>
+      Each divisor method produces a different partition of the simplex.
+    </p>
+
+    <p>
+      Different methods therefore encode different notions of fairness.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="optimization-methods">
+    <title>Optimization and Fairness</title>
+
+    <p>
+      Another way to think about apportionment is through optimization.
+    </p>
+
+    <p>
+      Instead of asking:
+    </p>
+
+    <blockquote>
+      <p>
+        <q>How should we round?</q>
+      </p>
+    </blockquote>
+
+    <p>
+      we ask:
+    </p>
+
+    <blockquote>
+      <p>
+        <q>What notion of unfairness are we trying to minimize?</q>
+      </p>
+    </blockquote>
+
+    <definition xml:id="error-function">
+      <title>Error Function</title>
+
+      <p>
+        An <term>error function</term> assigns a cost to an allocation:
+      </p>
+
+      <me>
+        \psi(\mathbf m)
+        =
+        \sum_{i=1}^n
+        \varphi_i(m_i,q_i).
+      </me>
+    </definition>
+
+    <p>
+      Different methods minimize different kinds of error:
+    </p>
+
+    <ul>
+      <li>
+        absolute error,
+      </li>
+
+      <li>
+        squared error,
+      </li>
+
+      <li>
+        relative representation error,
+      </li>
+
+      <li>
+        or bias toward large or small states.
+      </li>
+    </ul>
+
+    <p>
+      From this perspective, apportionment methods become optimization algorithms on the simplex.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="balinski-young">
+    <title>Impossibility</title>
+
+    <p>
+      Unfortunately, no apportionment method is perfect.
+    </p>
+
+    <theorem xml:id="balinski-young">
+      <title>Balinski–Young Impossibility Theorem</title>
+
+      <p>
+        No apportionment method can simultaneously satisfy:
+      </p>
+
+      <ul>
+        <li>
+          the quota rule,
+        </li>
+
+        <li>
+          and house monotonicity
+        </li>
+      </ul>
+
+      <p>
+        for all possible apportionment problems.
+      </p>
+    </theorem>
+
+    <p>
+      In other words:
+    </p>
+
+    <blockquote>
+      <p>
+        every notion of fairness forces tradeoffs.
+      </p>
+    </blockquote>
+
+    <p>
+      The geometry of the simplex helps us understand exactly where those tradeoffs occur.
+    </p>
+  </subsection>
+</section>

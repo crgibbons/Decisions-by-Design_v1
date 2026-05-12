@@ -1,260 +1,237 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<section xml:id="notes-class-01">
-  <title>Mathematical Modeling and Google NotebookLM</title>
-
-  <p>
-    We started with mathematical modeling using the SIAM M3 Challenge materials.
-    We read about the six stages of mathematical modeling and then applied those stages to a real-world problem.
-    We also got familiar with Google NotebookLM, which is a generative AI tool that can help us interact with documents and extract information from them.
-  </p>
-
-  <ol>
-    <li>
-      <p>
-        Mathematical Modeling Activities <aside>
-        <p>
-          <b>Instructor note:</b> If you are planning this activity, you need a deck of cards that you can use to divide the class into six groups of four using one characteristic (suit) and then four groups of six using another characteristic (number) so that each group of six has a member from each group of four. You may have more than 24 students, in which case, adapt appropriately!
-        </p>
-        </aside>
-      </p>
-    </li>
-
-    <li>
-      <p>
-        Google NotebookLM
-      </p>
-    </li>
-  </ol>
-
-
-  <subsection>
-    <title>Mathematical Modeling</title>
-
+<section xml:id="notes-background-math">
+  <title>Mathematical and Statistical Ideas - a Reference</title>
+  
+  <introduction>
     <p>
-      We started reading the M3 Mathematical Modeling Materials from the Society for Industrial and Applied Mathematics.
-      You should have a list describing the six stages of making a model.
+      This course is about mathematics and how it is used in social contexts to model phenomena, manage processes, and automate parts of the world around us.
+      To dig into these topics, you will need a certain level of comfort with topics from statistics, calculus, and linear algebra.
     </p>
+  </introduction>
 
-    <ol>
-      <li>
+  <subsection xml:id="subsec-statistics-review">
+    <title>Statistics Ideas</title>
+
+    <definition xml:id="def-stats-basics">
+      <statement>
         <p>
-          Defining the Problem Statement (Chapter 2)
+          <dl>
+            <li>
+              <title><term>Population</term></title>
+              <p>
+                blah
+              </p>
+            </li>
+            <li>
+              <title><term>Sample</term></title>
+              <p>
+                blah
+              </p>
+            </li>
+            <li>
+              <title><term>Statistic</term></title>
+              <p>
+                blah
+              </p>
+            </li>
+            <li>
+              <title><term>Data</term></title>
+              <p>
+                blah
+              </p>
+            </li>
+            <li>
+              <title><term>Feature</term></title>
+              <p>
+                blah
+              </p>
+            </li>
+            <li>
+              <title><term>Observation</term></title>
+              <p>
+                blah
+              </p>
+            </li>
+            <li>
+              <title><term>Measures of Spread and Central Tendency</term></title>
+              <p>
+                blah
+              </p>
+            </li>
+          </dl>
         </p>
-      </li>
+      </statement>
+    </definition>
 
-      <li>
-        <p>
-          Making Assumptions (Chapter 3)
-        </p>
-      </li>
+    <example><title>The U.S. Decennial Census</title>
+      <p>
+        The U.S. Decennial Census aims for population-level data.
+      </p>
+    </example>
 
-      <li>
-        <p>
-          Defining Variables (Chapter 4)
-        </p>
-      </li>
+    <example><title>Some other Census product</title>
+      <p>
+        
+      </p>
+    </example>
+    
 
-      <li>
-        <p>
-          Building Solutions (Chapter 5)
-        </p>
-      </li>
-
-      <li>
-        <p>
-          Analysis and Model Assessment (Chapter 6)
-        </p>
-      </li>
-
-      <li>
-        <p>
-          Putting it All Together (Chapter 7)
-        </p>
-      </li>
-    </ol>
-
-    <p>
-      In groups, we read the M3 Challenge Problem and Solution, with each group focusing on a different stage of the modeling process.
-      Then we mixed up into new groups to discuss how those processes fit together into a good overall solution to the challenge problem.
-    </p>
+    <example><title>Mathematical Moment</title>    
+      <p>
+        Grab a mathematical moment from AMS...
+      </p>
+    </example>
+    
   </subsection>
 
-
-  <subsection>
-    <title>Google NotebookLM</title>
-
-    <p>
-      This is a generative AI tool useful for interacting with documents, especially long ones (we're mathematicians; we read, but we also take productive shortcuts when it helps our learning goals).
-    </p>
-
-    <p>
-      We got used to the interface a little bit with the M3 handbook.
-      The link to our notebook is on Blackboard.
-    </p>
-
-    <example>
-      <title>Query: What are the six steps involved in mathematical modeling? </title>
-
+  <subsection xml:id="subsec-calculus-review">
+    <title>Calculus Review</title>
+    
+    <definition>
       <statement>
         <p>
-          <em>Response</em>: <br /> Mathematical modeling is described in the sources as an iterative process rather than a strictly sequential checklist, meaning that steps are often revisited multiple times as the model is refined. While the guidebook highlights several key components, the six primary steps involved in the process are as follows:
-          <ol>
+          <dl>
             <li>
-              <title>Defining the Problem Statement</title>
-
+              <title><term>Derivative</term></title>
               <p>
-                Real-world problems are typically broad, complex, and open-ended.
-                The first step involves researching and brainstorming to refine a conceptual idea into a concise problem statement that clearly indicates what the model will predict or measure.
+                blah
               </p>
             </li>
-
             <li>
-              <title>Making Assumptions</title>
-
+              <title><term>Differential Equation</term></title>
               <p>
-                Because real-world situations often contain incomplete information, assumptions are necessary to simplify the problem and make it tractable.
-                These assumptions help sharpen the focus by reducing the number of factors involved and establishing the specific conditions under which the model is considered valid.
+                blah
               </p>
             </li>
-
-            <li>
-              <title>Defining Variables</title>
-
+            <li><title>Other stuff</title>
               <p>
-                In this stage, the modeler identifies the primary factors influencing the phenomenon and defines them as quantifiable variables with specified units.
-                This includes distinguishing between:
-                <ul>
-                  <li>
-                    Independent variables: The model inputs.
-                  </li>
-
-                  <li>
-                    Dependent variables: The model outputs or predictions.
-                  </li>
-
-                  <li>
-                    Model parameters: Quantities that are held constant within the model
-                  </li>
-                </ul>
+                Series, sequence, integrals
               </p>
             </li>
-
-            <li>
-              <title>Building Solutions (Getting a Solution)</title>
-
-              <p>
-                This step involves using mathematical techniques to generate answers to the defined problem.
-                Depending on the modeler's background and the type of problem, solutions may be reached through hand calculations, algebraic manipulation, computer simulations, or software tools like Excel.
-              </p>
-            </li>
-
-            <li>
-              <title>Analysis and Model Assessment</title>
-
-              <p>
-                After obtaining a solution, the modeler must step back to assess its quality and determine if the results make sense.
-                This involves identifying the model's strengths and weaknesses, as well as performing a sensitivity analysis to see how changes in input values or parameters impact the final output.
-                If the results are unrealistic, the modeler may return to previous steps to adjust assumptions.
-              </p>
-            </li>
-
-            <li>
-              <title>Reporting the Results</title>
-
-              <p>
-                The final step is to explain the model and its implementation clearly so others can use it.
-                This is typically done through a technical report that includes an abstract or executive summary, a clear list of assumptions, defined variables, and an honest assessment of the model's limitations.
-              </p>
-            </li>
-          </ol>
-          Throughout these steps, modelers are encouraged to take careful notes and maintain a bibliography to ensure the process is transparent and repeatable.
-        </p>
-
-        <p>
-          <em>Fact Check</em>: We decided this was consistent with the guidebook. We can check again by clicking the links to the source material.
+          </dl>
         </p>
       </statement>
-    </example>
+      </definition>
 
-    <example>
-      <title>Query: What is the winning paper about?</title>
-
-      <statement>
+      <example>
         <p>
-          <em>Response</em>:<br /> The winning paper, submitted by Team 1356 from Montgomery Blair High School for the 2013 Moody’s Mega Math (M3) Challenge, is titled "Analysis of Plastic Waste Production and Recycling Methods". The paper focuses on three main tasks requested by the Environmental Protection Agency (EPA) regarding plastic waste and recycling strategies.
+          The differential equation <me>\frac{df}{dt} = k f(t)</me> is satisfied by functions <m>f(t) = Ce^{kt}</m> where <m>f(0) = C</m> and <m>k</m> is a constant.
+          No other functions satisfy this equation.
         </p>
-
         <p>
-          <em>There is more to see in the Notebook, but that seemed like enough of the response to start with!</em>
+          This type of differential equation can be used to model a quantity or concentration that is growing (<m>k \gt 0</m>) or decaying (<m>k \lt 0</m>) over time.
+          A common example is radiometric dating (using radioactive Carbon-14 or Uranium) using the known rate of decay of certain carbon isotopes.
         </p>
-
-        <p>
-          <em>Fact Check</em>: We agreed this was a good summary, and we can use the links to the source material to check.
+        <p> 
+          Some fun short videos include:
+          <ul>
+            <li>
+              <p>
+                <url href="https://www.youtube.com/watch?v=xQka8ohWLFo">Carbon Dating courtesy of Oxford</url>
+              </p>
+            </li>
+            <li>
+              <p>
+                <url href="https://www.youtube.com/watch?v=oe45GegJUvM">Radiometric Dating courtesy of Ars Technica</url>
+              </p>
+            </li>
+            <li>
+              <p>
+                 For a colorful description of atoms, isotopes, radioactive decay, heavy water, and more, see <url href="https://www.youtube.com/watch?v=AtmD-qogkXg">Star Talk</url> comparing protons to the Real Housewives of New Jersey and making terrible puns.
+              </p>
+            </li>
+          </ul>
         </p>
-      </statement>
-    </example>
+      </example>
 
-    <example>
-      <title>Query: Why is this a winning paper?</title>
+      <table>
+        <title>Common Derviatives and Differential Equations</title>
+        <tabular>
+          <row>
+            <cell>things</cell>
+          </row>
+        </tabular>
+      </table>
 
-      <statement>
-        <p>
-          This one is a bit trickier because it is a subjective matter, and we do not have the capacity to ask <q>How did you come to that conclusion?</q> and expect an <q>honest</q> answer because LLMs are not capable of self-reflection.
-          All that it can do is give a plausible text response to your question, based on the training data relevant to the question.
-          That is, at best, it's parroting the words of self-reflection!
-        </p>
-
-        <p>
-          For comparison, consider a phrase like, <q>That is a legitimately frustating experience, and I'm sorry you are feeling bad now.</q> We (people) often use a phrase like this to convey our internal empathy to a listener, who then responds to the perceived internal empathy of the speaker.
-          But I say these words to my toddler all the time, and sometimes I am only <em>performing</em> empathy when I don't actually feel it (like at 4 a.m.
-          when he is mad that it's not possible to have a nonconvex triangle in the plane).
-        </p>
-      </statement>
-    </example>
-
-    <exercise>
-      <title>Investigate on your own.</title>
-
-      <statement>
-        <ul>
-          <li>
-            <p>
-              Navigate to the shared notebook.
-              You can ask questions via the chat!
-            </p>
-
-            <p>
-              Professor Gibbons created some Studio Output.
-              What do you think of it?
-            </p>
-          </li>
-
-          <li>
-            <p>
-              Check out the flash cards.
-              Are they useful?
-            </p>
-          </li>
-
-          <li>
-            <p>
-              Are there other outputs you would like the notebook to produce?
-            </p>
-          </li>
-
-          <li>
-            <p>
-              Are there questions you would be unlikely to ask the notebook? Why or why not?
-            </p>
-          </li>
-        </ul>
-      </statement>
-    </exercise>
-
-    <p>
-      This is just our first foray into using a generative AI tool to enhance our learning.
-      We will develop more skills to interact with NotebookLM throughout the course.
-    </p>
+      <table>
+        <title>Integrals</title>
+        <tabular>
+          <row>
+            <cell>stuff</cell>
+          </row>
+        </tabular>
+      </table>
+    
   </subsection>
+
+  <subsection xml:id="subsec-Linear-algebra-review">
+    <title>Linear Algebra Review</title>
+
+    <definition xml:id="def-matrices-and-things">
+      <statement>
+        <p>
+          <dl>
+            <li>
+              <title>Matrix</title>
+              <p>
+                For positive integers <m>m</m> and <m>n</m>, a matrix <m>A \in M_{m\times n}(\R)</m> is an array of real numbers with <m>m</m> rows and <m>n</m> columns.
+                The entry <m>a_{ij}</m> refers to the entry in the <m>i</m>-th row and <m>j</m>-th column.
+                A matrix is said to be <term>square</term> when <m>m = n</m>.
+              </p>
+            </li>
+            <li><title>Matrix Algebra</title>
+              <p>
+                <term>addition</term>, etc, multiplication
+              </p>
+            </li>
+            <li><title>Matrix Equation for a Linear System</title>
+            <p>
+              <m>Ax = b</m>, <term>homogeneous</term>
+            </p>
+            </li>
+            <li><title>Augmented Matrix</title>
+            <p>Represents a linear system</p>
+            </li>
+            <li>
+              <title>Determinant</title>
+            </li>
+          </dl>
+        </p>
+      </statement>
+    </definition>
+
+    <example>
+      <p>
+        Eigen things
+      </p>
+    </example>
+    
+    <example>
+      <p>
+        Adjacency Matrix
+      </p>
+    </example>
+
+    <example>
+      <p>
+        Covariance Matrix
+      </p>
+    </example>
+
+    <example>
+      <p>
+        Barycentric coordinates
+      </p>
+    </example>
+  </subsection>
+
+  <definition xml:id="def-vector-stuff">
+    <statement>
+      <p>
+        Length, cross product, unit vector, projection of one vector onto another.
+      </p>
+    </statement>
+  </definition>
+  
 </section>
