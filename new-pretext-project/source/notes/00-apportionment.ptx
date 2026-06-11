@@ -450,17 +450,19 @@
   <subsection xml:id="apportionment-polyhedra">
     <title>Apportionment Polyhedra</title>
 
-    <p>
-      Any apportionment function partitions the quota simplex into regions such
-      that all quotas in a given region map to the same integer allocation.
-      These regions are called <term>apportionment polyhedra</term>.
-    </p>
+    <introduction>
+      <p>
+        Any apportionment function partitions the quota simplex into regions such
+        that all quotas in a given region map to the same integer allocation.
+        These regions are called <term>apportionment polyhedra</term>.
+      </p>
 
-    <p>
-      The boundaries between polyhedra correspond to tie situations where a small
-      change in the quotas can change the allocation. These boundaries are where
-      paradoxes are most likely to arise.
-    </p>
+      <p>
+        The boundaries between polyhedra correspond to tie situations where a small
+        change in the quotas can change the allocation. These boundaries are where
+        paradoxes are most likely to arise.
+      </p>
+    </introduction>
 
     <subsubsection xml:id="hamilton-polyhedron">
       <title>Hamilton's Polyhedron</title>
