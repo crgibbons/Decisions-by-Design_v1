@@ -49,15 +49,15 @@
       Districting is governed by constitutional and statutory rules, including the requirement that districts have equal population and the protections of the Voting Rights Act.
       Court cases such as <q>LULAC v. Perry</q> show how legal standards shape what is considered fair.
     </p>
-    
-    <subsection xml:id="districting-governance-note">
-      <title>Governance Decision-Makers</title>
-
-      <p>
-        District maps are produced by state actors (legislatures, commissions) and reviewed by courts and federal agencies. When modeling districts, keep a clear note of who has the authority to act and which constraints (statutory, constitutional, or practical) they must respect.
-      </p>
-    </subsection>
   </introduction>
+
+  <subsection xml:id="districting-governance-note">
+    <title>Governance Decision-Makers</title>
+
+    <p>
+      District maps are produced by state actors (legislatures, commissions) and reviewed by courts and federal agencies. When modeling districts, keep a clear note of who has the authority to act and which constraints (statutory, constitutional, or practical) they must respect.
+    </p>
+  </subsection>
 
 
   <subsection xml:id="what-is-gerrymandering">

@@ -63,15 +63,15 @@
     </p>
 
     <!-- TODO: Add a precise mathematical section introducing covariance, variance, and the role of eigenvalues in PCA. Include a brief check-it exercise on a small dataset. -->
-
-    <subsection xml:id="dimensionality-governance-framing">
-      <title>Governance Framing</title>
-
-      <p>
-        Data used in governance decisions are collected and curated by institutions with incentives and constraints. When applying dimensionality reduction, document the provenance of features, who is represented in the dataset, and what policy decisions will rely on the reduced representation.
-      </p>
-    </subsection>
   </introduction>
+
+  <subsection xml:id="dimensionality-governance-framing">
+    <title>Governance Framing</title>
+
+    <p>
+      Data used in governance decisions are collected and curated by institutions with incentives and constraints. When applying dimensionality reduction, document the provenance of features, who is represented in the dataset, and what policy decisions will rely on the reduced representation.
+    </p>
+  </subsection>
   <!-- Can also be <handout> instead of
   <subsection>
     to get a printable version -->

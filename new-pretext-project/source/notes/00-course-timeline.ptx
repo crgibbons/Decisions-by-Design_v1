@@ -26,12 +26,12 @@
         <row><cell>2</cell><cell>Healthcare</cell><cell>Class 1: Intro; Class 2: DE models; Lab: interacting substances</cell><cell>Begin policy framing for medication dosing and public health.</cell></row>
         <row><cell>3</cell><cell>Healthcare</cell><cell>Class 4: policy analysis; Class 5: application; Lab: policy analyses</cell><cell>Use model validation and data to compare dosing strategies.</cell></row>
         <row><cell>4</cell><cell>Healthcare / Apportionment</cell><cell>Class 7: Healthcare summary; Class 8: Unit quiz + Montana case intro</cell><cell>Half-class transition introduces Montana and apportionment themes.</cell></row>
-        <row><cell>5</cell><cell>Apportionment</cell><cell>Class 1: Methods & fairness; Class 2: lab on 2000/2020 outcomes</cell><cell>Define apportionment functions and fairness criteria.</cell></row>
+        <row><cell>5</cell><cell>Apportionment</cell><cell>Class 1: Methods &amp; fairness; Class 2: lab on 2000/2020 outcomes</cell><cell>Define apportionment functions and fairness criteria.</cell></row>
         <row><cell>6</cell><cell>Apportionment</cell><cell>Class 3: apportionment polyhedra; Class 4: barycentric coordinates</cell><cell>Link geometry, linear functionals, and allocation fairness.</cell></row>
         <row><cell>7</cell><cell>Apportionment / Districting</cell><cell>Class 5: lab on Georgia primary; Class 6: other allocation problems; Class 7: summary; Class 8: quiz + LULAC intro</cell><cell>Wrap apportionment and connect to the LULAC case.
 </cell></row>
         <row><cell>8</cell><cell>Districting</cell><cell>Class 1: congressional districts; Class 2: lab on compactness</cell><cell>Build from constitutional and Voting Rights Act constraints.</cell></row>
-        <row><cell>9</cell><cell>Districting</cell><cell>Class 3: efficiency gap & gerrymandering; Class 4: fairness / normal in plan space</cell><cell>Compare partisan and racial fairness metrics.</cell></row>
+        <row><cell>9</cell><cell>Districting</cell><cell>Class 3: efficiency gap &amp; gerrymandering; Class 4: fairness / normal in plan space</cell><cell>Compare partisan and racial fairness metrics.</cell></row>
         <row><cell>10</cell><cell>Districting / AI</cell><cell>Class 5: district plans lab; Class 6: state case study; Class 7: summary; Class 8: quiz + AI intro</cell><cell>Use the LULAC case to bridge into AI governance.</cell></row>
         <row><cell>11</cell><cell>AI and Algorithms</cell><cell>Class 0: intro; Class 1: Reacting to the Past 1; Class 2: Reacting to the Past 2</cell><cell>Introduce the Meta Oversight Board role-play and dimensionality reduction context.</cell></row>
         <row><cell>12</cell><cell>AI and Algorithms</cell><cell>Class 3: lab on chatbot settings; Class 4: PCA theory; Class 5: PCA applications</cell><cell>Ground PCA in algorithmic governance and real data.</cell></row>
