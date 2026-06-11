@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="worksheet">
+
+    <worksheet margin="1in" bottom="1.25cm" xml:id="wkst-mcmc">
+    <title>Markov Chain Monte Carlo and Gerrymandering</title>
+
+    <introduction>
+      <p>
+        Modern mathematical approaches to detecting gerrymandering compare an enacted districting plan to a large collection of alternative plans satisfying the same legal constraints.
+        Because the number of valid plans is astronomically large, we cannot list them all.
+        Instead, we use <term>Markov Chain Monte Carlo (MCMC)</term> to sample from this space.
+      </p>
+      <p>
+        This worksheet explains the mathematics behind that idea using linear algebra and calculus.
+      </p>
+    </introduction>
+
+
+      <p>
+        Let <m>\Omega</m> be the set of all valid districting plans for a state.
+        Each plan partitions precincts (or census blocks) into <m>k</m> contiguous districts with equal population.
+      </p>
+
+      <p>
+        For each plan <m>P \in \Omega</m>, we compute a statistic
+      </p>
+
+      <md><mrow>
+        f : \Omega \to \mathbb{R}.
+      </mrow></md>
+
+      <p>
+        Examples include seat share, efficiency gap, or number of competitive districts.
+      </p>
+
+      <p>
+        Ideally, we would compute the expectation
+      </p>
+
+      <md><mrow>
+        \mathbb{E}[f] = \sum_{P \in \Omega} f(P)\,\pi(P),
+      </mrow></md>
+
+      <p>
+        where <m>\pi</m> is a probability distribution on <m>\Omega</m>.
+        This is a discrete analogue of the integral
+      </p>
+
+      <md><mrow>
+        \int f(x)p(x)\,dx.
+      </mrow></md>
+
+      <p>
+        Since <m>\Omega</m> is too large to enumerate, we approximate this sum using MCMC.
+      </p>
+
+      <p>
+        Suppose <m>\Omega = \{P_1,\dots,P_n\}</m>.
+        A Markov chain on this space is described by a transition matrix
+      </p>
+
+      <md><mrow>
+        T = (t_{ij}),
+      </mrow></md>
+
+      <p>
+        where
+      </p>
+
+      <md><mrow>
+        t_{ij} = \Pr(P_i \to P_j).
+      </mrow></md>
+
+      <p>
+        The matrix <m>T</m> is stochastic: its entries are nonnegative and each row sums to 1.
+      </p>
+
+      <p>
+        If <m>\mathbf{v}</m> is a probability vector describing a distribution on plans, then
+      </p>
+
+      <md><mrow>
+        \mathbf{v}_{new} = T\mathbf{v}.
+      </mrow></md>
+
+      <p>
+        A stationary distribution satisfies
+      </p>
+
+      <md><mrow>
+        T\boldsymbol{\pi} = \boldsymbol{\pi}.
+      </mrow></md>
+
+      <p>
+        Thus <m>\boldsymbol{\pi}</m> is an eigenvector of <m>T</m> with eigenvalue 1.
+      </p>
+
+      <p>
+        Consider four precincts arranged in a line:
+      </p>
+
+      <md><mrow>
+        1 \text{ — } 2 \text{ — } 3 \text{ — } 4.
+      </mrow></md>
+
+      <p>
+        We divide them into two contiguous districts of two precincts each.
+      </p>
+
+      <p>
+        There are exactly three valid districting plans:
+      </p>
+
+      <ol>
+        <li><m>P_1 = \{1,2\} | \{3,4\}</m></li>
+        <li><m>P_2 = \{1\} | \{2,3,4\}</m> (invalid: unequal population)</li>
+      </ol>
+
+      <p>
+        To keep populations equal, suppose each precinct has equal population.
+        Then the valid plans are:
+      </p>
+
+      <ol>
+        <li><m>P_1 = \{1,2\} | \{3,4\}</m></li>
+        <li><m>P_2 = \{1,2,3\} | \{4\}</m> (invalid)</li>
+      </ol>
+
+      <p>
+        For simplicity, instead assume a cycle of four nodes:
+      </p>
+
+      <md><mrow>
+        1 - 2 - 3 - 4 - 1.
+      </mrow></md>
+
+      <p>
+        Now valid 2–2 partitions are:
+      </p>
+
+      <ol>
+        <li><m>P_1 = \{1,2\} | \{3,4\}</m></li>
+        <li><m>P_2 = \{2,3\} | \{4,1\}</m></li>
+      </ol>
+
+      <p>
+        So <m>\Omega = \{P_1, P_2\}</m>.
+      </p>
+
+        <p>
+          From either plan, with probability 1, we switch to the other plan.
+          The transition matrix is
+        </p>
+
+        <md><mrow>
+          T =
+          \begin{pmatrix}
+          0 \amp 1 \\
+          1 \amp 0
+          \end{pmatrix}.
+        </mrow></md>
+
+        <p>
+          The stationary distribution satisfies
+        </p>
+
+        <md><mrow>
+          T\boldsymbol{\pi} = \boldsymbol{\pi}.
+        </mrow></md>
+
+        <p>
+          Solving,
+        </p>
+
+        <md><mrow>
+          \boldsymbol{\pi} =
+          \begin{pmatrix}
+          1/2 \\
+          1/2
+          \end{pmatrix}.
+        </mrow></md>
+
+        <p>
+          So in the long run, each plan appears half the time.
+        </p>
+
+        <p>
+          Suppose under <m>P_1</m>, Party A wins 2 seats,
+          and under <m>P_2</m>, Party A wins 1 seat.
+        </p>
+
+        <p>
+          Define
+        </p>
+
+        <md><mrow>
+          f(P_1) = 2, \quad f(P_2) = 1.
+        </mrow></md>
+
+        <p>
+          The expected seat count under neutral sampling is
+        </p>
+
+        <md><mrow>
+          \mathbb{E}[f] =
+          \frac{1}{2}(2) + \frac{1}{2}(1)
+          = \frac{3}{2}.
+        </mrow></md>
+
+        <p>
+          If the enacted plan gives 2 seats, it lies above the ensemble mean.
+        </p>
+
+      <p>
+        Instead of solving for <m>\boldsymbol{\pi}</m> directly (which is impossible in real states),
+        we simulate the chain:
+      </p>
+
+      <md><mrow>
+        P_1, P_2, \dots, P_N.
+      </mrow></md>
+
+      <p>
+        Then approximate
+      </p>
+
+      <md><mrow>
+        \mathbb{E}[f]
+        \approx
+        \frac{1}{N}\sum_{i=1}^N f(P_i).
+      </mrow></md>
+
+      <p>
+        This is Monte Carlo integration over the space of districting plans.
+      </p>
+
+      <p>
+        Let <m>P^*</m> be the enacted plan.
+        We compare <m>f(P^*)</m> to the distribution of <m>f(P_i)</m>.
+      </p>
+
+      <p>
+        If <m>P^*</m> lies in the extreme tail of this distribution,
+        it is statistical evidence that the enacted map is not typical of neutral plans.
+      </p>
+
+    <conclusion>
+      <p>
+        MCMC transforms redistricting into a problem in linear algebra and numerical integration.
+        We build a Markov chain on a huge combinatorial space,
+        approximate its stationary distribution,
+        and estimate expectations by averaging sampled plans.
+      </p>
+    </conclusion>
+        </worksheet>
+    </article>
+</pretext>

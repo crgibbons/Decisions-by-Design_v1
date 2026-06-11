@@ -1,0 +1,69 @@
+<example>
+  <title>Exploring Huntington–Hill with a Table</title>
+  <p>
+    Three states have the populations shown below.  Each state has already
+    received one seat.
+  </p>
+
+  <table>
+    <tabular>
+      <row header="yes">
+        <cell>State</cell>
+        <cell>Population</cell>
+        <cell>Current seats (<m>n</m>)</cell>
+        <cell>Priority
+          (<m>\frac{P}{\sqrt{n(n+1)}}</m>)
+        </cell>
+      </row>
+      <row>
+        <cell>A</cell>
+        <cell>10,000,000</cell>
+        <cell>3</cell>
+        <cell>\fillin{}</cell>
+      </row>
+      <row>
+        <cell>B</cell>
+        <cell>6,000,000</cell>
+        <cell>2</cell>
+        <cell>\fillin{}</cell>
+      </row>
+      <row>
+        <cell>C</cell>
+        <cell>3,000,000</cell>
+        <cell>1</cell>
+        <cell>\fillin{}</cell>
+      </row>
+    </tabular>
+  </table>
+
+  <p>
+    <ol>
+      <li>Compute the priority value for each state.</li>
+      <li>Which state has the largest priority?</li>
+      <li>Which state receives the next seat?</li>
+      <li>Repeat for the fifth seat.</li>
+      <li>Find a modified divisor that produces the same apportionment with Huntington-Hill as a divisor method.</li>
+    </ol>
+  </p>
+</example>
+
+<remark>
+  <title>Geometric Interpretation</title>
+  <p>
+    The table above reflects a geometric partition of quota space.
+    For Huntington–Hill, each possible integer seat allocation corresponds to a
+    region bounded by surfaces where
+    <m>q = \sqrt{n(n+1)}</m>.
+  </p>
+  <p>
+    When a state’s quota crosses one of these geometric-mean boundaries, the
+    allocation changes by one seat.  In the priority formulation, these same
+    boundaries appear as comparisons of priority values between states.
+  </p>
+  <p>
+    From this perspective, Huntington–Hill assigns each population vector to
+    the integer seat allocation whose region contains it.  The method’s use of
+    the geometric mean ensures that these regions balance relative
+    over- and under-representation.
+  </p>
+</remark>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<worksheet>
+  <title>Homework 05: Content Moderation Fairness</title>
+
+  <introduction>
+    <p>
+      <alert>Instructions:</alert> Answer the questions below using classification metrics and fairness reasoning.
+      Think about how the mathematics informs real platform governance decisions.
+    </p>
+  </introduction>
+
+  <page>
+    <exercise>
+      <title>Confusion Matrix and Fairness</title>
+      <statement>
+        <p>
+          A social platform uses an automated classifier to flag content for removal. The classifier is evaluated on two groups, X and Y.
+        </p>
+        <table>
+          <title>Classifier Results</title>
+          <tabular>
+            <row><cell>Group</cell><cell>True Positive</cell><cell>False Positive</cell><cell>False Negative</cell><cell>True Negative</cell></row>
+            <row><cell>X</cell><cell>50</cell><cell>25</cell><cell>30</cell><cell>195</cell></row>
+            <row><cell>Y</cell><cell>40</cell><cell>10</cell><cell>20</cell><cell>230</cell></row>
+          </tabular>
+        </table>
+
+        <ol>
+          <li><p>Compute precision and recall for each group.</p></li>
+          <li><p>Compare the false-positive and false-negative rates for the two groups. Which group is more likely to have acceptable content removed? Which group is more likely to have disallowed content remain?</p></li>
+          <li><p>Explain why these differences matter for platform governance, especially for communities that are historically marginalized.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+
+  <page>
+    <exercise>
+      <title>Policy Trade-Offs</title>
+      <statement>
+        <ol>
+          <li><p>Suppose the platform can change the classification threshold to reduce false positives for Group X while increasing false negatives for both groups. What are the governance trade-offs involved in making that choice?</p></li>
+          <li><p>Describe one fairness criterion the platform could adopt (for example, demographic parity or equal opportunity) and how it would change the decision rule.</p></li>
+          <li><p>Choose a real platform policy (e.g. a social media community standard or a moderation guideline) and briefly analyze one way it could cause disparate impact.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+</worksheet>

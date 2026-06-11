@@ -1,0 +1,40 @@
+\documentclass{standalone}
+
+% In your preamble:
+\usepackage{tikz}
+\usetikzlibrary{calc}
+
+\begin{document}
+
+\begin{tikzpicture}[scale=1.2, line cap=round, line join=round]
+  \def\L{3} % axis length
+
+  % Basis directions in the page (a projection of R^3):
+  % y: to the right
+  % z: straight up
+  % x: 135 degrees from y (i.e., up-left)
+  \coordinate (O) at (0,0);
+  \coordinate (Y) at (\L,0);
+  \coordinate (Z) at (0,\L);
+  \coordinate (X) at ({\L*cos(135)},{\L*sin(135)});
+
+  % Useful derived points
+  \coordinate (XY) at ($(X)+(Y)$);
+  \coordinate (XZ) at ($(X)+(Z)$);
+  \coordinate (YZ) at ($(Y)+(Z)$);
+
+  % Lightly shade the three coordinate planes in the positive orthant
+  \fill[gray!15] (O) -- (X) -- (XY) -- (Y) -- cycle; % xy-plane
+  \fill[gray!10] (O) -- (X) -- (XZ) -- (Z) -- cycle; % xz-plane
+  \fill[gray!20] (O) -- (Y) -- (YZ) -- (Z) -- cycle; % yz-plane
+
+  % Draw axes
+  \draw[->, very thick] (O) -- (X) node[above left] {$x$};
+  \draw[->, very thick] (O) -- (Y) node[below right] {$y$};
+  \draw[->, very thick] (O) -- (Z) node[above] {$z$};
+
+  % Optional: mark the origin
+  \fill (O) circle (1.4pt) node[below left] {$0$};
+\end{tikzpicture}
+
+\end{document}

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<worksheet>
+  <title>Homework 03: Districting and Voting Rights</title>
+
+  <introduction>
+    <p>
+      <alert>Instructions:</alert> Use the tools from the districting unit to evaluate plans for fairness, compactness, and compliance with voting rights standards.
+    </p>
+  </introduction>
+
+  <page>
+    <exercise>
+      <title>Design a Three-District Plan</title>
+      <statement>
+        <p>
+          Suppose a state is divided into nine precincts arranged in a 3x3 grid. The precinct populations are listed below.
+        </p>
+        <table>
+          <title>Precinct Populations</title>
+          <tabular>
+            <row><cell>Precinct</cell><cell>Population</cell><cell>Party A</cell><cell>Party B</cell></row>
+            <row><cell>1</cell><cell>12,000</cell><cell>7,000</cell><cell>5,000</cell></row>
+            <row><cell>2</cell><cell>11,500</cell><cell>4,500</cell><cell>7,000</cell></row>
+            <row><cell>3</cell><cell>11,000</cell><cell>3,500</cell><cell>7,500</cell></row>
+            <row><cell>4</cell><cell>12,200</cell><cell>8,200</cell><cell>4,000</cell></row>
+            <row><cell>5</cell><cell>11,800</cell><cell>6,000</cell><cell>5,800</cell></row>
+            <row><cell>6</cell><cell>12,100</cell><cell>3,900</cell><cell>8,200</cell></row>
+            <row><cell>7</cell><cell>12,300</cell><cell>9,300</cell><cell>3,000</cell></row>
+            <row><cell>8</cell><cell>11,600</cell><cell>6,100</cell><cell>5,500</cell></row>
+            <row><cell>9</cell><cell>11,900</cell><cell>4,600</cell><cell>7,300</cell></row>
+          </tabular>
+        </table>
+
+        <p>
+          Each district must be contiguous and contain three precincts. Use the grid layout where precincts 1-3 are the top row, 4-6 the middle row, and 7-9 the bottom row.
+        </p>
+
+        <ol>
+          <li><p>Propose one plan that maximizes the number of districts won by Party A. List the precincts in each district.</p></li>
+          <li><p>Propose one alternative plan that is more proportional to the state-wide party vote share.</p></li>
+          <li><p>Compute the population totals for each district in both plans. Do the plans satisfy equal population goals?</p></li>
+          <li><p>Use the efficiency gap concept to compare the two plans. Which plan is more likely to be considered fair by courts?</p></li>
+          <li><p>Describe how a majority-minority district could be created if precincts 3, 6, and 9 are considered to represent a protected community with 70% of their population belonging to that community.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+</worksheet>

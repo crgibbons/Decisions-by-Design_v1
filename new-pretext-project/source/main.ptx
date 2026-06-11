@@ -33,11 +33,13 @@
 
       <!-- Include notes files -->
 
-      <xi:include href="./notes/001-modeling.ptx"/>
+      <xi:include href="./notes/00-modeling-framework.ptx"/>
+      <xi:include href="./notes/00-course-timeline.ptx"/>
+      <xi:include href="./notes/02-de-crash-course.ptx"/>
       <xi:include href="./notes/00-apportionment.ptx"/>
       <xi:include href="./notes/02-districting.ptx"/>
       <xi:include href="./notes/01-dimensionality.ptx"/>
-      <xi:include href="./notes/02-de-crash-course.ptx"/>
+      <xi:include href="./notes/05-content-moderation.ptx"/>
 
       <!-- etc. -->
 
@@ -61,9 +63,13 @@
 
       <xi:include href="./activities/neural-nets/00-training-language-models.ptx"/>
       <xi:include href="./activities/neural-nets/01-dimensionality-reduction-strategies.ptx"/>
+      <xi:include href="./activities/03-district-fairness.ptx"/>
 
       <!-- Add more xi:include files here to include them in the main course -->
     </chapter>
+
+    <!-- Interactive Notebooks Chapter -->
+    <xi:include href="./notebooks-chapter.ptx"/>
 
     <!-- <chapter xml:id="handouts"> -->
       <!-- <title>Handouts</title> -->
@@ -78,6 +84,10 @@
       <!-- Include homework files -->
       <xi:include href="./homework/homework-00.ptx"/>
       <xi:include href="./homework/homework-01.ptx"/>
+      <xi:include href="./homework/homework-02.ptx"/>
+      <xi:include href="./homework/homework-03.ptx"/>
+      <xi:include href="./homework/homework-04.ptx"/>
+      <xi:include href="./homework/homework-05.ptx"/>
 
     </chapter>
 

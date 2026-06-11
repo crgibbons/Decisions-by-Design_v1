@@ -1,0 +1,743 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude">
+  <!-- Worksheet contributed by Courtney Gibbons -->
+
+  <article xml:id="wkst-apportionment">
+
+    <title>Apportionment as Geometry: Hamilton and Webster on the Simplex</title>
+
+    <introduction>
+      <p>
+        In this activity you will treat apportionment methods as functions from a continuous
+        <em>quota space</em> to discrete integer allocations. You will visualize Hamilton’s method
+        and Webster’s method as geometric partitions of a simplex.
+      </p>
+
+      <p>
+        Throughout this worksheet we work on the simplex
+        <m>\Delta_4=\{(x,y,z)\in\mathbb{R}_{\ge 0}^3 : x+y+z=4\}</m>.
+      </p>
+    </introduction>
+
+    <!-- ===================================================== -->
+    <section xml:id="warmup-two-groups">
+      <title>Warm-Up: Two Groups, Five Seats</title>
+
+      <introduction>
+        <p>
+          Before working in triangles and three dimensions, we begin with the simplest possible
+          case: two groups sharing a fixed number of seats.
+        </p>
+
+        <p>
+          Suppose two groups, A and B, are dividing 5 seats.
+          If group A receives <m>x</m> seats, then group B receives <m>5-x</m>.
+          So every possible (possibly fractional) allocation corresponds to a point on the line segment
+          <m>0 \le x \le 5</m>.
+        </p>
+
+        <p>
+          In this warm-up, you will compare Hamilton’s method and Webster’s method in one dimension.
+        </p>
+      </introduction>
+
+      <section xml:id="quota-line">
+        <title>Quota Space on a Line</title>
+
+        <p>
+          Think of <m>x</m> as the (possibly fractional) quota for group A.
+          The quota for group B is automatically <m>5-x</m>.
+        </p>
+
+        <exercise xml:id="integer-points">
+          <statement>
+            <p>Mark the integer points on the number line from 0 to 5.</p>
+            <p>What do these integer points represent in terms of seat allocations?</p>
+          </statement>
+          <solution>
+            <p>
+              The integer points are <m>0,1,2,3,4,5</m>.
+              The point <m>k</m> represents the allocation “A gets <m>k</m> seats and B gets <m>5-k</m> seats,”
+              i.e. <m>(k,5-k)</m>.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="fractional-meaning">
+          <statement>
+            <p>What does a point like <m>x=2.7</m> represent in this setting?</p>
+          </statement>
+          <solution>
+            <p>
+              It represents a quota (ideal fractional allocation) where A “deserves” about 2.7 seats and B about
+              <m>5-2.7=2.3</m> seats. An apportionment method will turn this into an integer allocation near
+              <m>(3,2)</m> or <m>(2,3)</m>.
+            </p>
+          </solution>
+        </exercise>
+      </section>
+
+      <section xml:id="hamilton-line">
+        <title>Hamilton’s Method on the Line</title>
+
+        <p>
+          Hamilton’s method works by first taking lower quotas and then assigning leftover seats based on the
+          size of the fractional parts.
+        </p>
+
+        <exercise xml:id="hamilton-floor">
+          <statement>
+            <p>Suppose group A has quota <m>x</m>.</p>
+            <p>(a) Write the lower quota for group A.</p>
+            <p>(b) Write the lower quota for group B.</p>
+            <p>(c) How many seats remain to be assigned after taking floors?</p>
+          </statement>
+          <solution>
+            <p>
+              (a) A’s lower quota is <m>\lfloor x\rfloor</m>.
+              (b) B’s lower quota is <m>\lfloor 5-x\rfloor</m>.
+            </p>
+            <p>
+              (c) The remaining seats are
+              <m>5-(\lfloor x\rfloor+\lfloor 5-x\rfloor)</m>.
+              For non-integer <m>x</m>, we have <m>\lfloor x\rfloor+\lfloor 5-x\rfloor=4</m>, so there is 1
+              leftover seat. (If <m>x</m> is an integer, there are 0 leftover seats.)
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="largest-remainder-line">
+          <statement>
+            <p>Show that Hamilton gives the extra seat to group A exactly when</p>
+            <me>x-\lfloor x\rfloor \ge (5-x)-\lfloor 5-x\rfloor.</me>
+            <p>Simplify this inequality.</p>
+          </statement>
+          <solution>
+            <p>
+              Write the remainders:
+              <m>r_A=x-\lfloor x\rfloor</m> and <m>r_B=(5-x)-\lfloor 5-x\rfloor</m>.
+            </p>
+            <p>
+              For non-integer <m>x</m>, <m>\lceil x\rceil=\lfloor x\rfloor+1</m> and
+              <m>\lfloor 5-x\rfloor=5-\lceil x\rceil</m>, so
+              <m>r_B=(5-x)-(5-\lceil x\rceil)=\lceil x\rceil-x=\lfloor x\rfloor+1-x</m>.
+            </p>
+            <p>
+              Then <m>r_A \ge r_B</m> becomes
+              <me>
+                x-\lfloor x\rfloor \ge \lfloor x\rfloor+1-x
+                \quad\Longleftrightarrow\quad
+                2x \ge 2\lfloor x\rfloor+1
+                \quad\Longleftrightarrow\quad
+                x \ge \lfloor x\rfloor+\tfrac12.
+              </me>
+              So, within each unit interval <m>[k,k+1)</m>, the “switch point” is <m>k+\tfrac12</m>.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="hamilton-threshold">
+          <statement>
+            <p>Find the value of <m>x</m> where the seat allocation switches.</p>
+            <p>Draw this point and label the intervals where Hamilton assigns:</p>
+            <ul>
+              <li>2 seats to A,</li>
+              <li>3 seats to A.</li>
+            </ul>
+          </statement>
+          <solution>
+            <p>
+              The switch between A getting 2 vs 3 seats occurs on the interval <m>[2,3)</m>, at
+              <m>x=2.5</m>.
+            </p>
+            <p>
+              For <m>2 \le x &lt; 2.5</m>, Hamilton gives A 2 seats (and B 3).
+              For <m>2.5 \le x &lt; 3</m>, Hamilton gives A 3 seats (and B 2).
+              (At exactly <m>x=2.5</m> there is a tie in remainders.)
+            </p>
+          </solution>
+        </exercise>
+      </section>
+
+      <section xml:id="webster-line">
+        <title>Webster’s Method on the Line</title>
+
+        <p>
+          Webster’s method rounds to the nearest integer (after a scaling step in general).
+          In the two-group warm-up, we focus on rounding behavior on the line.
+        </p>
+
+        <exercise xml:id="rounding-rule-line">
+          <statement>
+            <p>
+              Suppose Webster uses the quota <m>x</m> directly.
+              Write the condition under which group A is rounded to 3 seats.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              “Round to 3” means <m>2.5 \le x &lt; 3.5</m>.
+              In particular, the switch from 2 to 3 occurs at <m>x=2.5</m>.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="webster-threshold">
+          <statement>
+            <p>
+              Find the value of <m>x</m> where Webster switches from giving A 2 seats to giving A 3 seats.
+              Mark this point on the same number line you used for Hamilton.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              The switching point is again <m>x=2.5</m>. Webster gives A 2 seats for
+              <m>1.5 \le x &lt; 2.5</m> and A 3 seats for <m>2.5 \le x &lt; 3.5</m>.
+            </p>
+          </solution>
+        </exercise>
+      </section>
+
+      <section xml:id="compare-line">
+        <title>Comparing the Two Methods</title>
+
+        <exercise xml:id="compare-thresholds">
+          <statement>
+            <p>Compare the Hamilton switching point and the Webster switching point.</p>
+            <p>Which one changes allocation earlier as <m>x</m> increases?</p>
+          </statement>
+          <solution>
+            <p>
+              In this two-group, five-seat setting, both switch at <m>x=2.5</m>.
+              So neither changes earlier; they agree (except at exact ties).
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="interpretation-line">
+          <statement>
+            <p>In your own words:</p>
+            <ul>
+              <li>How does Hamilton decide who gets the last seat?</li>
+              <li>How does Webster decide who gets the last seat?</li>
+            </ul>
+          </statement>
+          <solution>
+            <p>
+              Hamilton: give everyone their floors, then give the last seat to whoever has the bigger leftover
+              fractional part.
+            </p>
+            <p>
+              Webster: round to the nearest integer (in the full divisor method you first rescale by a common
+              divisor, then round).
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="connection">
+          <statement>
+            <p>
+              How do these one-dimensional pictures help you understand what happens later in the triangle
+              (three-group) case?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              They show how apportionment methods create “regions” separated by boundaries where a rounding
+              decision changes. In three groups, the same idea happens on a triangle instead of a line:
+              boundaries become line segments, and regions become polygons.
+            </p>
+          </solution>
+        </exercise>
+      </section>
+    </section>
+
+    <!-- ===================================================== -->
+    <section xml:id="barycentric-coordinates">
+      <title>Barycentric Coordinates and the Simplex</title>
+
+      <p>
+        The plane slice <m>x+y+z=4</m> in the positive orthant is represented by an equilateral triangle.
+        Each point corresponds to a triple with nonnegative coordinates summing to 4.
+      </p>
+
+      <figure xml:id="barycentric-grid">
+        <caption>Barycentric grid for <m>x+y+z=4</m>.</caption>
+        <!-- <image source="barycentric-grid.pdf"/> -->
+      </figure>
+
+      <exercise xml:id="reading-coordinates">
+        <statement>
+          <p>Mark each point on the barycentric triangle and explain how you located it:</p>
+          <p><m>(2,1,1)</m>, <m>(3,1,0)</m>, <m>(1,2,1)</m>.</p>
+        </statement>
+        <solution>
+          <p>
+            One way: use that coordinates sum to 4 and grid lines parallel to a side keep one coordinate
+            constant. For example, <m>(2,1,1)</m> lies on the line <m>x=2</m> (parallel to the <m>y</m>-<m>z</m>
+            edge) and also on the line <m>y=1</m>; their intersection inside the triangle is the point.
+            Similarly for the others.
+          </p>
+        </solution>
+      </exercise>
+
+      <exercise xml:id="integer-lattice">
+        <statement>
+          <p>How many integer triples satisfy <m>x+y+z=4</m>?</p>
+          <p>How many lie on the boundary? How many are strictly interior?</p>
+        </statement>
+        <solution>
+          <p>
+            Total integer solutions: <m>\binom{4+3-1}{3-1}=\binom{6}{2}=15</m>.
+          </p>
+          <p>
+            Interior means all coordinates positive. Count solutions to <m>x+y+z=4</m> with
+            <m>x,y,z\ge1</m>. Let <m>x'=x-1</m>, etc., so <m>x'+y'+z'=1</m> with nonnegative integers:
+            <m>\binom{1+3-1}{2}=\binom{3}{2}=3</m>. These are <m>(2,1,1)</m> and its permutations.
+          </p>
+          <p>
+            Boundary points: <m>15-3=12</m>.
+          </p>
+        </solution>
+      </exercise>
+    </section>
+
+    <!-- ===================================================== -->
+    <section xml:id="hamilton-method">
+      <title>Hamilton’s Method as a Geometric Function</title>
+
+      <p>
+        Hamilton’s method assigns seats by first taking lower quotas and then distributing
+        the remaining seats to the largest fractional parts.
+      </p>
+
+      <definition xml:id="hamilton-definition">
+        <title>Hamilton’s Method</title>
+        <statement>
+          <ol>
+            <li>Compute <m>\ell=(\lfloor x\rfloor,\lfloor y\rfloor,\lfloor z\rfloor)</m>.</li>
+            <li>Let <m>s=4-(\ell_1+\ell_2+\ell_3)</m>.</li>
+            <li>Let <m>r_i=q_i-\ell_i</m>; let <m>S(q)</m> be indices of the <m>s</m> largest remainders.</li>
+            <li>Output <m>H(q)=\ell+\sum_{i\in S(q)}e_i</m>.</li>
+          </ol>
+        </statement>
+      </definition>
+
+      <subsection xml:id="hamilton-floor-slabs">
+        <title>Step 1: Floor Slabs</title>
+
+        <exercise xml:id="floor-example">
+          <statement>
+            <p>Suppose <m>q=(x,y,z)</m> satisfies</p>
+            <me>
+              1 \le x &lt; 2,\quad
+              0 \le y &lt; 1,\quad
+              1 \le z &lt; 2.
+            </me>
+            <p>(a) Compute <m>\ell</m>.</p>
+            <p>(b) Compute the number of surplus seats <m>s</m>.</p>
+          </statement>
+          <solution>
+            <p>
+              (a) <m>\ell=(1,0,1)</m>.
+              (b) <m>\ell_1+\ell_2+\ell_3=2</m>, so <m>s=4-2=2</m> surplus seats.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="slab-geometry">
+          <statement>
+            <p>
+              Describe the shape of this region inside the simplex.
+              Is it a triangle, a quadrilateral, or something else?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Inside the plane <m>x+y+z=4</m>, the inequalities cut out a polygon (typically a quadrilateral)
+              because you are intersecting a “box” in <m>(x,y,z)</m> with a plane.
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+
+      <subsection xml:id="hamilton-remainders">
+        <title>Step 2: Remainder Comparisons</title>
+
+        <exercise xml:id="remainder-formulas">
+          <statement>
+            <p>In the slab above (<m>\ell=(1,0,1)</m>), write formulas for:</p>
+            <ul>
+              <li><m>r_1</m> in terms of <m>x</m>,</li>
+              <li><m>r_2</m> in terms of <m>y</m>,</li>
+              <li><m>r_3</m> in terms of <m>z</m>.</li>
+            </ul>
+          </statement>
+          <solution>
+            <p>
+              <m>r_1=x-1</m>, <m>r_2=y</m>, <m>r_3=z-1</m>.
+              Using <m>z=4-x-y</m> on the plane, <m>r_3=3-x-y</m>.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="largest-remainder-ineq">
+          <statement>
+            <p>
+              Suppose Hamilton assigns surplus seats to coordinates 1 and 2.
+              Write the inequalities that express this in terms of remainders.
+              Then rewrite using <m>x,y,z</m> and <m>x+y+z=4</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              “Seats go to 1 and 2” means <m>r_1\ge r_3</m> and <m>r_2\ge r_3</m>.
+              In this slab: <m>x-1 \ge z-1</m> and <m>y \ge z-1</m>.
+            </p>
+            <p>
+              Using <m>z=4-x-y</m>, these become
+              <me>
+                x-1 \ge 3-x-y \iff 2x+y \ge 4,
+              </me>
+              <me>
+                y \ge 3-x-y \iff x+2y \ge 3.
+              </me>
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+
+      <subsection xml:id="hamilton-piece">
+        <title>Step 3: One Hamilton Piece</title>
+
+        <exercise xml:id="single-piece">
+          <statement>
+            <p>Let <m>m=(2,1,1)</m> and <m>S=\{1,2\}</m>.</p>
+            <ol>
+              <li>Compute the corresponding <m>\ell</m>.</li>
+              <li>Write the slab inequalities.</li>
+              <li>Write the remainder comparison inequalities.</li>
+            </ol>
+          </statement>
+          <solution>
+            <p>
+              With <m>m=(2,1,1)</m> and <m>S=\{1,2\}</m>, the floors are
+              <m>\ell_1=m_1-1=1</m>, <m>\ell_2=m_2-1=0</m>, <m>\ell_3=m_3=1</m>,
+              so <m>\ell=(1,0,1)</m>.
+            </p>
+            <p>
+              Slab: <m>1\le x&lt;2</m>, <m>0\le y&lt;1</m>, <m>1\le z&lt;2</m> (with <m>z=4-x-y</m>).
+            </p>
+            <p>
+              Remainders: <m>r_1=x-1</m>, <m>r_2=y</m>, <m>r_3=z-1</m>.
+              Need <m>r_1\ge r_3</m>, <m>r_2\ge r_3</m>, equivalently
+              <m>2x+y\ge 4</m> and <m>x+2y\ge 3</m>.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="draw-piece">
+          <statement>
+            <p>On the barycentric grid, draw the slab, draw the boundaries, and shade the region.</p>
+          </statement>
+          <solution>
+            <p>
+              The boundary lines are where equalities hold:
+              <m>2x+y=4</m> and <m>x+2y=3</m>, intersected with the slab region.
+              The desired region is the part of the slab satisfying both inequalities.
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+
+      <subsection xml:id="hamilton-union">
+        <title>Step 4: Building the Full Hamilton Region</title>
+
+        <exercise xml:id="list-S">
+          <statement>
+            <p>For <m>m=(2,1,1)</m>, list all possible surplus sets <m>S</m>.</p>
+          </statement>
+          <solution>
+            <p>
+              Here <m>\sum m_i=4</m> and the corresponding floors satisfy <m>\sum \ell_i=2</m>, so there are
+              <m>s=2</m> surplus seats. Thus <m>S</m> must have size 2:
+              <m>\{1,2\}</m>, <m>\{1,3\}</m>, <m>\{2,3\}</m>.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="union-geometry">
+          <statement>
+            <p>
+              Sketch all pieces corresponding to these surplus sets on the same barycentric triangle.
+              What do you notice about how the pieces fit together?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              The pieces meet along tie boundaries where remainders are equal (e.g. <m>r_i=r_j</m>).
+              The union is connected, and the overlaps (if any) occur only along boundaries (ties).
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+
+      <subsection xml:id="hamilton-interpretation">
+        <title>Step 5: Interpreting Hamilton’s Geometry</title>
+
+        <exercise xml:id="polyhedron-interpretation">
+          <statement>
+            <p>Explain why Hamilton regions are intersections of floor slabs and halfspaces.</p>
+          </statement>
+          <solution>
+            <p>
+              Fixing the floor vector <m>\ell</m> forces <m>\ell_i \le q_i &lt; \ell_i+1</m> (a slab).
+              Fixing who gets the surplus seats forces remainder comparisons like <m>r_i\ge r_j</m>,
+              which become linear inequalities in <m>(x,y,z)</m> within that slab. So each piece is an
+              intersection of a slab with halfspaces, and the full region for <m>m</m> is a union of such pieces.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="hamilton-sensitivity">
+          <statement>
+            <p>
+              Describe what happens to the Hamilton output when a point crosses a remainder boundary.
+              What changes? What stays the same?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Crossing a remainder boundary changes which coordinate(s) are among the “largest remainders,”
+              so the surplus set <m>S(q)</m> can change. Typically the floor vector <m>\ell</m> stays the same
+              (unless you cross an integer boundary like <m>x=1</m>), so only the placement of the surplus seats changes.
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+    </section>
+
+    <!-- ===================================================== -->
+    <section xml:id="webster-method">
+      <title>Webster’s Method and Divisor Geometry</title>
+
+      <p>
+        Webster’s method is a divisor method. Unlike Hamilton’s method, which works directly with the quota vector,
+        Webster introduces a global scaling factor called the <term>divisor</term>.
+      </p>
+
+      <p>
+        Start with populations <m>p=(p_1,p_2,p_3)</m> and a seat total <m>M=4</m>.
+        For a divisor <m>d&gt;0</m>, define scaled quotas <m>q_i=p_i/d</m>, then round:
+      </p>
+
+      <definition xml:id="webster-rounding">
+        <title>Webster Rounding Rule</title>
+        <statement>
+          <me>\operatorname{W}(u)=\lfloor u+\tfrac12 \rfloor.</me>
+          <p>(We will avoid exact half-integer ties.)</p>
+        </statement>
+      </definition>
+
+      <subsection xml:id="single-coordinate">
+        <title>Step 1: Rounding Bands for One Coordinate</title>
+
+        <exercise xml:id="rounding-band">
+          <statement>
+            <p>
+              Write the inequality that characterizes when <m>\operatorname{W}(q_i)=2</m>.
+            </p>
+            <p>Express your answer as a double inequality.</p>
+          </statement>
+          <solution>
+            <p>
+              “Round to 2” means the number is within half a unit of 2:
+              <me>1.5 \le q_i &lt; 2.5.</me>
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="rounding-interpretation">
+          <statement>
+            <p>
+              Interpret this inequality geometrically. What kind of region does it describe on the number line?
+            </p>
+          </statement>
+          <solution>
+            <p>
+              It is an interval (a band) on the number line: all values between 1.5 and 2.5 are rounded to 2.
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+
+      <subsection xml:id="divisor-intervals">
+        <title>Step 2: Divisor Intervals for a Fixed Allocation</title>
+
+        <p>Now suppose Webster outputs <m>m=(2,1,1)</m>.</p>
+
+        <exercise xml:id="webster-coordinate-intervals">
+          <statement>
+            <p>
+              For each coordinate, write the rounding condition in terms of <m>d</m>, then solve for <m>d</m>.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              For coordinate 1 (target 2 seats):
+              <me>
+                1.5 \le \frac{p_1}{d} &lt; 2.5
+                \quad\Longleftrightarrow\quad
+                \frac{p_1}{2.5} &lt; d \le \frac{p_1}{1.5}.
+              </me>
+            </p>
+            <p>
+              For coordinate 2 (target 1 seat):
+              <me>
+                0.5 \le \frac{p_2}{d} &lt; 1.5
+                \quad\Longleftrightarrow\quad
+                \frac{p_2}{1.5} &lt; d \le \frac{p_2}{0.5}=2p_2.
+              </me>
+            </p>
+            <p>
+              For coordinate 3 (target 1 seat):
+              <me>
+                0.5 \le \frac{p_3}{d} &lt; 1.5
+                \quad\Longleftrightarrow\quad
+                \frac{p_3}{1.5} &lt; d \le 2p_3.
+              </me>
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="interval-intersection">
+          <statement>
+            <p>
+              Explain why Webster can output <m>m=(2,1,1)</m> if and only if these divisor intervals overlap.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Webster needs a single divisor <m>d</m> that makes all three rounded values correct at once.
+              That happens exactly when <m>d</m> lies in the intersection of the three allowed intervals.
+              If the intersection is empty, no single scaling works for all coordinates simultaneously.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="interval-geometry">
+          <statement>
+            <p>What does it mean geometrically if the three divisor intervals do not overlap?</p>
+          </statement>
+          <solution>
+            <p>
+              It means the three coordinates “want” incompatible scalings to land in their rounding bands,
+              so there is no single rescaled quota vector <m>q=p/d</m> that rounds to the target allocation.
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+
+      <subsection xml:id="quota-space">
+        <title>Step 3: From Divisor Intervals to Geometry on the Simplex</title>
+
+        <p>
+          If we work in quota space directly, Webster’s rounding condition for output <m>m</m> becomes
+          a set of slab inequalities:
+          <m>m_i-\tfrac12 \le q_i &lt; m_i+\tfrac12</m>.
+        </p>
+
+        <exercise xml:id="slab-geometry-again">
+          <statement>
+            <p>For <m>m=(2,1,1)</m>, write the three slab inequalities for <m>x</m>, <m>y</m>, <m>z</m>.</p>
+          </statement>
+          <solution>
+            <p>
+              <me>1.5 \le x &lt; 2.5,</me>
+              <me>0.5 \le y &lt; 1.5,</me>
+              <me>0.5 \le z &lt; 1.5.</me>
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="simplex-intersection">
+          <statement>
+            <p>Add <m>x+y+z=4</m>. Explain why Webster’s region is an intersection of three slabs with the simplex plane.</p>
+          </statement>
+          <solution>
+            <p>
+              Each slab restricts one coordinate to values that round to the desired integer.
+              The simplex plane enforces the total seats constraint <m>x+y+z=4</m>.
+              So the region is exactly the set of points on the plane that satisfy all three rounding constraints.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="webster-sketch">
+          <statement>
+            <p>On the barycentric grid:</p>
+            <ul>
+              <li>Draw the boundary lines <m>x=2.5</m>, <m>y=1.5</m>, <m>z=1.5</m>.</li>
+              <li>Shade the region where all three inequalities hold.</li>
+            </ul>
+          </statement>
+          <solution>
+            <p>
+              The region is where <m>x</m> is between 1.5 and 2.5 while <m>y</m> and <m>z</m> are between
+              0.5 and 1.5, intersected with <m>x+y+z=4</m>. It is a polygonal region clipped by these boundary lines.
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+
+      <subsection xml:id="comparison">
+        <title>Comparison With Hamilton</title>
+
+        <exercise xml:id="compare-geometry">
+          <statement>
+            <p>Compare the geometry of Hamilton’s regions with Webster’s regions.</p>
+            <ul>
+              <li>Which uses remainder comparisons?</li>
+              <li>Which uses fixed rounding thresholds?</li>
+              <li>Which introduces a global scaling parameter?</li>
+            </ul>
+          </statement>
+          <solution>
+            <p>
+              Hamilton uses remainder comparisons (who has the biggest fractional parts).
+              Webster uses fixed rounding thresholds (half-integers) after scaling.
+              Webster introduces a global scaling parameter (the divisor), while Hamilton does not.
+            </p>
+          </solution>
+        </exercise>
+
+        <exercise xml:id="stability">
+          <statement>
+            <p>
+              Which method do you expect to be more stable under small changes in population data?
+              Explain geometrically.
+            </p>
+          </statement>
+          <solution>
+            <p>
+              Geometrically, both methods change only when you cross a boundary. Hamilton boundaries come from
+              comparing remainders, so tiny changes can swap the ordering of fractional parts and flip who gets a surplus seat.
+              Divisor methods like Webster tend to have boundaries governed by half-integer rounding thresholds after a common scaling,
+              and are often viewed as more stable/regular in practice (though they still change on boundaries).
+            </p>
+          </solution>
+        </exercise>
+      </subsection>
+    </section>
+
+    <!-- ===================================================== -->
+    <conclusion>
+      <p>
+        In this activity you explored two apportionment methods as geometric functions.
+        Hamilton’s method partitions the simplex using remainder comparisons,
+        while Webster’s method partitions quota space using rounding thresholds controlled by a global scale.
+      </p>
+    </conclusion>
+
+  </article>
+</pretext>

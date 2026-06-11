@@ -1,0 +1,469 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Template based on a syllabus by Mitch Keller -->
+<pretext xml:lang="en-US" xmlns:xi="http://www.w3.org/2001/XInclude">
+  <!-- we first include a file which contains the docinfo element: -->
+  <xi:include href="./docinfo.ptx" />
+
+  <article xml:id="syllabus">
+    <title>Decisions by Design: Applied Mathematics in Society</title>
+    <subtitle>MATH-260</subtitle>
+
+    <!-- Include frontmatter -->
+    <xi:include href="./frontmatter.ptx" />
+
+    <!-- Include chapters -->
+    <section xml:id="sec-course-info">
+      <title>Course Information</title>
+      <p>
+        <dl>
+          <li>
+            <title>Course Description</title>
+            <p>
+              This course introduces applied mathematics in various social contexts. Its focus is exploring how mathematical tools such as calculus, linear algebra, optimization, and algorithms help shape decision-making in real-world applications. Depending on instructor expertise and student interest, applications may include search algorithms, apportionment methods, resource allocation, political districting, and more. By the end of the course, students will be equipped with mathematical skills to analyze complex systems and think critically about how to deploy mathematics to solve real-world problems. 
+            </p>
+          </li>
+          <li>
+            <title>Educational Goals and More</title>
+            <ul>
+              <li>
+                <p>
+                  <term>Itellectual Curiosity and Flexibility</term> You will examine primary source documents to understand facts, phenomena and issues in depth, and from a variety of perspectives. It will require courage to try different mathematical frameworks to make sense of the issue at hand, and it will require the flexibility to revise beliefs and outlooks in light of new evidence.
+                </p>
+              </li>
+              <li>
+                <p>
+                  <term>Ethical, Informed and Engaged Citizenship</term>. You will develop an awareness of the challenges and responsibilities of local, national and global citizenship, and the ability to meet such challenges and fulfill such responsibilities by exercising informed judgment in accordance with just principles and sound mathematics.
+                </p>
+              </li>
+              <li>
+                <p>Quantitative and Symbolic Reasoning (college-wide)</p>
+              </li>
+              <li>
+                <p>Applied Mathematics requirement (math concentration)</p>
+              </li>
+              <li>
+                <p>Ethics and Social Context (data science concentration)</p>
+              </li>
+              <li>
+                <p>Social, Structural and Institutional Hierarchy (math and data science concentrations)
+                </p>
+              </li>
+            </ul>
+          </li>
+          <li>
+            <title>Prerequisites</title>
+            <p>
+              MATH 116 (Calculus 2), MATH 224W (Linear Algebra)
+            </p>
+          </li>
+        </dl>
+      </p>
+     <paragraphs>
+        <title>Meeting Times and Locations</title>
+        <p>
+          This course meets 10:30 am on Tuesdays and Thursdays in Christian Johnson 225.
+        </p>
+      </paragraphs>
+    </section>
+    <section xml:id="sec-staff" xmlns:xi="http://www.w3.org/2001/XInclude">
+      <title>Professor</title>
+      <subsection>
+        <title>Courtney Gibbons</title>
+          <aside component="online">
+            <p>
+              My pronouns are she/her/hers but I'm comfortable with they/them/theirs as well.
+              I ask that you address me as <q>Courtney</q> or <q>Professor Gibbons</q>. Please do not address me as <q>Ms. Gibbons</q> or <q>Mrs. Gibbons</q>.
+            </p>
+          </aside>
+          <p><nbsp/>
+            <dl>
+              <li>
+                <title>Title</title>
+                <p>
+                  Associate Professor of Mathematics <br />
+                  Director of the Data Science Program Committee <br />
+                  Cat and Small Child Wrangler
+                </p>
+              </li>
+              <li>
+                <title>Email</title>
+                <p>
+                  <url href="mailto:crgibbon@hamilton.edu">crgibbon@hamilton.edu</url>
+                  <aside>
+                    <p>
+                      The email address cgibbons@hamilton.edu also reaches my inbox, but my <q>official</q> email is the one listed above.
+                    </p>
+                  </aside>
+                </p>
+              </li>
+            </dl>
+          </p>
+      </subsection>
+      <subsection xml:id="subsec-office-hours">
+        <title>Office Hours</title>
+        <p>
+          Students are welcome to drop in to my office hours. An up-to-date calendar is available on Google calendar and you can add it to your calendar app if you like: <url href="https://calendar.google.com/calendar/u/0?cid=Y19mMzVkODc5ZWFjN2MzY2M1MTQ4Njg5YWZkZDBmYmFiMDZhMDVkZmRlYzlkYTQ3OGY3ZjAxOGI0OWJmNjNhYmE5QGdyb3VwLmNhbGVuZGFyLmdvb2dsZS5jb20" show="https://calendar.google.com/" target="new">Courtney's Office Hours Calendar</url>
+        </p>
+      </subsection>
+    </section>
+  <section xml:id="sec-materials">
+    <title>Textbook and Other Required Materials</title>
+    <p>
+      <dl>
+        <li>
+          <title>SIAM Modeling Resources</title>
+          <p>
+            This course does not have a text that you must purchase, but we will work through the modeling handbooks prepared for the Society for Industrial and Applied Mathematics' M3 modeling contest: <url href="https://m3challenge.siam.org/what-is-math-modeling/modeling-handbooks/" target="new">M3 Handbooks</url> (also available on Blackboard). We will also engage with primary source material from the Supreme Court of the United States and other entities.
+          </p>
+        </li>
+        <li>
+          <title>Blackboard</title>
+          <p>
+            Course materials will be posted to or linked from Blackboard, including homework and blog assignments. You are responsible for reading Blackboard announcements in a timely manner.
+          </p>
+        </li>
+      </dl>
+    </p>
+  </section>
+  <section xml:id="sec-assessments">
+    <title>Assessments</title>
+    <paragraphs>
+      <title>Homework and Blog Posts</title>
+      <subtitle> Due Fridays </subtitle>
+      <p>
+        Each week you will have a series of problems to solve, proofs to write, and topics to respond to on our course blog.
+      </p>
+    </paragraphs>
+    <paragraphs>
+      <title>Quizzes</title>
+      <subtitle>Intermittently</subtitle>
+      <p>
+        We will have quizzes at the end of major topics in the course.
+      </p>
+    </paragraphs>
+    <paragraphs>
+      <title>Midterm</title>
+      <subtitle>In Class: Thursday, March 12, 2026</subtitle>
+      <p>
+        The midterm exam will test your knowledge of the mathematical modeling process, mathematics we've covered in the course and where it appears in social context. Each student may be asked to analyze a new problem on the exam. 
+      </p>
+    </paragraphs>
+    <paragraphs>
+      <title>Final Exam</title>
+      <subtitle>During Final Exam Period (set by registrar)</subtitle>
+      <p>
+        The final exam will be like the midterm, but a little longer.
+      </p>
+    </paragraphs>
+    <paragraphs>
+      <title>Active Engagement</title>
+      <subtitle>Continual</subtitle>
+        <paragraphs>
+        <p>
+          Part of your grade will depend on your engagement in this course during class meetings, particularly during the segment of the course where students apply their knowledge in a <em>Reacting to the Past</em>role-playing game.
+        </p>
+        <p>
+          Active engagement doesn't necessarily mean talking a lot; it can also mean listening to your classmates and responding to their comments thoughtfully in a blog post or a homework assignment.        
+        </p>
+        <p>
+          If you know you talk a lot in class, this might be a good course in which to try active listening!
+        </p>
+        <p>
+          If you don't like to speak up in classes, this is a good course to practice claiming some in-class air time for yourself.
+        </p>
+        <p>
+          Please come see me to talk about your goals for yourself as an active participant in the class!
+        </p>
+      </paragraphs>
+    </paragraphs>
+  </section>
+  <section xml:id="sec-grading">
+    <title>Grading</title>
+    <p>
+      The grade components and their are all identified above. For quick reference, they are also summarized in the table below.
+    </p>
+    <tabular>
+      <row header="yes" bottom="minor">
+        <cell>Component</cell>
+        <cell>Weight</cell>
+      </row>
+      <row>
+        <cell>Homework and Blog Posts</cell>
+        <cell>10%</cell>
+      </row>
+      <row>
+        <cell>Quizzes</cell>
+        <cell>10%</cell>
+      </row>
+      <row>
+        <cell>Midterm</cell>
+        <cell>25%</cell>
+      </row>
+      <row>
+        <cell>Final</cell>
+        <cell>25%</cell>
+      </row>
+      <row>
+        <cell>Active Engagement</cell>
+        <cell>30%</cell>
+      </row>
+    </tabular>
+    <p>
+      Grades will be calculated to two decimal places. They will <em>not</em> be rounded up to the next integer. The lower cutoff for each letter grade is given in the table below. It is possible that these cutoffs will be adjusted at the end of the semester. However, if this is done, it will only be done in a way that benefits students by lowering the cutoff to earn a given letter grade.
+    </p>
+    <tabular>
+      <col halign="center"/><col />
+      <row header="yes" bottom="minor">
+        <cell>Letter Grade</cell>
+        <cell>Lower Cutoff</cell>
+      </row>
+      <row>
+        <cell>A</cell>
+        <cell>94%</cell>
+      </row>
+      <row>
+        <cell>A-</cell>
+        <cell>90%</cell>
+      </row>
+      <row>
+        <cell>B+</cell>
+        <cell>87%</cell>
+      </row>
+      <row>
+        <cell>B</cell>
+        <cell>84%</cell>
+      </row>
+      <row>
+        <cell>B-</cell>
+        <cell>80%</cell>
+      </row>
+      <row>
+        <cell>C+</cell>
+        <cell>77%</cell>
+      </row>
+      <row>
+        <cell>C</cell>
+        <cell>74%</cell>
+      </row>
+      <row>
+        <cell>C-</cell>
+        <cell>70%</cell>
+      </row>
+      <row>
+        <cell>D</cell>
+        <cell>60%</cell>
+      </row>
+      <row>
+        <cell>F</cell>
+        <cell>0%</cell>
+      </row>
+    </tabular>
+  </section>
+  %
+  <section xml:id="sec-environment">
+    <title>Our Responsibilities</title>
+    <paragraphs>
+      <p>
+        The American Mathematical Society (the largest professional society for mathematicians) outlines its vision for a welcoming environment as follows:
+      </p>
+      <blockquote>
+        <p>
+          The AMS strives to ensure that participants in its activities enjoy a welcoming environment. In all its activities, the AMS seeks to foster an atmosphere that encourages the free expression and exchange of ideas. The AMS supports equality of opportunity and treatment for all participants, regardless of gender, gender identity or expression, race, color, national or ethnic origin, religion or religious belief, age, marital status, sexual orientation, disabilities, veteran status, or immigration status.... A commitment to a welcoming environment is expected of all attendees at AMS activities, including mathematicians, students, guests, staff, contractors and exhibitors, and participants in scientific sessions and social events.
+        </p>
+      </blockquote>
+      <p> 
+        I am committed to making our classroom a lively and respectful community of thinkers. Please let me know if you feel that we are straying from this vision at any point during the semester.
+      </p>
+    </paragraphs>
+  </section>
+  <section xml:id="sec-responsibilities">
+    <title> Your Responsibilities</title>
+    <subtitle>(or, How to Be a Good Mathematics Learner and Uphold the Honor Code)</subtitle>
+    <paragraphs>
+      <p>
+        <dl>
+          <li>
+            <title>Showing Up</title>
+            <paragraphs>
+              <p>
+                By enrolling in this class, you are agreeing to be an engaged student, to come to class with a learner's attitude, and to encourage your fellow students to do the same. If you miss a class, it’s your responsibility to make up the material you missed by getting the notes from a classmate and reading the textbook.
+              </p>
+              <p>
+                This class requires your tenacity and commitment to staying engaged throughout the semester. At times the assignments will be open-ended and require creativity and courage as you try solving problems that are different from those we cover in class.
+              </p>
+            </paragraphs>
+          </li>
+          <li><title>Reading and Writing</title>
+            <p>
+              There is <em>a lot of reading</em> in this course! We will engage with primary source material, including transcripts of SCOTUS cases, U.S. Census data, and other documents with embedded or implicit mathematics. As a reader, your responsibilities will include summarizing the big ideas in each source and extracting the mathematical content. You'll show that you are fulfilling these responsibilities by writing summaries and exposition (and sometimes proofs) of the math involved.
+            </p>
+          </li>
+          <li><title>AI Policy</title>
+            <p>
+              The only acceptable use of generative AI will be explicitly described by your professor in class and on assignments. ChatGPT is <b>never</b> appropriate for this course. If your professor has not given you guidelines for how to use a specific AI tool (like Google's NotebookLM) to complete an assignment, this means that the use of generative AI is not allowed for the assignment.
+            </p>
+          </li>
+          <li>
+            <title>The Honor Code and Getting Stuck</title>
+            <paragraphs>
+              <p>
+                You should be familiar with Hamilton's <url href="https://www.hamilton.edu/student-handbook/studentconduct/honor-code">Honor Code</url>. Section III commits you to report violations that you witness to your professor or a member of the honor court (preferably at the moment you witness it), or giving a warning to your peer. I expect you to honor these commitments as Hamilton community members.
+              </p>
+              <p>
+                Section II.1 discusses plagiarism. In mathematics, this includes finding a solution and using any part of it without attribution, even if you _could_ have thought of the ideas on your own. This is one reason that I prohibit using unofficial online resources (like generative AI, which now includes most search engines that provide AI summaries!). The other reason is that it’s bad for your mathematical development. If you slip up and do use an unapproved resource, don't plagiarize: cite your source.
+              </p>
+              <p>
+                Remember, being stumped is part of learning mathematics, and making sense of the world is part of being a human! But you belong to community of other people sharing this experience. I encourage you to seek help when you need it from appropriate resources. These include office hours, the QSR, your classmates, your professor, and materials and databases you can access through the Hamilton College library.
+              </p>
+              <p>
+                Working with collaborators is one of the best parts of mathematics! But write up your own solutions, andwhen working together, make sure everyone is able to (and encouraged to) contribute.
+              </p>
+              <p>
+                If in doubt, check with Courtney before using resources explicitly listed in this syllabus.
+              </p>
+            </paragraphs>
+          </li>
+          <li>
+            <title> Using Office Hours Productively</title>
+            <paragraphs>
+              <p>
+                If there are other people waiting to see me, say hi, introduce yourself, and see if you have the same questions. You can work together (and I encourage you to work together!) and then I can talk to a bunch of you together.
+              </p>
+              <p>
+                Bring your professor to you. I like to go where you (and your collaborators) are working on problems together.
+              </p>
+              <p>
+                Know the difference between collaboration (good) and copying someone else's solution (bad). Active collaboration can take many forms: asking "Why?" a lot; explaining your thinking to someone else; passing the chalk around a group of people and taking turns at the blackboard working on a problem.
+              </p>
+              <p>
+                Collaboration is one of the best parts of being a mathematician. Enjoy it! Make friends! Solve problems! Get stuck! Get unstuck!
+              </p>
+            </paragraphs>
+          </li>
+        </dl>
+      </p>
+    </paragraphs>
+  </section>
+  <section xml:id="sec-schedule">
+    <title>Tentative Schedule of Topics</title>
+    <p>
+      <dl>
+        <li>
+          <title>Week 1</title>
+          <p>
+            Mathematical Modeling
+          </p>
+        </li>
+        <li>
+          <title>Week 2</title>
+          <p>
+            Apportionment: Definitions and Examples
+          </p>
+        </li>
+        <li>
+          <title>Week 3</title>
+          <p>
+            Apportionment: Paradoxes and Proofs
+          </p>
+        </li>
+        <li>
+          <title>Week 4</title>
+          <p>
+            Rankings and Multivariate Data; Linear Algebra Review
+          </p>
+        </li>
+        <li>
+          <title>Week 5</title>
+          <p>
+            Principal Component Analysis and College Rankings
+          </p>
+        </li>
+        <li><title> (more will be added as we set our pace) </title></li>
+        <li><title> Final Exam (schedule: <url href="https://www.hamilton.edu/documents/CurrentExamSchedule.pdf">Spring '26 Finals</url></title>
+          <p>
+            Thursday, May 14, 7-10 pm (assigned for our TR class time slot)
+          </p>
+          <p>
+            Rescheduling possibilities: Friday, May 15, 9am-12pm (common exam time for Math, Gov) or Saturday, May 16, 9am-12pm (common exam times for Languages, Econ)
+          </p>
+        </li>
+        <!-- <li>
+          <title>Week 6</title>
+          <p>
+            Computation and <alert>Test I on Wednesday, February 26 (7:30<ndash/>9pm)</alert>
+          </p>
+        </li>
+        <li>
+          <title>Week 7</title>
+          <p>
+            Induction
+          </p>
+        </li>
+        <li>
+          <title>Week 8</title>
+          <p>
+            Recursion
+          </p>
+        </li>
+        <li>
+          <title>Week 9</title>
+          <p>
+            Recursion; Recurrence Relations
+          </p>
+        </li>
+        <li>
+          <title>Spring Break</title>
+          <p>
+            March 22<ndash/>30, 2025
+          </p>
+        </li>
+        <li>
+          <title>Week 10</title>
+          <p>
+            Relations and digraphs
+          </p>
+        </li>
+        <li>
+          <title>Week 11</title>
+          <p>
+            Couting and <alert>Test II on Wednesday, April 9 (7:30<ndash/>9pm)</alert>
+          </p>
+        </li>
+        <li>
+          <title>Week 12</title>
+          <p>
+            Counting; Graphs
+          </p>
+        </li>
+        <li>
+          <title>Week 13</title>
+          <p>
+            Graphs
+          </p>
+        </li>
+        <li>
+          <title>Week 14</title>
+          <p>
+            Trees
+          </p>
+        </li>
+        <li>
+          <title>Final Exam</title>
+          <p>
+            <alert>Tuesday, May 6 (5:05<ndash/>7:05pm)</alert>
+          </p>
+        </li> -->
+      </dl>
+    </p>
+<!--     <p>
+      Note that class will meet as scheduled during the weeks of the two tests in addition to meeting on Wednesday evening for the test.
+    </p> -->
+  </section>
+  <section xml:id="sec-inst-statements">
+    <title>Institutional Syllabus Statements</title>
+    <p>
+      <b>Accommodations, Conflicts, and Rescheduled Exams.</b> The only assignments that may be rescheduled are exams. Except in the case of severe illness or emergency, I need advance notice so that we can arrange a make-up midterm for you. Give me notice at least one week prior to the exam that you have an academic accommodation or a conflict due to academics, a religious observance, work, athletics, or a student organization event. The final exam is scheduled by the registrar and can be rescheduled only in very specific circumstances: travel plans home for break don’t count, but three finals on the same day do.
+    </p>
+  </section>
+  </article>
+</pretext>

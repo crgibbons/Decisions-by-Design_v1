@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretext>
+    <article xml:id="worksheet">
+
+    <!-- When creating a new activity, make a copy of this file with appropriate name -->
+        <worksheet margin=".5in" xml:id="quiz-apportionment" pagestyle="plain">
+            <title>Apportionment Quiz</title>
+
+            <introduction>
+                <p><alert>NAME:</alert></p>
+                <p>~~~</p>
+                <p>
+                    Consider the scenario below, unfolding the Department of Computer Science. Chair Strash has brought in 13 boxes of coffee to allocate to the members of the department for their advising appointments. No CS professor co-advises a student with another CS professor.
+                </p>
+                <tabular>
+                <row bottom="major">
+                    <cell>  Prof.   </cell>     <cell>  Adv.  </cell>    <cell>  Quota  </cell>
+                </row>
+                <row>
+                    <cell>  Bailey  </cell>      <cell>  15 (<m>\sim 28\%</m>) </cell>       <cell>  3.61  </cell>
+                </row>
+                <row>
+                    <cell>  Chen    </cell>      <cell>  3  (<m>\sim 6\%</m>)   </cell>      <cell>  0.72  </cell>
+                </row>
+                                    <row>
+                    <cell>  Doke    </cell>      <cell>  6  (<m>\sim 11\%</m>) </cell>       <cell>  1.44  </cell>
+                </row>
+                                    <row>
+                    <cell>  Dong        </cell>  <cell>  2  (<m>\sim 4\%</m>) </cell>        <cell>  0.48  </cell>
+                </row>
+                <row>
+                    <cell>  Helmuth     </cell>  <cell>  10 (<m>\sim 19\%</m>) </cell>       <cell>  2.41  </cell>
+                </row>
+                <row>
+                    <cell>Morrison-Smith</cell>  <cell>  2  (<m>\sim 4\%</m>) </cell>        <cell>  0.48  </cell>
+                </row>
+                <row bottom="minor">
+                    <cell>  Strash  </cell>      <cell>  16 (<m>\sim 30\%</m>) </cell>       <cell>  3.86  </cell>
+                </row>
+                <row>
+                    <cell>  Total  </cell>       <cell>  54  </cell>                         <cell>  13  </cell>
+                </row>
+                </tabular>
+            </introduction>
+
+            <exercise workspace=".5in">
+                <statement><p> Determine the coffee box apportionment according to Hamilton's Method (where everyone is guaranteed at least one box). </p></statement>
+            </exercise>
+                    
+             <p> Chair Strash invented an apportionment method called <q>Strashortionment</q> where a professor gets all the coffee if they advise more than half the students; otherwise, the professors who advise at least a tenth of the students get all the coffee via Hamilton's method (the other professors and their student numbers are ignored); otherwise, the whole department gets coffee according to the Iterated Lower Quota method. </p>
+
+             <exercise workspace=".5in"> <statement>
+                    <p> Which professors are eliminated from coffee consideration under Strashortionment? </p>
+                    </statement>
+            </exercise>
+             <exercise workspace=".5in"> <statement> 
+                    <p>What could student advisees of the eliminated professors do to ensure they also get a little coffee from their advisor(s)? </p>
+             </statement>
+             </exercise>
+
+            <sidebyside widths="40% 55%" valgin="bottom">
+            <image>
+                <latex-image>
+                    \usetikzlibrary{calc}
+
+                    \begin{tikzpicture}[scale=5, line cap=round, line join=round]
+                      \def\N{16}        % grid subdivisions per side
+                      % precompute loop upper bound safely  
+                      \pgfmathtruncatemacro{\Nm}{\N-1}
+
+                      % unit equilateral triangle with decimal height (sqrt(3)/2 ≈ 0.8660254038)
+                      \coordinate (A) at (0,0);
+                      \coordinate (B) at (1,0);
+                      \coordinate (C) at (0.5,0.8660254038);
+
+                      % grid lines: three families
+                      \foreach \k in {1,...,\Nm} {
+                        \pgfmathsetmacro{\t}{\k/\N}
+
+                        % parallel to BC
+                        \draw[very thin, gray!55] ($(A)!\t!(B)$) -- ($(A)!\t!(C)$);
+
+                        % parallel to AC
+                        \draw[very thin, gray!55] ($(B)!\t!(A)$) -- ($(B)!\t!(C)$);
+
+                        % parallel to AB
+                        \draw[very thin, gray!55] ($(C)!\t!(A)$) -- ($(C)!\t!(B)$);
+                      }
+
+                      % border
+                      \draw[thick] (A)--(B)--(C)--cycle;
+
+                      % ticks (optional; comment out for blank paper)
+                      \foreach \k in {0,...,\N} {
+                        \pgfmathsetmacro{\t}{\k/\N}
+                        \draw[thin] ($(A)!\t!(B)$) -- ++(0,-0.015);
+                        \draw[thin] ($(A)!\t!(C)$) -- ++(-0.013,0.007);
+                        \draw[thin] ($(B)!\t!(C)$) -- ++(0.013,0.007);
+                      }
+
+                      % corner labels (optional)
+                      \node[below left]  at (A) {$(8,0,0)$};
+                      \node[below right] at (B) {$(0,8,0)$};
+                      \node[above]       at (C) {$(0,0,8)$};
+
+                      \coordinate (L) at ($ (A)!0.5!(B) $);
+                      \coordinate (M) at ($ (B)!0.5!(C) $);
+                      \coordinate (N) at ($ (C)!0.5!(A) $);
+
+                      \draw[fill=gray!20] (L)--(A)--(N)--cycle;
+                      \draw[fill=gray!20] (L)--(B)--(M)--cycle;
+                      \draw[fill=gray!20] (M)--(C)--(N)--cycle;
+
+
+                    \end{tikzpicture}
+                </latex-image>
+            </image>
+            <exercise> 
+            <statement>
+                <p> 
+                The gray regions in the triangle to the left represent the first step of Strashortionment. Label each gray region with the apportionment vector that all quota vectors get mapped to by the Strashortionment function. 
+                </p>
+                </statement>
+            </exercise>
+            </sidebyside>
+                    
+        </worksheet>
+    </article>
+</pretext>

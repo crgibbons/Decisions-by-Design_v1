@@ -1,0 +1,684 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="notes">
+        <section xml:id="notes-week-03">
+            <title>Classes 3-5</title>
+
+            <p> Why doesn't the size of the House change anymore? 
+                <url href="https://public.tableau.com/views/Apportionment_16116063135030/Apportionment?:language=en-US&amp;:sid=&amp;:redirect=auth&amp;:display_count=n&amp;:origin=viz_share_link">See how House would have to scale with the population over time at this interactive Census applet</url>
+                </p>
+                
+            <p>
+                Apportionment is rife with paradoxes. Let's dig in.
+            </p>
+
+            <subsection><title>That's not fair!</title>
+            <example>
+                <p>
+                    In our CJ Coffee Distribution Scheme, there were some possibilities we didn't consider.
+                    <table>
+                        <title>Hamilton Apportionment</title>
+                        <tabular>
+                            <row header="yes" bottom="minor" >
+                                <cell>Prof.</cell>
+                                <cell>A</cell>
+                                <cell>B</cell>
+                                <cell>Ce</cell>
+                                <cell>Co</cell>
+                                <cell>D</cell>
+                                <cell>G</cell>
+                                <cell>Ka</cell>
+                                <cell>Ku</cell>
+                                <cell>L</cell>
+                                <cell>T</cell>
+                                <cell>Total</cell>
+                            </row>
+                            <row>
+                                <cell>Pop</cell>
+                                <cell>35</cell>
+                                <cell>60</cell>
+                                <cell>71</cell>
+                                <cell>22</cell>
+                                <cell>38</cell>
+                                <cell>55</cell>
+                                <cell>73</cell>
+                                <cell>45</cell>
+                                <cell>28</cell>
+                                <cell>58</cell>
+                                <cell>485</cell>
+                            </row>
+                            <row>
+                                <cell>Q</cell>
+                                <cell>3.25</cell>
+                                <cell>5.57</cell>
+                                <cell>6.59</cell>
+                                <cell>2.04</cell>
+                                <cell>3.53</cell>
+                                <cell>5.10</cell>
+                                <cell>6.77</cell>
+                                <cell>4.18</cell>
+                                <cell>2.60</cell>
+                                <cell>5.38</cell>
+                                <cell><m>\sim</m>485</cell>
+                            </row>
+                            <row>
+                                <cell>Boxes</cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>5</m></cell>
+                                <cell><m>0</m></cell>
+                                <cell><m>45</m></cell>
+                            </row>
+                            <row>
+                                <cell>Boxes</cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>9</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>4</m></cell>
+                                <cell><m>45</m></cell>
+                            </row>
+                        </tabular>
+                    </table>
+                </p>
+            </example>
+</subsection>
+
+<subsection xml:id="apportionment-problem">
+  <title>The Apportionment Problem, but Mathier</title>
+
+  <subsubsection xml:id="apportionment-variables">
+    <title>Formal Mathematical Variables</title>
+
+    <p>
+      The problem can be defined using the following parameters:
+    </p>
+
+    <dl>
+      <dt><m>M</m></dt>
+      <dd>
+        A positive integer representing the total number of items to be distributed
+        (for example, the total number of seats in a legislative body).
+      </dd>
+
+      <dt><m>n</m></dt>
+      <dd>
+        The number of entities receiving the items (for example, states or political
+        parties).
+      </dd>
+
+      <dt><m>\mathbf{p} = (p_1,\ldots,p_n)</m></dt>
+      <dd>
+        An <m>n</m>-dimensional real vector representing the size of each entity
+        (such as population or vote counts).
+      </dd>
+
+      <dt><m>P</m></dt>
+      <dd>
+        The sum of all entries in <m>\mathbf{p}</m>, given by
+        <m>P = \sum_{i=1}^n p_i</m>.
+      </dd>
+
+      <dt><m>\mathbf{m} = (m_1,\ldots,m_n)</m></dt>
+      <dd>
+        An integer vector where <m>m_s</m> is the final number of units allocated to entity <m>s</m>, satisfying <m>\sum_{s=1}^n m_s = M</m> and <m>m_s \ge 0</m>.
+      </dd>
+    </dl>
+  </subsubsection>
+
+  <subsubsection xml:id="exact-quota">
+    <title>The (Exact) Quota</title>
+
+    <p>
+      A central concept in apportionment is the <term>exact quota</term>,
+      denoted <m>q_s</m>, which represents the ideal fractional share of units
+      an entity would receive if units were divisible. It is defined by
+    </p>
+
+    <me>
+      q_s = \frac{p_s}{P} M.
+    </me>
+
+    <p>
+      In an ideal mathematical world, we would have <m>m_s = q_s</m>. However,
+      because <m>m_s</m> must be an integer and <m>q_s</m> is typically a rational number that is not an integer, an apportionment method is required to map the real vector of quotas to an integer vector of allocations.
+    </p>
+  </subsubsection>
+
+  <definition xml:id="definition-apportionment-method">
+  <title>Apportionment Method: a function!</title>
+
+  <p>
+    Fix a positive integer <m>M</m> and an integer <m>n \ge 2</m>. Let
+    <m>\mathcal{Q} = \{\mathbf{q} \in \mathbb{R}_{\ge 0}^n : \sum_{s=1}^n q_s = M\}</m>
+    denote the space of exact quota vectors, and let
+    <m>\mathcal{M} = \{\mathbf{m} \in \mathbb{Z}_{\ge 0}^n : \sum_{s=1}^n m_s = M\}</m>
+    denote the set of feasible integer allocations.
+  </p>
+
+  <p>
+    An <term>apportionment method</term> is a function
+  </p>
+
+  <me>
+    F : \mathcal{Q} \longrightarrow \mathcal{M}
+  </me>
+
+  <p>
+    that assigns to each exact quota vector <m>\mathbf{q}</m> a unique integer
+    allocation <m>\mathbf{m} = F(\mathbf{q})</m>.
+  </p>
+
+  <p>
+    The method <m>F</m> induces a partition of <m>\mathcal{Q}</m> into regions
+  </p>
+
+  <me>
+    P(\mathbf{m}) = \{\mathbf{q} \in Q : F(\mathbf{q}) = \mathbf{m}\},
+  </me>
+
+  <p>
+    called the <term>apportionment polyhedra</term>. Each polyhedron consists of
+    all exact quota vectors that are mapped to the same integer allocation.
+  </p>
+</definition>
+
+<figure>
+<caption><p>The positive orthant, <m>\mathcal{Q}</m>, and <m>\mathcal{M}</m></p> with three states and five seats.
+</caption>
+<image scale="90%">
+<latex-image>
+\usetikzlibrary{calc}
+
+\tikzset{
+  axis length/.store in=\AxisLen,
+  plane length/.store in=\PlaneLen,
+  x foreshorten/.store in=\ForeshortenX,
+  x angle/.store in=\AngleX,
+  axis length=3,
+  plane length=2.4,
+  x foreshorten=0.7,
+  x angle=-135
+}
+
+\begin{tikzpicture}[scale=1, line cap=round, line join=round]
+
+  % Basis directions in the page (a projection of R^3):
+  % y: to the right
+  % z: straight up
+  % x: 135 degrees from y (i.e., up-left)
+  \coordinate (O) at (0,0);
+  \coordinate (Y) at (\AxisLen,0);
+  \coordinate (Z) at (0,\AxisLen);
+  \coordinate (X) at ({\ForeshortenX*\AxisLen*cos(\AngleX)},{\ForeshortenX*\AxisLen*sin(\AngleX)});
+
+  % Useful derived points
+  \coordinate (XY) at ($(X)+(Y)$);
+  \coordinate (XZ) at ($(X)+(Z)$);
+  \coordinate (YZ) at ($(Y)+(Z)$);
+
+  % Lightly shade the three coordinate planes in the positive orthant
+  \fill[gray!15] (O) -- (X) -- (XY) -- (Y) -- cycle; % xy-plane
+  \fill[gray!10] (O) -- (X) -- (XZ) -- (Z) -- cycle; % xz-plane
+  \fill[gray!20] (O) -- (Y) -- (YZ) -- (Z) -- cycle; % yz-plane
+
+  % Draw axes
+  \draw[->, very thick] (O) -- (X) node[above left] {$x$};
+  \draw[->, very thick] (O) -- (Y) node[below right] {$y$};
+  \draw[->, very thick] (O) -- (Z) node[above] {$z$};
+
+  % Optional: mark the origin
+  \fill (O) circle (1.4pt) node[below left] {$0$};
+\end{tikzpicture}
+\begin{tikzpicture}[scale=1, line cap=round, line join=round]
+
+  % Origin
+  \coordinate (O) at (0,0);
+
+  % Axes directions (projection)
+  \coordinate (Y) at (\AxisLen,0);                 % y axis
+  \coordinate (Z) at (0,\AxisLen);                 % z axis
+  \coordinate (X) at ({\ForeshortenX*\AxisLen*cos(\AngleX)},{\ForeshortenX*\AxisLen*sin(\AngleX)}); % x axis
+
+  % Plane intercepts (scaled)
+  \coordinate (PX) at ({\ForeshortenX*\PlaneLen*cos(\AngleX)},{\ForeshortenX*\PlaneLen*sin(\AngleX)}); % (5,0,0)
+  \coordinate (PY) at (\PlaneLen,0);                        % (0,5,0)
+  \coordinate (PZ) at (0,\PlaneLen);                        % (0,5,0)
+
+  % Derived corners
+  \coordinate (XY) at ($(X)+(Y)$);
+  \coordinate (XZ) at ($(X)+(Z)$);
+  \coordinate (YZ) at ($(Y)+(Z)$);
+
+  % Coordinate planes (positive orthant)
+  \fill[gray!12] (O) -- (X) -- (XY) -- (Y) -- cycle; % xy
+  \fill[gray!8]  (O) -- (X) -- (XZ) -- (Z) -- cycle; % xz
+  \fill[gray!18] (O) -- (Y) -- (YZ) -- (Z) -- cycle; % yz
+
+  % Plane a+b+c=5 (simplex face)
+  \fill[blue!25, opacity=0.7]
+    (PX) -- (PY) -- (PZ) -- cycle;
+
+  % Plane edges
+  \draw[thick, blue!70!black]
+    (PX) -- (PY) -- (PZ) -- cycle;
+
+  % Axes
+  \draw[->, very thick] (O) -- (X) node[above left] {$x$};
+  \draw[->, very thick] (O) -- (Y) node[below right] {$y$};
+  \draw[->, very thick] (O) -- (Z) node[above] {$z$};
+
+  % Labels for intercepts
+  \node[above left]  at (PX) {$5$};
+  \node[below right] at (PY) {$5$};
+  \node[above right] at (PZ) {$5$};
+
+  % Origin
+  \fill (O) circle (1.4pt) node[below left] {$0$};
+
+\end{tikzpicture}
+\begin{tikzpicture}[scale=1, line cap=round, line join=round]
+
+  \coordinate (O) at (0,0);
+
+  \coordinate (Y) at (\AxisLen,0);
+  \coordinate (Z) at (0,\AxisLen);
+  \coordinate (X) at ({\ForeshortenX*\AxisLen*cos(\AngleX)},{\ForeshortenX*\AxisLen*sin(\AngleX)});
+
+  \coordinate (PX) at ({\ForeshortenX*\PlaneLen*cos(\AngleX)},{\ForeshortenX*\PlaneLen*sin(\AngleX)});
+  \coordinate (PY) at (\PlaneLen,0);
+  \coordinate (PZ) at (0,\PlaneLen);
+
+  \coordinate (XY) at ($(X)+(Y)$);
+  \coordinate (XZ) at ($(X)+(Z)$);
+  \coordinate (YZ) at ($(Y)+(Z)$);
+
+  % coordinate planes
+  \fill[gray!12] (O) -- (X) -- (XY) -- (Y) -- cycle;
+  \fill[gray!8]  (O) -- (X) -- (XZ) -- (Z) -- cycle;
+  \fill[gray!18] (O) -- (Y) -- (YZ) -- (Z) -- cycle;
+
+  % plane a+b+c=5
+  \fill[blue!25, opacity=0.7] (PX) -- (PY) -- (PZ) -- cycle;
+  \draw[thick, blue!70!black] (PX) -- (PY) -- (PZ) -- cycle;
+
+  % axes
+  \draw[->, very thick] (O) -- (X) node[above left] {$x$};
+  \draw[->, very thick] (O) -- (Y) node[below right] {$y$};
+  \draw[->, very thick] (O) -- (Z) node[above] {$z$};
+
+  \node[above left]  at (PX) {$5$};
+  \node[below right] at (PY) {$5$};
+  \node[above right] at (PZ) {$5$};
+  \fill (O) circle (1.4pt) node[below left] {$0$};
+
+  % ---- lattice points (a,b,c) with a+b+c=5 ----
+  \foreach \a in {0,...,5} {
+    \foreach \b in {0,...,5} {
+      \pgfmathtruncatemacro{\c}{5-\a-\b}
+      \ifnum\c\lt 0\relax
+      \else
+        % weights as decimals
+        \pgfmathsetmacro{\wa}{\a/5}
+        \pgfmathsetmacro{\wb}{\b/5}
+        \pgfmathsetmacro{\wc}{\c/5}
+
+        \coordinate (P) at ($ \wa*(PX) + \wb*(PY) + \wc*(PZ) $);
+        \fill (P) circle (2pt);
+      \fi
+    }
+  }
+\end{tikzpicture}
+</latex-image>
+</image>
+</figure>
+</subsection>
+
+<subsection xml:id="apportionment-polyhedra">
+  <title>Apportionment Polyhedra</title>
+
+  <p>
+    An <term>apportionment polyhedron</term> is a geometric region within the space of all possible exact quota vectors <m>\mathbf{q}</m> that a particular apportionment method maps to a single, fixed integer seat allocation <m>\mathbf{m}</m>. In mathematical terms, it consists of all fractional quota vectors that result in the same whole-number distribution of seats.
+  </p>
+
+  <subsubsection xml:id="polyhedron-geometry">
+    <title>Geometric Representation</title>
+
+    <p>
+      The concept is best understood by visualizing the space of exact quotas.
+    </p>
+
+    <ul>
+      <li>
+        <em>The set <m>\mathcal{Q}</m>.</em>
+        This set contains all possible fractional distributions of <m>M</m> items among <m>n</m> entities. For example, if there are three parties and <m>M = 5</m> seats, the set <m>\mathcal{Q}</m> forms an equilateral triangle in three-dimensional space with vertices at
+        <m>(5,0,0)</m>, <m>(0,5,0)</m>, and <m>(0,0,5)</m>.
+      </li>
+
+      <li>
+        <em>Integer points.</em>
+        Within this geometric space, the possible integer seat allocations are
+        represented by discrete lattice points corresponding to integer vectors
+        <m>\mathbf{m}</m>.
+      </li>
+
+      <li>
+        <em>Defining the polyhedra.</em>
+        A valid apportionment method partitions the larger region <m>Q</m> into
+        smaller regions, or polyhedra, each associated with a single integer
+        allocation. Any exact quota vector lying inside a given polyhedron is
+        rounded or mapped to the integer allocation corresponding to that region.
+      </li>
+    </ul>
+
+  <p>
+      The shape and size of apportionment polyhedra depend on the error function or rounding rule associated with the chosen apportionment method.
+    </p>
+
+    <ul>
+      <li>
+        <em>Mapping.</em>
+        A desirable property of an apportionment method is that any exact quota
+        vector that is already an integer vector is mapped to itself.
+      </li>
+
+      <li>
+        <em>Borders.</em>
+        The boundaries between apportionment polyhedra correspond to tie situations, where an exact quota vector may be equally compatible with two or more integer seat allocations. In such cases, the method must include a rule for resolving ties along these boundaries.
+      </li>
+    </ul>
+
+  <p>
+    To find apportionment polyhedra given an apportionment function, it is useful to introduce <term>barycentric coordinates</term>. Given a value <m>M</m>, a barycentric <m>n</m>-tuple <m>(q_1,q_2,\cdots,q_m)</m> satisfies the property that <m>q_i \geq 0</m> for each coordinate and <m>\sum_{i = 1}^n q_i = M</m>. We can imagine each tuple with an <m>M</m> in one spot and zeros elsewhere to be sitting at the corner of an <m>n</m>-dimensional simplex, which results from treating the tuple like the end of a vector with tail at the original in <m>\mathbb{R}_{\geq 0}^n</m>. Given a coordinate <m>q_i</m>, the face opposite its is the set of all barycentric coordinates with a zero in position <m>i</m>.
+  </p>
+
+  <figure>
+  <caption><p>Moving around the triangle where the barycentric coordinates sum to five. The barycentric tuple <m>P = (2,2,1)</m> lies on the line <m>q_2 = 2</m> (and the line <m>q_1 = 2</m>, and the line <m>q_3 = 1</m>).</p></caption>
+  <image>
+  <latex-image>
+  \usetikzlibrary{calc}
+
+\begin{tikzpicture}[scale=1.1, line cap=round, line join=round]
+  \pgfmathsetmacro{\N}{5} % sum of coordinates
+  \pgfmathsetmacro{\S}{6} % side length (visual)
+
+  % Equilateral triangle vertices
+  \coordinate (A) at (0,0);                 % (N,0,0) i.e. q1=N
+  \coordinate (B) at (\S,0);                % (0,N,0) i.e. q2=N
+  \coordinate (C) at ({\S/2},{\S*sqrt(3)/2}); % (0,0,N) i.e. q3=N
+
+  % Barycentric placement helper:
+  % point with (q1,q2,q3) and q1+q2+q3 = N is
+  % (q1/N)*A + (q2/N)*B + (q3/N)*C
+  \newcommand{\Bary}[4]{%
+    \pgfmathsetmacro{\wone}{#1/\N}%
+    \pgfmathsetmacro{\wtwo}{#2/\N}%
+    \pgfmathsetmacro{\wthree}{#3/\N}%
+    \coordinate (#4) at ($ \wone*(A) + \wtwo*(B) + \wthree*(C) $);%
+  }
+
+  % Draw the simplex boundary
+  \draw[thick] (A) -- (B) -- (C) -- cycle;
+
+  % Label vertices
+  \node[below left]  at (A) {$(5,0,0)$};
+  \node[below right] at (B) {$(0,5,0)$};
+  \node[above]       at (C) {$(0,0,5)$};
+
+  % (Optional) label axes directions on edges
+  % \node[font=\small, below] at ($(A)!0.5!(B)$) {$q_3=0$};
+  % \node[font=\small, left]  at ($(A)!0.5!(C)$) {$q_2=0$};
+  % \node[font=\small, right] at ($(B)!0.5!(C)$) {$q_1=0$};
+
+  % Boundary for q1 - q3 = 1 intersects at (1,4,0) and (3,0,2)
+  \Bary{4}{1}{0}{P} % (4,1,0)
+  \Bary{0}{1}{4}{Q} % (0,1,4)
+  \Bary{0}{2}{3}{S} % (3,2,0)
+  \Bary{3}{2}{0}{T}
+  \Bary{2}{3}{0}{R} % (0,2,3)
+  \Bary{0}{3}{2}{L} % (2,3,0)
+  \Bary{1}{4}{0}{N} % (0,3,2)
+  \Bary{0}{4}{1}{M} % (1,4,0)
+  \Bary{2}{2}{1}{X} % (2,2,1)
+  \Bary{1.5}{1.5}{2}{Y}
+
+  % Draw the boundary line (dashed since strict inequality)
+  \draw[thick, dashed] (P) -- (Q) node[midway, above] {$q_2 = 1$};
+  \draw[thick, dashed] (S) -- (T) node[midway, above] {$q_2 = 2$};
+  \draw[thick, dashed] (R) -- (L) node[midway, above] {$q_2 = 3$};
+  \draw[thick, dashed] (M) -- (N) node[midway, above] {$q_2 = 4$};
+
+  \fill (X) circle (1.2pt) node[above left, font=\small] {$P$};
+
+  \end{tikzpicture}
+  </latex-image>
+  </image>
+  </figure>
+  </subsubsection>
+
+  <subsubsection xml:id="apportionment-axioms">
+    <title>Mathematical Constraints and Properties</title>
+
+    <p>
+      For an apportionment method to be considered fair or valid, it is often
+      expected to satisfy certain mathematical axioms:
+    </p>
+
+    <ul>
+      <li>
+        <em>Symmetry.</em>
+        The outcome should not depend on the order in which the entities are listed.
+      </li>
+
+      <li>
+        <em>Homogeneity.</em>
+        If all input values <m>q_j</m> are multiplied by the same positive constant,
+        the resulting apportionment should remain unchanged.
+      </li>
+
+      <li>
+        <em>The Quota Rule.</em>
+        A method satisfies this rule if each allocation <m>m_j</m> is either
+        <m>\lfloor q_j \rfloor</m> or <m>\lceil q_j \rceil</m>.
+      </li>
+
+      <li>
+        <em>House Monotonicity.</em>
+        If the total number of units increases from <m>M</m> to <m>M+1</m>, no
+        entity’s allocation <m>m_j</m> should decrease. This property rules out
+        paradoxes such as the Alabama Paradox.
+      </li>
+    </ul>
+
+    <p>The Balinski-Young Theorem essentially says that there is no apportionment rule that satisfies all of these criteria all the time!</p>
+  </subsubsection>
+
+
+<subsubsection xml:id="example-hamilton-method">
+  <title>Hamilton’s Method as an Apportionment Function</title>
+
+  <p>
+    Fix <m>M</m> seats and <m>n</m> entities. Given an exact quota vector
+    <m>\mathbf{q} \in \mathcal{Q}</m>, Hamilton’s method proceeds as follows:
+  </p>
+
+  <ol>
+    <li>
+      Assign each entity its lower quota
+      <m>m_j = \lfloor q_j \rfloor</m>.
+    </li>
+    <li>
+      Distribute the remaining seats, one at a time, to the entities with the
+      largest fractional remainders <m>q_j - \lfloor q_j \rfloor</m>.
+    </li>
+  </ol>
+
+  <p>
+    This defines an apportionment method
+    <m>F_{\text{Ham}} : \mathcal{Q} \to \mathcal{M}</m>, since every quota vector is mapped
+    to a unique integer allocation.
+  </p>
+
+  <p>
+    Geometrically, the apportionment polyhedra for Hamilton’s method are regions
+    determined by inequalities comparing fractional parts of the quotas. The
+    boundaries between polyhedra occur where two or more remainders are equal,
+    leading to ties in the final seat assignment.
+  </p>
+
+  <p>
+    Because these boundaries depend on global comparisons of remainders, the
+    resulting polyhedra need not arise from minimizing a single global error
+    function. This explains why Hamilton’s method can satisfy the Quota Rule
+    while still exhibiting paradoxes such as the Alabama Paradox.
+  </p>
+
+<example xml:id="example-hamilton-polyhedron-coffee-3-6-6">
+  <title>The Hamilton Polyhedron for an example.</title>
+
+  <p>
+    Suppose we have <m>M=15</m> boxes of coffee to distribute among three people
+    (Ahmed, Gibbons, and Tripp) in proportion to their “need scores”
+    <m>\mathbf{a}=(35,55,58)</m>.
+  </p>
+
+  <p>
+    The total is <m>A = 35+55+58 = 148</m>, so the exact quotas are
+    <m>q_j = \dfrac{a_j}{A}M</m>.
+  </p>
+
+  <table xml:id="table-coffee-quotas">
+    <title>Exact quotas and remainders for 15 boxes</title>
+    <tabular>
+      <col align="left"/>
+      <col align="right"/>
+      <col align="right"/>
+      <col align="right"/>
+      <col align="right"/>
+      <row header="yes">
+        <cell>Person</cell>
+        <cell><m>a_j</m></cell>
+        <cell><m>q_j=\frac{a_j}{148}\cdot 15</m></cell>
+        <cell><m>\lfloor q_j\rfloor</m></cell>
+        <cell>Remainder</cell>
+      </row>
+      <row>
+        <cell>Ahmed</cell>
+        <cell><m>35</m></cell>
+        <cell><m>\frac{525}{148}\approx 3.547</m></cell>
+        <cell><m>3</m></cell>
+        <cell><m>\approx 0.547</m></cell>
+      </row>
+      <row>
+        <cell>Gibbons</cell>
+        <cell><m>55</m></cell>
+        <cell><m>\frac{825}{148}\approx 5.574</m></cell>
+        <cell><m>5</m></cell>
+        <cell><m>\approx 0.574</m></cell>
+      </row>
+      <row>
+        <cell>Tripp</cell>
+        <cell><m>58</m></cell>
+        <cell><m>\frac{870}{148}\approx 5.878</m></cell>
+        <cell><m>5</m></cell>
+        <cell><m>\approx 0.878</m></cell>
+      </row>
+    </tabular>
+  </table>
+
+  <p>
+    Using Hamilton’s (largest remainder) method, we first assign lower quotas:
+    <m>(3,5,5)</m>, which totals <m>13</m> boxes, leaving <m>2</m> boxes to distribute.
+    The two largest remainders are Tripp’s and Gibbons’s, so each receives one
+    additional box.
+  </p>
+
+  <p>
+    The final allocation is
+    <me>(m_{\text{Ahmed}},m_{\text{Gibbons}},m_{\text{Tripp}}) = (3,6,6).</me>
+  </p>
+
+  <p>
+    Consider Hamilton’s method on the quota simplex
+    <m>\mathcal{Q}=\{(q_A,q_G,q_T)\in\mathbb{R}_{\ge0}^3:\ q_A+q_G+q_T=15\}</m>.
+    We describe the region of quota vectors that Hamilton maps to the allocation
+    <m>(3,6,6)</m>.
+  </p>
+
+  <p>
+    For Hamilton’s method to output <m>(3,6,6)</m>, the lower-quota step must first produce
+    <ul>
+    <li> Two seats left: <m>(2,5,6)</m>, <m>(2,6,5)</m>, or <m>(3,5,5)</m>;</li>
+    <li> One seat left: <m>(2,6,6)</m>, <m>(3,5,6)</m>, or <m>(3,6,5)</m>;</li>
+    <li> No seats left: <m>(3,6,6)</m>.</li>
+    </ul>
+  </p>
+
+  <p>
+    In our example, we have the scenario that the lower quotas produce <m>(3,5,5)</m>, and the remainders satisfy <m>r_G \gt r_A</m>, <m>r_T > r_A</m>:
+  </p>
+
+  <me>
+    3 \le q_A &lt; 4,\qquad 5 \le q_G &lt; 6,\qquad 5 \le q_T &lt; 6,
+    \qquad q_A+q_G+q_T=15.
+  </me>
+
+  <p>
+    Write the remainders as
+    <m>r_A=q_A-3</m>, <m>r_G=q_G-5</m>, and <m>r_T=q_T-5</m>.
+    To award the two remaining seats to Gibbons and Tripp (and not to Ahmed),
+    we need the two inequalities
+  </p>
+
+  <me>
+    r_G &gt; r_A,\qquad r_T &gt; r_A.
+  </me>
+
+  <p>
+    Equivalently, these are linear conditions on the quotas:
+  </p>
+
+  <me>
+    q_G - q_A &gt; 2,\qquad q_T - q_A &gt; 2.
+  </me>
+
+  <p>
+    Therefore, part of the (open) Hamilton region mapping to <m>(3,6,6)</m> is
+  </p>
+
+  <me>
+    P(3,6,6) \supseteq
+    \left\{
+      (q_A,q_G,q_T)\in Q:
+      \begin{array}{l}
+        3 \le q_A &lt; 4,\ 5 \le q_G &lt; 6,\ 5 \le q_T &lt; 6,\\
+        q_G-q_A &gt; 2,\ q_T-q_A &gt; 2
+      \end{array}
+    \right\}.
+  </me>
+
+  <p>
+    The boundary of this region consists of tie situations, such as
+    <m>r_G=r_A</m> or <m>r_T=r_A</m>, together with the grid oundaries where
+    a quota crosses an integer and a lower quota changes (for example, <m>q_G=6</m>).
+    A complete closed polyhedron requires a specified tie-breaking rule on these
+    boundary sets.
+  </p>
+</example>
+</subsubsection>
+</subsection>
+</section>
+</article>
+</pretext>

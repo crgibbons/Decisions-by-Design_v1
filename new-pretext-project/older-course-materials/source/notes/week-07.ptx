@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="notes">
+        <section xml:id="notes-week-06">
+            <title>Gerrymandering Introduction</title>
+  <introduction>
+  <p>
+    The notes and activities related to gerrymandering from here on out are remixed (by Prof. Gibbons) from Math For The People (author attributions here) (CC- ).
+  </p>
+  </introduction>
+
+  <subsection xml:id="gerrymandering-background">
+    <title>Understanding the Issue</title>
+
+      <p>The following clip from Washington Post provides an overview of gerrymandering in the United States that elaborates on the above images. </p>
+
+      <figure>
+        <video youtube="bGLRJ12uqmk"> </video>
+        <caption> Gerrymandering, Explained (Washington Post). </caption>
+      </figure>
+      <p>
+        <em>Redistricting</em> (in the United States) is the process of drawing new political districts (maps), usually every 10 years, following a U.S. Census. Each district corresponds to (at least one) representative in government, decided by elections among voters living in that district.
+      </p>
+
+      <p>
+        There are a few rules that all states must abide by when drawing their districts:
+        <ul>
+          <li> Districts must be roughly equal in population (<q>one person, one vote</q>).</li>
+          <li> Districts must be contiguous (one connected shape). </li>
+          <li> Districts must comply with racial fairness via the Voting Rights Act of 1965.</li>
+        </ul>
+
+        Redistricting can be controversial due to who draws the lines in each state. While some states have independent redistricting commissions comprised of citizens or politicians equally representing the two main political parties, sometimes a state process is controlled by the political party in power of the state government. The manipulation of drawing districts to benefit one group is called <term>gerrymandering</term>.
+      </p>
+
+    </subsection>
+</section>
+
+
+
+</article>
+</pretext>

@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<activity xml:id="apportionment-geometry">
+  <title>Apportionment as Geometry: Hamilton and Webster on the Simplex</title>
+
+  <introduction>
+    <p>
+      In this activity you will treat apportionment methods as functions from a continuous
+      <em>quota space</em> to discrete integer allocations. You will visualize Hamilton’s method
+      and Webster’s method as geometric partitions of a simplex.
+    </p>
+
+    <p>
+      Throughout this worksheet we work on the simplex
+      <m>\Delta_4=\{(x,y,z)\in\mathbb{R}_{\ge 0}^3 : x+y+z=4\}</m>.
+    </p>
+  </introduction>
+
+  <!-- ===================================================== -->
+  <section xml:id="barycentric-coordinates">
+    <title>Barycentric Coordinates and the Simplex</title>
+
+    <p>
+      The plane slice <m>x+y+z=4</m> in the positive orthant is represented by an equilateral triangle.
+      Each point in the triangle corresponds to a triple with nonnegative coordinates summing to 4.
+      The vertices correspond to <m>(4,0,0)</m>, <m>(0,4,0)</m>, and <m>(0,0,4)</m>.
+    </p>
+
+    <figure xml:id="barycentric-grid">
+      <caption>Barycentric grid for <m>x+y+z=4</m>.</caption>
+      <image source="barycentric-grid.pdf"/>
+    </figure>
+
+    <exercise xml:id="reading-coordinates">
+      <statement>
+        <p>
+          Mark each point on the barycentric triangle and explain how you located it:
+        </p>
+        <p>
+          <m>(2,1,1)</m>, <m>(3,1,0)</m>, <m>(1,2,1)</m>.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="integer-lattice">
+      <statement>
+        <p>
+          How many integer triples satisfy <m>x+y+z=4</m>?
+        </p>
+        <p>
+          How many of these lie on the boundary of the simplex? How many are strictly interior?
+        </p>
+      </statement>
+    </exercise>
+
+  </section>
+
+  <!-- ===================================================== -->
+  <section xml:id="hamilton-method">
+    <title>Hamilton’s Method as a Function</title>
+
+    <p>
+      Let <m>q=(x,y,z)\in\Delta_4</m>. Hamilton’s method produces an integer allocation
+      <m>m=(m_1,m_2,m_3)</m> with total 4.
+    </p>
+
+    <definition xml:id="hamilton-definition">
+      <title>Hamilton’s Method</title>
+      <statement>
+        <ol>
+          <li>
+            Compute the lower quota vector
+            <m>\ell=(\lfloor x\rfloor,\lfloor y\rfloor,\lfloor z\rfloor)</m>.
+          </li>
+          <li>
+            Let <m>s=4-(\ell_1+\ell_2+\ell_3)</m> be the number of surplus seats.
+          </li>
+          <li>
+            Let <m>r_i=q_i-\lfloor q_i\rfloor</m> be the fractional parts.
+            Let <m>S(q)</m> be the set of indices corresponding to the <m>s</m> largest remainders.
+          </li>
+          <li>
+            Define
+            <m>H(q)=\ell+\sum_{i\in S(q)} e_i</m>.
+          </li>
+        </ol>
+      </statement>
+    </definition>
+
+    <exercise xml:id="hamilton-preimage">
+      <statement>
+        <p>
+          Fix an integer allocation <m>m</m>. In your own words, describe what the region
+        </p>
+        <p>
+          <m>H^{-1}(m)=\{q\in\Delta_4 : H(q)=m\}</m>
+        </p>
+        <p>
+          represents geometrically.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="hamilton-slabs">
+      <statement>
+        <p>
+          Let <m>m=(2,1,1)</m> and consider the surplus set <m>S=\{1,2\}</m>.
+        </p>
+
+        <p>
+          (a) Compute the corresponding lower quota vector <m>\ell</m> defined by
+        </p>
+
+        <me>
+          \ell_i =
+          \begin{cases}
+          m_i-1, &amp; i\in S,\\
+          m_i, &amp; i\notin S.
+          \end{cases}
+        </me>
+
+        <p>
+          (b) Write the slab inequalities <m>\ell_i \le q_i &lt; \ell_i+1</m> explicitly.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="hamilton-halfspaces">
+      <statement>
+        <p>
+          For <m>S=\{1,2\}</m>, Hamilton requires
+        </p>
+
+        <me>
+          r_1 \ge r_3, \qquad r_2 \ge r_3.
+        </me>
+
+        <p>
+          Rewrite these conditions as linear inequalities in <m>x,y,z</m>.
+          You may use the constraint <m>x+y+z=4</m>.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="hamilton-plot">
+      <statement>
+        <p>
+          On the barycentric grid:
+        </p>
+
+        <ul>
+          <li>Draw the slab region.</li>
+          <li>Draw the two boundary lines where remainders are equal.</li>
+          <li>Shade the region corresponding to <m>S=\{1,2\}</m>.</li>
+        </ul>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="hamilton-union">
+      <statement>
+        <p>
+          For <m>m=(2,1,1)</m>:
+        </p>
+
+        <ol>
+          <li>List the other possible surplus sets <m>S</m>.</li>
+          <li>For each, compute the corresponding slabs and remainder inequalities.</li>
+          <li>Sketch each region and combine them to approximate <m>H^{-1}(2,1,1)</m>.</li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="hamilton-practice">
+      <statement>
+        <p>
+          Choose another interior allocation <m>m</m> (all coordinates positive).
+          Outline the steps you would take to compute <m>H^{-1}(m)</m>.
+        </p>
+      </statement>
+    </exercise>
+
+  </section>
+
+  <!-- ===================================================== -->
+  <section xml:id="webster-method">
+    <title>Webster’s Method and Divisor Scaling</title>
+
+    <p>
+      Webster’s method is a divisor method. It starts from a population vector
+      <m>p=(p_1,p_2,p_3)</m> and a seat total <m>M=4</m>.
+      A divisor <m>d&gt;0</m> is chosen and quotas are defined by
+      <m>q_i=p_i/d</m>.
+    </p>
+
+    <definition xml:id="webster-rounding">
+      <title>Webster Rounding Rule</title>
+      <statement>
+        <me>
+          \operatorname{W}(u)=\lfloor u+\tfrac12 \rfloor
+        </me>
+
+        <p>
+          (Tie-breaking conventions may vary.)
+        </p>
+      </statement>
+    </definition>
+
+    <exercise xml:id="webster-divisor-effect">
+      <statement>
+        <p>
+          Explain what happens to the quotas <m>q_i=p_i/d</m> and to the rounded allocation when:
+        </p>
+
+        <ol>
+          <li>The divisor <m>d</m> increases.</li>
+          <li>The divisor <m>d</m> decreases.</li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="webster-intervals">
+      <statement>
+        <p>
+          Fix an integer allocation <m>m</m>. Webster requires, for each coordinate,
+        </p>
+
+        <me>
+          m_i-\tfrac12 \le \frac{p_i}{d} &lt; m_i+\tfrac12.
+        </me>
+
+        <p>
+          Solve these inequalities for <m>d</m> and describe the condition for a single
+          divisor to satisfy all three inequalities simultaneously.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="webster-geometry">
+      <statement>
+        <p>
+          Explain why Webster’s method can be viewed geometrically as selecting which
+          rounding slab the scaled quota vector <m>q=p/d</m> falls into,
+          subject to a single shared scaling factor.
+        </p>
+      </statement>
+    </exercise>
+
+  </section>
+
+  <!-- ===================================================== -->
+  <section xml:id="webster-algorithm">
+    <title>Algorithm for Finding the Webster Divisor</title>
+
+    <p>
+      One practical way to compute Webster’s method is by bisection on the divisor.
+    </p>
+
+    <procedure xml:id="webster-bisection">
+      <title>Bisection Algorithm</title>
+
+      <step>
+        Choose <m>d_{\text{low}}</m> small enough that
+        <m>\sum_i \operatorname{W}(p_i/d_{\text{low}}) &gt; 4</m>.
+      </step>
+
+      <step>
+        Choose <m>d_{\text{high}}</m> large enough that
+        <m>\sum_i \operatorname{W}(p_i/d_{\text{high}}) &lt; 4</m>.
+      </step>
+
+      <step>
+        Repeat:
+        <me>
+          d_{\text{mid}}=\frac{d_{\text{low}}+d_{\text{high}}}{2}
+        </me>
+
+        <p>
+          Compute <m>S(d_{\text{mid}})=\sum_i \operatorname{W}(p_i/d_{\text{mid}})</m>.
+        </p>
+
+        <ul>
+          <li>If <m>S(d_{\text{mid}})&gt;4</m>, increase the divisor.</li>
+          <li>If <m>S(d_{\text{mid}})&lt;4</m>, decrease the divisor.</li>
+          <li>If <m>S(d_{\text{mid}})=4</m>, stop.</li>
+        </ul>
+      </step>
+    </procedure>
+
+    <exercise xml:id="webster-monotonicity">
+      <statement>
+        <p>
+          Explain why increasing the divisor usually decreases the total number of seats assigned.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="webster-example">
+      <statement>
+        <p>
+          Work through a numerical example (provided by your instructor).
+          Show your bisection steps and final allocation.
+        </p>
+      </statement>
+    </exercise>
+
+  </section>
+
+  <!-- ===================================================== -->
+  <conclusion>
+    <p>
+      In this activity you explored two apportionment methods as geometric functions.
+      Hamilton’s method partitions the simplex using remainder comparisons,
+      while Webster’s method partitions quota space using rounding thresholds controlled by a global scale.
+    </p>
+  </conclusion>
+
+</activity>

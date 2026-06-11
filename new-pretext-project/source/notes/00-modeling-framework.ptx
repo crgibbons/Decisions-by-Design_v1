@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- EDITORIAL REVIEW - Priority 7 (May 2026)
+     ================================================
+     STATUS: ADEQUATE (MINOR ENHANCEMENTS OPTIONAL)
+     Current length: 118 lines (plus 001-modeling.ptx: 236 lines, 002-modeling.ptx: 258 lines)
+     Total intro files: 612 lines
+     Unit allocation: 3 hours (Week 1)
+     Appropriate length: 300-400 lines
+     ASSESSMENT: ✅ Adequate
+     
+     STRENGTHS:
+     - Clear exposition of SIAM M3 six-step process
+     - Good governance context (medication approval example)
+     - Appropriate for introductory framing
+     
+     OPTIONAL ENHANCEMENTS:
+     1. M3 process flowchart/diagram (~50 lines + visual)
+        - Visual representation of six-step process
+        - Feedback loops and iteration
+     2. Additional governance examples (~100 lines)
+        - Voting systems example
+        - Healthcare access example
+        - Data governance example
+     3. Quick reference checklist (~30 lines)
+        - Downloadable reference card
+        - M3 steps with key questions
+     
+     OPTIONAL TARGET: Expand intro files to 700-750 lines
+     (Current 612 lines is acceptable; enhancements would strengthen foundational framing)
+     
+     PRIORITY: LOW - Unit provides good foundation; enhancements would improve clarity
+     TIMELINE: If enhanced, 1 day
+-->
+
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="notes-modeling-framework">
+  <title>Modeling Framework for Governance Decisions</title>
+
+  <introduction>
+    <p>
+      In this course, we begin by asking how institutions make decisions when the problem is messy, the data are incomplete, and the consequences affect real people.
+      The SIAM M3 modeling framework gives us a six-step process for turning policy questions into mathematical models that can guide regulators, elected officials, and agency staff.
+    </p>
+
+    <p>
+      This unit emphasizes the planning behind the math: defining the decision problem, making assumptions explicit, choosing variables, solving the model, checking the results, and reporting clearly.
+      Every unit in the course is framed as a governance problem, whether it is approving a drug, allocating legislative seats, drawing district lines, managing data for research, or moderating content online.
+    </p>
+  </introduction>
+
+  <subsection xml:id="m3-six-step-process">
+    <title>The Six-Step Modeling Process</title>
+
+    <ol>
+      <li>
+        <p>
+          <term>Define the problem.</term> What decision needs to be made? Who is affected? What are the decision criteria? In governance settings, this often means translating legal standards, policy objectives, and stakeholder needs into a clear question.
+        </p>
+      </li>
+      <li>
+        <p>
+          <term>Make assumptions.</term> What simplifications are necessary? What is known, and what must be estimated? Assumptions should be explicit so that the model's limitations are visible to decision makers.
+        </p>
+      </li>
+      <li>
+        <p>
+          <term>Define variables and parameters.</term> Identify the quantities to model, the inputs we can control, the outputs we want, and the constraints that represent governance rules.
+        </p>
+      </li>
+      <li>
+        <p>
+          <term>Build and solve the model.</term> Use mathematics to generate predictions, equations, or algorithms that address the question. This could mean differential equations for dosing, divisor methods for apportionment, graph measures for districts, or classification rules for moderation.
+        </p>
+      </li>
+      <li>
+        <p>
+          <term>Analyze and validate.</term> Check whether the model behaves reasonably. Test it on data, explore alternative assumptions, and identify which inputs matter most.
+        </p>
+      </li>
+      <li>
+        <p>
+          <term>Report and revise.</term> Communicate the model, its assumptions, and its recommendations clearly. Good governance requires transparency and the ability to update the model as new evidence appears.
+        </p>
+      </li>
+    </ol>
+  </subsection>
+
+  <subsection xml:id="policy-example-medication">
+    <title>Example: Medication Approval and Dosing Policy</title>
+
+    <p>
+      Consider a regulator deciding whether a new medication should be approved for general use and how dosing guidelines should be written.
+      This is a governance decision because it involves public safety, equity across patient groups, and the trade-off between benefit and risk.
+    </p>
+
+    <p>
+      A model for this problem begins with a question such as:
+      <q>How does drug concentration change over time for different patient groups, and what dosing interval keeps the concentration in a therapeutic range while minimizing the risk of withdrawal?</q>
+    </p>
+
+    <p>
+      The modeler must decide which variables matter. For an initial model, we might use:
+    </p>
+
+    <ul>
+      <li><p><term>H(t)</term>: drug concentration at time <m>t</m>.</p></li>
+      <li><p><term>k</term>: elimination rate constant.</p></li>
+      <li><p><term>D</term>: dose amount.</p></li>
+      <li><p><term>\tau</term>: dosing interval.</p></li>
+      <li><p><term>L</term>: safety or withdrawal threshold.</p></li>
+    </ul>
+
+    <p>
+      We may assume the drug clears at a rate proportional to how much remains, leading to a simple differential equation model.
+      Later we can refine the model to account for differences across age, sex, weight, or access to follow-up care.
+    </p>
+
+    <p>
+      This example shows the core governance questions behind modeling:
+    </p>
+
+    <ul>
+      <li><p>What evidence do we need to support a policy recommendation?</p></li>
+      <li><p>Which assumptions are reasonable for all affected populations?</p></li>
+      <li><p>How can we explain the model's limits to decision makers?</p></li>
+    </ul>
+  </subsection>
+
+  <subsection xml:id="governance-framing">
+    <title>Modeling as a Governance Tool</title>
+
+    <p>
+      In governance settings, models are not just abstract mathematics. They are tools for making transparent trade-offs.
+      A good model makes it clear what is being optimized, what is being protected, and which stakeholders are most affected.
+    </p>
+
+    <p>
+      When we move through the units in this course, keep asking:
+    </p>
+
+    <ul>
+      <li><p>Who makes the decision?</p></li>
+      <li><p>What does the model take for granted?</p></li>
+      <li><p>What would change if the goals shifted?</p></li>
+      <li><p>How do we measure whether the outcome is fair?</p></li>
+    </ul>
+
+    <p>
+      This unit sets the foundation for the rest of the course. It helps us connect abstract math to questions such as which patients receive safe dosing recommendations, how legislative seats are distributed, when a district plan protects voting rights, and whether automated content moderation treats communities fairly.
+    </p>
+  </subsection>
+
+  <!-- TODO: Expand with more explicit mathematical exposition in a policy example. Add a short check-it exercise showing the M3 steps with equations and variables. -->
+
+  <subsection xml:id="modeling-quick-check">
+    <title>Quick Reference Checklist</title>
+
+    <p>
+      Use this one-page checklist when you begin any modeling task for a governance problem. It helps you keep the M3 steps visible and communicate clearly to decision makers.
+    </p>
+
+    <ol>
+      <li><p>Define the decision and identify stakeholders (who decides?).</p></li>
+      <li><p>List assumptions explicitly and note where they might fail.</p></li>
+      <li><p>Choose variables, parameters, and constraints tied to legal/policy rules.</p></li>
+      <li><p>Build the simplest model that addresses the decision criterion.</p></li>
+      <li><p>Validate: test on data, vary assumptions, and report sensitivity.</p></li>
+      <li><p>Report recommendations, explain uncertainty, and propose monitoring.</p></li>
+    </ol>
+
+    <p>
+      Quick links: See the medication activities (activities/halflives) for a worked example, and the apportionment notes for a non-medical governance example.
+    </p>
+  </subsection>
+</section>

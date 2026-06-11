@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<chapter xml:id="interactive-notebooks">
+  <title>Interactive Lab Notebooks</title>
+
+  <introduction>
+    <p>
+      This section collects interactive Jupyter notebooks for hands-on lab work. Each notebook combines exposition, worked examples, student exercises, and governance reflections.
+    </p>
+
+    <p>
+      <alert>How to use these notebooks:</alert>
+      <ol>
+        <li>Download or open the notebook in JupyterLab or Jupyter Notebook</li>
+        <li>Read the exposition sections (markdown cells)</li>
+        <li>Run the code cells to see examples and plots</li>
+        <li>Complete the "Student Exercise" sections</li>
+        <li>Write reflections in the designated cells</li>
+        <li>Use the "Generate Report" section to create a summary for submission</li>
+      </ol>
+    </p>
+
+    <p>
+      All notebooks require Python 3.7+ and standard packages: numpy, matplotlib, scipy, pandas, scikit-learn.
+    </p>
+  </introduction>
+
+  <section xml:id="notebook-halflives">
+    <title>Lab 1: Medication Half-Lives and Exponential Decay</title>
+
+    <p>
+      <url href="01-halflives-interactive.ipynb">Download Notebook</url>
+    </p>
+
+    <p>
+      This notebook explores exponential decay models for medication elimination. You will:
+    </p>
+
+    <ul>
+      <li>Learn the differential equation model for drug concentration</li>
+      <li>Connect half-life to elimination rate constants</li>
+      <li>Calculate concentration remaining after treatment interruption</li>
+      <li>Explore repeated dosing schedules</li>
+      <li>Reflect on policy implications for healthcare access</li>
+    </ul>
+
+    <p>
+      <strong>Topics:</strong> Differential equations, exponential decay, half-life, first-order elimination, repeated dosing
+    </p>
+
+    <p>
+      <strong>Governance Context:</strong> Gender-affirming hormone therapy, medication access interruptions, healthcare equity
+    </p>
+
+    <p>
+      <strong>Time Required:</strong> 60–90 minutes
+    </p>
+  </section>
+
+  <section xml:id="notebook-pca">
+    <title>Lab 2: Principal Component Analysis and Data Governance</title>
+
+    <p>
+      <url href="02-pca-data-governance.ipynb">Download Notebook</url>
+    </p>
+
+    <p>
+      This notebook explores how PCA reveals and conceals patterns in data. You will:
+    </p>
+
+    <ul>
+      <li>Compute covariance matrices and eigendecompositions</li>
+      <li>Visualize high-dimensional data in 2D</li>
+      <li>Interpret principal components and loadings</li>
+      <li>Analyze information loss from dimensionality reduction</li>
+      <li>Reflect on how data choices shape governance decisions</li>
+    </ul>
+
+    <p>
+      <strong>Topics:</strong> Covariance, eigenvalues/eigenvectors, principal component analysis, dimensionality reduction, data visualization
+    </p>
+
+    <p>
+      <strong>Governance Context:</strong> Data collection equity, feature selection bias, algorithmic decision-making
+    </p>
+
+    <p>
+      <strong>Time Required:</strong> 60–90 minutes
+    </p>
+  </section>
+
+  <section xml:id="notebook-guide">
+    <title>Notebook Design Principles</title>
+
+    <p>
+      Each interactive notebook follows a consistent structure:
+    </p>
+
+    <ol>
+      <li>
+        <p>
+          <strong>Overview and Learning Goals:</strong> Clear statement of what you will learn and why it matters.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Governance Context:</strong> Real-world policy or institutional motivation for the mathematics.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Exposition with Examples:</strong> Narrative explanation of concepts with worked examples and visualizations.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Student Exercises:</strong> Guided problems for you to solve, with starter code or hints.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Follow-Up Exploration:</strong> Open-ended questions inviting deeper investigation.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Governance Reflection:</strong> Questions about how the math informs policy decisions.
+        </p>
+      </li>
+      <li>
+        <p>
+          <strong>Report Generation:</strong> Code to create a summary document for submission.
+        </p>
+      </li>
+    </ol>
+
+    <p>
+      The goal is to make each notebook self-contained but also collaborative—you can read the exposition independently or in class, complete exercises with peers, and submit written reflections.
+    </p>
+  </section>
+
+  <section xml:id="notebook-setup">
+    <title>Getting Started with Jupyter</title>
+
+    <p>
+      <strong>Installation:</strong> If you do not have Jupyter installed, run:
+    </p>
+
+    <pre>pip install jupyter numpy matplotlib scipy pandas scikit-learn</pre>
+
+    <p>
+      <strong>Starting Jupyter:</strong> Open a terminal in the notebook directory and run:
+    </p>
+
+    <pre>jupyter notebook</pre>
+
+    <p>
+      or for JupyterLab (more modern interface):
+    </p>
+
+    <pre>jupyter lab</pre>
+
+    <p>
+      <strong>Running Cells:</strong> Click a cell and press <c>Shift+Enter</c> to run it. All code cells depend on earlier cells, so run them in order.
+    </p>
+
+    <p>
+      <strong>Saving Your Work:</strong> Jupyter automatically saves as you work. You can export a notebook as PDF or HTML via the File menu for submission.
+    </p>
+  </section>
+
+  <section xml:id="notebook-faq">
+    <title>Frequently Asked Questions</title>
+
+    <p>
+      <strong>Q: Can I run these notebooks on cloud platforms like Google Colab?</strong>
+    </p>
+
+    <p>
+      A: Yes. Download the notebook and upload it to Google Colab. All required libraries are pre-installed.
+    </p>
+
+    <p>
+      <strong>Q: What if a cell gives an error?</strong>
+    </p>
+
+    <p>
+      A: Make sure you ran all earlier cells in order. Cells depend on variables defined in previous cells. If an error persists, restart the kernel (Kernel menu → Restart) and run all cells from the beginning.
+    </p>
+
+    <p>
+      <strong>Q: Can I share my notebook with classmates?</strong>
+    </p>
+
+    <p>
+      A: Yes, but be thoughtful about collaboration. It's fine to discuss approaches and help debug; it's not fine to copy solutions wholesale. Write your own reflections.
+    </p>
+
+    <p>
+      <strong>Q: How do I submit my completed notebook?</strong>
+    </p>
+
+    <p>
+      A: Export to PDF (File → Export As → PDF) or save as .ipynb. Your instructor will specify submission method.
+    </p>
+  </section>
+</chapter>

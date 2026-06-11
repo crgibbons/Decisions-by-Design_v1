@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="worksheet">
+
+<worksheet xml:id="wkst-mcmc-4x4">
+  <title>An MCMC Exercise on a 4×4 Grid</title>
+
+  <p>
+    In this activity we model a “state” as a <m>4\times 4</m> grid of equal-population precincts.
+    A districting plan assigns each cell to one of two districts, <m>A</m> or <m>B</m>.
+    We require:
+  </p>
+
+  <ul>
+    <li><p><em>Balance:</em> each district has exactly 8 cells.</p></li>
+    <li><p><em>Contiguity:</em> within each district, every cell can be reached from every other by a path of edge-adjacent (not diagonal) cells that stays inside the district.</p></li>
+  </ul>
+
+  <p>
+    Think of each valid plan as a state in a Markov chain.
+    We will define a simple MCMC rule that proposes a local “swap” along the boundary between the districts.
+  </p>
+
+
+    <p>
+      Below are three valid plans.  In each grid, the symbols indicate which district each cell belongs to.
+    </p>
+
+    <p><em>Plan</em> <m>P_0</m> (vertical split):</p>
+    <md><mrow>
+      P_0=
+      \begin{array}{|c|c|c|c|}
+      \hline
+      A \amp A \amp B \amp B\\ \hline
+      A \amp A \amp B \amp B\\ \hline
+      A \amp A \amp B \amp B\\ \hline
+      A \amp A \amp B \amp B\\ \hline
+      \end{array}
+    </mrow></md>
+
+    <p><em>Plan</em> <m>P_1</m> (a “staircase” boundary):</p>
+    <md><mrow>
+      P_1=
+      \begin{array}{|c|c|c|c|}
+      \hline
+      A \amp B \amp B \amp B\\ \hline
+      A \amp A \amp B \amp B\\ \hline
+      A \amp A \amp B \amp B\\ \hline
+      A \amp A \amp A \amp B\\ \hline
+      \end{array}
+    </mrow></md>
+
+    <p><em>Plan</em> <m>P_2</m> (the mirror staircase):</p>
+    <md><mrow>
+      P_2 =
+      \begin{array}{|c|c|c|c|}
+      \hline
+      A \amp A \amp A \amp B\\ \hline
+      A \amp A \amp B \amp B\\ \hline
+      A \amp A \amp B \amp B\\ \hline
+      A \amp B \amp B \amp B\\ \hline
+      \end{array}
+    </mrow></md>
+
+    <p>
+      (Each plan has 8 <m>A</m>-cells and 8 <m>B</m>-cells, and you can check contiguity by tracing edge-adjacent paths.)
+    </p>
+
+    <p>
+      A single MCMC step will propose a new plan by attempting a <em>boundary swap</em>.
+    </p>
+
+    <p><em>Boundary-swap proposal rule.</em></p>
+    <ol>
+      <li>
+        <p>
+          Choose uniformly at random an <em>edge</em> (shared side) between two adjacent cells.
+        </p>
+      </li>
+      <li>
+        <p>
+          If the two cells are in different districts (one labeled <m>A</m>, one labeled <m>B</m>), propose swapping their labels.
+          (This preserves the 8–8 balance automatically.)
+        </p>
+      </li>
+      <li>
+        <p>
+          Accept the swap <em>only if</em> both districts remain contiguous after the swap.
+          Otherwise, reject the proposal and stay at the current plan.
+        </p>
+      </li>
+    </ol>
+
+    <p>
+      This produces a Markov chain on the space of valid plans.
+      If the proposal mechanism is symmetric (choosing an edge uniformly),
+      then this “accept-if-valid, otherwise-stay” rule targets the uniform distribution on valid plans
+      (informally: you do not prefer any valid plan over another; you are just exploring the space).
+    </p>
+
+    <exercise xml:id="ex-grid-contiguity">
+      <title>Contiguity Check</title>
+      <statement>
+        <p>
+          For each of the plans <m>P_0, P_1, P_2</m> above:
+        </p>
+        <ol>
+          <li><p>Verify that district <m>A</m> is contiguous.</p></li>
+          <li><p>Verify that district <m>B</m> is contiguous.</p></li>
+        </ol>
+        <p>
+          Give a short explanation (for example, describe a spanning “path of cells” that connects the district).
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-grid-one-swap">
+      <title>One Proposed Swap from <m>P_1</m></title>
+      <statement>
+        <p>
+          In plan <m>P_1</m>, focus on the adjacent pair of cells in row 2, columns 2 and 3 (the pair <m>(2,2)</m> and <m>(2,3)</m>).
+          (Row numbers increase downward; column numbers increase to the right.)
+        </p>
+        <p>
+          These two cells have labels <m>A</m> and <m>B</m>, so the boundary-swap rule proposes swapping them.
+        </p>
+        <ol>
+          <li><p>Write down the new plan <m>P'</m> obtained by swapping those two labels.</p></li>
+          <li><p>Does district <m>A</m> remain contiguous in <m>P'</m>? Explain.</p></li>
+          <li><p>Does district <m>B</m> remain contiguous in <m>P'</m>? Explain.</p></li>
+          <li><p>Is the swap accepted or rejected?</p></li>
+        </ol>
+      </statement>
+      <solution>
+        <p>
+          Students’ answers will depend on their contiguity check; the key is that balance is preserved automatically,
+          but contiguity may fail if the swapped cell was a “bridge” connecting part of a district.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-grid-list-legal">
+      <title>List the Accepted Swaps from <m>P_1</m></title>
+      <statement>
+        <p>
+          Consider all edges (shared sides) in the <m>4\times 4</m> grid.
+          For plan <m>P_1</m>, an edge is <em>eligible</em> if its two cells have different labels.
+        </p>
+        <ol>
+          <li><p>How many eligible edges does <m>P_1</m> have?</p></li>
+          <li><p>For each eligible edge, decide whether swapping across that edge would be accepted (both districts remain contiguous) or rejected.</p></li>
+          <li><p>How many accepted swaps does <m>P_1</m> have?</p></li>
+        </ol>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-grid-transition-prob">
+      <title>A Transition Probability</title>
+      <statement>
+        <p>
+          Suppose the chain is currently at <m>P_1</m> and we choose uniformly among all grid edges.
+          (There are 24 edges total in a <m>4\times 4</m> grid: 12 horizontal and 12 vertical.)
+        </p>
+        <ol>
+          <li><p>Using your work from the previous problem, compute the probability that the chain stays at <m>P_1</m> in one step.</p></li>
+          <li><p>Compute the probability that the chain moves to each distinct new plan reachable from <m>P_1</m> in one accepted swap.</p></li>
+        </ol>
+        <p>
+          (If multiple edges produce the same resulting plan, combine their probabilities.)
+        </p>
+      </statement>
+      <solution>
+        <p>
+          If <m>a</m> edges lead to accepted swaps and the remaining edges either are not eligible or are rejected,
+          then <m>\Pr(\text{move})=a/24</m> and <m>\Pr(\text{stay})=1-a/24</m>.
+          Probabilities of specific moves depend on how many edges produce each resulting plan.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="ex-grid-statistic">
+      <title>Connecting to Gerrymandering: An Observable</title>
+      <statement>
+        <p>
+          Define a simple statistic <m>f(P)</m> on plans as follows:
+          in each district, Party A wins the district if Party A has a majority of votes in that district.
+        </p>
+
+        <p>
+          To keep this toy model concrete, assign each cell a fixed vote label (Party A or Party B) using the pattern below:
+        </p>
+
+        <md><mrow>
+          \begin{array}{|c|c|c|c|}
+          \hline
+          A \amp A \amp B \amp B\\ \hline
+          A \amp A \amp B \amp B\\ \hline
+          B \amp B \amp A \amp A\\ \hline
+          B \amp B \amp A \amp A\\ \hline
+          \end{array}
+        </mrow></md>
+
+        <p>
+          For each plan <m>P_0, P_1, P_2</m>, compute <m>f(P)</m>, the number of districts won by Party A.
+        </p>
+
+        <p>
+          Explain (in one or two sentences) what it would mean, in this setting, for an enacted plan to be an outlier in the MCMC ensemble.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="ex-grid-linear-algebra">
+  <title>Linear Algebra Structure of the Markov Chain</title>
+
+  <statement>
+    <p>
+      In this exercise we study the boundary-swap Markov chain on the space of valid
+      districting plans for the <m>4\times 4</m> grid with two contiguous districts of size 8.
+    </p>
+
+    <p>
+      Suppose we focus on three particular plans introduced earlier:
+    </p>
+
+    <md><mrow>
+      \Omega'=\{P_0,P_1,P_2\}.
+    </mrow></md>
+
+    <p>
+      We will analyze how the Markov chain moves among these plans.
+    </p>
+
+    <p>
+      Assume the chain proposes swaps by choosing uniformly among the 24 grid edges.
+      From prior work, suppose the accepted swaps are:
+    </p>
+
+    <ul>
+      <li><p>From <m>P_0</m>, exactly 4 edges lead to <m>P_1</m> and 4 edges lead to <m>P_2</m>.</p></li>
+      <li><p>From <m>P_1</m>, 3 edges lead to <m>P_0</m>, 2 lead to <m>P_2</m>, and the rest are rejected.</p></li>
+      <li><p>From <m>P_2</m>, 3 edges lead to <m>P_0</m>, 2 lead to <m>P_1</m>, and the rest are rejected.</p></li>
+    </ul>
+
+    <p>
+      (Rejected swaps mean the chain stays at the current plan.)
+    </p>
+
+    <ol>
+      <li>
+        <p>
+          Compute the one-step transition probabilities and write the transition matrix <m>T</m>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Let <m>e_0,e_1,e_2</m> be the standard basis vectors corresponding to starting entirely in plans
+          <m>P_0,P_1,P_2</m>.
+          Interpret <m>T e_0</m> probabilistically.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          If the initial distribution is
+        </p>
+
+        <md><mrow>
+          \mathbf{v}^{(0)}=
+          \begin{pmatrix}
+          1\\0\\0
+          \end{pmatrix},
+        </mrow></md>
+
+        <p>
+          compute <m>\mathbf{v}^{(1)} = T\mathbf{v}^{(0)}</m>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Explain in words what the vector <m>\mathbf{v}^{(2)} = T^2\mathbf{v}^{(0)}</m> represents.
+          (You do not need to compute it explicitly.)
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Why must 1 be an eigenvalue of <m>T</m>?
+          (Hint: use the fact that rows sum to 1.)
+        </p>
+      </li>
+
+      <li>
+        <p>
+          What does the corresponding eigenvector represent in the context of districting plans?
+        </p>
+      </li>
+    </ol>
+  </statement>
+
+  <solution>
+    <ol>
+      <li>
+        <p>
+          Each move probability is the number of accepted edges divided by 24.
+        </p>
+
+        <md><mrow>
+          T=
+          \begin{pmatrix}
+          16/24 \amp 4/24 \amp 4/24\\
+          3/24 \amp 19/24 \amp 2/24\\
+          3/24 \amp 2/24 \amp 19/24
+          \end{pmatrix}.
+        </mrow></md>
+
+        <p>
+          The diagonal entries reflect rejected proposals.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The vector <m>e_0=(1,0,0)^T</m> represents certainty of starting in plan <m>P_0</m>.
+          Then
+        </p>
+
+        <md><mrow>
+          Te_0=
+          \begin{pmatrix}
+          16/24\\
+          3/24\\
+          3/24
+          \end{pmatrix},
+        </mrow></md>
+
+        <p>
+          which gives the probability distribution after one step.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          This is the same computation:
+        </p>
+
+        <md><mrow>
+          \mathbf{v}^{(1)}=
+          \begin{pmatrix}
+          16/24\\
+          3/24\\
+          3/24
+          \end{pmatrix}.
+        </mrow></md>
+      </li>
+
+      <li>
+        <p>
+          The vector <m>T^2\mathbf{v}^{(0)}</m> gives the probability distribution over plans after two MCMC steps.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          Since rows sum to 1, the vector of all ones is a left eigenvector.
+          Therefore 1 is an eigenvalue of <m>T</m>.
+        </p>
+      </li>
+
+      <li>
+        <p>
+          The corresponding right eigenvector (normalized to sum to 1)
+          is the stationary distribution of districting plans —
+          the long-run sampling frequency of each plan.
+        </p>
+      </li>
+    </ol>
+  </solution>
+
+</exercise>
+
+    <remark>
+      <p>
+        This activity emphasizes what MCMC is doing in redistricting: it samples from a huge discrete space of plans under constraints,
+        then computes an “observable” (seat count, efficiency gap, etc.) as a function <m>f(P)</m>.
+        The Monte Carlo average approximates the discrete integral <m>\sum_{P\in \Omega} f(P)\pi(P)</m>.
+      </p>
+      <p>
+        The boundary-swap move is intentionally local and easy to implement by hand.
+        It also naturally illustrates why contiguity constraints make the space complicated:
+        some swaps break connectivity and must be rejected.
+      </p>
+    </remark>
+    </worksheet>
+    </article>
+    </pretext>

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="worksheet">
+
+    <!-- When creating a new activity, make a copy of this file with appropriate name -->
+        <worksheet margin="1in" bottom="1.25cm" xml:id="Activity-title">
+            <title>Reading Mathematics</title>
+
+            <introduction>
+                <p>
+                    Reading mathematics, and especially mathematics textbooks, is not like reading a novel for pleasure. Often, one sentence of a book or paper contains a paragraph's worth of information. This worksheet will help you develop some habits to read math effectively.
+                </p>
+            </introduction>
+
+            <exercise workspace="2in">
+                <statement>
+                    <p>
+                        On page xviii, our textbook authors give advice to a student reader. Summarize the advice here.
+                    </p>
+                </statement>
+            </exercise>
+
+            <exercise workspace="2in">
+                <statement>
+                        <paragraphs><title>Using the End of Section Materials</title>
+                        <p>
+                            Head to the back of Section 1.1 and jot down of the key terms. Leave space to write notes about each term. Do this before you start reading the material in the chapter.
+                        </p>
+                        <p>
+                            How many terms are in your list?
+                        </p>
+                    </paragraphs>
+                </statement>
+            </exercise>
+
+            <exercise workspace="2in">
+                <statement>
+                    <paragraphs><title>Reading for Meaning</title>
+                        <p>
+                            The first term in the Key Terms list is <term>Linear equation</term>. Start reading the chapter and keep an eye out for this term.
+                        </p>
+                        <p>
+                            We find the first appearance of the term on page 1. It is defined as an equation of the form <m>a_1 x_1 + a_2 x_2 + \cdots + a_n x_n = b</m> where the variables <m>x_i</m> (<m>1 \le i \le n</m>) are unknowns and <m>a_1,\ldots,a_n</m> and <m>b</m> are real (or complex) numbers.
+                        </p>
+                        <p>
+                            We can see that it is closely related to the next terms in the Key Terms list, <term>solution</term> and <term>linear system</term>. Write those definitions in your list of terms, too. It's helpful to include a page numnber where it appears in the book in case you want to find it again.
+                        </p>
+                    </paragraphs>
+                </statement>
+            </exercise>
+
+            <exercise>
+                <statement>
+                    <paragraphs><title>Reading Comprehension: Examples and Non-Examples</title>
+                        <p>
+                            When you encounter a defintion, it's a good idea to jot down an example and a non-example.
+                        </p>
+                        <p> 
+                            With your team, come up with an example and non-example of a linear system based on page 1 of our textbook. Do not reuse the (non-)examples in the book! Make note of how many equations and how many unknowns are in your examples and non-examples.
+                        </p>
+                        <p>
+                            Why is your non-example <em>not</em> a linear system? Are the other ways to make a non-example?
+                        </p>
+                        <p>
+                            Continue reading until Example 1 on page 2. Make sure to fill out the definitions of the Key Terms you encounter.
+                        </p>
+                        <p>
+                            Before you read Example 1, see how the new terms relate to your example of a linear system. Does your linear system have a <term>solution</term>? If not, what term should we use to describe it? If so, what would you check next? 
+                        </p>
+                    </paragraphs>
+                </statement>
+            </exercise>
+
+            <exercise>
+                <statement>
+                    <paragraphs><title>Examples in the Textbook</title>
+                        <p>
+                            The authors include an example (Example 1) in the textbook on page 2.
+                        </p>
+                        <p>
+                            What are the authors trying to demonstrate with the example? That is, what's the point of the example and why is it being shown to the reader now?
+                        </p>
+                        <p>
+                            Write a note for yourself that <q>Example 1, page 2, is showing...</q>
+                        </p>
+                    </paragraphs>
+                </statement>
+            </exercise>
+
+            <exercise>
+                <statement>
+                    <paragraphs>
+                        <p>
+                            There is one more key term on page 2; don't miss it
+                        </p>
+                        <p>
+                            Pages 3-5 contain Examples 2-5. Repeat the previous exercise for each of these examples.
+                        </p>
+                        <p>
+                            After Example 5, the authors summarize some material and present figures with geometric interpretations. If you have questions about these figures, jot them down so you can ask about them in class (or on Zulip before class).
+                        </p>
+                        <p>
+                            Finish reading the chapter.
+                        </p>
+                    </paragraphs>
+                </statement>
+            </exercise>
+
+            <exercise>
+                <statement>
+                    <paragraphs><title>Reading Comprehension: Trying Exercises</title>
+                        <p>
+                            Your professor has assigned some homework problems, but she did not assign number 1. Try that with individually and check with your teammates when you all finish.
+                        </p>
+                        <p>
+                            Your professor assigned problems 8, 12, and 16. Decide which group member will be the lead recorder for each problem (this role should rotate), and talk through the problems together.
+                        </p>
+                        <p>
+                            If you are stuck as a team, flag down your professor for help!
+                        </p>
+                    </paragraphs>
+                </statement>
+            </exercise>
+        </worksheet>
+    </article>
+</pretext>

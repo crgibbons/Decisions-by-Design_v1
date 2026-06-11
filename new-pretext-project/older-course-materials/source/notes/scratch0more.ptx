@@ -1,0 +1,264 @@
+
+
+
+
+
+<definition xml:id="definition-error-based-method">
+  <title>Error-Based Apportionment Method</title>
+
+  <p>
+    An apportionment method is called <term>error-based</term> if there exists an
+    error function
+    <m>\psi : \mathcal{M} \times \mathcal{Q} \to \mathbb{R}</m>
+    such that
+  </p>
+
+  <me>
+    F(\mathbf{q}) = \arg\min_{\mathbf{m} \in \mathcal{M}} \psi(\mathbf{m},\mathbf{q}).
+  </me>
+
+  <p>
+    In this case, the apportionment polyhedron associated to
+    <m>\mathbf{m}</m> is
+  </p>
+
+  <me>
+    P(\mathbf{m}) =
+    \{\mathbf{q} \in \mathcal{Q} : \psi(\mathbf{m},\mathbf{q}) \le
+      \psi(\mathbf{m}',\mathbf{q}) \text{ for all } \mathbf{m}' \in \mathcal{M}\}.
+  </me>
+
+  <p>
+    The boundaries between polyhedra are therefore given by equality of error
+    between competing allocations.
+  </p>
+</definition>
+
+
+<example xml:id="example-sainte-lague-method">
+  <title>The Sainte&#8209;Laguë Method</title>
+
+  <p>
+    Consider the error function
+  </p>
+
+  <me>
+    \psi(\mathbf{m},\mathbf{q})
+    =
+    \sum_{s=1}^n \frac{(m_s - q_s)^2}{q_s}.
+  </me>
+
+  <p>
+    The Sainte&#8209;Laguë method assigns to each quota vector
+    <m>\mathbf{q} \in \mathcal{Q}</m> the integer allocation
+  </p>
+
+  <me>
+    F_{\text{SL}}(\mathbf{q})
+    =
+    \arg\min_{\mathbf{m} \in \mathcal{M}}
+    \psi(\mathbf{m},\mathbf{q}).
+  </me>
+
+  <p>
+    The associated apportionment polyhedron
+    <m>P(\mathbf{m})</m> consists of all quota vectors for which
+    <m>\mathbf{m}</m> minimizes this error function.
+  </p>
+
+  <p>
+    The boundaries between polyhedra are therefore determined by equations of the
+    form
+    <m>\psi(\mathbf{m},\mathbf{q}) = \psi(\mathbf{m}',\mathbf{q})</m>,
+    which define affine hyperplanes in the quota space.
+  </p>
+
+  <p>
+    In the case of three entities, this produces a hexagonal tiling of the quota
+    simplex. The symmetry of these polyhedra explains why the Sainte&#8209;Laguë
+    method is often regarded as neutral with respect to entity size and avoids
+    certain paradoxes that arise in non–error-based methods.
+  </p>
+</example>
+
+
+
+  <subsubsection xml:id="error-minimization">
+    <title>Error Minimization</title>
+
+    <p>
+      From a mathematical perspective, many apportionment methods can be viewed
+      as attempting to minimize the error between the ideal proportions
+      <m>q_j</m> and the actual integer allocations <m>m_j</m>. This is often
+      modeled using a decomposable error function
+    </p>
+
+    <me>
+      \psi(\mathbf{m}) = \sum_{j=1}^n \varphi_j(m_j),
+    </me>
+
+    <p>
+      where <m>\varphi_j</m> measures the severity of the error for entity
+      <m>j</m>. For example, the Sainte&#8209;Laguë method can be characterized as
+      minimizing an error function based on the squared difference between
+      allocated units and exact quotas.
+    </p>
+  </subsubsection>
+</subsection>
+</section>
+
+
+
+
+        
+
+  <subsubsection xml:id="polyhedron-function">
+    <title>Function and Boundaries</title>
+
+    <p>
+      The shape and size of apportionment polyhedra depend on the error function or
+      rounding rule associated with the chosen apportionment method.
+    </p>
+
+    <ul>
+      <li>
+        <em>Mapping.</em>
+        A desirable property of an apportionment method is that any exact quota
+        vector that is already an integer vector is mapped to itself.
+      </li>
+
+      <li>
+        <em>Borders.</em>
+        The boundaries between apportionment polyhedra correspond to tie situations,
+        where an exact quota vector may be equally compatible with two or more
+        integer seat allocations. In such cases, the method must include a rule for
+        resolving ties along these boundaries.
+      </li>
+    </ul>
+  </subsubsection>
+</subsection>
+
+<subsection xml:id="polyhedra-fairness">
+  <title>Using Apportionment Polyhedra to Assess Fairness</title>
+
+  <p>
+    The <term>apportionment polyhedron</term> provides a geometric framework for
+    assessing the fairness of an apportionment method by describing how the method rounds exact quotas—the ideal fractional shares of seats—into whole-number allocations. By analyzing the shapes and boundaries of these polyhedra, mathematicians and social scientists can determine which methods minimize rounding error and which are susceptible to representational paradoxes.
+  </p>
+
+  <subsubsection xml:id="visualizing-rounding-error">
+    <title>Visualizing Rounding and Error</title>
+
+    <p>
+      Geometrically, the space of all possible exact quota vectors <m>\mathcal{Q}</m> is
+      partitioned into regions, or polyhedra, each associated with a single integer seat allocation.
+    </p>
+
+    <ul>
+      <li>
+        <em>Mapping fairness.</em>
+        A well-behaved apportionment method maps any exact quota vector lying inside a given polyhedron to the integer allocation at its center. Fairness can then be assessed by measuring the <term>gravity of the error</term>, defined as the distance or discrepancy between the ideal quota <m>q_j</m> and the resulting integer allocation <m>m_j</m>.
+      </li>
+
+      <li>
+        <em>Defining boundaries.</em>
+        The boundaries between polyhedra correspond to tie situations, in which an exact quota vector may be equally compatible with more than one integer allocation. A fair method must resolve such ties using a consistent rule, rather than an arbitrary choice.
+      </li>
+    </ul>
+  </subsubsection>
+
+  <subsubsection xml:id="comparing-methods">
+    <title>Comparing Methodological Justness</title>
+
+    <p>
+      Different apportionment methods correspond to different error functions, 
+      these choices lead to distinct polyhedral decompositions of the quota space. This geometric perspective allows for direct mathematical comparison between methods.
+    </p>
+
+    <ul>
+      <li>
+        <em>Sainte&#8209;Laguë versus Hare.</em>
+        Different methods induce different polyhedral grids. The Sainte&#8209;Laguë method is designed to minimize relative error and, in three-entity settings, produces a hexagonal tiling that is often regarded as neutral with respect to entity size. In contrast, rounding methods such as Hare’s method focus on greatest remainders and are frequently analyzed using <m>\ell_p</m>-norms—such as Euclidean distance—to identify the integer point closest to a given exact quota.
+      </li>
+
+      <li>
+        <em>Bias detection.</em>
+        Geometric analysis can reveal systematic biases in an apportionment method. For example, linear divisor methods may favor smaller entities or larger entities depending on the placement of their polyhedral boundaries, often parametrized by an initial divisor offset.
+      </li>
+    </ul>
+  </subsubsection>
+
+  <subsubsection xml:id="paradoxes">
+    <title>Identifying Paradoxes</title>
+
+    <p>
+      Apportionment polyhedra are also a useful tool for determining whether a method satisfies common axioms of fairness.
+    </p>
+
+    <ul>
+      <li>
+        <em>The Quota Rule.</em>
+        Polyhedral analysis can be used to check whether allocations always lie
+        between the floor and ceiling of the exact quotas.
+      </li>
+
+      <li>
+        <em>House monotonicity.</em>
+        Examining how polyhedral boundaries change as the total number of seats
+        <m>M</m> increases helps determine whether a method avoids decreases in
+        allocation when additional seats are added.
+      </li>
+
+      <li>
+        <em>The Alabama Paradox.</em>
+        Poorly aligned polyhedral boundaries can lead to paradoxical outcomes in
+        which increasing the total number of seats causes an entity to lose a seat, a phenomenon observed in historical legislative apportionments.
+      </li>
+    </ul>
+
+    <p>
+      A contemporary illustration of these issues arose in the 2020 Iowa Democratic caucuses. The use of Hamilton’s method, which satisfies the Quota Rule but is geometrically vulnerable to paradoxes, produced several aggregation anomalies in which the sum of local allocations failed to align with statewide totals.
+    </p>
+  </subsubsection>
+</subsection>
+
+<!-- <exercise>
+    <statement>
+        <p> Find an example for one of the <q>Yes</q> answers in the table below.</p>
+        <table>
+  <title>Summary of five apportionment methods</title>
+  <tabular>
+      <row><cell>Method</cell><cell>Quota Rule</cell><cell>Alabama</cell><cell>Population</cell><cell>New-States</cell></row>
+      <row><cell>Hamilton</cell><cell>No violations</cell><cell>Yes</cell><cell>Yes</cell><cell>Yes</cell></row>
+      <row><cell>Jefferson</cell><cell>Upper-quota violations</cell><cell>No</cell><cell>No</cell><cell>No</cell></row>
+      <row><cell>Adams</cell><cell>Lower-quota violations</cell><cell>No</cell><cell>No</cell><cell>No</cell></row>
+      <row><cell>Webster</cell><cell>Lower- and upper-quota violations</cell><cell>No</cell><cell>No</cell><cell>No</cell></row>
+      <row><cell>Huntington-Hill</cell><cell>Lower- and upper-quota violations</cell><cell>No</cell><cell>No</cell><cell>No</cell></row>
+  </tabular>
+</table>
+    </statement>
+
+</exercise> -->
+
+<!--<exercise><title>2024 Electoral College.</title>
+<statement>
+    <ol>
+        <li>
+            <p>
+                Apportioning seats in the House of Representatives also determines each states number of electors in the electoral college. Use the Harmonic Mean to reapportion the House based on the 2020 census. Find a break down of the 2024 election results by state, and use the new Electoral College numbers to see if the outcome of the election would have changed.
+            </p>
+        </li>
+        <li>
+            <p>
+                In the 2020 election, the Supreme Court of the United States ultimately made a decision because of a voting irregularity (<q>hanging chads</q>). Would a different apportionment method have made a difference in the outcome of the election, or at least the deciciveness of the election results?
+            </p>
+        </li>
+    </ol>
+</statement>
+</exercise>-->
+
+
+
+</section>
+</article>
+</pretext>

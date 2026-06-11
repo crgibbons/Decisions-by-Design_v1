@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<activity>
+  <title>Designing Fair Districts</title>
+
+  <introduction>
+    <p>
+      In this activity, you will design district boundaries for a small state and use fairness measures to compare alternative plans.
+      The exercise is intended to make the trade-offs in redistricting visible.
+    </p>
+  </introduction>
+
+  <page>
+    <exercise>
+      <title>Build Three Districts</title>
+      <statement>
+        <p>
+          The map below divides a small state into nine precincts. Each precinct lists the number of voters who prefer Party A and Party B.
+          Your task is to group precincts into three contiguous districts with roughly equal population.
+        </p>
+
+        <table>
+          <title>Precinct Data</title>
+          <tabular>
+            <row>
+              <cell>Precinct</cell>
+              <cell>Party A</cell>
+              <cell>Party B</cell>
+            </row>
+            <row>
+              <cell>1</cell>
+              <cell>120</cell>
+              <cell>80</cell>
+            </row>
+            <row>
+              <cell>2</cell>
+              <cell>90</cell>
+              <cell>110</cell>
+            </row>
+            <row>
+              <cell>3</cell>
+              <cell>60</cell>
+              <cell>140</cell>
+            </row>
+            <row>
+              <cell>4</cell>
+              <cell>130</cell>
+              <cell>70</cell>
+            </row>
+            <row>
+              <cell>5</cell>
+              <cell>100</cell>
+              <cell>100</cell>
+            </row>
+            <row>
+              <cell>6</cell>
+              <cell>80</cell>
+              <cell>120</cell>
+            </row>
+            <row>
+              <cell>7</cell>
+              <cell>150</cell>
+              <cell>50</cell>
+            </row>
+            <row>
+              <cell>8</cell>
+              <cell>110</cell>
+              <cell>90</cell>
+            </row>
+            <row>
+              <cell>9</cell>
+              <cell>70</cell>
+              <cell>130</cell>
+            </row>
+          </tabular>
+        </table>
+
+        <p>
+          Assume the precincts are arranged in a 3x3 grid with precincts 1-3 in the top row, 4-6 in the middle row, and 7-9 in the bottom row.
+          Districts must be contiguous under this grid.
+        </p>
+
+        <ol>
+          <li><p>Propose one plan that gives Party A the largest number of districts without splitting precincts.</p></li>
+          <li><p>Propose one plan that is more proportional to the statewide vote share.</p></li>
+          <li><p>For each plan, compute the total population in each district and determine whether the plan satisfies equal population requirements.</p></li>
+          <li><p>Compute the district winners for each plan and compare how many seats each party would win.</p></li>
+          <li><p>Explain how compactness and contiguity influence whether a plan appears fair, and whether these measures always prevent partisan advantage.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+
+  <page>
+    <exercise>
+      <title>Voting Rights and Representation</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Identify a plan that creates a majority-minority district if precinct 3, 6, and 9 are considered to have a protected group that is 60% of their population.
+            </p>
+          </li>
+          <li>
+            <p>
+              Discuss whether your plan protects the voting power of this group while still respecting compactness and contiguity.
+            </p>
+          </li>
+          <li>
+            <p>
+              Describe how a court might evaluate your plan under the Voting Rights Act and how mathematical measures can support that evaluation.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+</activity>

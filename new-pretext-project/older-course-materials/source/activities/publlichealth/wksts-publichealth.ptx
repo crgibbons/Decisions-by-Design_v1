@@ -1,0 +1,1179 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="worksheet">
+
+<worksheet xml:id="wkst-26-card-disease">
+  <title>The 26-Card Disease Model</title>
+
+  <introduction>
+    <p>
+      In this activity, we model the spread of an infectious disease using a deck of playing cards.
+      The model is intentionally simple, but it captures several important features of epidemics:
+      randomness, transmission by contact, and the gradual buildup of immunity in a population.
+    </p>
+    <p>
+      You will simulate several outbreaks and record how they evolve over time. Even though each group
+      follows the same rules, the results may differ significantly.
+    </p>
+  </introduction>
+
+
+  <exercise xml:id="setup-26-card-disease">
+    <statement>
+      <p>
+        Work in pairs or small groups. Each group will need one deck of playing cards (no jokers).
+      </p>
+
+      <p>
+        Separate the deck into:
+      </p>
+
+      <ul>
+        <li><p>26 red cards (susceptible individuals),</p></li>
+        <li><p>26 black cards (immune individuals).</p></li>
+      </ul>
+
+      <p>
+        Place all black cards face up in a pile. This is the <em>immune pile</em>.
+      </p>
+
+      <p>
+        Hold the 26 red cards face down in your hands. This is the <em>population pile</em>.
+      </p>
+
+      <p>
+        Throughout the activity:
+      </p>
+
+      <ul>
+        <li><p>red cards represent people who can still become infected,</p></li>
+        <li><p>black cards represent people who are already immune.</p></li>
+      </ul>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="step-0-initial-infection">
+    <statement>
+      <p>
+        <bold>Step 0: The initial infection</bold>
+      </p>
+
+      <p>
+        Remove the top card from the population pile and place it face up on the table.
+        This represents the first infected individual.
+      </p>
+
+      <p>
+        Replace that card in the population pile with one black card from the immune pile.
+      </p>
+
+      <p>
+        Record the number of new infections at Step <m>0</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="step-1-transmission">
+    <statement>
+      <p>
+        <bold>Step 1</bold>
+      </p>
+
+      <p>
+        Shuffle the population pile without looking at the cards.
+      </p>
+
+      <p>
+        Draw two cards from the population pile and place them face up on the table.
+      </p>
+
+      <p>
+        Interpret the cards as follows:
+      </p>
+
+      <ul>
+        <li><p>each red card represents a new infection,</p></li>
+        <li><p>each black card represents contact with an immune individual.</p></li>
+      </ul>
+
+      <p>
+        Return any black cards to the population pile.
+      </p>
+
+      <p>
+        For each red card drawn, replace one red card in the population pile with one black card from the immune pile.
+      </p>
+
+      <p>
+        Record the number of new infections at Step <m>1</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="step-2-general-rule">
+    <statement>
+      <p>
+        <bold>Step 2 and beyond</bold>
+      </p>
+
+      <p>
+        Suppose Step <m>n</m> produces <m>k</m> new infections.
+      </p>
+
+      <p>
+        Then Step <m>n+1</m> proceeds as follows:
+      </p>
+
+      <ol>
+        <li><p>shuffle the population pile,</p></li>
+        <li><p>draw <m>2k</m> cards from the population pile,</p></li>
+        <li><p>count how many of those cards are red,</p></li>
+        <li><p>replace each red card in the population pile with a black card from the immune pile,</p></li>
+        <li><p>return any black cards drawn to the population pile.</p></li>
+      </ol>
+
+      <p>
+        Continue until a step produces no new infections.
+      </p>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="recording-data">
+    <statement>
+      <p>
+        Record your epidemic in the table below.
+      </p>
+
+      <tabular>
+        <row>
+          <cell><p>Step</p></cell>
+          <cell><p>Number exposed</p></cell>
+          <cell><p>New infections</p></cell>
+        </row>
+        <row>
+          <cell><p>0</p></cell>
+          <cell><p>1</p></cell>
+          <cell><p></p></cell>
+        </row>
+        <row>
+          <cell><p>1</p></cell>
+          <cell><p>2</p></cell>
+          <cell><p></p></cell>
+        </row>
+        <row>
+          <cell><p>2</p></cell>
+          <cell><p></p></cell>
+          <cell><p></p></cell>
+        </row>
+        <row>
+          <cell><p>3</p></cell>
+          <cell><p></p></cell>
+          <cell><p></p></cell>
+        </row>
+        <row>
+          <cell><p>4</p></cell>
+          <cell><p></p></cell>
+          <cell><p></p></cell>
+        </row>
+      </tabular>
+
+      <p>
+        Continue the table as needed until the epidemic ends.
+      </p>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="graphing-the-epidemic">
+    <statement>
+      <p>
+        Create a graph of your epidemic.
+      </p>
+
+      <ul>
+        <li><p>horizontal axis: step number,</p></li>
+        <li><p>vertical axis: number of new infections.</p></li>
+      </ul>
+
+      <p>
+        Compare your graph with those of other groups.
+      </p>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="initial-reflection">
+    <statement>
+      <p>
+        Answer the following questions about your simulation.
+      </p>
+
+      <ol>
+        <li><p>How many steps did your epidemic last?</p></li>
+        <li><p>What was the largest number of new infections in a single step?</p></li>
+        <li><p>Did the epidemic grow steadily, or did it fluctuate?</p></li>
+        <li><p>At what point did the epidemic begin to shrink?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="class-comparison">
+    <statement>
+      <p>
+        Compare your results with other groups.
+      </p>
+
+      <ol>
+        <li><p>Did all epidemics last the same number of steps?</p></li>
+        <li><p>Did some epidemics die out quickly?</p></li>
+        <li><p>Did some grow much larger than others?</p></li>
+        <li><p>What features did most epidemics have in common?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="model-interpretation">
+    <statement>
+      <p>
+        Interpret the structure of the model.
+      </p>
+
+      <ol>
+        <li><p>Why does the population pile always contain 26 cards?</p></li>
+        <li><p>Why does the epidemic eventually end in this model?</p></li>
+        <li><p>What real-world feature is represented by replacing red cards with black cards?</p></li>
+        <li><p>In what ways is this model realistic?</p></li>
+        <li><p>In what ways is it unrealistic?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="extensions">
+    <statement>
+      <p>
+        Explore how changes to the model affect the epidemic.
+      </p>
+
+      <ol>
+        <li><p>What changes if Step <m>0</m> begins with two infected individuals instead of one?</p></li>
+        <li><p>What changes if each infected individual exposes three people instead of two?</p></li>
+        <li><p>What changes if some individuals begin the activity already immune?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+</worksheet>
+
+
+<worksheet xml:id="wkst-expected-value-epidemics">
+  <title>From Simulation to a Mathematical Model of an Epidemic</title>
+
+  <introduction>
+    <p>
+      In the previous activity, you simulated the spread of a disease using a deck of cards.
+      Each infected individual exposed two others, and some of those exposures produced new
+      infections while others did not.
+    </p>
+
+    <p>
+      In this worksheet, we develop a mathematical model that describes what typically
+      happens in such an epidemic. Instead of tracking one specific outbreak, we study
+      the <em>expected number</em> of new infections at each step.
+    </p>
+  </introduction>
+
+
+  <exercise xml:id="review-simulation-results">
+    <statement>
+      <p>
+        Recall your epidemic simulation from the previous activity.
+      </p>
+
+      <p>
+        Let <m>I_n</m> represent the number of new infections at Step <m>n</m>.
+      </p>
+
+      <ol>
+        <li><p>What was the value of <m>I_0</m> in your simulation?</p></li>
+        <li><p>What was the largest value of <m>I_n</m> that occurred?</p></li>
+        <li><p>Did your sequence of values increase steadily, fluctuate, or decrease immediately?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="counting-exposures">
+    <statement>
+      <p>
+        In the card model, each infected individual exposed two other members of the population.
+      </p>
+
+      <p>
+        Suppose there are <m>I_n</m> new infections at Step <m>n</m>.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            How many total exposures occur at Step <m>n+1</m>?
+          </p>
+        </li>
+        <li>
+          <p>
+            If every exposure produced a new infection, what would <m>I_{n+1}</m> equal?
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="introducing-probability">
+    <statement>
+      <p>
+        In reality, not every exposure produces a new infection.
+      </p>
+
+      <p>
+        Let <m>p</m> represent the probability that a single exposure produces a new infection.
+      </p>
+
+      <p>
+        Suppose there are <m>2I_n</m> exposures at Step <m>n+1</m>.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            On average, how many of those exposures will produce infections?
+          </p>
+        </li>
+        <li>
+          <p>
+            Write a formula for the expected number of new infections at Step <m>n+1</m>.
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="difference-equation-model">
+    <statement>
+      <p>
+        The previous reasoning leads to the approximation
+      </p>
+
+      <me>
+        I_{n+1} \approx 2p I_n.
+      </me>
+
+      <p>
+        This is called a <em>difference equation</em>. It predicts how the number of infections
+        changes from one step to the next.
+      </p>
+
+      <ol>
+        <li><p>If <m>p = 0.25</m>, compute <m>I_1</m> when <m>I_0 = 1</m>.</p></li>
+        <li><p>Use your answer to compute <m>I_2</m>.</p></li>
+        <li><p>Continue one more step to compute <m>I_3</m>.</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="growth-or-decay">
+    <statement>
+      <p>
+        The model
+      </p>
+
+      <me>
+        I_{n+1} = 2p I_n
+      </me>
+
+      <p>
+        predicts whether an epidemic grows or shrinks.
+      </p>
+
+      <ol>
+        <li><p>What happens if <m>2p &gt; 1</m>?</p></li>
+        <li><p>What happens if <m>2p &lt; 1</m>?</p></li>
+        <li><p>What happens if <m>2p = 1</m>?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="epidemic-threshold">
+    <statement>
+      <p>
+        The condition
+      </p>
+
+      <me>
+        2p = 1
+      </me>
+
+      <p>
+        represents a boundary between epidemic growth and epidemic decline.
+      </p>
+
+      <p>
+        Solve this equation for <m>p</m>.
+      </p>
+
+      <p>
+        This value of <m>p</m> is called a <em>threshold value</em>.
+      </p>
+
+      <ol>
+        <li><p>What happens when <m>p</m> is larger than this value?</p></li>
+        <li><p>What happens when <m>p</m> is smaller than this value?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="changing-contact-number">
+    <statement>
+      <p>
+        In the card model, each infected individual exposed two others.
+      </p>
+
+      <p>
+        Suppose instead that each infected individual exposed <m>c</m> others.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Write a new difference equation for <m>I_{n+1}</m>.
+          </p>
+        </li>
+        <li>
+          <p>
+            What condition determines whether the epidemic grows?
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="toward-a-reproduction-number">
+    <statement>
+      <p>
+        The quantity
+      </p>
+
+      <me>
+        R = cp
+      </me>
+
+      <p>
+        represents the expected number of new infections caused by one infected individual.
+      </p>
+
+      <ol>
+        <li><p>Explain what <m>R &gt; 1</m> means in this model.</p></li>
+        <li><p>Explain what <m>R &lt; 1</m> means in this model.</p></li>
+        <li><p>Why might public-health officials want to reduce the value of <m>R</m>?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="connecting-to-the-card-model">
+    <statement>
+      <p>
+        Return to the original card simulation.
+      </p>
+
+      <ol>
+        <li><p>Early in the simulation, was the fraction of red cards in the population pile large or small?</p></li>
+        <li><p>Later in the simulation, did this fraction increase or decrease?</p></li>
+        <li>
+          <p>
+            How did this change affect the number of new infections at each step?
+          </p>
+        </li>
+        <li>
+          <p>
+            Why does this explain why epidemics eventually end in the card model?
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+  <exercise xml:id="preview-next-model">
+    <statement>
+      <p>
+        So far, we have studied how the number of new infections changes from one step to the next.
+      </p>
+
+      <p>
+        In the next activity, we will track three groups in a population simultaneously:
+      </p>
+
+      <ul>
+        <li><p>susceptible individuals,</p></li>
+        <li><p>infected individuals,</p></li>
+        <li><p>recovered individuals.</p></li>
+      </ul>
+
+      <p>
+        This leads to one of the most important models in mathematical epidemiology.
+      </p>
+    </statement>
+  </exercise>
+
+</worksheet>
+
+  <worksheet xml:id="worksheet-discrete-sir-model">
+  <title>Building the SIR Model</title>
+
+  <introduction>
+    <p>
+      In previous activities, we modeled how infections spread step by step using a card simulation
+      and a difference equation for the number of new infections. In this worksheet, we refine that
+      approach by tracking three groups in a population simultaneously:
+    </p>
+
+    <ul>
+      <li><p>susceptible individuals,</p></li>
+      <li><p>infected individuals,</p></li>
+      <li><p>recovered individuals.</p></li>
+    </ul>
+
+    <p>
+      This leads to one of the most important models in mathematical epidemiology: the SIR model.
+    </p>
+  </introduction>
+
+
+
+  <exercise xml:id="sir-variables">
+    <statement>
+      <p>
+        Suppose a disease spreads through a population of fixed size <m>N</m>.
+      </p>
+
+      <p>
+        At Step <m>n</m>, let:
+      </p>
+
+      <ul>
+        <li><p><m>S_n</m> be the number of susceptible individuals,</p></li>
+        <li><p><m>I_n</m> be the number of infected individuals,</p></li>
+        <li><p><m>R_n</m> be the number of recovered individuals.</p></li>
+      </ul>
+
+      <p>
+        What equation must always be true relating <m>S_n</m>, <m>I_n</m>, and <m>R_n</m>?
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-contact-assumption">
+    <statement>
+      <p>
+        To model how infections occur, we make the following assumption:
+      </p>
+
+      <p>
+        The number of new infections during Step <m>n</m> is proportional to both
+        the number of susceptible individuals and the number of infected individuals.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            Why should the number of new infections increase if <m>S_n</m> increases?
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Why should the number of new infections increase if <m>I_n</m> increases?
+          </p>
+        </li>
+
+        <li>
+          <p>
+            Explain why it is reasonable to model new infections using a product
+            involving <m>S_n</m> and <m>I_n</m>.
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-infection-term">
+    <statement>
+      <p>
+        Suppose new infections occur at rate
+      </p>
+
+      <me>
+        \beta S_n I_n,
+      </me>
+
+      <p>
+        where <m>\beta</m> is a constant describing how easily the disease spreads.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            What does a larger value of <m>\beta</m> represent?
+          </p>
+        </li>
+
+        <li>
+          <p>
+            What does a smaller value of <m>\beta</m> represent?
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-recovery-term">
+    <statement>
+      <p>
+        Suppose infected individuals recover at rate
+      </p>
+
+      <me>
+        \gamma I_n,
+      </me>
+
+      <p>
+        where <m>\gamma</m> represents the fraction of infected individuals who recover
+        during one step.
+      </p>
+
+      <ol>
+        <li>
+          <p>
+            What does a larger value of <m>\gamma</m> represent?
+          </p>
+        </li>
+
+        <li>
+          <p>
+            What does a smaller value of <m>\gamma</m> represent?
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-susceptible-equation">
+    <statement>
+      <p>
+        Susceptible individuals become infected, so the susceptible population decreases
+        each step.
+      </p>
+
+      <p>
+        Using the infection term <m>\beta S_n I_n</m>, write an equation for <m>S_{n+1}</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-infected-equation">
+    <statement>
+      <p>
+        The infected population changes in two ways:
+      </p>
+
+      <ul>
+        <li><p>it increases due to new infections,</p></li>
+        <li><p>it decreases due to recoveries.</p></li>
+      </ul>
+
+      <p>
+        Using the infection term <m>\beta S_n I_n</m> and the recovery term <m>\gamma I_n</m>,
+        write an equation for <m>I_{n+1}</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-recovered-equation">
+    <statement>
+      <p>
+        Recovered individuals come only from the infected population.
+      </p>
+
+      <p>
+        Using the recovery term <m>\gamma I_n</m>, write an equation for <m>R_{n+1}</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-full-system">
+    <statement>
+      <p>
+        Combine your previous answers to write the complete system:
+      </p>
+
+      <me>
+        S_{n+1} = \quad
+      </me>
+
+      <me>
+        I_{n+1} = \quad
+      </me>
+
+      <me>
+        R_{n+1} = \quad
+      </me>
+
+      <p>
+        This system is called the discrete SIR model.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-conservation">
+    <statement>
+      <p>
+        Show that the total population remains constant from one step to the next.
+      </p>
+
+      <p>
+        That is, verify that
+      </p>
+
+      <me>
+        S_{n+1} + I_{n+1} + R_{n+1} = S_n + I_n + R_n.
+      </me>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-epidemic-condition">
+    <statement>
+      <p>
+        Suppose the disease is just beginning to spread, so that almost everyone
+        is susceptible.
+      </p>
+
+      <p>
+        That means we can approximate
+      </p>
+
+      <me>
+        S_n \approx N.
+      </me>
+
+      <p>
+        Use the equation for <m>I_{n+1}</m> to determine when the number of infected
+        individuals increases from one step to the next.
+      </p>
+
+      <p>
+        Your answer should produce a condition involving <m>\beta</m>, <m>\gamma</m>, and <m>N</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-basic-reproduction-number">
+    <statement>
+      <p>
+        The quantity
+      </p>
+
+      <me>
+        R_0 = \frac{\beta N}{\gamma}
+      </me>
+
+      <p>
+        is called the <em>basic reproduction number</em>.
+      </p>
+
+      <ol>
+        <li><p>What does <m>R_0 &gt; 1</m> mean?</p></li>
+        <li><p>What does <m>R_0 &lt; 1</m> mean?</p></li>
+        <li>
+          <p>
+            How does this relate to the threshold condition <m>cp &gt; 1</m>
+            from the previous worksheet?
+          </p>
+        </li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-preview-continuous-model">
+    <statement>
+      <p>
+        The discrete SIR model tracks changes step by step. A closely related model
+        instead tracks how these quantities change continuously over time.
+      </p>
+
+      <p>
+        In that setting, the model becomes
+      </p>
+
+      <me>
+        S'(t) = -\beta S(t) I(t)
+      </me>
+
+      <me>
+        I'(t) = \beta S(t) I(t) - \gamma I(t)
+      </me>
+
+      <me>
+        R'(t) = \gamma I(t).
+      </me>
+
+      <p>
+        In later work, we will use this continuous model to predict epidemic peaks,
+        vaccination thresholds, and long-term outcomes.
+      </p>
+    </statement>
+  </exercise>
+
+</worksheet>
+
+<worksheet xml:id="worksheet-compartment-models-parameters">
+  <title>Compartment Models and Estimating Parameters from Data</title>
+
+  <introduction>
+    <p>
+      In earlier worksheets, we built the SIR model by tracking three groups:
+      susceptible, infected, and recovered individuals. In this worksheet,
+      we extend this idea to more general compartment models and learn how
+      to estimate model parameters using epidemic data.
+    </p>
+  </introduction>
+
+
+
+  <exercise xml:id="compartments-idea">
+    <statement>
+      <p>
+        A <em>compartment model</em> divides a population into groups that represent
+        disease status.
+      </p>
+
+      <p>
+        Examples include:
+      </p>
+
+      <ul>
+        <li><p>susceptible individuals,</p></li>
+        <li><p>infected individuals,</p></li>
+        <li><p>recovered individuals,</p></li>
+        <li><p>exposed individuals who are infected but not yet infectious.</p></li>
+      </ul>
+
+      <p>
+        Explain why it is useful to divide a population into compartments when
+        modeling an epidemic.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="sir-review-system">
+    <statement>
+      <p>
+        Recall the discrete SIR model:
+      </p>
+
+      <me>
+        S_{n+1} = S_n - \beta S_n I_n
+      </me>
+
+      <me>
+        I_{n+1} = I_n + \beta S_n I_n - \gamma I_n
+      </me>
+
+      <me>
+        R_{n+1} = R_n + \gamma I_n
+      </me>
+
+      <p>
+        Identify which term represents:
+      </p>
+
+      <ol>
+        <li><p>new infections,</p></li>
+        <li><p>recoveries.</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="adding-exposed-compartment">
+    <statement>
+      <p>
+        Some diseases include an incubation period during which individuals are
+        infected but not yet infectious.
+      </p>
+
+      <p>
+        To model this, we introduce a new compartment:
+      </p>
+
+      <p>
+        <m>E_n</m> = number of exposed individuals.
+      </p>
+
+      <p>
+        Individuals move through compartments in this order:
+      </p>
+
+      <p>
+        susceptible → exposed → infected → recovered
+      </p>
+
+      <p>
+        Explain why adding an exposed compartment may improve the realism
+        of a model.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="seir-transitions">
+    <statement>
+      <p>
+        Suppose exposed individuals become infectious at rate
+      </p>
+
+      <me>
+        \sigma E_n.
+      </me>
+
+      <p>
+        Write equations describing how the exposed compartment changes from
+        Step <m>n</m> to Step <m>n+1</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="seir-full-system">
+    <statement>
+      <p>
+        Combine the infection term <m>\beta S_n I_n</m>, the progression term
+        <m>\sigma E_n</m>, and the recovery term <m>\gamma I_n</m> to write a
+        discrete SEIR model.
+      </p>
+
+      <me>
+        S_{n+1} =
+      </me>
+
+      <me>
+        E_{n+1} =
+      </me>
+
+      <me>
+        I_{n+1} =
+      </me>
+
+      <me>
+        R_{n+1} =
+      </me>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="interpreting-parameters">
+    <statement>
+      <p>
+        The parameters <m>\beta</m>, <m>\sigma</m>, and <m>\gamma</m> describe how
+        quickly individuals move between compartments.
+      </p>
+
+      <ol>
+        <li><p>What does <m>\beta</m> measure?</p></li>
+        <li><p>What does <m>\sigma</m> measure?</p></li>
+        <li><p>What does <m>\gamma</m> measure?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="early-epidemic-growth">
+    <statement>
+      <p>
+        Early in an epidemic, most individuals are susceptible. This allows us
+        to approximate
+      </p>
+
+      <me>
+        S_n \approx N.
+      </me>
+
+      <p>
+        Using this approximation, simplify the equation for <m>I_{n+1}</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="estimating-growth-factor">
+    <statement>
+      <p>
+        Suppose infection counts during the first few days of an outbreak are:
+      </p>
+
+      <tabular>
+        <row><cell><p>Day</p></cell><cell><p>Infected</p></cell></row>
+        <row><cell><p>0</p></cell><cell><p>5</p></cell></row>
+        <row><cell><p>1</p></cell><cell><p>8</p></cell></row>
+        <row><cell><p>2</p></cell><cell><p>13</p></cell></row>
+        <row><cell><p>3</p></cell><cell><p>21</p></cell></row>
+      </tabular>
+
+      <ol>
+        <li><p>Compute the ratios <m>I_1/I_0</m>, <m>I_2/I_1</m>, and <m>I_3/I_2</m>.</p></li>
+        <li><p>Estimate the growth factor of the epidemic.</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="estimating-beta">
+    <statement>
+      <p>
+        Suppose the early-stage approximation
+      </p>
+
+      <me>
+        I_{n+1} \approx (1 + \beta N - \gamma) I_n
+      </me>
+
+      <p>
+        holds.
+      </p>
+
+      <p>
+        Use your estimated growth factor to estimate the value of
+      </p>
+
+      <me>
+        \beta N - \gamma.
+      </me>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="estimating-r0">
+    <statement>
+      <p>
+        Recall that the basic reproduction number is
+      </p>
+
+      <me>
+        R_0 = \frac{\beta N}{\gamma}.
+      </me>
+
+      <p>
+        Use your estimate from the previous exercise to approximate <m>R_0</m>.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="interpreting-r0-data">
+    <statement>
+      <p>
+        Suppose a disease has estimated value <m>R_0 = 2.4</m>.
+      </p>
+
+      <ol>
+        <li><p>What does this number mean?</p></li>
+        <li><p>Would you expect infections to increase or decrease initially?</p></li>
+        <li><p>What kinds of interventions might reduce <m>R_0</m>?</p></li>
+      </ol>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="model-limitations">
+    <statement>
+      <p>
+        Compartment models simplify many aspects of disease spread.
+      </p>
+
+      <p>
+        List at least three assumptions made by the SIR or SEIR models that may
+        not hold in real populations.
+      </p>
+    </statement>
+  </exercise>
+
+
+
+  <exercise xml:id="model-extensions">
+    <statement>
+      <p>
+        Realistic epidemic models often include additional compartments such as:
+      </p>
+
+      <ul>
+        <li><p>vaccinated individuals,</p></li>
+        <li><p>hospitalized individuals,</p></li>
+        <li><p>asymptomatic individuals.</p></li>
+      </ul>
+
+      <p>
+        Describe one additional compartment you would add to improve realism,
+        and explain how individuals would move into and out of it.
+      </p>
+    </statement>
+  </exercise>
+
+</worksheet>
+</article>
+</pretext>

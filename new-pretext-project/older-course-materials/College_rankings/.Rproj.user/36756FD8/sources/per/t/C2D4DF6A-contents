@@ -1,0 +1,347 @@
+import random
+import operator
+import sys
+import unittest
+
+__version__ = "0.1"
+
+class BoolMatError(Exception):
+    """ An exception class for BoolMat """
+    pass
+
+class BoolMat(object):
+    """ A simple Python BoolMat class with
+    basic operations and operator overloading """
+    
+    def __init__(self, m, n, init=True):
+        if init:
+            self.rows = [[0]*n for x in range(m)]
+        else:
+            self.rows = []
+        self.m = m
+        self.n = n
+        
+    def __getitem__(self, idx):
+        return self.rows[idx]
+
+    def __setitem__(self, idx, item):
+        self.rows[idx] = item
+        
+    def __str__(self):
+        s='\n'.join([' '.join([str(item) for item in row]) for row in self.rows])
+        return s + '\n'
+
+    def __repr__(self):
+        s=str(self.rows)
+        rank = str(self.getRank())
+        rep="BoolMat: \"%s\", rank: \"%s\"" % (s,rank)
+        return rep
+    
+    def reset(self):
+        """ Reset the BoolMat data """
+        self.rows = [[] for x in range(self.m)]
+
+    def getTranspose(self):
+        """ Return a transpose of the BoolMat without
+        modifying the BoolMat itself """
+        
+        m, n = self.n, self.m
+        mat = BoolMat(m, n)
+        mat.rows =  [list(item) for item in zip(*self.rows)]
+        
+        self.T = mat
+        
+        return mat
+      
+    def getComplement(self):
+        """ Return a complement of the BoolMat without
+        modifying the BoolMat itself """
+        
+        m, n = self.m, self.n
+
+        mat = BoolMat(m,n)
+        
+        for x in range(m):
+          for y in range(n):
+            mat[x][y] = 1 - self[x][y]
+            
+        self.C = mat
+
+        return mat
+
+    def getRank(self):
+        return (self.m, self.n)
+
+    def __eq__(self, mat):
+        """ Test equality """
+
+        return (mat.rows == self.rows)
+        
+    def __add__(self, mat):
+        """ Add a BoolMat to this BoolMat and
+        return the new BoolMat. Doesn't modify
+        the current BoolMat """
+        
+        if self.getRank() != mat.getRank():
+            raise Exception("Trying to add BoolMats of varying rank!")
+
+        ret = BoolMat(self.m, self.n)
+        
+        for x in range(self.m):
+            row = [max(item) for item in zip(self.rows[x], mat[x])]
+            ret[x] = row
+
+        return ret
+      
+    def __sub__(self,mat):
+        """ Intersect a BoolMat with this BoolMat and
+        return the new BoolMat. Doesn't modify
+        the current BoolMat """
+        
+        if self.getRank() != mat.getRank():
+            raise Exception("Trying to add BoolMats of varying rank!")
+
+        ret = BoolMat(self.m, self.n)
+        
+        for x in range(self.m):
+            row = [min(item) for item in zip(self.rows[x], mat[x])]
+            ret[x] = row
+
+        return ret
+      
+    def __le__(self,mat):
+        """ Determine if this BoolMat is contained in a BoolMat """
+        
+        for x in range(self.m):
+          for item in zip(self.rows[x],mat.rows[x]):
+            if item[0] > item[1]:
+              return False
+        return True
+          
+#    def __gt__(self,mat):
+#    def __ge__(self,mat):
+
+    def __pow__(self,k):
+        """ iterate multiplication"""
+        
+        if self.m != self.n:
+            raise Exception("BoolMat is not square!")
+        
+        mat = BoolMat.makeId(self.m)
+        
+        for _ in range(k):
+            mat = mat * self
+        
+        return mat
+          
+#
+    def isSym(self):
+        return self == self.getTranspose()
+  
+    def isSkew(self):
+        return self == self.getTranspose().getComplement()
+    
+    def sym(self): # remember "-" is intersection
+      return self - self.getTranspose()
+    
+    def skew(self): # remember "-" is intersection
+      return self - self.getTranspose().getComplement()
+    
+    def decomp(self):
+      return self.sym(), self.skew()
+
+    def __mul__(self, mat):
+        """ Multiple a BoolMat with this BoolMat and
+        return the new BoolMat. Doesn't modify
+        the current BoolMat """
+        
+        matm, matn = mat.getRank()
+        
+        if (self.n != matm):
+            raise Exception("BoolMats cannot be multipled!")
+        
+        mat_t = mat.getTranspose()
+        mulmat = BoolMat(self.m, matn)
+        
+        for x in range(self.m):
+            for y in range(mat_t.m):
+                mulmat[x][y] = max([min(item[0],item[1]) for item in zip(self.rows[x], mat_t[y])])
+
+        return mulmat
+    
+    def __truediv__(mat, self):
+        """ Calculate the left residual of another BoolMat
+        with this BoolMat"""
+        
+        return (mat.getComplement() * self.getTranspose()).getComplement()
+      
+    def __floordiv__(mat, self):
+        """ Calculate the left residual of another BoolMat
+        with this BoolMat"""
+        
+        return (self.getTranspose() * mat.getComplement()).getComplement()
+
+    def __iadd__(self, mat):
+        """ Add a BoolMat to this BoolMat.
+        This modifies the current BoolMat """
+
+        # Calls __add__
+        tempmat = self + mat
+        self.rows = tempmat.rows[:]
+        return self
+
+    def __isub__(self, mat):
+        """ Subtract a BoolMat to this BoolMat.
+        This modifies the current BoolMat """
+
+        # Calls __sub__
+        tempmat = self - mat
+        self.rows = tempmat.rows[:]     
+        return self
+
+    def __imul__(self, mat):
+        """ Add a BoolMat to this BoolMat.
+        This modifies the current BoolMat """
+
+        # Possibly not a proper operation
+        # since this changes the current BoolMat
+        # rank as well...
+        
+        # Calls __mul__
+        tempmat = self * mat
+        self.rows = tempmat.rows[:]
+        self.m, self.n = tempmat.getRank()
+        return self
+      
+    def save(self, filename):
+        open(filename, 'w').write(str(self))
+        
+    @classmethod
+    def _makeBoolMat(cls, rows):
+
+        m = len(rows)
+        n = len(rows[0])
+        # Validity check
+        if any([len(row) != n for row in rows[1:]]):
+            raise Exception("inconsistent row length")
+        mat = BoolMat(m,n, init=False)
+        mat.rows = rows
+
+        return mat
+        
+    @classmethod
+    def makeRandom(cls, m, n):
+        """ Make a random BoolMat """
+        
+        obj = BoolMat(m, n, init=False)
+        for x in range(m):
+            obj.rows.append([random.randrange(0, 1) for i in range(obj.n)])
+
+        return obj
+
+    @classmethod
+    def makeZero(cls, m, n):
+        """ Make a zero-BoolMat of rank (mxn) """
+
+        rows = [[0]*n for x in range(m)]
+        return cls.fromList(rows)
+    
+    @classmethod
+    def makeOne(cls, m, n):
+        """ Make a ones-BoolMat of rank (mxn) """
+
+        rows = [[1]*n for x in range(m)]
+        return cls.fromList(rows)
+
+    @classmethod
+    def makeId(cls, m):
+        """ Make identity BoolMat of rank (mxm) """
+
+        rows = [[0]*m for x in range(m)]
+        idx = 0
+        
+        for row in rows:
+            row[idx] = 1
+            idx += 1
+
+        return cls.fromList(rows)
+    
+    @classmethod
+    def readStdin(cls):
+        """ Read a BoolMat from standard input """
+        
+        print('Enter BoolMat row by row. Type "q" to quit')
+        rows = []
+        while True:
+            line = sys.stdin.readline().strip()
+            if line=='q': break
+
+            row = [int(x) for x in line.split()]
+            rows.append(row)
+            
+        return cls._makeBoolMat(rows)
+
+    @classmethod
+    def readGrid(cls, fname):
+        """ Read a BoolMat from a file """
+
+        rows = []
+        for line in open(fname).readlines():
+            row = [int(x) for x in line.split()]
+            rows.append(row)
+
+        return cls._makeBoolMat(rows)
+
+    @classmethod
+    def fromList(cls, listoflists):
+        """ Create a BoolMat by directly passing a list
+        of lists """
+
+        # E.g: BoolMat.fromList([[1 2 3], [4,5,6], [7,8,9]])
+
+        rows = listoflists[:]
+        return cls._makeBoolMat(rows)
+        
+
+class BoolMatTests(unittest.TestCase):
+
+    def testAdd(self):
+        m1 = BoolMat.fromList([[0, 0, 1], [0, 1, 1]])
+        m2 = BoolMat.fromList([[1, 0, 0], [1, 1, 1]])        
+        m3 = m1 + m2
+        self.assertTrue(m3 == BoolMat.fromList([[1,0,1], [1,1,1]]))
+
+    def testMul(self):
+        m1 = BoolMat.fromList([[0,1,0], [0,0,1]])
+        m2 = BoolMat.fromList([[0,1], [1,1], [0,0]])
+        self.assertTrue(m1 * m2 == BoolMat.fromList([[1,1],[0,0]]))
+        self.assertTrue(m2*m1 == BoolMat.fromList([[0, 0, 1], [0, 1, 1], [0, 0, 0]]))
+
+    def testTranspose(self):
+
+        m1 = BoolMat.makeRandom(25, 30)
+        zerom = BoolMat.makeZero(25, 30)
+        m2 = m1 + zerom
+        
+        m1.transpose()
+        m1.transpose()
+        self.assertTrue(m2 == m1)
+
+        # Also test getTranspose
+        m2 = m1.getTranspose()
+        r2 = m2.getRank()
+
+        self.assertTrue(r2==(30,25))
+        m2.transpose()
+
+        self.assertTrue(m2 == m1)
+
+    def testId(self):
+
+        m1 = BoolMat.makeId(10)
+        m2 = BoolMat.makeRandom(4, 10)
+        m3 = m2*m1
+        self.assertTrue(m3 == m2)
+
+if __name__ == "__main__":
+    unittest.main()

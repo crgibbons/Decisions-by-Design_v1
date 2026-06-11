@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<worksheet>
+  <title>Homework 02: Apportionment and Representation</title>
+
+  <introduction>
+    <p>
+      <alert>Instructions:</alert> Complete the exercises below and explain your reasoning clearly.
+      Use the 2020 census or a provided sample dataset to compare apportionment methods and their fairness implications.
+    </p>
+  </introduction>
+
+  <page>
+    <exercise>
+      <title>Congressional Apportionment</title>
+      <statement>
+        <p>
+          The U.S. House of Representatives has 435 seats. The apportionment method determines how many seats each state receives after the decennial census.
+        </p>
+        <ol>
+          <li>
+            <p>
+              Explain why apportionment is a governance decision and not just an arithmetic exercise.
+              What constitutional principles does it serve, and what kinds of unfair outcomes may still arise?
+            </p>
+          </li>
+          <li>
+            <p>
+              Compute the standard divisor and quotas for the following simplified population data:
+            </p>
+            <table>
+              <title>States and Populations</title>
+              <tabular>
+                <row><cell>State</cell><cell>Population</cell></row>
+                <row><cell>A</cell><cell>5,000,000</cell></row>
+                <row><cell>B</cell><cell>3,200,000</cell></row>
+                <row><cell>C</cell><cell>1,800,000</cell></row>
+                <row><cell>D</cell><cell>1,100,000</cell></row>
+                <row><cell>E</cell><cell>800,000</cell></row>
+              </tabular>
+            </table>
+          </li>
+          <li>
+            <p>
+              Apply Jefferson's method, Webster's method, and Huntington-Hill to this data. Compare the seat allocations and explain any differences.
+            </p>
+          </li>
+          <li>
+            <p>
+              For each method, identify whether it violates the quota rule and describe the governance consequence of that violation.
+            </p>
+          </li>
+          <li>
+            <p>
+              Reflect on an international example: how would a parliament with 100 seats and proportional lists differ from a U.S.-style single-member district House? What fairness trade-offs are involved?
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+
+  <page>
+    <exercise>
+      <title>Paradox Detection</title>
+      <statement>
+        <ol>
+          <li>
+            <p>
+              Explain the Alabama Paradox and the Population Paradox in your own words.
+            </p>
+          </li>
+          <li>
+            <p>
+              Give a numerical example showing the Alabama Paradox under the Hamilton method.
+            </p>
+          </li>
+          <li>
+            <p>
+              Why do these paradoxes matter for modern democratic governance?
+              In particular, discuss the implications for public trust and for states whose population changes between censuses.
+            </p>
+          </li>
+        </ol>
+      </statement>
+    </exercise>
+  </page>
+</worksheet>

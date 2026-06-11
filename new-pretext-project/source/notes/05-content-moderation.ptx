@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- EDITORIAL REVIEW - Priority 7 (May 2026)
+     ================================================
+     STATUS: CRITICALLY UNDER-RESOURCED
+     Current length: 138 lines
+     Unit allocation: ~2.5 weeks (part of Weeks 11-13)
+     TARGET LENGTH: 400-500 lines (this section alone)
+     Combined with dimensionality reduction: 1100-1300 lines total for 7.5-hour unit
+     
+     ISSUES:
+     - Only ~55 lines per week of instruction
+     - Missing: detailed worked examples on precision/recall trade-offs
+     - Missing: ROC curves and threshold tuning
+     - Missing: group fairness calculations (demographic parity, equal opportunity)
+     - Missing: real-world scenario analysis
+     - Missing: case studies (hiring, policing, content moderation)
+     - Missing: discussion of impossible fairness tradeoffs
+     
+     EXPANSION PLAN:
+     1. Deepen confusion matrix section with real-world scenarios (~50 lines)
+     2. Add detailed precision/recall worked examples (6-8 examples) (~200 lines)
+     3. Add ROC curves and threshold tuning section (~100 lines)
+     4. Add group fairness and tradeoff analysis (~100 lines)
+     5. Add case studies: hiring algorithms, predictive policing (~150 lines)
+     
+     INTEGRATION NOTE:
+     - This section should be integrated with dimensionality reduction (01-dimensionality.ptx)
+     - Add bridge section: "How data collection choices affect classification fairness"
+     - Reference to Lab 2 (PCA notebook) for computational examples
+     
+     TIMELINE: 3-4 days to complete expansion
+     PRIORITY: HIGH - Essential for understanding algorithmic governance and fairness
+-->
+
+<section xml:id="notes-content-moderation">
+  <title>Algorithmic Governance and Content Moderation</title>
+
+  <introduction>
+    <p>
+      Content moderation is a governance problem at massive scale.
+      Platforms, regulators, and oversight bodies decide what speech is allowed, what is removed, and how automated systems contribute to those decisions.
+    </p>
+
+    <p>
+      In this unit, we study how simple classification models can be used to automate moderation and how fairness metrics help reveal the costs of false positives and false negatives.
+      The goal is to understand the math behind these decisions and the governance trade-offs that shape policy.
+    </p>
+  </introduction>
+
+  <subsection xml:id="classification-basics">
+    <title>Classification Models for Moderation</title>
+
+    <p>
+      A moderation system typically classifies content as either <term>acceptable</term> or <term>disallowed</term>.
+      Each classification can be correct or incorrect, and the pattern of errors matters for people and groups.
+    </p>
+
+    <!-- TODO: Add a short example of a classifier with a decision threshold and a check-it exercise computing confusion matrix entries from counts. -->
+
+    <definition>
+      <term>Confusion Matrix</term>
+      <statement>
+        <p>
+          A confusion matrix organizes predictions versus reality for a binary classifier.
+        </p>
+        <table>
+          <title>Confusion Matrix</title>
+          <tabular>
+            <row>
+              <cell></cell>
+              <cell>Predicted Acceptable</cell>
+              <cell>Predicted Disallowed</cell>
+            </row>
+            <row>
+              <cell>Actually Acceptable</cell>
+              <cell>True Negative (TN)</cell>
+              <cell>False Positive (FP)</cell>
+            </row>
+            <row>
+              <cell>Actually Disallowed</cell>
+              <cell>False Negative (FN)</cell>
+              <cell>True Positive (TP)</cell>
+            </row>
+          </tabular>
+        </table>
+      </statement>
+    </definition>
+
+    <p>
+      In content moderation, a false positive means acceptable speech is removed, and a false negative means disallowed content is left online.
+      Both can cause harm, but the harms are different.
+    </p>
+  </subsection>
+
+  <subsection xml:id="fairness-metrics">
+    <title>Fairness Metrics and Trade-offs</title>
+
+    <definition>
+      <term>Precision</term>
+      <statement>
+        <p>
+          Precision measures the fraction of content labeled disallowed that truly belongs in the disallowed category.
+        </p>
+        <me>
+          \text{Precision} = \frac{TP}{TP + FP}.
+        </me>
+      </statement>
+    </definition>
+
+    <definition>
+      <term>Recall</term>
+      <statement>
+        <p>
+          Recall measures the fraction of truly disallowed content that the system correctly removes.
+        </p>
+        <me>
+          \text{Recall} = \frac{TP}{TP + FN}.
+        </me>
+      </statement>
+    </definition>
+    <p>
+      A classifier can often be tuned to increase precision at the cost of recall, or vice versa.
+      Regulators may prefer a conservative system in some contexts, while communities may demand a system that avoids over-removing protected speech.
+    </p>
+
+    <definition>
+      <term>Demographic Parity</term>
+      <statement>
+        <p>
+          One fairness goal is to ensure that content from different groups is treated similarly by the classifier.
+          For example, the rate of content labeled disallowed should be close across groups with different protected attributes.
+        </p>
+      </statement>
+    </definition>
+
+    <definition>
+      <term>Equal Opportunity</term>
+      <statement>
+        <p>
+          Equal opportunity requires that the classifier has similar recall across groups, so that truly disallowed content is detected at similar rates for everyone.
+        </p>
+      </statement>
+    </definition>
+
+    <!-- TODO: Add notation for false positive and false negative rates, and include a short exercise comparing precision/recall trade-offs for two thresholds. -->
+  </subsection>
+
+  <subsection xml:id="governance-case-studies">
+    <title>Case Study: Oversight and Regulation</title>
+
+    <p>
+      The Meta Oversight Board and new laws such as the European Union Digital Services Act show that content moderation is not only a technical problem.
+      It is also a matter of governance: who sets the rules, who reviews them, and how harms are balanced.
+    </p>
+
+    <p>
+      A simplified model helps us see the mathematical decisions behind platform governance.
+      For example, regulators may ask whether a classifier should prioritize reducing false negatives to protect people from violence, or reducing false positives to protect free expression.
+    </p>
+
+    <exercise>
+      <title>Balanced Moderation</title>
+      <statement>
+        <p>
+          Suppose a platform uses a classifier to detect disallowed content. For one community, the classifier produces <m>TP = 60</m>, <m>FP = 20</m>, and <m>FN = 40</m>. For another community, it produces <m>TP = 45</m>, <m>FP = 15</m>, and <m>FN = 15</m>.
+        </p>
+        <ol>
+          <li><p>Compute precision and recall for each community.</p></li>
+          <li><p>Which community experiences a higher false-negative rate? Which community experiences a higher false-positive rate?</p></li>
+          <li><p>Discuss how these differences might affect public trust and whether a single threshold is fair.</p></li>
+        </ol>
+      </statement>
+    </exercise>
+  </subsection>
+</section>

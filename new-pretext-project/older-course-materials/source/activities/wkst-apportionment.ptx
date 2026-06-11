@@ -1,0 +1,579 @@
+<?xml version="1.0" encoding="utf-8"?>
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude">
+<!-- Worksheet contributed by Courtney Gibbons -->
+ 
+<article xml:id="wkst-apportionment">
+
+<title>Apportionment: Hamilton, Webster, Huntington-Hill, and Dean get in line!</title>
+  <introduction>
+    <p>
+      In this activity you will treat apportionment methods as functions from a continuous
+      <em>quota space</em> to an <em>apportionment space</em> (sometimes called an <em>allocation space</em>), 
+      <me>F: \mathcal{Q} = \{(a,b) \in \mathbb{R}_{\ge 0}^2 \, \colon \, a+b = M\} to \mathcal{M} = \{(k,\ell) \in \mathbb{Z}_{\ge 0}^2 \, \colon \, k+\ell = M\}</me> to discrete integer allocations. You will visualize apportionment methods as geometric partitions of the line segment <m>\mathcal{Q}</m> that determine how to apportion the seats. That is, you're going to find <m>F^{-1}(\mathbf{m})</m> for each <m> \mathbf{m} \in \mathcal{M}</m>.
+    </p>
+  </introduction>
+
+<paragraphs>
+  <title>Warm-Up: Two Groups, Five Seats</title>
+    <p>
+      Before working in triangles and three dimensions, we begin with the simplest possible
+      case: two groups sharing a fixed number of seats.
+    </p>
+
+    <p>
+      Suppose two groups, A and B, are dividing 5 seats.
+      If group A receives <m>a</m> seats, then group B receives <m>5-a</m>.
+      So every possible allocation corresponds to a point on the line segment
+    </p>
+
+    <me>
+      0 \le a \le 5.
+    </me>
+
+    <p>
+      In this activity, you will compare Hamilton’s method and Webster’s method
+      in this one-dimensional setting.
+    </p>
+  </paragraphs>
+
+  <!-- ===================================================== -->
+  <paragraphs xml:id="quota-line">
+    <title>Quota Space on a Line</title>
+
+    <p>
+      Think of <m>a</m> as the (possibly fractional) quota for group A.
+      The quota for group B is automatically <m>5-a</m>.
+    </p>
+
+    <exercise xml:id="integer-points">
+      <statement>
+        <p>
+          Mark the integer points on the number line from 0 to 5.
+        </p>
+
+        <p>
+          What do these integer points represent in terms of seat allocations?
+        </p>
+      </statement>
+      <solution>
+          <p>
+              The integer points are <m>0,1,2,3,4,5</m>.
+              The point <m>k</m> represents the allocation <q>A gets <m>k</m> seats and B gets <m>5-k</m> seats,</q>
+              i.e. <m>(k,5-k)</m>.
+          </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="fractional-meaning">
+      <statement>
+        <p>
+          What does an integer like <m>a=2.7</m> (or the ordered pair <m>(2.7,2.3)</m>) represent in this setting?
+        </p>
+      </statement>
+      <solution>
+            <p>
+              It represents a quota (ideal fractional allocation) where A <q>deserves</q> about <m>2.7</m> seats and B about
+              <m>5-2.7=2.3</m> seats. An apportionment method will turn this into an integer allocation near
+              <m>(3,2)</m> or <m>(2,3)</m>. Which one depends on the method.
+            </p>
+          </solution>
+    </exercise>
+  </paragraphs>
+
+  <paragraphs xml:id="hamilton-line">
+    <title>Hamilton’s Method on the Line</title>
+
+    <p>
+      Hamilton’s method works by first taking lower quotas and then assigning
+      leftover seats based on the size of the fractional parts.
+    </p>
+
+    <p>
+      In the two-group case, this process simplifies dramatically!
+    </p>
+
+    <exercise xml:id="hamilton-floor">
+      <statement>
+        <p>
+          Suppose group A has quota <m>a</m>.
+        </p>
+
+        <p>
+          (a) Write the lower quota for group A.
+        </p>
+
+        <p>
+          (b) Write the lower quota for group B.
+        </p>
+
+        <p>
+          (c) How many seats remain to be assigned after taking floors?
+        </p>
+      </statement>
+      <solution>
+            <p>
+              (a) A’s lower quota is <m>\lfloor a\rfloor</m>.
+              (b) B’s lower quota is <m>\lfloor 5-a\rfloor</m>.
+            </p>
+            <p>
+              (c) The remaining seats are
+              <m>5-(\lfloor a\rfloor+\lfloor 5-a\rfloor)</m>.
+              For non-integer <m>a</m>, we have <m>\lfloor a\rfloor+\lfloor 5-a\rfloor=4</m>, so there is 1
+              leftover seat. (If <m>a</m> is an integer, there are no leftover seats.)
+            </p>
+          </solution>
+    </exercise>
+
+    <exercise xml:id="largest-remainder-line">
+      <statement>
+        <p>
+          Show that Hamilton’s method gives the extra seat to group A exactly when
+        </p>
+
+        <me>
+          a - \lfloor a \rfloor \ge (5-a) - \lfloor 5-a \rfloor.
+        </me>
+
+        <p>
+          Simplify this inequality.
+        </p>
+      </statement>
+      <!-- <solution>
+            <p>
+              Write the remainders:
+              <m>r_A=a-\lfloor a\rfloor</m> and <m>r_B=(5-a)-\lfloor 5-a\rfloor</m>.
+            </p>
+            <p>
+              For non-integer <m>a</m>, <m>\lceil a\rceil=\lfloor a\rfloor+1</m> and
+              <m>\lfloor 5-a\rfloor=5-\lceil a\rceil</m>, so
+              <m>r_B=(5-a)-(5-\lceil a\rceil)=\lceil a\rceil-a=\lfloor a\rfloor+1-a</m>.
+            </p>
+            <p>
+              Then <m>r_A \ge r_B</m> becomes
+              <me>
+                a-\lfloor a\rfloor \ge \lfloor a\rfloor+1-a
+                \quad\Longleftrightarrow\quad
+                2a \ge 2\lfloor a\rfloor+1
+                \quad\Longleftrightarrow\quad
+                a \ge \lfloor a\rfloor+\tfrac12.
+              </me>
+              So, within each unit interval <m>[k,k+1)</m>, the <q>switch point</q> is <m>k+\tfrac12</m>.
+            </p>
+          </solution> -->
+    </exercise>
+
+    <exercise xml:id="hamilton-threshold">
+      <statement>
+        <p>
+          Find the value of <m>a</m> where the seat allocation switches.
+        </p>
+
+        <p>
+          Draw this point on the number line and label the intervals where Hamilton assigns:
+        </p>
+
+        <ul>
+          <li>2 seats to A,</li>
+          <li>3 seats to A.</li>
+        </ul>
+      </statement>
+      <!-- <solution>
+            <p>
+              The switch between A getting 2 vs 3 seats occurs on the interval <m>[2,3)</m>, at
+              <m>a=2.5</m>.
+            </p>
+            <p>
+              For <m>2 \le a \lt 2.5</m>, Hamilton gives A 2 seats (and B 3).
+              For <m>2.5 \le a \lt 3</m>, Hamilton gives A 3 seats (and B 2).
+              (At exactly <m>a=2.5</m> there is a tie in remainders.)
+            </p>
+          </solution> -->
+    </exercise>
+
+  </paragraphs>
+
+  <!-- ===================================================== -->
+  <paragraphs xml:id="webster-line">
+    <title>Webster’s Method on the Line</title>
+
+    <p>
+      Webster’s method uses a scaling factor (the divisor) and then rounds to the nearest integer.
+    </p>
+
+    <p>
+      In the two-group case, Webster’s behavior becomes especially simple.
+    </p>
+
+    <exercise xml:id="rounding-rule-line">
+      <statement>
+        <p>
+          Suppose Webster uses the quota <m>a</m> directly.
+          Write the condition under which group A is rounded to 3 seats.
+        </p>
+
+        <p>
+          Express your answer as an inequality involving <m>a</m>.
+        </p>
+      </statement>
+    </exercise>
+
+    <exercise xml:id="webster-threshold">
+      <statement>
+        <p>
+          Find the value of <m>a</m> where Webster switches from giving A 2 seats to giving A 3 seats.
+        </p>
+
+        <p>
+          Mark this point on the same number line you used for Hamilton.
+        </p>
+      </statement>
+    </exercise>
+  </paragraphs>
+
+    <paragraphs xml:id="hill-line">
+  <title>Huntington–Hill (Equal Proportions) on the Line</title>
+
+  <p>
+    Now we add one more method, often called <em>Huntington–Hill</em> or
+    <em>Equal Proportions</em>.
+    In this warm-up we will describe it as a next-seat rule.
+  </p>
+
+  <p>
+    We will use the common convention that each group must receive at least 1 seat.
+    So with 5 total seats and two groups, the possible final allocations are
+    <m>(1,4),(2,3),(3,2),(4,1)</m>.
+  </p>
+</paragraphs>
+
+  <paragraphs xml:id="hill-priority">
+    <title>Step 1: A next-seat score</title>
+
+    <p>
+      Suppose a group has population <m>p</m> and currently has <m>n</m> seats.
+      Its score for receiving the next seat is
+    </p>
+
+    <me>
+      \mathrm{score}(p,n)=\frac{p}{\sqrt{n(n+1)}}.
+    </me>
+
+    <p>
+      The next seat goes to the group with the larger score.
+      (If there is a tie, use a tie-breaking rule.)
+    </p>
+
+    <exercise xml:id="hill-scores-table">
+      <statement>
+        <p>
+          Starting from <m>(1,1)</m>, there are 3 more seats to give out.
+          Make a small table of the scores that would be compared at each step:
+        </p>
+
+        <ul>
+          <li>When comparing A goes from 1 to 2 versus B goes from 1 to 2.</li>
+          <li>When comparing A goes from 2 to 3 versus B goes from 1 to 2.</li>
+          <li>When comparing A goes from 3 to 4 versus B goes from 1 to 2.</li>
+        </ul>
+      </statement>
+      <solution>
+        <p>
+          The score for going from <m>n</m> to <m>n+1</m> is
+          <m>p/\sqrt{n(n+1)}</m>.
+        </p>
+
+        <p>
+          Comparing A: <m>1 \to 2</m> versus B: <m>1 \to 2</m> compares
+          <m>\dfrac{p_A}{\sqrt{1\cdot 2}}</m> to <m>\dfrac{p_B}{\sqrt{1\cdot 2}}</m>,
+          so the first extra seat goes to whichever population is larger.
+        </p>
+
+        <p>
+          Later comparisons involve different denominators:
+          A: <m>2\to 3</m> uses <m>\sqrt{2\cdot 3}=\sqrt{6}</m>, while B: <m>1\to 2</m> uses <m>\sqrt{2}</m>, etc.
+        </p>
+      </solution>
+    </exercise>
+
+  </paragraphs>
+
+  <paragraphs xml:id="hill-cutpoints">
+    <title>Step 2: Where does the outcome switch?</title>
+
+    <p>
+      As before, let <m>a</m> be A’s quota on the line, so B’s quota is <m>5-a</m>.
+      The Huntington–Hill method partitions the line into intervals where A receives
+      1, 2, 3, or 4 seats.
+    </p>
+
+    <exercise xml:id="hill-thresholds-derivation">
+      <statement>
+        <p>
+          The middle switch between A getting 2 seats versus 3 seats happens at <m>a=2.5</m>.
+          (This is the symmetric point where A and B have equal population.)
+        </p>
+
+        <p>
+          The other two switch points occur when the population ratio reaches <m>\sqrt{6}</m>
+          (or its reciprocal).
+          Use the score comparison to show that the boundary between outcomes
+          <m>(1,4)</m> and <m>(2,3)</m> occurs when
+        </p>
+
+        <me>
+          \frac{p_A}{\sqrt{2}}=\frac{p_B}{\sqrt{6}}.
+        </me>
+
+        <p>
+          Then solve for the corresponding quota value <m>a</m>.
+        </p>
+      </statement>
+      <!-- <solution>
+        <p>
+          The boundary between final outcomes <m>(1,4)</m> and <m>(2,3)</m> is the point where,
+          after A already has 1 seat, A is tied with B for receiving the next relevant seat.
+          One clean way to capture the decisive tie is:
+          compare A’s score for <m>1\to 2</m> with B’s score for <m>2\to 3</m> (which uses <m>\sqrt{6}</m>).
+          Setting them equal gives
+          <m>\dfrac{p_A}{\sqrt{2}}=\dfrac{p_B}{\sqrt{6}}</m>, i.e.
+          <m>\dfrac{p_A}{p_B}=\sqrt{\dfrac{2}{6}}=\dfrac{1}{\sqrt{3}}</m>.
+          (Equivalently, a symmetric formulation yields the same quota cut point.)
+        </p>
+
+        <p>
+          A more standard (and symmetric) way to express the decisive cut points for 5 seats is:
+          A receives 1 seat when <m>\dfrac{p_A}{p_B} \lt \dfrac{1}{\sqrt{6}}</m>,
+          and A receives 4 seats when <m>\dfrac{p_A}{p_B} \gt \sqrt{6}</m>.
+          Converting to quota on the line:
+          <m>a=5\cdot \dfrac{p_A}{p_A+p_B}</m>.
+        </p>
+
+        <p>
+          If <m>\dfrac{p_A}{p_B}=\dfrac{1}{\sqrt{6}}</m>, then
+          <m>\dfrac{p_A}{p_A+p_B}=\dfrac{1/\sqrt{6}}{1+1/\sqrt{6}}=\dfrac{1}{1+\sqrt{6}}</m>,
+          so
+          <me>a=\frac{5}{1+\sqrt{6}}\approx 1.4494897.</me>
+        </p>
+
+        <p>
+          By symmetry, the boundary between 3 and 4 seats occurs at
+          <me>a=\frac{5\sqrt{6}}{1+\sqrt{6}}\approx 3.5505103.</me>
+        </p>
+      </solution> -->
+    </exercise>
+
+    <exercise xml:id="hill-intervals">
+      <statement>
+        <p>
+          Use the switch points to label the intervals on the line where A receives
+          1, 2, 3, or 4 seats under Huntington–Hill.
+        </p>
+      </statement>
+      <!-- <solution>
+        <p>
+          Let
+          <m>t_a=\dfrac{5}{1+\sqrt{6}}\approx 1.4494897</m>
+          and
+          <m>t_b=\dfrac{5\sqrt{6}}{1+\sqrt{6}}\approx 3.5505103</m>.
+        </p>
+
+        <ul>
+          <li><m>0 \le a \lt t_a</m>: A gets 1 seat (allocation <m>(1,4)</m>).</li>
+          <li><m>a \le a \lt 2.5</m>: A gets 2 seats (allocation <m>(2,3)</m>).</li>
+          <li><m>2.5 \le a \lt t_b</m>: A gets 3 seats (allocation <m>(3,2)</m>).</li>
+          <li><m>b \le a \le 5</m>: A gets 4 seats (allocation <m>(4,1)</m>).</li>
+        </ul>
+      </solution> -->
+    </exercise>
+  </paragraphs>
+
+    <paragraphs xml:id="dean-line">
+  <title>Dean’s Method on the Line</title>
+
+  <p>
+    Dean’s method is another divisor method, similar in structure to Webster’s and Huntington–Hill’s.
+    The difference lies in how rounding is decided.
+  </p>
+
+  <p>
+    Instead of rounding to the nearest integer or using geometric means,
+    Dean’s method uses the <em>harmonic mean</em> as the cutoff between adjacent integers.
+  </p>
+</paragraphs>
+
+  <paragraphs xml:id="dean-rounding">
+    <title>Step 1: Dean’s Rounding Rule</title>
+
+    <p>
+      Suppose a quota value <m>q</m> lies between two integers <m>n</m> and <m>n+1</m>.
+      Dean’s method rounds:
+    </p>
+
+    <ul>
+      <li>down to <m>n</m> if <m>q</m> is less than the harmonic mean of <m>n</m> and <m>n+1</m>,</li>
+      <li>up to <m>n+1</m> if <m>q</m> is greater than that harmonic mean.</li>
+    </ul>
+
+    <p>
+      Recall that the harmonic mean of <m>n</m> and <m>n+1</m> is
+    </p>
+
+    <me>
+      H(n,n+1)=\frac{2n(n+1)}{2n+1}.
+    </me>
+
+    <exercise xml:id="dean-cutoff-example">
+      <statement>
+        <p>
+          Compute the harmonic mean cutoff between:
+        </p>
+
+        <ul>
+          <li>1 and 2</li>
+          <li>2 and 3</li>
+        </ul>
+      </statement>
+      <!-- <solution>
+        <p>
+          Between 1 and 2:
+          <me>
+            H(1,2)=\frac{2\cdot1\cdot2}{2\cdot1+1}=\frac{4}{3}\approx1.3333.
+          </me>
+        </p>
+
+        <p>
+          Between 2 and 3:
+          <me>
+            H(2,3)=\frac{2\cdot2\cdot3}{2\cdot2+1}=\frac{12}{5}=2.4.
+          </me>
+        </p>
+      </solution> -->
+    </exercise>
+  </paragraphs>
+
+  <paragraphs xml:id="dean-line-intervals">
+    <title>Step 2: Dean’s Switching Points on the Line</title>
+
+    <p>
+      As before, let <m>a</m> represent A’s quota on the line with total 5 seats.
+      Dean’s rounding thresholds determine when A switches from receiving
+      2 seats to 3 seats, and from 1 to 2, etc.
+    </p>
+
+    <exercise xml:id="dean-middle-switch">
+      <statement>
+        <p>
+          Using the harmonic mean cutoff between 2 and 3, determine the value of <m>a</m>
+          where Dean switches from assigning A 2 seats to assigning A 3 seats.
+        </p>
+      </statement>
+      <!-- <solution>
+        <p>
+          The cutoff between 2 and 3 is <m>2.4</m>.
+          So Dean rounds to 3 seats when <m>a \ge 2.4</m>, and to 2 seats when <m>a \lt 2.4</m>.
+        </p>
+      </solution> -->
+    </exercise>
+
+    <exercise xml:id="dean-other-switches">
+      <statement>
+        <p>
+          Use the harmonic mean cutoffs to find the approximate switch points where A moves:
+        </p>
+
+        <ul>
+          <li>from 1 seat to 2 seats,</li>
+          <li>from 3 seats to 4 seats.</li>
+        </ul>
+      </statement>
+      <solution>
+        <p>
+          Between 1 and 2 seats, the cutoff is <m>4/3 \approx 1.333</m>.
+          So A switches from 1 to 2 seats at <m>a \approx 1.333</m>.
+        </p>
+
+        <p>
+          By symmetry, the cutoff between 3 and 4 seats occurs at
+          <m>5-4/3=3.6667</m>.
+        </p>
+      </solution>
+    </exercise>
+
+    <exercise xml:id="dean-intervals">
+      <statement>
+        <p>
+          Label the intervals on the number line where Dean assigns A:
+        </p>
+
+        <ul>
+          <li>1 seat</li>
+          <li>2 seats</li>
+          <li>3 seats</li>
+          <li>4 seats</li>
+        </ul>
+      </statement>
+      <!-- <solution>
+        <p>
+          Approximately:
+        </p>
+
+        <ul>
+          <li><m>0 \le a \lt 1.333</m>: A gets 1 seat</li>
+          <li><m>1.333 \le a \lt 2.4</m>: A gets 2 seats</li>
+          <li><m>2.4 \le a \lt 3.667</m>: A gets 3 seats</li>
+          <li><m>3.667 \le a \le 5</m>: A gets 4 seats</li>
+        </ul>
+      </solution> -->
+    </exercise>
+  </paragraphs>
+
+  <paragraphs xml:id="dean-compare">
+    <title>Comparing All Four Methods</title>
+
+    <exercise xml:id="compare-all">
+      <statement>
+        <p>
+          Compare the switching points for Hamilton, Webster, Huntington–Hill, and Dean
+          for the transition between 2 seats and 3 seats.
+        </p>
+
+        <p>
+          Arrange the methods from earliest switch to latest switch as <m>a</m> increases.
+        </p>
+      </statement>
+      <!-- <solution>
+        <p>
+          Switching points for A going from 2 to 3 seats:
+        </p>
+
+        <ul>
+          <li>Dean: <m>a=2.4</m></li>
+          <li>Hamilton: <m>a=2.5</m></li>
+          <li>Webster: <m>a=2.5</m></li>
+          <li>Huntington–Hill: <m>a=2.5</m></li>
+        </ul>
+
+        <p>
+          So Dean switches earliest, while the other three coincide at the midpoint for this case.
+        </p>
+      </solution> -->
+    </exercise>
+
+    <exercise xml:id="interpretation-dean">
+      <statement>
+        <p>
+          In words: what does Dean’s method favor compared to Webster and Huntington–Hill?
+        </p>
+      </statement>
+      <!-- <solution>
+        <p>
+          Dean’s method favors giving additional seats slightly earlier (at smaller quota values).
+          Geometrically, its rounding boundaries are shifted toward the lower integer compared to
+          arithmetic and geometric mean rounding.
+        </p>
+      </solution> -->
+    </exercise>
+</paragraphs>
+
+</article>
+</pretext>

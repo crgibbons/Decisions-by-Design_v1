@@ -1,0 +1,759 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="notes">
+        <section xml:id="notes-week-02">
+            <title>Class 2</title>
+            <p>
+                This week we covered the basics of apportionment, plus how to use Google NotebookLM to help dig into primary source material.
+            </p>
+
+            <subsection><title>Apportionment</title>
+            <p>
+                One of the first topics we'll study is <term>apportionment</term>.
+            </p>
+            <definition>
+                <title>Apportionment</title>
+                <statement>
+                    <p> 
+                        The term <term>apportionment</term> refers to the mathematical process of distributing a fixed number of indistinguishable assets among different entities.
+                    </p>
+                    <p>
+                        Each asset is indistinguishable from any other asset, and no asset can be subdivided.
+                    </p>
+                </statement>
+            </definition>
+            <example>
+                <title> Is it apportionment? </title>
+                <statement>
+                    <p>
+                        For example, suppose Courtney buys 45 boxes of coffee (from the orange and pink doughnut shop down the hill) for the math department to bring to their classes. The department has to come up with a way to decide how many boxes each professor gets, perhaps using the number of students each professor is teaching as the main relevant piece of data to make this decision.
+                    </p>
+                    <p> 
+                        Each professor has to decide how to share the coffee among their classes. This need not be an apportionment problem.
+                    </p>
+                    <p> Based on the following table of data, determine how to divvy up the boxes of coffee in different ways. Each box serves 10. Assume every student (and professor) drinks coffee.</p>
+                    <table>
+                        <title>Professors and Enrollments, with <m>45</m> boxes of coffee.</title>
+                          <tabular>
+                            <row header="yes">
+                              <cell>Prof</cell>
+                              <cell>Total Students (plus one)</cell>
+                              <!-- <cell>Quota</cell>
+                              <cell>Lower quota</cell>
+                              <cell>Upper quota</cell> -->
+                            </row>
+
+                            <row>
+                              <cell>Ahmed</cell>
+                              <cell>35</cell>
+                              <!-- <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+
+                            <row>
+                              <cell>Bowman</cell>
+                              <cell>60</cell>
+                         <!--      <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                            <row>
+                              <cell>Ceniceros</cell>
+                              <cell>71</cell>
+                        <!--       <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                            <row>
+                              <cell>Cockburn</cell>
+                              <cell>22</cell>
+                         <!--      <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                            <row>
+                              <cell>Dykstra</cell>
+                              <cell>38</cell>
+                         <!--      <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                            <row>
+                              <cell>Gibbons</cell>
+                              <cell>55</cell>
+                        <!--       <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                            <row>
+                              <cell>Kantrowitz</cell>
+                              <cell>73</cell>
+                         <!--      <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                            <row>
+                              <cell>Kuruwita</cell>
+                              <cell>45</cell>
+                         <!--      <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                            <row>
+                              <cell>LeMasurier</cell>
+                              <cell>28</cell>
+                         <!--      <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                            <row>
+                              <cell>Tripp</cell>
+                              <cell>58</cell>
+                         <!--      <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+
+                            <row>
+                              <cell><em>Totals</em></cell>
+                              <cell><answer><m> 485 </m></answer></cell>
+                         <!--      <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell>
+                              <cell><answer><m> ? </m></answer></cell> -->
+                            </row>
+                          </tabular>
+                        </table>
+                    <p>Which method or methods seem <q>fair</q>? Why?</p>
+                </statement>
+            </example>
+
+            <p>One of the most famous apportionment problems is the apportionment of seats in the U.S. House of Representatives among the U.S. states. In fact, the terminology for apportionment problems comes from this application.</p>
+
+            <definition><title>Apportionment Terms</title>
+            <p>
+                <dl>
+                    <li><title><term>Apportionment Problem</term></title>
+                        <p>
+                            a scenario in which <m>m</m> identical and <m>n</m> indivisible items (the <q>seats</q>) must be divided among <m>n</m> entities (the <q>states</q>) proportionately (using the <q>populations</q>)
+                        </p>
+                    </li>
+                    <li><title><term>States</term></title>
+                        <p>
+                            the entities in the apportionment problem
+                        </p>
+                    </li>
+                    <li><title><term>Seats</term></title>
+                        <p>
+                            the items being apportioned among the states
+                        </p>
+                    </li>
+                    <li><title><term>Apportionment Method</term></title>
+                        <p>
+                            the algorithm determining how to apportion the <m>m</m> seats to the <m>n</m> states, guaranteeing exactly <m>m</m> seats are distributed proporitionaly to each of the <m>n</m> states based on their populations <m>p_s</m> for <m>1 \le s \le n</m>.
+                        </p>
+                    </li>
+                    <li><title><term>Standard Divisor <m>D</m></term> and <term>Standard Quota <m>Q_s</m></term>, <term>Lower Quota<m>L_s</m></term>, <term>Upper Quota <m>U_s</m></term></title>
+                        <p>
+                            <m>D = p/m</m> where <m>p = \sum_{s = 1}^n p_s</m> is the total population; <br />
+                            <m>Q_s = p_s/D</m>, representing the <q>fair</q> share of seats for state <m>s</m> if the seats could be subdivided; <br />
+                            <m>L_s = \lfloor Q_s \rfloor</m>, the largest integer less than or equal to the standard quota; <m>U_s = L_s + 1</m>, the smallest integer strictly greater than the standard quota.
+                            <aside>The definition of the floor function varies from setting to setting. Here we take it to include the possibility of equality.</aside>
+                        </p>
+                    </li>
+                    <li><title><term>Modified Divisor (and friends)</term></title>
+                    <p>
+                        A value <m>d</m> or <m>D'</m> other than the standard divisor, used to make the distribution of seats produced by rounding (based on a given convention) add up to <m>m</m>. From <m>d</m> each state gets a modified quota <m>{Q_s}^\prime</m>, lower quota <m>{L_s}^\prime</m>, and upper quota <m>{U_s}^\prime</m>.
+                    </p>
+                    </li>
+                    <li><title><term>Priority</term></title>
+                    <p>
+                        An order by which extra seats are assigned to states. An example is using the fractional part of the quota to determine which states get their upper quota of seats by ranking from largest fracitonal part to smallest.
+                    </p>
+                    </li>
+                </dl>
+            </p>
+            </definition>
+
+<example><title>Revisiting Coffee</title>
+<statement>
+    <p>Taking each professor to be a state and each box of coffee to be a seat, we use the number of students each professor is teaching as the population (plus the professors themselves!). The standard divisor is <m>D = \frac{485}{45} = 10 + \frac{35}{485} = 10.\overline{7}</m>.
+</p>
+                            <table>
+                              <title>Apportionment Computations</title>
+                              <tabular halign="center">
+                                <row header="yes" bottom="minor">
+                                  <cell>Name</cell>
+                                  <cell>Number of Students (plus one)</cell>
+                                  <cell>Standard Quota</cell>
+                                  <cell>Lower Quota</cell>
+                                  <cell>Upper Quota</cell>
+                                  <cell>Fractional Rank</cell>
+                              </row>
+
+                              <row>
+                                  <cell>Ahmed</cell>
+                                  <cell><m>35</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>Bowman</cell>
+                                  <cell><m>60</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>Ceniceros</cell>
+                                  <cell><m>71</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>Cockburn</cell>
+                                  <cell><m>22</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>Dykstra</cell>
+                                  <cell><m>38</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>Gibbons</cell>
+                                  <cell><m>55</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>Kantrowitz</cell>
+                                  <cell><m>73</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>Kuruwita</cell>
+                                  <cell><m>45</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>LeMasurier</cell>
+                                  <cell><m>28</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+
+                              <row>
+                                  <cell>Tripp</cell>
+                                  <cell><m>58</m></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer><math>?</math></answer></cell>
+                                  <cell><answer>?</answer></cell>
+                              </row>
+                            </tabular>
+                            </table>
+                        </statement>
+
+<solution>
+    <table>
+      <title>Standard Quotas</title>
+      <tabular halign="center">
+        <row header="yes" bottom="minor">
+          <cell>Name</cell>
+          <cell>Number of Students (plus one)</cell>
+          <cell>Standard Quota</cell>
+          <cell>Traditional Round Up or Down</cell>
+          <cell>Lower Quota</cell>
+          <cell>Upper Quota</cell>
+          <cell>Fractional Rank</cell>
+      </row>
+
+      <row>
+          <cell>A</cell>
+          <cell><m>35</m></cell>
+          <cell><m>3.2474</m></cell>
+          <cell>3</cell>
+          <cell>3</cell>
+          <cell>4</cell>
+          <cell>7</cell>
+      </row>
+
+      <row>
+          <cell>B</cell>
+          <cell><m>60</m></cell>
+          <cell><m>5.5670</m></cell>
+          <cell>6</cell>
+          <cell>5</cell>
+          <cell>6</cell>
+          <cell>4</cell>
+      </row>
+
+      <row>
+          <cell>Ce</cell>
+          <cell><m>71</m></cell>
+          <cell><m>6.5876</m></cell>
+          <cell>7</cell>
+          <cell>6</cell>
+          <cell>7</cell>
+          <cell>3</cell>
+      </row>
+
+      <row>
+          <cell>Co</cell>
+          <cell><m>22</m></cell>
+          <cell><m>2.0412</m></cell>
+          <cell>2</cell>
+          <cell>2</cell>
+          <cell>2</cell>
+          <cell>10</cell>
+      </row>
+
+      <row>
+          <cell>D</cell>
+          <cell><m>38</m></cell>
+          <cell><m>3.5258</m></cell>
+          <cell>4</cell>
+          <cell>3</cell>
+          <cell>4</cell>
+          <cell>5</cell>
+      </row>
+
+      <row>
+          <cell>G</cell>
+          <cell><m>55</m></cell>
+          <cell><m>5.1031</m></cell>
+          <cell>5</cell>
+          <cell>5</cell>
+          <cell>5</cell>
+          <cell>9</cell>
+      </row>
+
+      <row>
+          <cell>Ka</cell>
+          <cell><m>73</m></cell>
+          <cell><m>6.7732</m></cell>
+          <cell>7</cell>
+          <cell>6</cell>
+          <cell>7</cell>
+          <cell>1</cell>
+      </row>
+
+      <row>
+          <cell>Ku</cell>
+          <cell><m>45</m></cell>
+          <cell><m>4.1753</m></cell>
+          <cell>4</cell>
+          <cell>4</cell>
+          <cell>5</cell>
+          <cell>8</cell>
+      </row>
+
+      <row>
+          <cell>L</cell>
+          <cell><m>28</m></cell>
+          <cell><m>2.5979</m></cell>
+          <cell>3</cell>
+          <cell>2</cell>
+          <cell>3</cell>
+          <cell>2</cell>
+      </row>
+
+      <row>
+          <cell>T</cell>
+          <cell><m>58</m></cell>
+          <cell><m>5.3814</m></cell>
+          <cell>5</cell>
+          <cell>5</cell>
+          <cell>6</cell>
+          <cell>6</cell>
+      </row>
+
+      <row>
+          <cell>Total</cell>
+          <cell><m>485</m></cell>
+          <cell></cell>
+          <cell>46</cell>
+          <cell>41</cell>
+          <cell>51</cell>
+          <cell>N/A</cell>
+      </row>
+  </tabular>
+</table>
+</solution>
+</example>
+
+<p> The first apportionment method we'll study is due to none other than Alexander Hamilton! </p>
+
+<definition><title>Hamilton's Method</title>
+<p>
+    Start by giving each state its lower quota. Then, in order of largest fractional part, distribute the remaining seats.
+</p>
+</definition>
+
+<exercise><title>The winners are...</title>
+<statement>
+    <p>
+        Determine which professors get their upper quota of boxes of coffee thanks to Alexander Hamilton.
+    </p>
+</statement>
+<answer> 
+    <p>
+        The professors with fractional rank one through four.
+        <table>
+            <title>Hamilton Apportionment</title>
+            <tabular>
+                <row header="yes" bottom="minor" >
+                    <cell>A</cell>
+                    <cell>B</cell>
+                    <cell>Ce</cell>
+                    <cell>Co</cell>
+                    <cell>D</cell>
+                    <cell>G</cell>
+                    <cell>Ka</cell>
+                    <cell>Ku</cell>
+                    <cell>L</cell>
+                    <cell>T</cell>
+                    <cell>Total</cell>
+                </row>
+                <row>
+                    <cell><m>3</m></cell>
+                    <cell><m>6</m></cell>
+                    <cell><m>7</m></cell>
+                    <cell><m>2</m></cell>
+                    <cell><m>3</m></cell>
+                    <cell><m>5</m></cell>
+                    <cell><m>7</m></cell>
+                    <cell><m>4</m></cell>
+                    <cell><m>3</m></cell>
+                    <cell><m>5</m></cell>
+                    <cell><m>45</m></cell>
+                </row>
+            </tabular>
+        </table>
+    </p>
+</answer>
+</exercise>
+
+<exercise><title>A small tweak</title>
+<statement>
+    <p> 
+        What happens if Courtney only buys <m>44</m> boxes of coffee?
+    </p>
+</statement>
+</exercise>
+
+<p>
+    Three additional methods involve changing the value of <m>D</m> to come up with a modified divisor <m>d</m> where some method (rounding conventionally, using the upper quota, or using the lower quota for each state) adds up to the number of seats. Respectively, these are Webster's method, Adams' Method, and Jefferson's Method.
+</p>
+
+<p>
+    But what if there were a different way to decide how to round up or down that always added up to the number of seats?
+</p>
+
+<definition><title>The Geometric Mean</title>
+<p> 
+    The geometric mean of two distinct numbers <m>L</m> and <m>U</m> is given by <m>c = \sqrt{LU}</m>. If <m>q \gt c</m>, round up. If <m>q \lt c</m>, round down. 
+</p>
+</definition>
+
+<definition>
+  <title>Huntington–Hill Method (Equal Proportions)</title>
+  <p>
+    The <em>Huntington–Hill method</em> is an apportionment method that assigns
+    seats one at a time using <em>priority values</em> based on population and
+    the geometric mean of consecutive seat numbers.
+  </p>
+  <p>
+    After each state receives one initial seat, additional seats are awarded
+    sequentially to the state with the largest priority value
+    <m>\frac{P}{\sqrt{n(n+1)}}</m>,
+    where <m>P</m> is the state’s population and <m>n</m> is the number of seats
+    the state currently holds.
+  </p>
+</definition>
+
+<remark>
+  <p>
+    The Huntington–Hill method is sometimes described using different
+    <em>divisors</em>, which can be confusing at first.  This happens because
+    the method has two equivalent formulations.
+  </p>
+  <p>
+    In the <em>priority formulation</em>, seats are assigned one at a time using
+    the priority value <m>\frac{P}{\sqrt{n(n+1)}}</m>, where the divisor
+    <m>\sqrt{n(n+1)}</m> depends on the state’s current number of seats.
+  </p>
+  <p>
+    In the <em>rounding formulation</em>, a single global divisor is used to
+    compute quotas, and each quota is rounded up or down depending on whether it
+    lies above or below the geometric mean <m>\sqrt{n(n+1)}</m>.  Here, the same
+    expression appears as a <em>rounding threshold</em> rather than a priority
+    denominator.
+  </p>
+  <p>
+    Although the divisors look different in these descriptions, both approaches
+    implement the same rule: rounding is determined by the geometric mean, which
+    balances relative over- and under-representation.
+  </p>
+</remark>
+
+<table>
+ <title>Cutoff points for Huntington-Hill rounding of quotas between 1 and 10</title>
+ <tabular>
+  <row><cell>Quota is between</cell><cell>Cutoff point</cell></row>
+  <row><cell>1 and 2</cell><cell><m>\sqrt{2} \approx 1.414</m></cell></row>
+  <row><cell>2 and 3</cell><cell><m>\sqrt{6} \approx 2.449</m></cell></row>
+  <row><cell>3 and 4</cell><cell><m>\sqrt{12} \approx 3.464</m></cell></row>
+  <row><cell>4 and 5</cell><cell><m>\sqrt{20} \approx 4.472</m></cell></row>
+  <row><cell>5 and 6</cell><cell><m>\sqrt{30} \approx 5.477</m></cell></row>
+  <row><cell>6 and 7</cell><cell><m>\sqrt{42} \approx 6.481</m></cell></row>
+  <row><cell>7 and 8</cell><cell><m>\sqrt{56} \approx 7.483</m></cell></row>
+  <row><cell>8 and 9</cell><cell><m>\sqrt{72} \approx 8.485</m></cell></row>
+  <row><cell>9 and 10</cell><cell><m>\sqrt{90} \approx 9.487</m></cell></row>
+</tabular>
+</table>
+
+<example><title>Huntington-Hill and Parador</title>
+<statement>
+
+<table>
+ <title>Huntington-Hill method: Calculations standard divisor <m>D = 10,000</m></title>
+ <tabular>
+  <row><cell>State</cell><cell>Population</cell><cell>Standard quota</cell><cell>Cutoff point</cell><cell>Round quota to</cell></row>
+  <row><cell>A</cell><cell>34,800</cell><cell>3.48</cell><cell>3.464</cell><cell>4</cell></row>
+  <row><cell>B</cell><cell>104,800</cell><cell>10.48</cell><cell>10.488</cell><cell>10</cell></row>
+  <row><cell>C</cell><cell>64,800</cell><cell>6.48</cell><cell>6.481</cell><cell>6</cell></row>
+  <row><cell>D</cell><cell>140,800</cell><cell>14.08</cell><cell>14.491</cell><cell>14</cell></row>
+  <row><cell>E</cell><cell>54,800</cell><cell>5.48</cell><cell>5.477</cell><cell>6</cell></row>
+  <row><cell>Total</cell><cell>400,000</cell><cell>40</cell><cell></cell><cell>40</cell></row>
+</tabular>
+</table>
+
+<table>
+ <title>Huntington-Hill method: Calculations for with standard divisor <m>D = 10,000</m> and modified divisor <m>d = 10,030</m></title>
+ <tabular>
+  <row>
+    <cell>State</cell><cell>Population</cell>
+    <cell>Standard quota</cell><cell>Round quota to</cell>
+    <cell>Modified quota <m>d = 10,030</m></cell><cell>Round quota to</cell>
+</row>
+<row><cell>A</cell><cell>34,800</cell><cell>3.48</cell><cell>4</cell><cell>3.47</cell><cell>4</cell></row>
+<row><cell>B</cell><cell>105,100</cell><cell>10.51</cell><cell>11</cell><cell>10.479</cell><cell>10</cell></row>
+<row><cell>C</cell><cell>65,100</cell><cell>6.51</cell><cell>7</cell><cell>6.491</cell><cell>7</cell></row>
+<row><cell>D</cell><cell>140,200</cell><cell>14.02</cell><cell>14</cell><cell>13.978</cell><cell>14</cell></row>
+<row><cell>E</cell><cell>54,800</cell><cell>5.48</cell><cell>6</cell><cell>5.464</cell><cell>5</cell></row>
+<row><cell>Total</cell><cell>400,000</cell><cell>40</cell><cell>42</cell><cell></cell><cell>40</cell></row>
+</tabular>
+</table>
+</statement>
+
+<table>
+ <title>Huntington-Hill method: Calculations modified divisor <m>d = 50,100</m></title>
+ <tabular>
+  <row><cell>State</cell><cell>Population</cell><cell>Modified quota</cell><cell>Cutoff point</cell><cell>Round quota to</cell></row>
+  <row><cell>A</cell><cell>1,646,000</cell><cell>32.85</cell><cell>32.496</cell><cell>33</cell></row>
+  <row><cell>B</cell><cell>6,936,000</cell><cell>138.44</cell><cell>138.499</cell><cell>138</cell></row>
+  <row><cell>C</cell><cell>154,000</cell><cell>3.07</cell><cell>3.464</cell><cell>3</cell></row>
+  <row><cell>D</cell><cell>2,091,000</cell><cell>41.74</cell><cell>41.497</cell><cell>42</cell></row>
+  <row><cell>E</cell><cell>685,000</cell><cell>13.67</cell><cell>13.491</cell><cell>14</cell></row>
+  <row><cell>F</cell><cell>988,000</cell><cell>19.72</cell><cell>19.494</cell><cell>20</cell></row>
+  <row><cell>Total</cell><cell>12,500,000</cell><cell></cell><cell></cell><cell>250</cell></row>
+</tabular>
+</table>
+</example>
+
+</subsection>
+
+<subsection><title>Paradoxes (colloquially)</title>
+    <definition>
+    <title>Named Paradoxes</title>
+    <dl>
+        <li>
+            <title><term>Quota paradox</term></title>
+            <p>
+                If there exists an apportionment problem where an apportionment method assigns a state fewer than its lower quota of seats (or more than its upper quota), that method is said to exhibit the quota paradox.
+            </p>
+        </li>
+        <li>
+            <title><term>Alabama paradox</term></title>
+            <p>
+                This paradox occurs when a state gets apportioned fewer seats simply because the total number of seats being apportioned has increased.
+            </p>
+        </li>
+
+        <li>
+            <title><term>Population paradox</term></title>
+            <p>
+                This paradox occurs when a state <m>A</m> gets apportioned fewer seats than <m>B</m> when the population of <m>A</m> has increased more rapidly than the population of <m>B</m>.
+            </p>
+        </li>
+
+        <li>
+            <title><term>New-states paradox</term></title>
+            <p>
+                This paradox occurs when a state's apportionment is affected when a new state (together with its fair share of seats) has been added to the computation.
+            </p>
+        </li>
+    </dl>
+</definition>
+
+   <example><title>Paradox Analysis</title>
+    <statement>
+        <p>The Intergalactic Congress Apportionments of 2525 and 2535 exhibit one of the paradoxes. Which one?</p>
+    <table>
+ <title>Intergalactic Congress: Apportionment of 2525</title>
+ <tabular>
+  <row><cell>Planet</cell><cell>Population</cell><cell>Standard quota</cell><cell>Lower quota</cell><cell>Surplus</cell><cell>Apportionment</cell></row>
+  <row><cell>Alanos</cell><cell>150</cell><cell>8.3</cell><cell>8</cell><cell>0</cell><cell>8</cell></row>
+  <row><cell>Betta</cell><cell>78</cell><cell>4.3</cell><cell>4</cell><cell>0</cell><cell>4</cell></row>
+  <row><cell>Conii</cell><cell>173</cell><cell>9.61</cell><cell>9</cell><cell>1</cell><cell>10</cell></row>
+  <row><cell>Dugos</cell><cell>204</cell><cell>11.3</cell><cell>11</cell><cell>0</cell><cell>11</cell></row>
+  <row><cell>Ellisium</cell><cell>295</cell><cell>16.38</cell><cell>16</cell><cell>1</cell><cell>17</cell></row>
+  <row><cell>Total</cell><cell>900</cell><cell>50.00</cell><cell>48</cell><cell>2</cell><cell>50</cell></row>
+</tabular>
+</table>
+
+<table>
+ <title>Intergalactic Congress: Apportionment of 2535</title>
+ <tabular>
+  <row><cell>Planet</cell><cell>Population</cell><cell>Standard quota</cell><cell>Lower quota</cell><cell>Surplus</cell><cell>Apportionment</cell></row>
+  <row><cell>Alanos</cell><cell>150</cell><cell>8.25</cell><cell>8</cell><cell>0</cell><cell>8</cell></row>
+  <row><cell>Betta</cell><cell>78</cell><cell>4.29</cell><cell>4</cell><cell>Second</cell><cell>5</cell></row>
+  <row><cell>Conii</cell><cell>181</cell><cell>9.96</cell><cell>9</cell><cell>First</cell><cell>10</cell></row>
+  <row><cell>Dugos</cell><cell>204</cell><cell>11.22</cell><cell>11</cell><cell>0</cell><cell>11</cell></row>
+  <row><cell>Ellisium</cell><cell>296</cell><cell>16.28</cell><cell>16</cell><cell>0</cell><cell>16</cell></row>
+  <row><cell>Total</cell><cell>909</cell><cell>50.00</cell><cell>48</cell><cell>2</cell><cell>50</cell></row>
+</tabular>
+</table>
+</statement>
+</example>
+</subsection>
+<subsection><title>Google NotebookLM</title>
+
+<p> 
+    To dig into the primary source literature about a famous apportionment lawsuit, you will use Google NotebookLM as described in class.
+</p>
+<exercise>
+    <title> NotebookLM set-up</title>
+    <statement> 
+        <ul>
+            <li>
+                <p>
+                    One of your group members should use their Hamilton email account to log in at <url href="https://notebooklm.google.com/">Google NotebookLM</url>, then click <q>Create New</q>. That group members should also upload the SCOTUS transcript and SCOTUS opinion. Name the notebook something recognizable, like <q>SCOTUS Apportionment</q>. 
+                </p>
+                <p>
+                    You might also like to add additional webpages from the U.S. Census Bureau (see Links of Interest below) and the paper on Blackboard by David McCune, but these are optional (and you can toggle whether the notebook interface uses them to respond to a question by clicking the checkboxes on or off.
+                </p>
+            </li>
+            <li>
+                <p>
+                    The creator of the notebook should share it by adding the Hamilton email addresses of the other group members, with access to the full notebook.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Each group member will come up with a question they would like NotebookLM to answer about the source material, then save the reponse to the question as a note.
+                </p>
+            </li>
+            <li>
+                <p>
+                   Finally, each group member will share their question and answer on the course blog, plus their strategy for fact-checking the answer and an assessment of how well NotebookLM did.
+               </p>
+           </li>
+       </ul>
+   </statement>
+</exercise>
+<p> 
+    This is just our first foray into using a generative AI tool to enhance our learning. We will develop more skills to interact with NotebookLM throughout the course.
+</p>
+</subsection>
+
+<subsection>
+    <title>Exercises</title>
+
+    <exercise><title>Other Means</title>
+    <statement>
+        <ol>
+            <li>
+                <p> 
+                    The Huntington-Hill method uses the geometric mean, 
+                    <me>
+                        c(L,U) = \sqrt{LU},
+                    </me>
+                    which generalizes for more than two numbers as 
+                    <me>
+                        c(a_1,a_2,\cdots,a_n) = \sqrt[n]{a_1 a_2 \cdots a_n}.
+                    </me> 
+                    What if we modify Huntington Hill to use
+                    <me>
+                        c(L_s,Q_s,U_s) = \sqrt[3]{L_sQ_sU_s}
+                    </me>
+                    where <m>Q_s</m> is the quota for State <m>s</m> from the standard divisor? Try on the coffee data set.
+                </p>
+            </li>
+            <li>
+                <p> 
+                    There are two other means we could try, too. The Harmonic Mean is given by 
+                    <me>
+                        h(L_s,U_s)= \dfrac{2 L_s U_s}{L_s + U_s},
+                    </me>
+                    and the Quadratic Mean is given by
+                    <me>
+                        p(L_s,U_s) = \sqrt{\dfrac{L_s^2+U_s^2}{2}}.
+                    </me>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Apply these to the coffee data.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Describe/invent how to generalize each of these to more than two numbers.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Visit <image source="https://commons.wikimedia.org/wiki/File:01-Mittlere_Proportionale.gif" /> and see if you can make a geometric argument for the geometric mean.
+                </p>
+            </li>
+        </ol>
+    </statement>
+</exercise>
+</subsection>
+<!--  -->
+    </section>
+</article>
+</pretext>

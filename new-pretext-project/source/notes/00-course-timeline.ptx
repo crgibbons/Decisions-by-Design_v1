@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section xml:id="course-timeline">
+  <title>Course Timeline and Big Picture Overview</title>
+
+  <introduction>
+    <p>
+      This course is organized around four theme units plus an introductory mathematical modeling week.
+      Each week includes approximately 3 hours of class time: two interactive lecture sessions and one computational lab session.
+      The four main units are Healthcare, Apportionment, Districting, and AI/Algorithms.
+    </p>
+
+    <p>
+      The schedule below uses the unit structure from the big-picture plan and preserves the half-class transition moments between units.
+      Each unit ends with a summary and a comprehensive quiz that can be completed on paper without a calculator.
+    </p>
+  </introduction>
+
+  <subsection xml:id="weekly-schedule">
+    <title>Weekly Schedule</title>
+
+    <table>
+      <title>Weekly Course Timeline</title>
+      <tabular>
+        <row header="yes"><cell>Week</cell><cell>Theme</cell><cell>Class Sessions</cell><cell>Notes</cell></row>
+        <row><cell>1</cell><cell>Intro to Mathematical Modeling</cell><cell>Modeling stages; jigsaw paper activity; model building</cell><cell>Introduce SIAM M3 framework and governance framing.</cell></row>
+        <row><cell>2</cell><cell>Healthcare</cell><cell>Class 1: Intro; Class 2: DE models; Lab: interacting substances</cell><cell>Begin policy framing for medication dosing and public health.</cell></row>
+        <row><cell>3</cell><cell>Healthcare</cell><cell>Class 4: policy analysis; Class 5: application; Lab: policy analyses</cell><cell>Use model validation and data to compare dosing strategies.</cell></row>
+        <row><cell>4</cell><cell>Healthcare / Apportionment</cell><cell>Class 7: Healthcare summary; Class 8: Unit quiz + Montana case intro</cell><cell>Half-class transition introduces Montana and apportionment themes.</cell></row>
+        <row><cell>5</cell><cell>Apportionment</cell><cell>Class 1: Methods & fairness; Class 2: lab on 2000/2020 outcomes</cell><cell>Define apportionment functions and fairness criteria.</cell></row>
+        <row><cell>6</cell><cell>Apportionment</cell><cell>Class 3: apportionment polyhedra; Class 4: barycentric coordinates</cell><cell>Link geometry, linear functionals, and allocation fairness.</cell></row>
+        <row><cell>7</cell><cell>Apportionment / Districting</cell><cell>Class 5: lab on Georgia primary; Class 6: other allocation problems; Class 7: summary; Class 8: quiz + LULAC intro</cell><cell>Wrap apportionment and connect to the LULAC case.
+</cell></row>
+        <row><cell>8</cell><cell>Districting</cell><cell>Class 1: congressional districts; Class 2: lab on compactness</cell><cell>Build from constitutional and Voting Rights Act constraints.</cell></row>
+        <row><cell>9</cell><cell>Districting</cell><cell>Class 3: efficiency gap & gerrymandering; Class 4: fairness / normal in plan space</cell><cell>Compare partisan and racial fairness metrics.</cell></row>
+        <row><cell>10</cell><cell>Districting / AI</cell><cell>Class 5: district plans lab; Class 6: state case study; Class 7: summary; Class 8: quiz + AI intro</cell><cell>Use the LULAC case to bridge into AI governance.</cell></row>
+        <row><cell>11</cell><cell>AI and Algorithms</cell><cell>Class 0: intro; Class 1: Reacting to the Past 1; Class 2: Reacting to the Past 2</cell><cell>Introduce the Meta Oversight Board role-play and dimensionality reduction context.</cell></row>
+        <row><cell>12</cell><cell>AI and Algorithms</cell><cell>Class 3: lab on chatbot settings; Class 4: PCA theory; Class 5: PCA applications</cell><cell>Ground PCA in algorithmic governance and real data.</cell></row>
+        <row><cell>13</cell><cell>AI and Algorithms</cell><cell>Class 6: lab on embeddings; Class 7: summary; Class 8: quiz / early dismissal</cell><cell>Finish AI unit with application labs and an assessment quiz.</cell></row>
+        <row><cell>14</cell><cell>Midterm Review and Midterm</cell><cell>Review session; exam</cell><cell>Comprehensive midterm on unit material and governance reasoning.</cell></row>
+        <row><cell>15</cell><cell>Project Work</cell><cell>Project planning and lab time</cell><cell>Students work on unit-specific deeper projects.</cell></row>
+        <row><cell>16</cell><cell>Final Poster Session</cell><cell>Poster presentations and final reflections</cell><cell>Public presentation of governance-driven quantitative projects.</cell></row>
+      </tabular>
+    </table>
+  </subsection>
+
+  <subsection xml:id="priority-changes">
+    <title>Priority for Big Picture Changes</title>
+
+    <ol>
+      <li>
+        <p>
+          Finalize the week-by-week timeline and unit transitions first so the overall course scaffolding is stable.
+        </p>
+      </li>
+      <li>
+        <p>
+          Convert lab materials to interactive notebook format with stronger exposition, simple follow-up exercises, and report-generation support.
+        </p>
+      </li>
+      <li>
+        <p>
+          Create SageMath-based homework starting with an introduction to SageMath syntax and linear algebra usage.
+        </p>
+      </li>
+      <li>
+        <p>
+          Anchor each unit with primary source material and a blog-style reflection assignment where possible.
+        </p>
+      </li>
+      <li>
+        <p>
+          Draft the unit-end quizzes now so the assessment design matches the paper-based, calculator-free format.
+        </p>
+      </li>
+      <li>
+        <p>
+          Define one “go deeper” project per unit so students can explore a concrete governance case study.
+        </p>
+      </li>
+      <li>
+        <p>
+          Review and add editorial markup to the notes to ensure each unit has the right pacing and enough context for the course hours.
+        </p>
+      </li>
+    </ol>
+  </subsection>
+
+  <subsection xml:id="unit-summaries">
+    <title>Unit Summaries</title>
+
+    <p>
+      The course is organized around five major segments:
+    </p>
+
+    <ul>
+      <li><p><strong>Intro:</strong> Mathematical modeling stages and a jigsaw paper analysis.</p></li>
+      <li><p><strong>Unit 1:</strong> Healthcare modeling with differential equations, interacting substances, and policy analysis.</p></li>
+      <li><p><strong>Unit 2:</strong> Apportionment methods, fairness criteria, allocation geometry, and the Montana case.</p></li>
+      <li><p><strong>Unit 3:</strong> Districting, compactness, efficiency gap, plan fairness, and the LULAC case.</p></li>
+      <li><p><strong>Unit 4:</strong> AI and algorithms, Reacting to the Past role-play, PCA, embeddings, and algorithmic governance.</p></li>
+    </ul>
+  </subsection>
+</section>

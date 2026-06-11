@@ -1,20 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- EDITORIAL REVIEW - Priority 7 (May 2026)
+     ================================================
+     STATUS: SEVERELY UNDER-RESOURCED
+     Current length: 180 lines
+     Appropriate for: 2-hour math refresher
+     Unit allocation: 7.5 hours (Weeks 2-4)
+     TARGET LENGTH: 1200-1500 lines
+     
+     ISSUES:
+     - No governance/policy context (FDA approval, access equity, withdrawal)
+     - No real healthcare case studies
+     - No worked examples with real drug parameters
+     - Missing: equity considerations across populations
+     - Missing: discussion of healthcare policy implications
+     
+     EXPANSION PLAN:
+     1. Add healthcare governance context section (~200 lines)
+     2. Add 3-4 detailed case studies (hormone therapy, antibiotics, chemotherapy) (~500 lines)
+     3. Add worked numerical examples with real pharmacokinetics (~400 lines)
+     4. Add section on policy implications and access equity (~200 lines)
+     
+     TIMELINE: 3-4 days to complete expansion
+     PRIORITY: HIGH - Foundation for units on repeated systems and policy trade-offs
+-->
+
 <section xml:id="de-crash-course">
   <title>A Crash Course in Concentration Models</title>
-
-  <p>
-    Many quantities in biology and medicine change continuously over time.
-    Understanding how different government policies or administrative decisions 
-    affect these quantities requires a way to model their dynamics. 
-    For example, we might want to understand how hormone levels change during treatment, 
-    or how they respond to changes in dosing schedules.
-  </p>
-  <p>
-    Differential equations provide a way to model how these quantities evolve.
-    In this section, we review the key ideas needed to study concentration
-    decay, repeated dosing, and interacting systems.
-  </p>
+  <introduction>
+    <p>
+      Many quantities in biology and medicine change continuously over time.
+      Understanding how different government policies or administrative decisions 
+      affect these quantities requires a way to model their dynamics. 
+      For example, we might want to understand how hormone levels change during treatment, 
+      or how they respond to changes in dosing schedules.
+    </p>
+    <p>
+      Regulatory bodies and clinical advisors must translate these models into policies about drug approval, dosing intervals, and patient monitoring.
+      This section uses differential equations and discrete dosing models to make those policy trade-offs explicit.
+    </p>
+    <p>
+      Differential equations provide a way to model how these quantities evolve.
+      In this section, we review the key ideas needed to study concentration
+      decay, repeated dosing, and interacting systems.
+    </p>
+  </introduction>
 
   <subsection xml:id="exponential-decay">
     <title>Exponential Decay</title>
@@ -63,6 +93,8 @@
 
     <me>H^\ast = \frac{u}{k}.</me>
 
+    <!-- TODO: Add a worked example showing how to compute equilibrium for a medication that receives constant input, and a short check-it exercise. -->
+
     <p>
       The solution can be written as
     </p>
@@ -98,6 +130,8 @@
       The sequence <m>H_n</m> approaches this value as <m>n</m> increases.
     </p>
   </subsection>
+
+  <!-- TODO: Insert a short student exercise about when a dosing regimen converges and how parameter changes affect steady-state concentration. -->
 
   <subsection xml:id="linear-systems">
     <title>Interacting Quantities and Linear Systems</title>

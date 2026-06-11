@@ -1,0 +1,1505 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="notes">
+        <section xml:id="notes-week-02">
+            <title>Week 2</title>
+            <p>
+                This week we covered the basics of apportionment, plus how to use Google NotebookLM to help dig into primary source material.
+            </p>
+
+            <subsection><title>Apportionment</title>
+            <p>
+                One of the first topics we'll study is <term>apportionment</term>.
+            </p>
+            <definition>
+                <title>Apportionment</title>
+                <statement>
+                    <p> 
+                        The term <term>apportionment</term> refers to the mathematical process of distributing a fixed number of indistinguishable assets among different entities.
+                    </p>
+                    <p>
+                        Each asset is indistinguishable from any other asset, and no asset can be subdivided.
+                    </p>
+                </statement>
+            </definition>
+            <example>
+                <title> Is it apportionment? </title>
+                <statement>
+                    <p>
+                        For example, suppose Courtney buys 45 boxes of coffee (from the orange and pink doughnut shop down the hill) for the math department to bring to their classes. The department has to come up with a way to decide how many boxes each professor gets, perhaps using the number of students each professor is teaching as the main relevant piece of data to make this decision.
+                    </p>
+                    <p> 
+                        Each professor has to decide how to share the coffee among their classes. This need not be an apportionment problem.
+                    </p>
+                    <p> Based on the following table of data, determine how to divvy up the boxes of coffee in different ways. Each box serves 10. Assume every student (and professor) drinks coffee.</p>
+                    <table>
+                        <title>Enrollments and Courses</title>
+                        <tabular halign="center">
+                            <row header="yes" bottom="minor" >
+                                <cell><nbsp /></cell>
+                                <cell>Ahmed</cell>
+                                <cell>Bowman</cell>
+                                <cell>Ceniceros</cell>
+                                <cell>Cockburn</cell>
+                                <cell>Dykstra</cell>
+                                <cell>Gibbons</cell>
+                                <cell>Kantrowitz</cell>
+                                <cell>Kuruwita</cell>
+                                <cell>LeMasurier</cell>
+                                <cell>Tripp</cell>
+                                <cell>Total</cell>
+                            </row>
+                            <row>
+                                <cell>Number of Sections</cell>
+                                <cell>2</cell>
+                                <cell>3</cell>
+                                <cell>3</cell>
+                                <cell>1</cell>
+                                <cell>3</cell>
+                                <cell>2</cell>
+                                <cell>1</cell>
+                                <cell>2</cell>
+                                <cell>3</cell>
+                                <cell>20</cell>
+                            </row>
+                            <row>
+                                <cell>Number of Students</cell>
+                                <cell>34</cell>
+                                <cell>59</cell>
+                                <cell>70</cell>
+                                <cell>21</cell>
+                                <cell>37</cell>
+                                <cell>50</cell>
+                                <cell>72</cell>
+                                <cell>44</cell>
+                                <cell>27</cell>
+                                <cell>57</cell>
+                                <cell>481</cell>
+                            </row>
+                        </tabular>
+                    </table>
+                    <p>Which method or methods seem <q>fair</q>? Why?</p>
+                </statement>
+            </example>
+
+            <p>One of the most famous apportionment problems is the apportionment of seats in the U.S. House of Representatives among the U.S. states. In fact, the terminology for apportionment problems comes from this application.</p>
+
+            <definition><title>Apportionment Terms</title>
+            <p>
+                <dl>
+                    <li><title><term>Apportionment Problem</term></title>
+                    <p>
+                        a scenario in which <m>m</m> identical and indivisible items (the <q>seats</q>) must be divided among <m>n</m> entities (the <q>states</q>) proportionately (using the <q>populations</q>)
+                    </p>
+                </li>
+                <li><title><term>States</term></title>
+                <p>
+                    the entities in the apportionment problem
+                </p>
+            </li>
+            <li><title><term>Seats</term></title>
+            <p>
+                the items being apportioned among the states
+            </p>
+        </li>
+        <li><title><term>Apportionment Method</term></title>
+        <p>
+            the algorithm determining how to apportion the <m>m</m> seats to the <m>n</m> states, guaranteeing exactly <m>m</m> seats are distributed proporitionaly to each of the <m>n</m> states based on their populations <m>p_s</m> for <m>1 \le s \le </m>
+        </p>
+    </li>
+    <li><title><term>Standard Divisor <m>D</m></term> and <term>Standard Quota <m>Q_s</m></term>, <term>Lower Quota<m>L_s</m></term>, <term>Upper Quota <m>U_s</m></term></title>
+    <p>
+        <m>D = p/m</m> where <m>p = \sum_{s = 1}^n p_s</m> is the total population; <br />
+        <m>Q_s = p_s/D</m>, representing the <q>fair</q> share of seats for state <m>s</m> if the seats could be subdivided; <br />
+        <m>L_s = \lfloor Q_s \rfloor</m>, the largest integer less than or equal to the standard quota; <m>U_s = \lceil Q_s \rceil</m>, the smallest integer strictly greater than the standard quota
+    </p>
+</li>
+<li><title><term>Modified Divisor</term></title>
+<p>
+    A value other than the standard divisor, used to make the distribution of seats produced by rounding (based on a given convention) add up to <m>m</m>.
+</p>
+</li>
+</dl>
+</p>
+</definition>
+
+<example><title>Revisiting Coffee</title>
+<statement>
+    <p>Taking each professor to be a state and each box of coffee to be a seat, we use the number of students each professor is teaching as the population (plus the professors themselves!). The standard divisor is , the standard divisor is <m>495/45 = 11</m>.
+</p>
+<table>
+  <title>Apportionment Computations</title>
+  <tabular halign="center">
+    <row header="yes" bottom="minor">
+      <cell>Name</cell>
+      <cell>Number of Students (plus one)</cell>
+      <cell>Standard Quota</cell>
+      <cell>Lower Quota</cell>
+      <cell>Upper Quota</cell>
+      <cell>Fractional Rank</cell>
+  </row>
+
+  <row>
+      <cell>Ahmed</cell>
+      <cell><m>35</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>Bowman</cell>
+      <cell><m>60</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>Ceniceros</cell>
+      <cell><m>71</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>Cockburn</cell>
+      <cell><m>22</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>Dykstra</cell>
+      <cell><m>38</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>Gibbons</cell>
+      <cell><m>55</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>Kantrowitz</cell>
+      <cell><m>73</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>Kuruwita</cell>
+      <cell><m>45</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>LeMasurier</cell>
+      <cell><m>28</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+
+  <row>
+      <cell>Tripp</cell>
+      <cell><m>58</m></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer><math>?</math></answer></cell>
+      <cell><answer>?</answer></cell>
+  </row>
+</tabular>
+</table>
+</statement>
+
+<solution>
+    <table>
+      <title>Standard Quotas (Transposed)</title>
+      <tabular halign="center">
+        <row header="yes" bottom="minor">
+          <cell>Name</cell>
+          <cell>Number of Students (plus one)</cell>
+          <cell>Standard Quota</cell>
+          <cell>Traditional Round Up or Down</cell>
+          <cell>Lower Quota</cell>
+          <cell>Upper Quota</cell>
+          <cell>Fractional Rank</cell>
+      </row>
+
+      <row>
+          <cell>A</cell>
+          <cell><m>35</m></cell>
+          <cell><m>3.2474</m></cell>
+          <cell>3</cell>
+          <cell>3</cell>
+          <cell>4</cell>
+          <cell>7</cell>
+      </row>
+
+      <row>
+          <cell>B</cell>
+          <cell><m>60</m></cell>
+          <cell><m>5.5670</m></cell>
+          <cell>6</cell>
+          <cell>5</cell>
+          <cell>6</cell>
+          <cell>4</cell>
+      </row>
+
+      <row>
+          <cell>Ce</cell>
+          <cell><m>71</m></cell>
+          <cell><m>6.5876</m></cell>
+          <cell>7</cell>
+          <cell>6</cell>
+          <cell>7</cell>
+          <cell>3</cell>
+      </row>
+
+      <row>
+          <cell>Co</cell>
+          <cell><m>22</m></cell>
+          <cell><m>2.0412</m></cell>
+          <cell>2</cell>
+          <cell>2</cell>
+          <cell>2</cell>
+          <cell>10</cell>
+      </row>
+
+      <row>
+          <cell>D</cell>
+          <cell><m>38</m></cell>
+          <cell><m>3.5258</m></cell>
+          <cell>4</cell>
+          <cell>3</cell>
+          <cell>4</cell>
+          <cell>5</cell>
+      </row>
+
+      <row>
+          <cell>G</cell>
+          <cell><m>55</m></cell>
+          <cell><m>5.1031</m></cell>
+          <cell>5</cell>
+          <cell>5</cell>
+          <cell>5</cell>
+          <cell>9</cell>
+      </row>
+
+      <row>
+          <cell>Ka</cell>
+          <cell><m>73</m></cell>
+          <cell><m>6.7732</m></cell>
+          <cell>7</cell>
+          <cell>6</cell>
+          <cell>7</cell>
+          <cell>1</cell>
+      </row>
+
+      <row>
+          <cell>Ku</cell>
+          <cell><m>45</m></cell>
+          <cell><m>4.1753</m></cell>
+          <cell>4</cell>
+          <cell>4</cell>
+          <cell>5</cell>
+          <cell>8</cell>
+      </row>
+
+      <row>
+          <cell>L</cell>
+          <cell><m>28</m></cell>
+          <cell><m>2.5979</m></cell>
+          <cell>3</cell>
+          <cell>2</cell>
+          <cell>3</cell>
+          <cell>2</cell>
+      </row>
+
+      <row>
+          <cell>T</cell>
+          <cell><m>58</m></cell>
+          <cell><m>5.3814</m></cell>
+          <cell>5</cell>
+          <cell>5</cell>
+          <cell>6</cell>
+          <cell>6</cell>
+      </row>
+
+      <row>
+          <cell>Total</cell>
+          <cell><m>485</m></cell>
+          <cell></cell>
+          <cell>46</cell>
+          <cell>41</cell>
+          <cell>51</cell>
+          <cell>N/A</cell>
+      </row>
+  </tabular>
+</table>
+</solution>
+</example>
+
+<p> The first apportionment method we'll study is due to none other than Alexander Hamilton! </p>
+
+<definition><title>Hamilton's Method</title>
+<p>
+    Start by giving each state its lower quota. Then, in order of largest fractional part, distribute the remaining seats.
+</p>
+</definition>
+
+<exercise><title>The winners are...</title>
+<statement>
+    <p>
+        Determine which professors get their upper quota of boxes of coffee thanks to Alexander Hamilton.
+    </p>
+</statement>
+<answer> 
+    <p>
+        The professors with fractional rank one through four.
+        <table>
+            <title>Hamilton Apportionment</title>
+            <tabular>
+                <row header="yes" bottom="minor" >
+                    <cell><nbsp /></cell>
+                    <cell>A</cell>
+                    <cell>B</cell>
+                    <cell>Ce</cell>
+                    <cell>Co</cell>
+                    <cell>D</cell>
+                    <cell>G</cell>
+                    <cell>Ka</cell>
+                    <cell>Ku</cell>
+                    <cell>L</cell>
+                    <cell>T</cell>
+                    <cell>Total</cell>
+                </row>
+                <row>
+                    <cell><m>3</m></cell>
+                    <cell><m>6</m></cell>
+                    <cell><m>7</m></cell>
+                    <cell><m>2</m></cell>
+                    <cell><m>3</m></cell>
+                    <cell><m>5</m></cell>
+                    <cell><m>7</m></cell>
+                    <cell><m>4</m></cell>
+                    <cell><m>3</m></cell>
+                    <cell><m>5</m></cell>
+                    <cell><m>45</m></cell>
+                </row>
+            </tabular>
+        </table>
+    </p>
+</answer>
+</exercise>
+
+<exercise><title>A small tweak</title>
+<statement>
+    <p> 
+        What happens if Courtney only buys <m>44</m> boxes of coffee?
+    </p>
+</statement>
+</exercise>
+
+<p>
+    Three additional methods involve changing the value of <m>D</m> until either rounding conventionally, using the upper quota, or using the lower quota for each state adds up to the number of seats. Respectively, these are Webster's method, Adams' Method, and Jefferson's Method.
+</p>
+
+<p>
+    But what if there were a different way to decide how to round up or down that always added up to the number of seats?
+</p>
+
+<definition><title>The Geometric Mean</title>
+<p> 
+    The geometric mean of two distinct numbers <m>L</m> and <m>U</m> is given by <m>c = \sqrt{LU}</m>. If <m>q \gt c</m>, round up. If <m>q \lt c</m>, round down. 
+</p>
+</definition>
+
+<definition>
+  <title>Huntington–Hill Method (Equal Proportions)</title>
+  <p>
+    The <em>Huntington–Hill method</em> is an apportionment method that assigns
+    seats one at a time using <em>priority values</em> based on population and
+    the geometric mean of consecutive seat numbers.
+  </p>
+  <p>
+    After each state receives one initial seat, additional seats are awarded
+    sequentially to the state with the largest priority value
+    <m>\frac{P}{\sqrt{n(n+1)}}</m>,
+    where <m>P</m> is the state’s population and <m>n</m> is the number of seats
+    the state currently holds.
+  </p>
+</definition>
+
+<remark>
+  <p>
+    The Huntington–Hill method is sometimes described using different
+    <em>divisors</em>, which can be confusing at first.  This happens because
+    the method has two equivalent formulations.
+  </p>
+  <p>
+    In the <em>priority formulation</em>, seats are assigned one at a time using
+    the priority value <m>\frac{P}{\sqrt{n(n+1)}}</m>, where the divisor
+    <m>\sqrt{n(n+1)}</m> depends on the state’s current number of seats.
+  </p>
+  <p>
+    In the <em>rounding formulation</em>, a single global divisor is used to
+    compute quotas, and each quota is rounded up or down depending on whether it
+    lies above or below the geometric mean <m>\sqrt{n(n+1)}</m>.  Here, the same
+    expression appears as a <em>rounding threshold</em> rather than a priority
+    denominator.
+  </p>
+  <p>
+    Although the divisors look different in these descriptions, both approaches
+    implement the same rule: rounding is determined by the geometric mean, which
+    balances relative over- and under-representation.
+  </p>
+</remark>
+
+<table>
+ <title>Cutoff points for Huntington-Hill rounding of quotas between 1 and 10</title>
+ <tabular>
+  <row><cell>Quota is between</cell><cell>Cutoff point</cell></row>
+  <row><cell>1 and 2</cell><cell><m>\sqrt{2} \approx 1.414</m></cell></row>
+  <row><cell>2 and 3</cell><cell><m>\sqrt{6} \approx 2.449</m></cell></row>
+  <row><cell>3 and 4</cell><cell><m>\sqrt{12} \approx 3.464</m></cell></row>
+  <row><cell>4 and 5</cell><cell><m>\sqrt{20} \approx 4.472</m></cell></row>
+  <row><cell>5 and 6</cell><cell><m>\sqrt{30} \approx 5.477</m></cell></row>
+  <row><cell>6 and 7</cell><cell><m>\sqrt{42} \approx 6.481</m></cell></row>
+  <row><cell>7 and 8</cell><cell><m>\sqrt{56} \approx 7.483</m></cell></row>
+  <row><cell>8 and 9</cell><cell><m>\sqrt{72} \approx 8.485</m></cell></row>
+  <row><cell>9 and 10</cell><cell><m>\sqrt{90} \approx 9.487</m></cell></row>
+</tabular>
+</table>
+
+<example><title>Huntington-Hill and Parador</title>
+<statement>
+
+<table>
+ <title>Huntington-Hill method: Calculations standard divisor <m>D = 10,000</m></title>
+ <tabular>
+  <row><cell>State</cell><cell>Population</cell><cell>Standard quota</cell><cell>Cutoff point</cell><cell>Round quota to</cell></row>
+  <row><cell>A</cell><cell>34,800</cell><cell>3.48</cell><cell>3.464</cell><cell>4</cell></row>
+  <row><cell>B</cell><cell>104,800</cell><cell>10.48</cell><cell>10.488</cell><cell>10</cell></row>
+  <row><cell>C</cell><cell>64,800</cell><cell>6.48</cell><cell>6.481</cell><cell>6</cell></row>
+  <row><cell>D</cell><cell>140,800</cell><cell>14.08</cell><cell>14.491</cell><cell>14</cell></row>
+  <row><cell>E</cell><cell>54,800</cell><cell>5.48</cell><cell>5.477</cell><cell>6</cell></row>
+  <row><cell>Total</cell><cell>400,000</cell><cell>40</cell><cell></cell><cell>40</cell></row>
+</tabular>
+</table>
+
+<table>
+ <title>Huntington-Hill method: Calculations for with standard divisor <m>D = 10,000</m> and modified divisor <m>d = 10,030</m></title>
+ <tabular>
+  <row>
+    <cell>State</cell><cell>Population</cell>
+    <cell>Standard quota</cell><cell>Round quota to</cell>
+    <cell>Modified quota <m>d = 10,030</m></cell><cell>Round quota to</cell>
+</row>
+<row><cell>A</cell><cell>34,800</cell><cell>3.48</cell><cell>4</cell><cell>3.47</cell><cell>4</cell></row>
+<row><cell>B</cell><cell>105,100</cell><cell>10.51</cell><cell>11</cell><cell>10.479</cell><cell>10</cell></row>
+<row><cell>C</cell><cell>65,100</cell><cell>6.51</cell><cell>7</cell><cell>6.491</cell><cell>7</cell></row>
+<row><cell>D</cell><cell>140,200</cell><cell>14.02</cell><cell>14</cell><cell>13.978</cell><cell>14</cell></row>
+<row><cell>E</cell><cell>54,800</cell><cell>5.48</cell><cell>6</cell><cell>5.464</cell><cell>5</cell></row>
+<row><cell>Total</cell><cell>400,000</cell><cell>40</cell><cell>42</cell><cell></cell><cell>40</cell></row>
+</tabular>
+</table>
+</statement>
+
+<table>
+ <title>Huntington-Hill method: Calculations modified divisor <m>d = 50,100</m></title>
+ <tabular>
+  <row><cell>State</cell><cell>Population</cell><cell>Modified quota</cell><cell>Cutoff point</cell><cell>Round quota to</cell></row>
+  <row><cell>A</cell><cell>1,646,000</cell><cell>32.85</cell><cell>32.496</cell><cell>33</cell></row>
+  <row><cell>B</cell><cell>6,936,000</cell><cell>138.44</cell><cell>138.499</cell><cell>138</cell></row>
+  <row><cell>C</cell><cell>154,000</cell><cell>3.07</cell><cell>3.464</cell><cell>3</cell></row>
+  <row><cell>D</cell><cell>2,091,000</cell><cell>41.74</cell><cell>41.497</cell><cell>42</cell></row>
+  <row><cell>E</cell><cell>685,000</cell><cell>13.67</cell><cell>13.491</cell><cell>14</cell></row>
+  <row><cell>F</cell><cell>988,000</cell><cell>19.72</cell><cell>19.494</cell><cell>20</cell></row>
+  <row><cell>Total</cell><cell>12,500,000</cell><cell></cell><cell></cell><cell>250</cell></row>
+</tabular>
+</table>
+</example>
+
+</subsection>
+
+<subsection>
+    <title>Paradoxes</title>
+
+    <dl>
+        <li>
+            <title>Quota paradox</title>
+            <p>
+                This paradox occurs when a state is assigned a number of seats that lies outside its quota—that is, it receives fewer than its lower quota or more than its upper quota. A state’s lower quota is the whole number part (floor) of its standard quota, and its upper quota is the next integer (ceiling). Any apportionment method that violates this rule is said to exhibit the quota paradox. While Hamilton’s method always satisfies the quota rule, several divisor methods can, in certain situations, assign a state a number of seats outside its quota.
+            </p>
+        </li>
+        <li>
+            <title>Alabama paradox</title>
+            <p>
+                This paradox occurs when a state gets apportioned fewer seats simply because the total number of seats being apportioned has increased. Under Hamilton’s method, increasing the house size can reshuffle the residues (fractional parts) of the standard quotas; some states can move ahead of others in the priority order for surplus seats, and a state can lose a seat it previously had. A famous historical instance arose in the 1880s when proposed U.S. House sizes led to Alabama receiving fewer seats when the House size increased by one.
+            </p>
+        </li>
+
+        <li>
+            <title>Population paradox</title>
+            <p>
+                This paradox occurs when a state gets apportioned fewer seats simply because its population has increased. More specifically, it describes situations in which state X loses a seat to state Y even though X grew in population at a higher rate than Y. Under Hamilton’s method, changes in populations can change residues and the surplus-seat priority order in a way that produces this outcome.
+            </p>
+        </li>
+
+        <li>
+            <title>New-states paradox</title>
+            <p>
+                This paradox occurs when a state’s apportionment is affected simply by virtue of the fact that a new state (together with its fair share of seats) has been added to the computation. Historically, when Oklahoma joined the Union in 1907, the House size was increased to accommodate Oklahoma’s fair share, but the recalculated apportionment still shifted seats among existing states (for example, Maine gained a seat while New York lost one).
+            </p>
+        </li>
+    </dl>
+
+    <example><title>Paradox Analysis</title>
+    <statement>
+        <p>The Intergalactic Congress Apportionments of 2525 and 2535 exhibit one of the paradoxes. Which one?</p>
+    <table>
+ <title>Intergalactic Congress: Apportionment of 2525</title>
+ <tabular>
+  <row><cell>Planet</cell><cell>Population</cell><cell>Standard quota</cell><cell>Lower quota</cell><cell>Surplus</cell><cell>Apportionment</cell></row>
+  <row><cell>Alanos</cell><cell>150</cell><cell>8.3</cell><cell>8</cell><cell>0</cell><cell>8</cell></row>
+  <row><cell>Betta</cell><cell>78</cell><cell>4.3</cell><cell>4</cell><cell>0</cell><cell>4</cell></row>
+  <row><cell>Conii</cell><cell>173</cell><cell>9.61</cell><cell>9</cell><cell>1</cell><cell>10</cell></row>
+  <row><cell>Dugos</cell><cell>204</cell><cell>11.3</cell><cell>11</cell><cell>0</cell><cell>11</cell></row>
+  <row><cell>Ellisium</cell><cell>295</cell><cell>16.38</cell><cell>16</cell><cell>1</cell><cell>17</cell></row>
+  <row><cell>Total</cell><cell>900</cell><cell>50.00</cell><cell>48</cell><cell>2</cell><cell>50</cell></row>
+</tabular>
+</table>
+
+<table>
+ <title>Intergalactic Congress: Apportionment of 2535></title>
+ <tabular>
+  <row><cell>Planet</cell><cell>Population</cell><cell>Standard quota</cell><cell>Lower quota</cell><cell>Surplus</cell><cell>Apportionment</cell></row>
+  <row><cell>Alanos</cell><cell>150</cell><cell>8.25</cell><cell>8</cell><cell>0</cell><cell>8</cell></row>
+  <row><cell>Betta</cell><cell>78</cell><cell>4.29</cell><cell>4</cell><cell>Second</cell><cell>5</cell></row>
+  <row><cell>Conii</cell><cell>181</cell><cell>9.96</cell><cell>9</cell><cell>First</cell><cell>10</cell></row>
+  <row><cell>Dugos</cell><cell>204</cell><cell>11.22</cell><cell>11</cell><cell>0</cell><cell>11</cell></row>
+  <row><cell>Ellisium</cell><cell>296</cell><cell>16.28</cell><cell>16</cell><cell>0</cell><cell>16</cell></row>
+  <row><cell>Total</cell><cell>909</cell><cell>50.00</cell><cell>48</cell><cell>2</cell><cell>50</cell></row>
+</tabular>
+</table>
+</statement>
+</example>
+</subsection>
+
+<subsection>
+    <title>Exercises</title>
+
+    <exercise><title>Other Means</title>
+    <statement>
+        <ol>
+            <li>
+                <p> 
+                    The Huntington-Hill method uses the geometric mean, 
+                    <me>
+                        c(L,U) = \sqrt{LU},
+                    </me>
+                    which generalizes for more than two numbers as 
+                    <me>
+                        c(a_1,a_2,\cdots,a_n) = \sqrt[n]{a_1 a_2 \cdots a_n}.
+                    </me> 
+                    What if we modify Huntington Hill to use
+                    <me>
+                        c(L_s,Q_s,U_s) = \sqrt[3]{L_sQ_sU_s}
+                    </me>
+                    where <m>Q_s</m> is the quota for State <m>s</m> from the standard divisor? Try on the coffee data set.
+                </p>
+            </li>
+            <li>
+                <p> 
+                    There are two other means we could try, too. The Harmonic Mean is given by 
+                    <me>
+                        h(L_s,U_s)= \dfrac{2 L_s U_s}{L_s + U_s},
+                    </me>
+                    and the Quadratic Mean is given by
+                    <me>
+                        p(L_s,U_s) = \sqrt{\dfrac{L_s^2+U_s^2}{2}}.
+                    </me>
+                </p>
+            </li>
+            <li>
+                <p>
+                    Apply these to the coffee data.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Describe how to generalize each of these to more than two numbers.
+                </p>
+            </li>
+        </ol>
+    </statement>
+</exercise>
+
+<exercise>
+    <statement>
+        <p> Use the tables at the end of this section to find an example for every <q>Yes</q> in the table below.</p>
+        <table>
+  <title>Summary of five apportionment methods</title>
+  <tabular>
+      <row><cell>Method</cell><cell>Quota Rule</cell><cell>Alabama</cell><cell>Population</cell><cell>New-States</cell></row>
+      <row><cell>Hamilton</cell><cell>No violations</cell><cell>Yes</cell><cell>Yes</cell><cell>Yes</cell></row>
+      <row><cell>Jefferson</cell><cell>Upper-quota violations</cell><cell>No</cell><cell>No</cell><cell>No</cell></row>
+      <row><cell>Adams</cell><cell>Lower-quota violations</cell><cell>No</cell><cell>No</cell><cell>No</cell></row>
+      <row><cell>Webster</cell><cell>Lower- and upper-quota violations</cell><cell>No</cell><cell>No</cell><cell>No</cell></row>
+      <row><cell>Huntington-Hill</cell><cell>Lower- and upper-quota violations</cell><cell>No</cell><cell>No</cell><cell>No</cell></row>
+  </tabular>
+</table>
+    </statement>
+
+</exercise>
+
+<exercise><title>2024 Electoral College.</title>
+<statement>
+    <ol>
+        <li>
+            <p>
+                Apportioning seats in the House of Representatives also determines each states number of electors in the electoral college. Use the Harmonic Mean to reapportion the House based on the 2020 census. Find a break down of the 2024 election results by state, and use the new Electoral College numbers to see if the outcome of the election would have changed.
+            </p>
+        </li>
+        <li>
+            <p>
+                In the 2020 election, the Supreme Court of the United States ultimately made a decision because of a voting irregularity (<q>hanging chads</q>). Would a different apportionment method have made a difference in the outcome of the election, or at least the deciciveness of the election results?
+            </p>
+        </li>
+    </ol>
+</statement>
+</exercise>
+</subsection>
+
+<subsection><title>Google NotebookLM</title>
+
+<p> 
+    To dig into the primary source literature about a famous apportionment lawsuit, you will use Google NotebookLM as described in class.
+</p>
+<exercise>
+    <title> NotebookLM set-up</title>
+    <statement> 
+        <ul>
+            <li>
+                <p>
+                    One of your group members should use their Hamilton email account to log in at <url href="https://notebooklm.google.com/">Google NotebookLM</url>, then click <q>Create New</q>. That group members should also upload the SCOTUS transcript and SCOTUS opinion. Name the notebook something recognizable, like <q>SCOTUS Apportionment</q>. 
+                </p>
+                <p>
+                    You might also like to add additional webpages from the U.S. Census Bureau (see Links of Interest below) and the paper on Blackboard by David McCune, but these are optional (and you can toggle whether the notebook interface uses them to respond to a question by clicking the checkboxes on or off.
+                </p>
+            </li>
+            <li>
+                <p>
+                    The creator of the notebook should share it by adding the Hamilton email addresses of the other group members, with access to the full notebook.
+                </p>
+            </li>
+            <li>
+                <p>
+                    Each group member will come up with a question they would like NotebookLM to answer about the source material, then save the reponse to the question as a note.
+                </p>
+            </li>
+            <li>
+                <p>
+                   Finally, each group member will share their question and answer on the course blog, plus their strategy for fact-checking the answer and an assessment of how well NotebookLM did.
+               </p>
+           </li>
+       </ul>
+   </statement>
+</exercise>
+<p> 
+    This is just our first foray into using a generative AI tool to enhance our learning. We will develop more skills to interact with NotebookLM throughout the course.
+</p>
+</subsection>
+<subsection>
+    <title>Links of Interest</title>
+    <ul>
+        <li>
+            <p>
+                <url href="https://www.census.gov/topics/public-sector/congressional-apportionment/about.html">About Congressional Apportionment</url> from the U.S. Census Bureau.
+            </p>
+        </li>
+        <li>
+            <p>
+                <url href="https://www.census.gov/topics/public-sector/congressional-apportionment/about/computing.html">Computing Apportionment</url> from the U.S. Census Bureau.
+            </p>
+        </li>
+    </ul>
+    <p>
+        Note that the public availability of U.S. Census data is important for anyone who wants to see how different apportionment methods would work out!
+    </p>
+</subsection>
+
+<subsection>
+    <title>Example Data</title>
+
+    <p>Source: Excursions in Modern Mathematics, 8e</p>
+
+    <table>
+        <title>Work (in minutes) per child</title>
+        <tabular>
+          <row>
+            <cell>Child</cell><cell>Alan</cell><cell>Betty</cell><cell>Connie</cell><cell>Doug</cell><cell>Ellie</cell><cell>Total</cell>
+        </row>
+        <row>
+            <cell>Minutes worked</cell><cell>150</cell><cell>78</cell><cell>173</cell><cell>204</cell><cell>295</cell><cell>900</cell>
+        </row>
+    </tabular>
+</table>
+
+<table>
+    <title>Intergalactic Federation: Population figures (in billions) for 2525</title>
+    <tabular>
+      <row>
+        <cell>Planet</cell><cell>Alanos</cell><cell>Betta</cell><cell>Conii</cell><cell>Dugos</cell><cell>Ellisium</cell><cell>Total</cell>
+    </row>
+    <row>
+        <cell>Population</cell><cell>150</cell><cell>78</cell><cell>173</cell><cell>204</cell><cell>295</cell><cell>900</cell>
+    </row>
+</tabular>
+</table>
+
+<table>
+    <title>Republic of Parador (Populations by state)</title>
+    <tabular>
+      <row>
+        <cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell><cell>Total</cell>
+    </row>
+    <row>
+        <cell>Population</cell><cell>1,646,000</cell><cell>6,936,000</cell><cell>154,000</cell><cell>2,091,000</cell><cell>685,000</cell><cell>988,000</cell><cell>12,500,000</cell>
+    </row>
+</tabular>
+</table>
+
+<table xml:id="tab-six">
+    <title>Republic of Parador: Standard quotas for each state <m>D = 50,000</m></title>
+    <tabular>
+      <row>
+        <cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell><cell>Total</cell>
+    </row>
+    <row>
+        <cell>Population</cell><cell>1,646,000</cell><cell>6,936,000</cell><cell>154,000</cell><cell>2,091,000</cell><cell>685,000</cell><cell>988,000</cell><cell>12,500,000</cell>
+    </row>
+    <row>
+        <cell>Standard quota</cell><cell>32.92</cell><cell>138.72</cell><cell>3.08</cell><cell>41.82</cell><cell>13.70</cell><cell>19.76</cell><cell>250</cell>
+    </row>
+</tabular>
+</table>
+
+<table>
+    <title>Conventional rounding of the standard quotas</title>
+    <tabular>
+      <row>
+        <cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell><cell>Total</cell>
+    </row>
+    <row>
+        <cell>Standard quota</cell><cell>32.92</cell><cell>138.72</cell><cell>3.08</cell><cell>41.82</cell><cell>13.70</cell><cell>19.76</cell><cell>250.00</cell>
+    </row>
+    <row>
+        <cell>Nearest integer</cell><cell>33</cell><cell>139</cell><cell>3</cell><cell>42</cell><cell>14</cell><cell>20</cell><cell>251</cell>
+    </row>
+</tabular>
+</table>
+
+<table>
+    <title>Parador’s Congress: the Hamilton apportionment</title>
+    <tabular>
+      <row>
+        <cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell><cell>Total</cell>
+    </row>
+    <row>
+        <cell>Standard quota</cell><cell>32.92</cell><cell>138.72</cell><cell>3.08</cell><cell>41.82</cell><cell>13.70</cell><cell>19.76</cell><cell>250.00</cell>
+    </row>
+    <row>
+        <cell>Lower quota</cell><cell>32</cell><cell>138</cell><cell>3</cell><cell>41</cell><cell>13</cell><cell>19</cell><cell>246</cell>
+    </row>
+    <row>
+        <cell>Residue</cell><cell>0.92</cell><cell>0.72</cell><cell>0.08</cell><cell>0.82</cell><cell>0.70</cell><cell>0.76</cell><cell>4.00</cell>
+    </row>
+    <row>
+        <cell>Order of Surplus</cell><cell>First</cell><cell>Fourth</cell><cell></cell><cell>Second</cell><cell></cell><cell>Third</cell><cell></cell>
+    </row>
+    <row>
+        <cell>Apportionment</cell><cell>33</cell><cell>139</cell><cell>3</cell><cell>42</cell><cell>13</cell><cell>20</cell><cell>250</cell>
+    </row>
+</tabular>
+</table>
+
+<table>
+    <title>Hamilton’s method with <m>m = 200</m>, <m>D = 1000</m></title>
+    <tabular>
+      <row>
+        <cell></cell><cell>Bama</cell><cell>Tecos</cell><cell>Ilnos</cell><cell>Total</cell>
+    </row>
+    <row>
+        <cell>Population</cell><cell>9400</cell><cell>90,300</cell><cell>100,300</cell><cell>200,000</cell>
+    </row>
+    <row>
+        <cell>Standard quota</cell><cell>9.4</cell><cell>90.3</cell><cell>100.3</cell><cell>200</cell>
+    </row>
+    <row>
+        <cell>Lower quota</cell><cell>9</cell><cell>90</cell><cell>100</cell><cell>199</cell>
+    </row>
+    <row>
+        <cell>Surplus</cell><cell>1</cell><cell>0</cell><cell>0</cell><cell>1</cell>
+    </row>
+    <row>
+        <cell>Hamilton apportionment</cell><cell>10</cell><cell>90</cell><cell>100</cell><cell>200</cell>
+    </row>
+</tabular>
+</table>
+
+<table>
+    <title>Hamilton’s method with <m>m = 201</m>, <m>D = 995.02</m></title>
+    <tabular>
+      <row>
+        <cell></cell><cell>Bama</cell><cell>Tecos</cell><cell>Ilnos</cell><cell>Total</cell>
+    </row>
+    <row>
+        <cell>Population</cell><cell>9400</cell><cell>90,300</cell><cell>100,300</cell><cell>200,000</cell>
+    </row>
+    <row>
+        <cell>Standard quota</cell><cell>9.45</cell><cell>90.75</cell><cell>100.8</cell><cell>201</cell>
+    </row>
+    <row>
+        <cell>Lower quota</cell><cell>9</cell><cell>90</cell><cell>100</cell><cell>199</cell>
+    </row>
+    <row>
+        <cell>Surplus</cell><cell>0</cell><cell>1</cell><cell>1</cell><cell>2</cell>
+    </row>
+    <row>
+        <cell>Hamilton apportionment</cell><cell>9</cell><cell>91</cell><cell>101</cell><cell>201</cell>
+    </row>
+</tabular>
+</table>
+
+<table>
+    <title>Calculations for Parador with the standard divisor <m>D = 50,000</m></title>
+    <tabular>
+      <row>
+        <cell>State</cell><cell>Population</cell><cell>Standard quota</cell><cell>Lower quota</cell>
+    </row>
+    <row><cell>A</cell><cell>1,646,000</cell><cell>32.92</cell><cell>32</cell></row>
+    <row><cell>B</cell><cell>6,936,000</cell><cell>138.72</cell><cell>138</cell></row>
+    <row><cell>C</cell><cell>154,000</cell><cell>3.08</cell><cell>3</cell></row>
+    <row><cell>D</cell><cell>2,091,000</cell><cell>41.82</cell><cell>41</cell></row>
+    <row><cell>E</cell><cell>685,000</cell><cell>13.70</cell><cell>13</cell></row>
+    <row><cell>F</cell><cell>988,000</cell><cell>19.76</cell><cell>19</cell></row>
+    <row><cell>Total</cell><cell>12,500,000</cell><cell>250</cell><cell>246</cell></row>
+</tabular>
+</table>
+
+<table><title>Jefferson’s method: Calculations for Parador with divisor <m>d = 49,500</m></title>
+<tabular>
+  <row>
+    <cell>State</cell><cell>Population</cell><cell><m>d = 49,500</m></cell><cell>Rounded down to</cell>
+</row>
+<row><cell>A</cell><cell>1,646,000</cell><cell>33.25</cell><cell>33</cell></row>
+<row><cell>B</cell><cell>6,936,000</cell><cell>140.12</cell><cell>140</cell></row>
+<row><cell>C</cell><cell>154,000</cell><cell>3.11</cell><cell>3</cell></row>
+<row><cell>D</cell><cell>2,091,000</cell><cell>42.24</cell><cell>42</cell></row>
+<row><cell>E</cell><cell>685,000</cell><cell>13.84</cell><cell>13</cell></row>
+<row><cell>F</cell><cell>988,000</cell><cell>19.96</cell><cell>19</cell></row>
+<row><cell>Total</cell><cell>12,500,000</cell><cell></cell><cell>250</cell></row>
+</tabular>
+</table>
+
+<table><title>Jefferson’s method: Calculations for Parador with divisor <m>d = 49,000</m></title>
+<tabular>
+  <row>
+    <cell>State</cell><cell>Population</cell><cell>Modified quota <m>d = 49,000</m></cell><cell>Rounded down to</cell>
+</row>
+<row><cell>A</cell><cell>1,646,000</cell><cell>33.59</cell><cell>33</cell></row>
+<row><cell>B</cell><cell>6,936,000</cell><cell>141.55</cell><cell>141</cell></row>
+<row><cell>C</cell><cell>154,000</cell><cell>3.14</cell><cell>3</cell></row>
+<row><cell>D</cell><cell>2,091,000</cell><cell>42.67</cell><cell>42</cell></row>
+<row><cell>E</cell><cell>685,000</cell><cell>13.97</cell><cell>13</cell></row>
+<row><cell>F</cell><cell>988,000</cell><cell>20.16</cell><cell>20</cell></row>
+<row><cell>Total</cell><cell>12,500,000</cell><cell></cell><cell>252</cell></row>
+</tabular>
+</table>
+
+<table>
+    <title>Adams’s method: Calculations for Parador with divisors <m>d_1 = 50,500</m> and <m>d_2 = 50,700</m></title>
+    <tabular>
+      <row>
+        <cell>State</cell><cell>Population</cell>
+        <cell><m>d_1 = 50,500</m></cell><cell>Rounded up to</cell>
+        <cell><m>d_2 = 50,700</m></cell><cell>Rounded up to</cell>
+    </row>
+    <row><cell>A</cell><cell>1,646,000</cell><cell>32.59</cell><cell>33</cell><cell>32.47</cell><cell>33</cell></row>
+    <row><cell>B</cell><cell>6,936,000</cell><cell>137.35</cell><cell>138</cell><cell>136.8</cell><cell>137</cell></row>
+    <row><cell>C</cell><cell>154,000</cell><cell>3.05</cell><cell>4</cell><cell>3.04</cell><cell>4</cell></row>
+    <row><cell>D</cell><cell>2,091,000</cell><cell>41.41</cell><cell>42</cell><cell>41.24</cell><cell>42</cell></row>
+    <row><cell>E</cell><cell>685,000</cell><cell>13.56</cell><cell>14</cell><cell>13.51</cell><cell>14</cell></row>
+    <row><cell>F</cell><cell>988,000</cell><cell>19.56</cell><cell>20</cell><cell>19.49</cell><cell>20</cell></row>
+    <row><cell>Total</cell><cell>12,500,000</cell><cell></cell><cell>251</cell><cell></cell><cell>250</cell></row>
+</tabular>
+</table>
+
+<table>
+    <title>Webster’s method: Calculations for Example 8 with <m>D = 50,000</m> and <m>d = 50,100</m></title>
+    <tabular>
+      <row>
+        <cell>State</cell><cell>Population</cell>
+        <cell><m>q_s</m> with <m>D = 50,000</m></cell><cell>Nearest integer</cell>
+        <cell><m>q_s</m> with <m>d = 50,100</m></cell><cell>Nearest integer</cell>
+    </row>
+    <row><cell>A</cell><cell>1,646,000</cell><cell>32.92</cell><cell>33</cell><cell>32.85</cell><cell>33</cell></row>
+    <row><cell>B</cell><cell>6,936,000</cell><cell>138.72</cell><cell>139</cell><cell>138.44</cell><cell>138</cell></row>
+    <row><cell>C</cell><cell>154,000</cell><cell>3.08</cell><cell>3</cell><cell>3.07</cell><cell>3</cell></row>
+    <row><cell>D</cell><cell>2,091,000</cell><cell>41.82</cell><cell>42</cell><cell>41.74</cell><cell>42</cell></row>
+    <row><cell>E</cell><cell>685,000</cell><cell>13.70</cell><cell>14</cell><cell>13.67</cell><cell>14</cell></row>
+    <row><cell>F</cell><cell>988,000</cell><cell>19.76</cell><cell>20</cell><cell>19.72</cell><cell>20</cell></row>
+    <row><cell>Total</cell><cell>12,500,000</cell><cell></cell><cell>251</cell><cell></cell><cell>250</cell></row>
+</tabular>
+</table>
+
+<table>
+ <title>Cutoff points for Huntington-Hill rounding of quotas between 1 and 10</title>
+ <tabular>
+  <row><cell>Quota is between</cell><cell>Cutoff point</cell></row>
+  <row><cell>1 and 2</cell><cell><m>\sqrt{2} \approx 1.414</m></cell></row>
+  <row><cell>2 and 3</cell><cell><m>\sqrt{6} \approx 2.449</m></cell></row>
+  <row><cell>3 and 4</cell><cell><m>\sqrt{12} \approx 3.464</m></cell></row>
+  <row><cell>4 and 5</cell><cell><m>\sqrt{20} \approx 4.472</m></cell></row>
+  <row><cell>5 and 6</cell><cell><m>\sqrt{30} \approx 5.477</m></cell></row>
+  <row><cell>6 and 7</cell><cell><m>\sqrt{42} \approx 6.481</m></cell></row>
+  <row><cell>7 and 8</cell><cell><m>\sqrt{56} \approx 7.483</m></cell></row>
+  <row><cell>8 and 9</cell><cell><m>\sqrt{72} \approx 8.485</m></cell></row>
+  <row><cell>9 and 10</cell><cell><m>\sqrt{90} \approx 9.487</m></cell></row>
+</tabular>
+</table>
+
+<table>
+ <title>Huntington-Hill method: Calculations for Example 10 with divisor <m>d = 50,100</m></title>
+ <tabular>
+  <row><cell>State</cell><cell>Population</cell><cell>Modified quota</cell><cell>Cutoff point</cell><cell>Round quota to</cell></row>
+  <row><cell>A</cell><cell>1,646,000</cell><cell>32.85</cell><cell>32.496</cell><cell>33</cell></row>
+  <row><cell>B</cell><cell>6,936,000</cell><cell>138.44</cell><cell>138.499</cell><cell>138</cell></row>
+  <row><cell>C</cell><cell>154,000</cell><cell>3.07</cell><cell>3.464</cell><cell>3</cell></row>
+  <row><cell>D</cell><cell>2,091,000</cell><cell>41.74</cell><cell>41.497</cell><cell>42</cell></row>
+  <row><cell>E</cell><cell>685,000</cell><cell>13.67</cell><cell>13.491</cell><cell>14</cell></row>
+  <row><cell>F</cell><cell>988,000</cell><cell>19.72</cell><cell>19.494</cell><cell>20</cell></row>
+  <row><cell>Total</cell><cell>12,500,000</cell><cell></cell><cell></cell><cell>250</cell></row>
+</tabular>
+</table>
+
+<table>
+ <title>Huntington-Hill method: Calculations for Example 11 with standard divisor <m>D = 10,000</m></title>
+ <tabular>
+  <row><cell>State</cell><cell>Population</cell><cell>Standard quota</cell><cell>Cutoff point</cell><cell>Round quota to</cell></row>
+  <row><cell>A</cell><cell>34,800</cell><cell>3.48</cell><cell>3.464</cell><cell>4</cell></row>
+  <row><cell>B</cell><cell>104,800</cell><cell>10.48</cell><cell>10.488</cell><cell>10</cell></row>
+  <row><cell>C</cell><cell>64,800</cell><cell>6.48</cell><cell>6.481</cell><cell>6</cell></row>
+  <row><cell>D</cell><cell>140,800</cell><cell>14.08</cell><cell>14.491</cell><cell>14</cell></row>
+  <row><cell>E</cell><cell>54,800</cell><cell>5.48</cell><cell>5.477</cell><cell>6</cell></row>
+  <row><cell>Total</cell><cell>400,000</cell><cell>40</cell><cell></cell><cell>40</cell></row>
+</tabular>
+</table>
+
+<table>
+ <title>Huntington-Hill method: Calculations for Example 12 with <m>D = 10,000</m> and <m>d = 10,030</m></title>
+ <tabular>
+  <row>
+    <cell>State</cell><cell>Population</cell>
+    <cell>Standard quota</cell><cell>Round quota to</cell>
+    <cell>Modified quota <m>d = 10,030</m></cell><cell>Round quota to</cell>
+</row>
+<row><cell>A</cell><cell>34,800</cell><cell>3.48</cell><cell>4</cell><cell>3.47</cell><cell>4</cell></row>
+<row><cell>B</cell><cell>105,100</cell><cell>10.51</cell><cell>11</cell><cell>10.479</cell><cell>10</cell></row>
+<row><cell>C</cell><cell>65,100</cell><cell>6.51</cell><cell>7</cell><cell>6.491</cell><cell>7</cell></row>
+<row><cell>D</cell><cell>140,200</cell><cell>14.02</cell><cell>14</cell><cell>13.978</cell><cell>14</cell></row>
+<row><cell>E</cell><cell>54,800</cell><cell>5.48</cell><cell>6</cell><cell>5.464</cell><cell>5</cell></row>
+<row><cell>Total</cell><cell>400,000</cell><cell>40</cell><cell>42</cell><cell></cell><cell>40</cell></row>
+</tabular>
+</table>
+
+
+
+<table>
+ <title>Metro garbage truck apportionments</title>
+ <tabular>
+  <row><cell>District</cell><cell>Homes</cell><cell>Quota</cell><cell>Apportionment</cell></row>
+  <row><cell>Northtown</cell><cell>10,450</cell><cell>10.45</cell><cell>10</cell></row>
+  <row><cell>Southtown</cell><cell>89,550</cell><cell>89.55</cell><cell>90</cell></row>
+  <row><cell>Total</cell><cell>100,000</cell><cell>100.00</cell><cell>100</cell></row>
+</tabular>
+</table>
+
+<table>
+    <title>Revised Metro garbage truck apportionments</title>
+    <tabular>
+      <row><cell>District</cell><cell>Homes</cell><cell>Quota</cell><cell>Apportionment</cell></row>
+      <row><cell>Northtown</cell><cell>10,450</cell><cell>10.43</cell><cell>11</cell></row>
+      <row><cell>Southtown</cell><cell>89,550</cell><cell>89.34</cell><cell>89</cell></row>
+      <row><cell>Newtown</cell><cell>5,250</cell><cell>5.24</cell><cell>5</cell></row>
+      <row><cell>Total</cell><cell>105,250</cell><cell>105.00</cell><cell>105</cell></row>
+  </tabular>
+</table>
+
+<table>
+  <title>SMARTS daily average ridership (in thousands)</title>
+  <tabular>
+      <row><cell>Route</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell></row>
+      <row><cell>Ridership</cell><cell>45.3</cell><cell>31.07</cell><cell>20.49</cell><cell>14.16</cell><cell>10.26</cell><cell>8.72</cell></row>
+  </tabular>
+</table>
+
+<table>
+  <title>Placerville General Hospital: average patients treated per shift</title>
+  <tabular>
+      <row><cell>Shift</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell></row>
+      <row><cell>Patients</cell><cell>871</cell><cell>1029</cell><cell>610</cell><cell>190</cell></row>
+  </tabular>
+</table>
+
+<table>
+  <title>Tropicana: standard quotas by state</title>
+  <tabular>
+      <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell></row>
+      <row><cell>Standard quota</cell><cell>41.2</cell><cell>31.9</cell><cell>24.8</cell><cell>22.6</cell><cell>16.5</cell></row>
+  </tabular>
+</table>
+
+<table>
+    <title>Tasmania State University: standard quotas by school</title>
+    <tabular>
+      <row><cell>School</cell><cell>A</cell><cell>B</cell><cell>E</cell><cell>H</cell><cell>S</cell></row>
+      <row><cell>Standard quota</cell><cell>32.92</cell><cell>15.24</cell><cell>41.62</cell><cell>21.32</cell><cell>138.90</cell></row>
+  </tabular>
+</table>
+
+              <!-- <table n="27" caption="Inter-Fraternia: planet populations as percent of total">
+                <tabular>
+                  <row><cell>Planet</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell></row>
+                  <row><cell>Population percentage</cell><cell>11.37</cell><cell>8.07</cell><cell>38.62</cell><cell>14.98</cell><cell>10.42</cell><cell>16.54</cell></row>
+                </tabular>
+              </table>
+
+              <table n="28" caption="Margarita: island populations as percent of total">
+                <tabular>
+                  <row><cell>Island</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell></row>
+                  <row><cell>Population percentage</cell><cell>6.24</cell><cell>26.16</cell><cell>28.48</cell><cell>39.12</cell></row>
+                </tabular>
+              </table>
+
+              <table n="29" caption="Happy Rivers County: cases by town (2011)">
+                <tabular>
+                  <row><cell>Town</cell><cell>Dunes</cell><cell>Smithville</cell><cell>Johnstown</cell></row>
+                  <row><cell>Number of cases</cell><cell>41</cell><cell>106</cell><cell>253</cell></row>
+                </tabular>
+              </table>
+
+              <table n="30" caption="Plainsville Hospital: beds by wing">
+                <tabular>
+                  <row><cell>Wing</cell><cell>A</cell><cell>B</cell><cell>C</cell></row>
+                  <row><cell>Number of beds</cell><cell>154</cell><cell>66</cell><cell>30</cell></row>
+                </tabular>
+              </table>
+
+              <table n="31" caption="Fireland: populations by county">
+                <tabular>
+                  <row><cell>County</cell><cell>Arcadia</cell><cell>Belarmine</cell><cell>Crowley</cell><cell>Dandia</cell></row>
+                  <row><cell>Population</cell><cell>4,500,000</cell><cell>4,900,000</cell><cell>3,900,000</cell><cell>6,700,000</cell></row>
+                </tabular>
+              </table>
+
+              <table n="32" caption="Galatia: populations by province (in millions)">
+                <tabular>
+                  <row><cell>Province</cell><cell>Anline</cell><cell>Brock</cell><cell>Clanwin</cell><cell>Drundell</cell></row>
+                  <row><cell>Population (in millions)</cell><cell>5.9</cell><cell>7.8</cell><cell>6.1</cell><cell>6.9</cell></row>
+                </tabular>
+              </table>
+
+              <table n="33" caption="Guayuru: populations by state">
+                <tabular>
+                  <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell></row>
+                  <row><cell>Population</cell><cell>34,800</cell><cell>104,800</cell><cell>64,800</cell><cell>140,800</cell><cell>54,800</cell></row>
+                </tabular>
+              </table>
+
+              <table n="34" caption="Standard quotas (Table 34)">
+                <tabular>
+                  <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell></row>
+                  <row><cell>Standard quota</cell><cell>3.52</cell><cell>10.48</cell><cell>1.41</cell><cell>12.51</cell><cell>12.08</cell></row>
+                </tabular>
+              </table>
+
+              <table n="35" caption="Standard quotas (Table 35)">
+                <tabular>
+                  <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell></row>
+                  <row><cell>Standard quota</cell><cell>25.49</cell><cell>14.52</cell><cell>8.48</cell><cell>30.71</cell><cell>20.8</cell></row>
+                </tabular>
+              </table>
+
+              <table n="36" caption="Standard quotas (Table 36)">
+                <tabular>
+                  <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell></row>
+                  <row><cell>Standard quota</cell><cell>3.46</cell><cell>10.49</cell><cell>1.42</cell><cell>12.45</cell><cell>12.18</cell></row>
+                </tabular>
+              </table>
+
+              <table n="37" caption="Standard quotas (Table 37)">
+                <tabular>
+                  <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell></row>
+                  <row><cell>Standard quota</cell><cell>25.496</cell><cell>14.491</cell><cell>8.486</cell><cell>30.449</cell><cell>21.078</cell></row>
+                </tabular>
+              </table>
+
+              <table n="38" caption="Populations for six states (Table 38)">
+                <tabular>
+                  <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell></row>
+                  <row><cell>Population</cell><cell>344,970</cell><cell>408,700</cell><cell>219,200</cell><cell>587,210</cell><cell>154,920</cell><cell>285,000</cell></row>
+                </tabular>
+              </table>
+
+              <table n="39" caption="Populations for six states (Table 39)">
+                <tabular>
+                  <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell><cell>E</cell><cell>F</cell></row>
+                  <row><cell>Population</cell><cell>344,970</cell><cell>204,950</cell><cell>515,100</cell><cell>84,860</cell><cell>154,960</cell><cell>695,160</cell></row>
+                </tabular>
+              </table>
+
+              <table n="40" caption="Populations for four states (Table 40)">
+                <tabular>
+                  <row><cell>State</cell><cell>A</cell><cell>B</cell><cell>C</cell><cell>D</cell></row>
+                  <row><cell>Population</cell><cell>86,915</cell><cell>4,325</cell><cell>5,400</cell><cell>3,360</cell></row>
+                </tabular>
+            </table> -->
+        </subsection>
+
+        <subsection xml:id="apportionment-problem">
+  <title>The Apportionment Problem, but Mathier</title>
+
+  <subsubsection xml:id="apportionment-variables">
+    <title>Formal Mathematical Variables</title>
+
+    <p>
+      The problem can be defined using the following parameters:
+    </p>
+
+    <dl>
+      <dt><m>M</m></dt>
+      <dd>
+        A positive integer representing the total number of items to be distributed
+        (for example, the total number of seats in a legislative body).
+      </dd>
+
+      <dt><m>n</m></dt>
+      <dd>
+        The number of entities receiving the items (for example, states or political
+        parties).
+      </dd>
+
+      <dt><m>\mathbf{a} = (a_1,\ldots,a_n)</m></dt>
+      <dd>
+        An <m>n</m>-dimensional real vector representing the size of each entity
+        (such as population or vote counts).
+      </dd>
+
+      <dt><m>A</m></dt>
+      <dd>
+        The sum of all entries in <m>\mathbf{a}</m>, given by
+        <m>A = \sum_{i=1}^n a_i</m>.
+      </dd>
+
+      <dt><m>\mathbf{m} = (m_1,\ldots,m_n)</m></dt>
+      <dd>
+        An integer vector where <m>m_j</m> is the final number of units allocated to
+        entity <m>j</m>, satisfying
+        <m>\sum_{j=1}^n m_j = M</m> and <m>m_j \ge 0</m>.
+      </dd>
+    </dl>
+  </subsubsection>
+
+  <subsubsection xml:id="exact-quota">
+    <title>The Exact Quota</title>
+
+    <p>
+      A central concept in apportionment is the <term>exact quota</term>,
+      denoted <m>q_j</m>, which represents the ideal fractional share of units
+      an entity would receive if units were divisible. It is defined by
+    </p>
+
+    <me>
+      q_j = \frac{a_j}{A} M.
+    </me>
+
+    <p>
+      In an ideal mathematical world, we would have <m>m_j = q_j</m>. However,
+      because <m>m_j</m> must be an integer and <m>q_j</m> is typically a real
+      number, an apportionment method is required to map the real vector of
+      quotas to an integer vector of allocations.
+    </p>
+  </subsubsection>
+
+  <subsubsection xml:id="apportionment-axioms">
+    <title>Mathematical Constraints and Properties</title>
+
+    <p>
+      For an apportionment method to be considered fair or valid, it is often
+      expected to satisfy certain mathematical axioms:
+    </p>
+
+    <ul>
+      <li>
+        <em>Symmetry.</em>
+        The outcome should not depend on the order in which the entities are listed.
+      </li>
+
+      <li>
+        <em>Homogeneity.</em>
+        If all input values <m>a_j</m> are multiplied by the same positive constant,
+        the resulting apportionment should remain unchanged.
+      </li>
+
+      <li>
+        <em>The Quota Rule.</em>
+        A method satisfies this rule if each allocation <m>m_j</m> is either
+        <m>\lfloor q_j \rfloor</m> or <m>\lceil q_j \rceil</m>.
+      </li>
+
+      <li>
+        <em>House Monotonicity.</em>
+        If the total number of units increases from <m>M</m> to <m>M+1</m>, no
+        entity’s allocation <m>m_j</m> should decrease. This property rules out
+        paradoxes such as the Alabama Paradox.
+      </li>
+    </ul>
+  </subsubsection>
+
+  <subsubsection xml:id="error-minimization">
+    <title>Error Minimization</title>
+
+    <p>
+      From a mathematical perspective, many apportionment methods can be viewed
+      as attempting to minimize the error between the ideal proportions
+      <m>q_j</m> and the actual integer allocations <m>m_j</m>. This is often
+      modeled using a decomposable error function
+    </p>
+
+    <me>
+      \psi(\mathbf{m}) = \sum_{j=1}^n \varphi_j(m_j),
+    </me>
+
+    <p>
+      where <m>\varphi_j</m> measures the severity of the error for entity
+      <m>j</m>. For example, the Sainte&#8209;Laguë method can be characterized as
+      minimizing an error function based on the squared difference between
+      allocated units and exact quotas.
+    </p>
+  </subsubsection>
+</subsection>
+
+
+
+
+        <subsection xml:id="apportionment-polyhedra">
+  <title>Apportionment Polyhedra</title>
+
+  <p>
+    An <term>apportionment polyhedron</term> is a geometric region within the space
+    of all possible exact quota vectors <m>\mathbf{q}</m> that a particular
+    apportionment method maps to a single, fixed integer seat allocation
+    <m>\mathbf{m}</m>. In mathematical terms, it consists of all fractional quota
+    vectors that result in the same whole-number distribution of seats.
+  </p>
+
+  <subsubsection xml:id="polyhedron-geometry">
+    <title>Geometric Representation</title>
+
+    <p>
+      The concept is best understood by visualizing the space of exact quotas.
+    </p>
+
+    <ul>
+      <li>
+        <em>The set <m>Q</m>.</em>
+        This set contains all possible fractional distributions of <m>M</m> items
+        among <m>n</m> entities. For example, if there are three parties and
+        <m>M = 5</m> seats, the set <m>Q</m> forms an equilateral triangle in
+        three-dimensional space with vertices at
+        <m>(5,0,0)</m>, <m>(0,5,0)</m>, and <m>(0,0,5)</m>.
+      </li>
+
+      <li>
+        <em>Integer points.</em>
+        Within this geometric space, the possible integer seat allocations are
+        represented by discrete lattice points corresponding to integer vectors
+        <m>\mathbf{m}</m>.
+      </li>
+
+      <li>
+        <em>Defining the polyhedra.</em>
+        A valid apportionment method partitions the larger region <m>Q</m> into
+        smaller regions, or polyhedra, each associated with a single integer
+        allocation. Any exact quota vector lying inside a given polyhedron is
+        rounded or mapped to the integer allocation corresponding to that region.
+      </li>
+    </ul>
+
+    
+  </subsubsection>
+
+  <subsubsection xml:id="polyhedron-function">
+    <title>Function and Boundaries</title>
+
+    <p>
+      The shape and size of apportionment polyhedra depend on the error function or
+      rounding rule associated with the chosen apportionment method.
+    </p>
+
+    <ul>
+      <li>
+        <em>Mapping.</em>
+        A desirable property of an apportionment method is that any exact quota
+        vector that is already an integer vector is mapped to itself.
+      </li>
+
+      <li>
+        <em>Borders.</em>
+        The boundaries between apportionment polyhedra correspond to tie situations,
+        where an exact quota vector may be equally compatible with two or more
+        integer seat allocations. In such cases, the method must include a rule for
+        resolving ties along these boundaries.
+      </li>
+    </ul>
+  </subsubsection>
+</subsection>
+
+<subsection xml:id="polyhedra-fairness">
+  <title>Using Apportionment Polyhedra to Assess Fairness</title>
+
+  <p>
+    The <term>apportionment polyhedron</term> provides a geometric framework for
+    assessing the fairness of an apportionment method by describing how the method
+    rounds exact quotas—the ideal fractional shares of seats—into whole-number
+    allocations. By analyzing the shapes and boundaries of these polyhedra,
+    mathematicians and social scientists can determine which methods minimize
+    rounding error and which are susceptible to representational paradoxes.
+  </p>
+
+  <subsubsection xml:id="visualizing-rounding-error">
+    <title>Visualizing Rounding and Error</title>
+
+    <p>
+      Geometrically, the space of all possible exact quota vectors <m>Q</m> is
+      partitioned into regions, or polyhedra, each associated with a single integer
+      seat allocation.
+    </p>
+
+    <ul>
+      <li>
+        <em>Mapping fairness.</em>
+        A well-behaved apportionment method maps any exact quota vector lying inside
+        a given polyhedron to the integer allocation at its center. Fairness can then
+        be assessed by measuring the <term>gravity of the error</term>, defined as
+        the distance or discrepancy between the ideal quota <m>q_j</m> and the
+        resulting integer allocation <m>m_j</m>.
+      </li>
+
+      <li>
+        <em>Defining boundaries.</em>
+        The boundaries between polyhedra correspond to tie situations, in which an
+        exact quota vector may be equally compatible with more than one integer
+        allocation. A fair method must resolve such ties using a consistent rule,
+        rather than an arbitrary choice.
+      </li>
+    </ul>
+  </subsubsection>
+
+  <subsubsection xml:id="comparing-methods">
+    <title>Comparing Methodological Justness</title>
+
+    <p>
+      Different apportionment methods correspond to different error functions, and
+      these choices lead to distinct polyhedral decompositions of the quota space.
+      This geometric perspective allows for direct mathematical comparison between
+      methods.
+    </p>
+
+    <ul>
+      <li>
+        <em>Sainte&#8209;Laguë versus Hare.</em>
+        Different methods induce different polyhedral grids. The Sainte&#8209;Laguë
+        method is designed to minimize relative error and, in three-entity settings,
+        produces a hexagonal tiling that is often regarded as neutral with respect to
+        entity size. In contrast, rounding methods such as Hare’s method focus on
+        greatest remainders and are frequently analyzed using
+        <m>\ell_p</m>-norms—such as Euclidean distance—to identify the integer point
+        closest to a given exact quota.
+      </li>
+
+      <li>
+        <em>Bias detection.</em>
+        Geometric analysis can reveal systematic biases in an apportionment method.
+        For example, linear divisor methods may favor smaller entities or larger
+        entities depending on the placement of their polyhedral boundaries, often
+        parametrized by an initial divisor offset.
+      </li>
+    </ul>
+  </subsubsection>
+
+  <subsubsection xml:id="paradoxes">
+    <title>Identifying Paradoxes</title>
+
+    <p>
+      Apportionment polyhedra are also a useful tool for determining whether a method
+      satisfies common axioms of fairness.
+    </p>
+
+    <ul>
+      <li>
+        <em>The Quota Rule.</em>
+        Polyhedral analysis can be used to check whether allocations always lie
+        between the floor and ceiling of the exact quotas.
+      </li>
+
+      <li>
+        <em>House monotonicity.</em>
+        Examining how polyhedral boundaries change as the total number of seats
+        <m>M</m> increases helps determine whether a method avoids decreases in
+        allocation when additional seats are added.
+      </li>
+
+      <li>
+        <em>The Alabama Paradox.</em>
+        Poorly aligned polyhedral boundaries can lead to paradoxical outcomes in
+        which increasing the total number of seats causes an entity to lose a seat,
+        a phenomenon observed in historical legislative apportionments.
+      </li>
+    </ul>
+
+    <p>
+      A contemporary illustration of these issues arose in the 2020 Iowa Democratic
+      caucuses. The use of Hamilton’s method, which satisfies the Quota Rule but is
+      geometrically vulnerable to paradoxes, produced several aggregation anomalies
+      in which the sum of local allocations failed to align with statewide totals.
+    </p>
+  </subsubsection>
+</subsection>
+    </section>
+</article>
+</pretext>

@@ -1,0 +1,56 @@
+=>PYTHONTEX#py#default#default#0#code#####193#
+from sympy import *
+
+A = Matrix([
+[0,1,0,1,1,0,0],
+[1,0,1,1,0,1,0],
+[1,0,0,0,0,0,1],
+[0,0,1,0,1,1,0],
+[1,1,0,0,0,1,0],
+[0,1,1,1,0,0,1],
+[1,0,0,0,0,0,1]
+])
+
+# Get eigenvalues/eigenvectors
+eigs = A.eigenvects()
+
+# Sort by absolute value of eigenvalue
+eigs = sorted(eigs, key=lambda t: abs(complex(N(t[0]))), reverse=True)
+
+lambda1 = eigs[0][0]
+v = eigs[0][2][0]
+
+# Normalize so entries sum to 1, PageRank-style
+v = v / sum(v)
+
+# Decimal version
+v_decimal = N(v, 4)
+=>PYTHONTEX#py#default#default#1#i#####223#
+latex(N(lambda1,4))
+=>PYTHONTEX#py#default#default#2#i#####224#
+latex(v_decimal)
+=>PYTHONTEX:SETTINGS#
+version=0.17
+outputdir=pythontex-files-final
+workingdir=.
+workingdirset=false
+gobble=none
+rerun=default
+hashdependencies=default
+makestderr=false
+stderrfilename=full
+keeptemps=none
+pyfuture=default
+pyconfuture=none
+pygments=true
+pygglobal=:GLOBAL||
+fvextfile=-1
+pyconbanner=none
+pyconfilename=stdin
+depythontex=false
+pygfamily=py|python3|
+pygfamily=pycon|pycon|
+pygfamily=sympy|python3|
+pygfamily=sympycon|pycon|
+pygfamily=pylab|python3|
+pygfamily=pylabcon|pycon|

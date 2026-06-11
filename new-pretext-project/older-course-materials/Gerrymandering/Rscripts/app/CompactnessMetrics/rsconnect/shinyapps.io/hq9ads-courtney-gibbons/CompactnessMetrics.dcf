@@ -1,0 +1,12 @@
+name: CompactnessMetrics
+title: CompactnessMetrics
+username: hq9ads-courtney-gibbons
+account: hq9ads-courtney-gibbons
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 16689462
+bundleId: 11619936
+url: https://hq9ads-courtney-gibbons.shinyapps.io/CompactnessMetrics/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

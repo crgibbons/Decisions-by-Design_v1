@@ -1,3067 +1,701 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
-<section>
-  <title>Apportionment</title>
+<section xml:id="apportionment-chapter">
+  <title>Apportionment: Geometry, Fairness, and Representation</title>
 
   <introduction>
     <p>
-      One of the first topics we'll study is <term>apportionment</term>.
+      Every few years, the United States must decide how to distribute the fixed
+      number of seats in the House of Representatives among the states.
+      The same mathematical challenge appears in many governance decisions:
+      allocating funding, assigning committee memberships, and distributing
+      indivisible goods.
     </p>
 
-    <definition>
-      <title>Apportionment</title>
+    <p>
+      In this chapter, we study how exact proportional shares can be represented
+      as points inside a geometric space and how different rounding rules lead to
+      distinct notions of fairness.
+      This makes it easier to compare apportionment methods, identify paradoxes,
+      and understand why no single rule can satisfy every reasonable criterion.
+    </p>
+  </introduction>
+
+  <subsection xml:id="apportionment-motivation">
+    <title>Why Apportionment Matters</title>
+
+    <p>
+      Apportionment is not only an arithmetic problem.
+      It is a governance decision because the chosen method affects which
+      communities gain influence and which lose it.
+    </p>
+
+    <p>
+      A method that seems reasonable in one context may appear unfair in another.
+      For example, the United States uses apportionment to assign seats in the
+      House of Representatives, while political parties use similar calculations
+      to turn vote totals into council seats.
+    </p>
+
+    <p>
+      Throughout this chapter, we will pay attention to the policy implications of
+      the mathematics. When you compare methods, always note the assumptions about
+      total seats, minimum representation, and the fairness criteria that matter
+      in the governance setting.
+    </p>
+  </subsection>
+
+  <subsection xml:id="coffee-example">
+    <title>Coffee for the Department</title>
+
+    <p>
+      To make the ideas concrete, we begin with a smaller allocation problem.
+      Suppose the mathematics department has purchased <m>45</m> boxes of coffee
+      and wants to distribute them to ten faculty members in proportion to the
+      number of students each professor teaches.
+    </p>
+
+    <example xml:id="coffee-box-example">
+      <title>Boxes of Coffee</title>
 
       <statement>
         <p>
-          The term <term>apportionment</term> refers to the mathematical process of distributing a fixed number of indistinguishable assets among different entities.
-        </p>
-
-        <p>
-          Each asset is indistinguishable from any other asset, and no asset can be subdivided.
-        </p>
-      </statement>
-    </definition>
-
-    <example>
-      <title> Is it apportionment? </title>
-
-      <statement>
-        <p>
-          For example, suppose Courtney buys 45 boxes of coffee (from the orange and pink doughnut shop down the hill) for the math department to bring to their classes.
-          The department has to come up with a way to decide how many boxes each professor gets, perhaps using the number of students each professor is teaching as the main relevant piece of data to make this decision.
-        </p>
-
-        <p>
-          Each professor has to decide how to share the coffee among their classes.
-          This need not be an apportionment problem.
-        </p>
-
-        <p>
-          Based on the following table of data, determine how to divvy up the boxes of coffee in different ways.
-          Each box serves 10.
-          Assume every student (and professor) drinks coffee.
+          The department decides that each professor's allocation should depend on
+          the number of students they teach, including the professor themselves.
+          Because boxes of coffee are indivisible, each professor must receive a
+          whole number of boxes.
         </p>
 
         <table>
-          <title>Professors and Enrollments, with <m>45</m> boxes of coffee.</title>
-
+          <title>Faculty Teaching Loads</title>
           <tabular>
             <row header="yes">
-              <cell>Prof</cell>
-              <cell>Total Students (plus one)</cell>
-              <!--
-              <cell>Quota</cell>
-              <cell>Lower quota</cell>
-              <cell>Upper quota</cell>
-              -->
+              <cell>Professor</cell>
+              <cell>Total Students</cell>
             </row>
-
-            <row>
-              <cell>Ahmed</cell>
-              <cell>35</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>Bowman</cell>
-              <cell>60</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>Ceniceros</cell>
-              <cell>71</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>Cockburn</cell>
-              <cell>22</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>Dykstra</cell>
-              <cell>38</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>Gibbons</cell>
-              <cell>55</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>Kantrowitz</cell>
-              <cell>73</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>Kuruwita</cell>
-              <cell>45</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>LeMasurier</cell>
-              <cell>28</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell>Tripp</cell>
-              <cell>58</cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
-            </row>
-
-            <row>
-              <cell><em>Totals</em></cell>
-              <cell>
-              <answer>
-                <m> 485 </m>
-              </answer>
-              </cell>
-              <!--
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <m> ? </m>
-              </answer>
-              </cell>
-              -->
+            <row><cell>Ahmed</cell><cell>35</cell></row>
+            <row><cell>Bowman</cell><cell>60</cell></row>
+            <row><cell>Ceniceros</cell><cell>71</cell></row>
+            <row><cell>Cockburn</cell><cell>22</cell></row>
+            <row><cell>Dykstra</cell><cell>38</cell></row>
+            <row><cell>Gibbons</cell><cell>55</cell></row>
+            <row><cell>Kantrowitz</cell><cell>73</cell></row>
+            <row><cell>Kuruwita</cell><cell>45</cell></row>
+            <row><cell>LeMasurier</cell><cell>28</cell></row>
+            <row><cell>Tripp</cell><cell>58</cell></row>
+            <row bottom="minor">
+              <cell><em>Total</em></cell>
+              <cell><m>485</m></cell>
             </row>
           </tabular>
         </table>
 
         <p>
-          Which method or methods seem <q>fair</q>? Why?
+          The department will convert these counts into a proportional allocation
+          of the <m>45</m> boxes.
         </p>
       </statement>
     </example>
-  </introduction>
 
-
-  <subsection xml:id="subsec-apportionment-terminology">
-    <title>Apportionment Terminology</title>
-
-    <p>
-      One of the most famous apportionment problems is the apportionment of seats in the U.S.
-      House of Representatives among the U.S.
-      states.
-      In fact, the terminology for apportionment problems comes from this application.
-    </p>
-
-    <definition>
-      <title>Apportionment Terms</title>
+    <discussion xml:id="coffee-first-thoughts">
+      <title>First Thoughts</title>
 
       <p>
-        <dl>
-        <li>
-          <title><term>Apportionment Problem</term></title>
+        One way to start is to compute an ideal share for each professor.
+        If the department treats the number of students as the relevant size,
+        then the quota for professor <m>i</m> is
+      </p>
 
-          <p>
-            a scenario in which <m>m</m> identical and <m>n</m> indivisible items (the <q>seats</q>) must be divided among <m>n</m> entities (the <q>states</q>) proportionately (using the <q>populations</q>)
-          </p>
-        </li>
+      <me>
+        q_i = \frac{a_i}{485} \cdot 45.
+      </me>
 
-        <li>
-          <title><term>States</term></title>
+      <p>
+        For example, Ahmed's quota is
+      </p>
 
-          <p>
-            the entities in the apportionment problem
-          </p>
-        </li>
+      <me>
+        q_{\text{Ahmed}} \approx 3.25,
+        \qquad
+        q_{\text{Kantrowitz}} \approx 6.77.
+      </me>
 
-        <li>
-          <title><term>Seats</term></title>
+      <p>
+        These quotas are fractional, but the final allocation must be whole numbers.
+      </p>
+    </discussion>
 
-          <p>
-            the items being apportioned among the states
-          </p>
-        </li>
+    <discussion xml:id="coffee-rounding-problem">
+      <title>The Rounding Problem</title>
 
-        <li>
-          <title><term>Apportionment Method</term></title>
+      <p>
+        If we round each quota to the nearest whole number, the result may not sum
+        to the available number of boxes.
+      </p>
 
-          <p>
-            the algorithm determining how to apportion the <m>m</m> seats to the <m>n</m> states, guaranteeing exactly <m>m</m> seats are distributed proporitionaly to each of the <m>n</m> states based on their populations <m>p_s</m> for <m>1 \le s \le n</m>.
-          </p>
-        </li>
+      <p>
+        For the coffee example, the quotas add up exactly to <m>45</m>, but ordinary
+        rounding can produce too many or too few boxes.
+      </p>
 
-        <li>
-          <title><term>Standard Divisor <m>D</m></term> and <term>Standard Quota <m>Q_s</m></term>, <term>Lower Quota<m>L_s</m></term>, <term>Upper Quota <m>U_s</m></term></title>
+      <blockquote>
+        <p>
+          The difficulty of apportionment is that local rounding decisions need not
+          preserve the global total.
+        </p>
+      </blockquote>
+    </discussion>
+  </subsection>
 
-          <p>
-            <m>D = p/m</m> where <m>p = \sum_{s = 1}^n p_s</m> is the total population; <br /> <m>Q_s = p_s/D</m>, representing the <q>fair</q> share of seats for state <m>s</m> if the seats could be subdivided; <br /> <m>L_s = \lfloor Q_s \rfloor</m>, the largest integer less than or equal to the standard quota; <m>U_s = L_s + 1</m>, the smallest integer strictly greater than the standard quota. <aside>The definition of the floor function varies from setting to setting. Here we take it to include the possibility of equality.</aside>
-          </p>
-        </li>
+  <subsection xml:id="formal-definitions">
+    <title>Formal Definitions</title>
 
-        <li>
-          <title><term>Modified Divisor (and friends)</term></title>
+    <definition xml:id="apportionment-definition">
+      <title>Apportionment Problem</title>
 
-          <p>
-            A value <m>d</m> or <m>D'</m> other than the standard divisor, used to make the distribution of seats produced by rounding (based on a given convention) add up to <m>m</m>.
-            From <m>d</m> each state gets a modified quota <m>{Q_s}^\prime</m>, lower quota <m>{L_s}^\prime</m>, and upper quota <m>{U_s}^\prime</m>.
-          </p>
-        </li>
+      <p>
+        An <term>apportionment problem</term> consists of a positive integer
+        <m>M</m> representing the total number of indivisible items and a vector
+        <m>\mathbf{a} = (a_1,\dots,a_n)</m> representing the sizes of the entities.
+      </p>
 
-        <li>
-          <title><term>Priority</term></title>
+      <p>
+        The goal is to choose an integer allocation vector
+        <m>\mathbf{m} = (m_1,\dots,m_n)</m> satisfying
+      </p>
 
-          <p>
-            An order by which extra seats are assigned to states.
-            An example is using the fractional part of the quota to determine which states get their upper quota of seats by ranking from largest fracitonal part to smallest.
-          </p>
-        </li>
-        </dl>
+      <me>
+        \sum_{j=1}^n m_j = M,
+        \qquad
+        m_j \in \mathbb Z_{\ge0} \text{ for all } j.
+      </me>
+    </definition>
+
+    <definition xml:id="exact-quota-vector-definition">
+      <title>Exact Quota Vector</title>
+
+      <p>
+        The <term>exact quota vector</term> is the ideal real allocation computed as
+      </p>
+
+      <me>
+        q_j = \frac{a_j}{A} M,
+        \qquad A = \sum_{i=1}^n a_i.
+      </me>
+
+      <p>
+        The exact quota vector satisfies
+      </p>
+
+      <me>
+        \sum_{j=1}^n q_j = M,
+        \qquad q_j \ge 0.
+      </me>
+    </definition>
+
+    <definition xml:id="quota-simplex-definition">
+      <title>Quota Simplex</title>
+
+      <p>
+        The set of all exact quota vectors is
+      </p>
+
+      <me>
+        \mathcal Q_M = \left\{(q_1,\dots,q_n) \in \mathbb R_{\ge0}^n :
+        \sum_{j=1}^n q_j = M\right\}.
+      </me>
+
+      <p>
+        This set is called the <term>quota simplex</term>.
       </p>
     </definition>
 
-    <example>
-      <title>Revisiting Coffee</title>
+    <definition xml:id="allocation-space-definition">
+      <title>Allocation Space</title>
 
-      <statement>
-        <p>
-          Taking each professor to be a state and each box of coffee to be a seat, we use the number of students each professor is teaching as the population (plus the professors themselves!).
-          The standard divisor is <m>D = \frac{485}{45} = 10 + \frac{35}{485} = 10.\overline{7}</m>.
-        </p>
+      <p>
+        The set of feasible integer allocations is
+      </p>
 
-        <table>
-          <title>Apportionment Computations</title>
+      <me>
+        \mathcal M_M = \left\{(m_1,\dots,m_n) \in \mathbb Z_{\ge0}^n :
+        \sum_{j=1}^n m_j = M\right\}.
+      </me>
+    </definition>
 
-          <tabular halign="center">
-            <row header="yes" bottom="minor">
-              <cell>Name</cell>
-              <cell>Number of Students (plus one)</cell>
-              <cell>Standard Quota</cell>
-              <cell>Lower Quota</cell>
-              <cell>Upper Quota</cell>
-              <cell>Fractional Rank</cell>
-            </row>
+    <definition xml:id="apportionment-function-definition">
+      <title>Apportionment Function</title>
 
-            <row>
-              <cell>Ahmed</cell>
-              <cell><m>35</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
+      <p>
+        An <term>apportionment function</term> is a rule
+      </p>
 
-            <row>
-              <cell>Bowman</cell>
-              <cell><m>60</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
+      <me>
+        F : \mathcal Q_M \to \mathcal M_M.
+      </me>
 
-            <row>
-              <cell>Ceniceros</cell>
-              <cell><m>71</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
+      <p>
+        It assigns each exact quota vector a unique integer allocation.
+      </p>
+    </definition>
+  </subsection>
 
-            <row>
-              <cell>Cockburn</cell>
-              <cell><m>22</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
+  <subsection xml:id="hamilton-method">
+    <title>Hamilton's Method</title>
 
-            <row>
-              <cell>Dykstra</cell>
-              <cell><m>38</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
-
-            <row>
-              <cell>Gibbons</cell>
-              <cell><m>55</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
-
-            <row>
-              <cell>Kantrowitz</cell>
-              <cell><m>73</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
-
-            <row>
-              <cell>Kuruwita</cell>
-              <cell><m>45</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
-
-            <row>
-              <cell>LeMasurier</cell>
-              <cell><m>28</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
-
-            <row>
-              <cell>Tripp</cell>
-              <cell><m>58</m></cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                <math>?</math>
-              </answer>
-              </cell>
-              <cell>
-              <answer>
-                ?
-              </answer>
-              </cell>
-            </row>
-          </tabular>
-        </table>
-      </statement>
-
-      <solution>
-        <table>
-          <title>Standard Quotas</title>
-
-          <tabular halign="center">
-            <row header="yes" bottom="minor">
-              <cell>Name</cell>
-              <cell>Number of Students (plus one)</cell>
-              <cell>Standard Quota</cell>
-              <cell>Traditional Round Up or Down</cell>
-              <cell>Lower Quota</cell>
-              <cell>Upper Quota</cell>
-              <cell>Fractional Rank</cell>
-            </row>
-
-            <row>
-              <cell>A</cell>
-              <cell><m>35</m></cell>
-              <cell><m>3.2474</m></cell>
-              <cell>3</cell>
-              <cell>3</cell>
-              <cell>4</cell>
-              <cell>7</cell>
-            </row>
-
-            <row>
-              <cell>B</cell>
-              <cell><m>60</m></cell>
-              <cell><m>5.5670</m></cell>
-              <cell>6</cell>
-              <cell>5</cell>
-              <cell>6</cell>
-              <cell>4</cell>
-            </row>
-
-            <row>
-              <cell>Ce</cell>
-              <cell><m>71</m></cell>
-              <cell><m>6.5876</m></cell>
-              <cell>7</cell>
-              <cell>6</cell>
-              <cell>7</cell>
-              <cell>3</cell>
-            </row>
-
-            <row>
-              <cell>Co</cell>
-              <cell><m>22</m></cell>
-              <cell><m>2.0412</m></cell>
-              <cell>2</cell>
-              <cell>2</cell>
-              <cell>2</cell>
-              <cell>10</cell>
-            </row>
-
-            <row>
-              <cell>D</cell>
-              <cell><m>38</m></cell>
-              <cell><m>3.5258</m></cell>
-              <cell>4</cell>
-              <cell>3</cell>
-              <cell>4</cell>
-              <cell>5</cell>
-            </row>
-
-            <row>
-              <cell>G</cell>
-              <cell><m>55</m></cell>
-              <cell><m>5.1031</m></cell>
-              <cell>5</cell>
-              <cell>5</cell>
-              <cell>5</cell>
-              <cell>9</cell>
-            </row>
-
-            <row>
-              <cell>Ka</cell>
-              <cell><m>73</m></cell>
-              <cell><m>6.7732</m></cell>
-              <cell>7</cell>
-              <cell>6</cell>
-              <cell>7</cell>
-              <cell>1</cell>
-            </row>
-
-            <row>
-              <cell>Ku</cell>
-              <cell><m>45</m></cell>
-              <cell><m>4.1753</m></cell>
-              <cell>4</cell>
-              <cell>4</cell>
-              <cell>5</cell>
-              <cell>8</cell>
-            </row>
-
-            <row>
-              <cell>L</cell>
-              <cell><m>28</m></cell>
-              <cell><m>2.5979</m></cell>
-              <cell>3</cell>
-              <cell>2</cell>
-              <cell>3</cell>
-              <cell>2</cell>
-            </row>
-
-            <row>
-              <cell>T</cell>
-              <cell><m>58</m></cell>
-              <cell><m>5.3814</m></cell>
-              <cell>5</cell>
-              <cell>5</cell>
-              <cell>6</cell>
-              <cell>6</cell>
-            </row>
-
-            <row>
-              <cell>Total</cell>
-              <cell><m>485</m></cell>
-              <cell></cell>
-              <cell>46</cell>
-              <cell>41</cell>
-              <cell>51</cell>
-              <cell>N/A</cell>
-            </row>
-          </tabular>
-        </table>
-      </solution>
-    </example>
-
-    <p>
-      The first apportionment method we'll study is due to none other than Alexander Hamilton!
-    </p>
-
-    <definition>
+    <definition xml:id="hamilton-definition">
       <title>Hamilton's Method</title>
 
       <p>
-        Start by giving each state its lower quota.
-        Then, in order of largest fractional part, distribute the remaining seats.
+        Hamilton's method begins by giving each entity its lower quota and then
+        distributes remaining seats according to the largest fractional remainders.
       </p>
     </definition>
 
-    <exercise>
-      <title>The winners are...</title>
-
-      <statement>
-        <p>
-          Determine which professors get their upper quota of boxes of coffee thanks to Alexander Hamilton.
-        </p>
-      </statement>
-
-      <answer>
-        <p>
-          The professors with fractional rank one through four.
-          <table>
-            <title>Hamilton Apportionment</title>
-
-            <tabular>
-              <row header="yes" bottom="minor" >
-                <cell><nbsp /></cell>
-                <cell>A</cell>
-                <cell>B</cell>
-                <cell>Ce</cell>
-                <cell>Co</cell>
-                <cell>D</cell>
-                <cell>G</cell>
-                <cell>Ka</cell>
-                <cell>Ku</cell>
-                <cell>L</cell>
-                <cell>T</cell>
-                <cell>Total</cell>
-              </row>
-
-              <row>
-                <cell><m>3</m></cell>
-                <cell><m>6</m></cell>
-                <cell><m>7</m></cell>
-                <cell><m>2</m></cell>
-                <cell><m>3</m></cell>
-                <cell><m>5</m></cell>
-                <cell><m>7</m></cell>
-                <cell><m>4</m></cell>
-                <cell><m>3</m></cell>
-                <cell><m>5</m></cell>
-                <cell><m>45</m></cell>
-              </row>
-            </tabular>
-          </table>
-        </p>
-      </answer>
-    </exercise>
-
-    <exercise>
-      <title>A small tweak</title>
-
-      <statement>
-        <p>
-          What happens if Courtney only buys <m>44</m> boxes of coffee?
-        </p>
-      </statement>
-    </exercise>
+    <ol>
+      <li>
+        <p>Compute the exact quota vector <m>\mathbf{q}</m>.</p>
+      </li>
+      <li>
+        <p>Assign each entity <m>m_j = \lfloor q_j \rfloor</m>.</p>
+      </li>
+      <li>
+        <p>Distribute remaining seats to the entities with the largest values of
+          <m>q_j - \lfloor q_j \rfloor</m>.</p>
+      </li>
+    </ol>
 
     <p>
-      Three additional methods involve changing the value of <m>D</m> to come up with a modified divisor <m>d</m> where some method (rounding conventionally, using the upper quota, or using the lower quota for each state) adds up to the number of seats.
-      Respectively, these are Webster's method, Adams' Method, and Jefferson's Method.
+      This defines a map <m>F_{\text{Ham}} : \mathcal Q_M \to \mathcal M_M</m>.
+      Hamilton's method satisfies the quota rule but can violate house
+      monotonicity.
     </p>
 
-    <p>
-      But what if there were a different way to decide how to round up or down that always added up to the number of seats?
-    </p>
-
-    <definition>
-      <title>The Geometric Mean</title>
+    <example xml:id="hamilton-coffee-example">
+      <title>Applying Hamilton to Coffee</title>
 
       <p>
-        The <term>geometric mean</term> of two distinct numbers <m>L</m> and <m>U</m> is given by <m>c = \sqrt{LU}</m>.
-        If <m>q \gt c</m>, round up.
-        If <m>q \lt c</m>, round down.
+        For the coffee example, the exact quota vector is approximately
       </p>
-    </definition>
 
-    <example>
-      <title>Calculating the Geometric Mean</title>
+      <me>
+        \mathbf{q} \approx (3.25, 5.57, 6.59, 2.04, 3.53, 5.10, 6.77, 4.17,
+        2.60, 5.38).
+      </me>
 
-      <statement>
-        <p>
-          The geometric mean of 3 and 4 is <m>\sqrt{3\cdot 4} = 2\sqrt{3} \approx 3.464</m>, while the arithmetic mean is <m>\frac{3 + 4}{2} = 3.5</m>.
-          The geometric mean of 5 and 6 is <m>\sqrt{5\cdot 6} = \sqrt{30} \approx 5.477</m>, while the arithmetic mean is <m>\frac{5+6}{2} = 5.5</m>.
-          The geometric mean of 10 and 11 is <m>\sqrt{10\cdot 11} = \sqrt{110} \approx 10.488</m>, while the arithmetic mean is <m>\frac{10 + 11}{2} = 10.5</m>.
-        </p>
-      </statement>
+      <p>
+        The corresponding lower quotas are
+      </p>
+
+      <me>
+        (3, 5, 6, 2, 3, 5, 6, 4, 2, 5).
+      </me>
+
+      <p>
+        These sum to <m>41</m>, leaving <m>4</m> boxes to distribute by remainder.
+      </p>
+
+      <p>
+        The four largest remainders correspond to Ceniceros, Kantrowitz, Bowman, and
+        Tripp, so each receives one additional box under Hamilton's method.
+      </p>
     </example>
+  </subsection>
 
-    <exercise>
-      <statement>
-        <p>
-          Prove that the geometric mean of two distinct positive numbers is always less than the arithmetic mean of those numbers.
-        </p>
-      </statement>
-    </exercise>
+  <subsection xml:id="divisor-methods">
+    <title>Divisor Methods</title>
 
-    <definition>
-      <title>Huntington–Hill Method (Equal Proportions)</title>
+    <p>
+      Divisor methods choose a single divisor and then round the ratios of entity
+      sizes to that divisor. These methods are commonly used because they often
+      satisfy monotonicity properties that Hamilton's method does not.
+    </p>
+
+    <definition xml:id="divisor-method-definition">
+      <title>Divisor Method</title>
 
       <p>
-        The <term>Huntington–Hill method</term> is an apportionment method that assigns seats one at a time using <term>priority values</term> based on population and the geometric mean of consecutive seat numbers.
+        Given a positive divisor <m>d</m>, compute
       </p>
 
+      <me>
+        x_j(d) = \frac{a_j}{d}.
+      </me>
+
       <p>
-        After each state receives one initial seat, additional seats are awarded sequentially to the state with the largest priority value <m>\frac{P}{\sqrt{n(n+1)}}</m>, where <m>P</m> is the state's population and <m>n</m> is the number of seats the state currently holds.
+        Choose <m>d</m> so that rounding each <m>x_j(d)</m> by a fixed rule yields
+        allocations that sum to <m>M</m>.
       </p>
     </definition>
-
-    <remark>
-      <p>
-        The Huntington-Hill method is sometimes described using different <term>divisors</term>, which can be confusing at first.
-        This happens because the method has two equivalent formulations.
-      </p>
-
-      <p>
-        In the <term>priority formulation</term>, seats are assigned one at a time using the priority value <m>\frac{P}{\sqrt{n(n+1)}}</m>, where the divisor <m>\sqrt{n(n+1)}</m> depends on the state's current number of seats.
-      </p>
-
-      <p>
-        In the <term>rounding formulation</term>, a single global divisor is used to compute quotas, and each quota is rounded up or down depending on whether it lies above or below the geometric mean <m>\sqrt{n(n+1)}</m>.
-        Here, the same expression appears as a <term>rounding threshold</term> rather than a priority denominator.
-      </p>
-
-      <p>
-        Although the divisors look different in these descriptions, both approaches implement the same rule: rounding is determined by the geometric mean, which balances relative over- and under-representation.
-      </p>
-    </remark>
 
     <table>
-      <title>Cutoff points for Huntington-Hill rounding of quotas between 1 and 10</title>
-
+      <title>Common Divisor Methods</title>
       <tabular>
-        <row>
-          <cell>Quota is between</cell>
-          <cell>Cutoff point</cell>
+        <row header="yes">
+          <cell>Method</cell>
+          <cell>Rounding Rule</cell>
         </row>
-
         <row>
-          <cell>1 and 2</cell>
-          <cell><m>\sqrt{2} \approx 1.414</m></cell>
+          <cell>Jefferson</cell>
+          <cell>Always round down: <m>\lfloor x_j(d) \rfloor</m></cell>
         </row>
-
         <row>
-          <cell>2 and 3</cell>
-          <cell><m>\sqrt{6} \approx 2.449</m></cell>
+          <cell>Adams</cell>
+          <cell>Always round up: <m>\lceil x_j(d) \rceil</m></cell>
         </row>
-
         <row>
-          <cell>3 and 4</cell>
-          <cell><m>\sqrt{12} \approx 3.464</m></cell>
+          <cell>Webster</cell>
+          <cell>Round to the nearest integer</cell>
         </row>
-
         <row>
-          <cell>4 and 5</cell>
-          <cell><m>\sqrt{20} \approx 4.472</m></cell>
-        </row>
-
-        <row>
-          <cell>5 and 6</cell>
-          <cell><m>\sqrt{30} \approx 5.477</m></cell>
-        </row>
-
-        <row>
-          <cell>6 and 7</cell>
-          <cell><m>\sqrt{42} \approx 6.481</m></cell>
-        </row>
-
-        <row>
-          <cell>7 and 8</cell>
-          <cell><m>\sqrt{56} \approx 7.483</m></cell>
-        </row>
-
-        <row>
-          <cell>8 and 9</cell>
-          <cell><m>\sqrt{72} \approx 8.485</m></cell>
-        </row>
-
-        <row>
-          <cell>9 and 10</cell>
-          <cell><m>\sqrt{90} \approx 9.487</m></cell>
+          <cell>Huntington–Hill</cell>
+          <cell>Round using geometric mean thresholds</cell>
         </row>
       </tabular>
     </table>
 
-    <example>
-      <title>Huntington-Hill and Paradoxes</title>
-
-      <statement>
-        <table>
-          <title>Huntington-Hill method: Calculations standard divisor <m>D = 10,000</m></title>
-
-          <tabular>
-            <row>
-              <cell>State</cell>
-              <cell>Population</cell>
-              <cell>Standard quota</cell>
-              <cell>Cutoff point</cell>
-              <cell>Round quota to</cell>
-            </row>
-
-            <row>
-              <cell>A</cell>
-              <cell>34,800</cell>
-              <cell>3.48</cell>
-              <cell>3.464</cell>
-              <cell>4</cell>
-            </row>
-
-            <row>
-              <cell>B</cell>
-              <cell>104,800</cell>
-              <cell>10.48</cell>
-              <cell>10.488</cell>
-              <cell>10</cell>
-            </row>
-
-            <row>
-              <cell>C</cell>
-              <cell>64,800</cell>
-              <cell>6.48</cell>
-              <cell>6.481</cell>
-              <cell>6</cell>
-            </row>
-
-            <row>
-              <cell>D</cell>
-              <cell>140,800</cell>
-              <cell>14.08</cell>
-              <cell>14.491</cell>
-              <cell>14</cell>
-            </row>
-
-            <row>
-              <cell>E</cell>
-              <cell>54,800</cell>
-              <cell>5.48</cell>
-              <cell>5.477</cell>
-              <cell>6</cell>
-            </row>
-
-            <row>
-              <cell>Total</cell>
-              <cell>400,000</cell>
-              <cell>40</cell>
-              <cell></cell>
-              <cell>40</cell>
-            </row>
-          </tabular>
-        </table>
-
-        <table>
-          <title>Huntington-Hill method: Calculations for with standard divisor <m>D = 10,000</m> and modified divisor <m>d = 10,030</m></title>
-
-          <tabular>
-            <row>
-              <cell>State</cell>
-              <cell>Population</cell>
-              <cell>Standard quota</cell>
-              <cell>Round quota to</cell>
-              <cell>Modified quota <m>d = 10,030</m></cell>
-              <cell>Round quota to</cell>
-            </row>
-
-            <row>
-              <cell>A</cell>
-              <cell>34,800</cell>
-              <cell>3.48</cell>
-              <cell>4</cell>
-              <cell>3.47</cell>
-              <cell>4</cell>
-            </row>
-
-            <row>
-              <cell>B</cell>
-              <cell>105,100</cell>
-              <cell>10.51</cell>
-              <cell>11</cell>
-              <cell>10.479</cell>
-              <cell>10</cell>
-            </row>
-
-            <row>
-              <cell>C</cell>
-              <cell>65,100</cell>
-              <cell>6.51</cell>
-              <cell>7</cell>
-              <cell>6.491</cell>
-              <cell>7</cell>
-            </row>
-
-            <row>
-              <cell>D</cell>
-              <cell>140,200</cell>
-              <cell>14.02</cell>
-              <cell>14</cell>
-              <cell>13.978</cell>
-              <cell>14</cell>
-            </row>
-
-            <row>
-              <cell>E</cell>
-              <cell>54,800</cell>
-              <cell>5.48</cell>
-              <cell>6</cell>
-              <cell>5.464</cell>
-              <cell>5</cell>
-            </row>
-
-            <row>
-              <cell>Total</cell>
-              <cell>400,000</cell>
-              <cell>40</cell>
-              <cell>42</cell>
-              <cell></cell>
-              <cell>40</cell>
-            </row>
-          </tabular>
-        </table>
-      </statement>
-
-      <table>
-        <title>Huntington-Hill method: Calculations modified divisor <m>d = 50,100</m></title>
-
-        <tabular>
-          <row>
-            <cell>State</cell>
-            <cell>Population</cell>
-            <cell>Modified quota</cell>
-            <cell>Cutoff point</cell>
-            <cell>Round quota to</cell>
-          </row>
-
-          <row>
-            <cell>A</cell>
-            <cell>1,646,000</cell>
-            <cell>32.85</cell>
-            <cell>32.496</cell>
-            <cell>33</cell>
-          </row>
-
-          <row>
-            <cell>B</cell>
-            <cell>6,936,000</cell>
-            <cell>138.44</cell>
-            <cell>138.499</cell>
-            <cell>138</cell>
-          </row>
-
-          <row>
-            <cell>C</cell>
-            <cell>154,000</cell>
-            <cell>3.07</cell>
-            <cell>3.464</cell>
-            <cell>3</cell>
-          </row>
-
-          <row>
-            <cell>D</cell>
-            <cell>2,091,000</cell>
-            <cell>41.74</cell>
-            <cell>41.497</cell>
-            <cell>42</cell>
-          </row>
-
-          <row>
-            <cell>E</cell>
-            <cell>685,000</cell>
-            <cell>13.67</cell>
-            <cell>13.491</cell>
-            <cell>14</cell>
-          </row>
-
-          <row>
-            <cell>F</cell>
-            <cell>988,000</cell>
-            <cell>19.72</cell>
-            <cell>19.494</cell>
-            <cell>20</cell>
-          </row>
-
-          <row>
-            <cell>Total</cell>
-            <cell>12,500,000</cell>
-            <cell></cell>
-            <cell></cell>
-            <cell>250</cell>
-          </row>
-        </tabular>
-      </table>
-    </example>
-  </subsection>
-
-
-  <subsection>
-    <title>Paradoxes</title>
-
-    <dl>
-    <li>
-      <title>Quota paradox</title>
-
-      <p>
-        This paradox occurs when a state is assigned a number of seats that lies outside its quota—that is, it receives fewer than its lower quota or more than its upper quota.
-        A state's lower quota is the whole number part (floor) of its standard quota, and its upper quota is the next integer (ceiling).
-        Any apportionment method that violates this rule is said to exhibit the quota paradox.
-        While Hamilton's method always satisfies the quota rule, several divisor methods can, in certain situations, assign a state a number of seats outside its quota.
-      </p>
-    </li>
-
-    <li>
-      <title>Alabama paradox</title>
-
-      <p>
-        This paradox occurs when a state gets apportioned fewer seats simply because the total number of seats being apportioned has increased.
-        Under Hamilton's method, increasing the house size can reshuffle the residues (fractional parts) of the standard quotas; some states can move ahead of others in the priority order for surplus seats, and a state can lose a seat it previously had.
-        A famous historical instance arose in the 1880s when proposed U.S.
-        House sizes led to Alabama receiving fewer seats when the House size increased by one.
-      </p>
-    </li>
-
-    <li>
-      <title>Population paradox</title>
-
-      <p>
-        This paradox occurs when a state gets apportioned fewer seats simply because its population has increased.
-        More specifically, it describes situations in which state X loses a seat to state Y even though X grew in population at a higher rate than Y.
-        Under Hamilton's method, changes in populations can change residues and the surplus-seat priority order in a way that produces this outcome.
-      </p>
-    </li>
-
-    <li>
-      <title>New-states paradox</title>
-
-      <p>
-        This paradox occurs when a state's apportionment is affected simply by virtue of the fact that a new state (together with its fair share of seats) has been added to the computation.
-        Historically, when Oklahoma joined the Union in 1907, the House size was increased to accommodate Oklahoma's fair share, but the recalculated apportionment still shifted seats among existing states (for example, Maine gained a seat while New York lost one).
-      </p>
-    </li>
-    </dl>
-  </subsection>
-
-
-  <subsection xml:id="apportionment-problem">
-    <title>The Apportionment Problem, but Mathier</title>
-
-    <subsubsection xml:id="apportionment-variables">
-      <title>Formal Mathematical Variables</title>
-
-      <p>
-        The problem can be defined using the following parameters:
-      </p>
-      <dl> <dt><m>M</m></dt> <dd> A positive integer representing the total number of items to be distributed (for example, the total number of seats in a legislative body). </dd> <dt><m>n</m></dt> <dd> The number of entities receiving the items (for example, states or political parties). </dd> <dt><m>\mathbf{a} = (a_1,\ldots,a_n)</m></dt> <dd> An <m>n</m>-dimensional real vector representing the size of each entity (such as population or vote counts). </dd> <dt><m>A</m></dt> <dd> The sum of all entries in <m>\mathbf{a}</m>, given by <m>A = \sum_{i=1}^n a_i</m>. </dd> <dt><m>\mathbf{m} = (m_1,\ldots,m_n)</m></dt> <dd> An integer vector where <m>m_j</m> is the final number of units allocated to entity <m>j</m>, satisfying <m>\sum_{j=1}^n m_j = M</m> and <m>m_j \ge 0</m>. </dd> </dl>
-    </subsubsection>
-
-    <subsubsection xml:id="exact-quota">
-      <title>The Exact Quota</title>
-
-      <p>
-        A central concept in apportionment is the <term>exact quota</term>, denoted <m>q_j</m>, which represents the ideal fractional share of units an entity would receive if units were divisible.
-        It is defined by
-      </p>
-      <me>
-        q_j = \frac{a_j}{A} M.
-      </me>
-
-      <p>
-        In an ideal mathematical world, we would have <m>m_j = q_j</m>.
-        However, because <m>m_j</m> must be an integer and <m>q_j</m> is typically a real number, an apportionment method is required to map the real vector of quotas to an integer vector of allocations.
-      </p>
-    </subsubsection>
-
-    <subsubsection xml:id="apportionment-axioms">
-      <title>Mathematical Constraints and Properties</title>
-
-      <p>
-        For an apportionment method to be considered fair or valid, it is often expected to satisfy certain mathematical axioms:
-      </p>
-
-      <ul>
-        <li>
-          <em>Symmetry.</em> The outcome should not depend on the order in which the entities are listed.
-        </li>
-
-        <li>
-          <em>Homogeneity.</em> If all input values <m>a_j</m> are multiplied by the same positive constant, the resulting apportionment should remain unchanged.
-        </li>
-
-        <li>
-          <em>The Quota Rule.</em> A method satisfies this rule if each allocation <m>m_j</m> is either <m>\lfloor q_j \rfloor</m> or <m>\lceil q_j \rceil</m>.
-        </li>
-
-        <li>
-          <em>House Monotonicity.</em> If the total number of units increases from <m>M</m> to <m>M+1</m>, no entity’s allocation <m>m_j</m> should decrease. This property rules out paradoxes such as the Alabama Paradox.
-        </li>
-      </ul>
-    </subsubsection>
-
-    <subsubsection xml:id="error-minimization">
-      <title>Error Minimization</title>
-
-      <p>
-        From a mathematical perspective, many apportionment methods can be viewed as attempting to minimize the error between the ideal proportions <m>q_j</m> and the actual integer allocations <m>m_j</m>.
-        This is often modeled using a decomposable error function
-      </p>
-      <me>
-        \psi(\mathbf{m}) = \sum_{j=1}^n \varphi_j(m_j),
-      </me>
-
-      <p>
-        where <m>\varphi_j</m> measures the severity of the error for entity <m>j</m>.
-        For example, the Sainte-Lague method can be characterized as minimizing an error function based on the squared difference between allocated units and exact quotas.
-      </p>
-    </subsubsection>
-  </subsection>
-
-
-  <subsection>
-    <title>More</title>
-
     <p>
-      Why doesn't the size of the House change anymore? <url href="https://public.tableau.com/views/Apportionment_16116063135030/Apportionment?:language=en-US&amp;:sid=&amp;:redirect=auth&amp;:display_count=n&amp;:origin=viz_share_link">See how House would have to scale with the population over time at this interactive Census applet</url>
-    </p>
-
-    <p>
-      Apportionment is rife with paradoxes.
-      Let's dig in.
+      Different divisor methods correspond to different partitions of the quota
+      simplex. The choice of rounding rule determines which integer allocations
+      are assigned to which regions.
     </p>
   </subsection>
 
-
-  <subsection>
-    <title>That's not fair!</title>
-
-    <example>
-      <p>
-        In our CJ Coffee Distribution Scheme, there were some possibilities we didn't consider.
-        <table>
-          <title>Hamilton Apportionment</title>
-
-          <tabular>
-            <row header="yes" bottom="minor" >
-              <cell>Prof.</cell>
-              <cell>A</cell>
-              <cell>B</cell>
-              <cell>Ce</cell>
-              <cell>Co</cell>
-              <cell>D</cell>
-              <cell>G</cell>
-              <cell>Ka</cell>
-              <cell>Ku</cell>
-              <cell>L</cell>
-              <cell>T</cell>
-              <cell>Total</cell>
-            </row>
-
-            <row>
-              <cell>Pop</cell>
-              <cell>35</cell>
-              <cell>60</cell>
-              <cell>71</cell>
-              <cell>22</cell>
-              <cell>38</cell>
-              <cell>55</cell>
-              <cell>73</cell>
-              <cell>45</cell>
-              <cell>28</cell>
-              <cell>58</cell>
-              <cell>485</cell>
-            </row>
-
-            <row>
-              <cell>Q</cell>
-              <cell>3.25</cell>
-              <cell>5.57</cell>
-              <cell>6.59</cell>
-              <cell>2.04</cell>
-              <cell>3.53</cell>
-              <cell>5.10</cell>
-              <cell>6.77</cell>
-              <cell>4.18</cell>
-              <cell>2.60</cell>
-              <cell>5.38</cell>
-              <cell><m>\sim</m>485</cell>
-            </row>
-
-            <row>
-              <cell>Boxes</cell>
-              <cell><m>5</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>0</m></cell>
-              <cell><m>45</m></cell>
-            </row>
-
-            <row>
-              <cell>Boxes</cell>
-              <cell><m>4</m></cell>
-              <cell><m>4</m></cell>
-              <cell><m>4</m></cell>
-              <cell><m>4</m></cell>
-              <cell><m>4</m></cell>
-              <cell><m>9</m></cell>
-              <cell><m>4</m></cell>
-              <cell><m>4</m></cell>
-              <cell><m>4</m></cell>
-              <cell><m>4</m></cell>
-              <cell><m>45</m></cell>
-            </row>
-          </tabular>
-        </table>
-      </p>
-    </example>
-  </subsection>
-
-
-  <subsection xml:id="apportionment-problem-again">
-    <title>The Apportionment Problem, but Mathier</title>
-
-    <subsubsection xml:id="apportionment-variables-again">
-      <title>Formal Mathematical Variables</title>
-
-      <p>
-        The problem can be defined using the following parameters:
-      </p>
-      <dl> <dt><m>M</m></dt> <dd> A positive integer representing the total number of items to be distributed (for example, the total number of seats in a legislative body). </dd> <dt><m>n</m></dt> <dd> The number of entities receiving the items (for example, states or political parties). </dd> <dt><m>\mathbf{p} = (p_1,\ldots,p_n)</m></dt> <dd> An <m>n</m>-dimensional real vector representing the size of each entity (such as population or vote counts). </dd> <dt><m>P</m></dt> <dd> The sum of all entries in <m>\mathbf{p}</m>, given by <m>P = \sum_{i=1}^n p_i</m>. </dd> <dt><m>\mathbf{m} = (m_1,\ldots,m_n)</m></dt> <dd> An integer vector where <m>m_s</m> is the final number of units allocated to entity <m>s</m>, satisfying <m>\sum_{s=1}^n m_s = M</m> and <m>m_s \ge 0</m>. </dd> </dl>
-    </subsubsection>
-
-    <subsubsection xml:id="exact-quota-again">
-      <title>The (Exact) Quota</title>
-
-      <p>
-        A central concept in apportionment is the <term>exact quota</term>, denoted <m>q_s</m>, which represents the ideal fractional share of units an entity would receive if units were divisible.
-        It is defined by
-      </p>
-      <me>
-        q_s = \frac{p_s}{P} M.
-      </me>
-
-      <p>
-        In an ideal mathematical world, we would have <m>m_s = q_s</m>.
-        However, because <m>m_s</m> must be an integer and <m>q_s</m> is typically a rational number that is not an integer, an apportionment method is required to map the real vector of quotas to an integer vector of allocations.
-      </p>
-    </subsubsection>
-
-    <definition xml:id="definition-apportionment-method">
-      <title>Apportionment Method: a function!</title>
-
-      <p>
-        Fix a positive integer <m>M</m> and an integer <m>n \ge 2</m>.
-        Let <m>\mathcal{Q} = \{\mathbf{q} \in \mathbb{R}_{\ge 0}^n : \sum_{s=1}^n q_s = M\}</m> denote the space of exact quota vectors, and let <m>\mathcal{M} = \{\mathbf{m} \in \mathbb{Z}_{\ge 0}^n : \sum_{s=1}^n m_s = M\}</m> denote the set of feasible integer allocations.
-      </p>
-
-      <p>
-        An <term>apportionment method</term> is a function
-      </p>
-      <me>
-        F : \mathcal{Q} \longrightarrow \mathcal{M}
-      </me>
-
-      <p>
-        that assigns to each exact quota vector <m>\mathbf{q}</m> a unique integer allocation <m>\mathbf{m} = F(\mathbf{q})</m>.
-      </p>
-
-      <p>
-        The method <m>F</m> induces a partition of <m>\mathcal{Q}</m> into regions
-      </p>
-      <me>
-        P(\mathbf{m}) = \{\mathbf{q} \in Q : F(\mathbf{q}) = \mathbf{m}\},
-      </me>
-
-      <p>
-        called the <term>apportionment polyhedra</term>.
-        Each polyhedron consists of all exact quota vectors that are mapped to the same integer allocation.
-      </p>
-    </definition>
-
-    <figure>
-      <caption>
-      <p>
-        The positive orthant, <m>\mathcal{Q}</m>, and <m>\mathcal{M}</m>
-      </p>
-      with three states and five seats.
-      </caption>
-      <image scale="90%">
-        <latex-image>
-\usetikzlibrary{calc}
-\tikzset{
-  axis length/.store in=\AxisLen,
-  plane length/.store in=\PlaneLen,
-  x foreshorten/.store in=\ForeshortenX,
-  x angle/.store in=\AngleX,
-  axis length=3,
-  plane length=2.4,
-  x foreshorten=0.7,
-  x angle=-135
-}
-\begin{tikzpicture}[scale=1, line cap=round, line join=round]
-  % Basis directions in the page (a projection of R^3):
-  % y: to the right
-  % z: straight up
-  % x: 135 degrees from y (i.e., up-left)
-  \coordinate (O) at (0,0);
-  \coordinate (Y) at (\AxisLen,0);
-  \coordinate (Z) at (0,\AxisLen);
-  \coordinate (X) at ({\ForeshortenX*\AxisLen*cos(\AngleX)},{\ForeshortenX*\AxisLen*sin(\AngleX)});
-  % Useful derived points
-  \coordinate (XY) at ($(X)+(Y)$);
-  \coordinate (XZ) at ($(X)+(Z)$);
-  \coordinate (YZ) at ($(Y)+(Z)$);
-  % Lightly shade the three coordinate planes in the positive orthant
-  \fill[gray!15] (O) -- (X) -- (XY) -- (Y) -- cycle; % xy-plane
-  \fill[gray!10] (O) -- (X) -- (XZ) -- (Z) -- cycle; % xz-plane
-  \fill[gray!20] (O) -- (Y) -- (YZ) -- (Z) -- cycle; % yz-plane
-  % Draw axes
-  \draw[->, very thick] (O) -- (X) node[above left] {$x$};
-  \draw[->, very thick] (O) -- (Y) node[below right] {$y$};
-  \draw[->, very thick] (O) -- (Z) node[above] {$z$};
-  % Optional: mark the origin
-  \fill (O) circle (1.4pt) node[below left] {$0$};
-\end{tikzpicture}
-\begin{tikzpicture}[scale=1, line cap=round, line join=round]
-  % Origin
-  \coordinate (O) at (0,0);
-  % Axes directions (projection)
-  \coordinate (Y) at (\AxisLen,0);                 % y axis
-  \coordinate (Z) at (0,\AxisLen);                 % z axis
-  \coordinate (X) at ({\ForeshortenX*\AxisLen*cos(\AngleX)},{\ForeshortenX*\AxisLen*sin(\AngleX)}); % x axis
-  % Plane intercepts (scaled)
-  \coordinate (PX) at ({\ForeshortenX*\PlaneLen*cos(\AngleX)},{\ForeshortenX*\PlaneLen*sin(\AngleX)}); % (5,0,0)
-  \coordinate (PY) at (\PlaneLen,0);                        % (0,5,0)
-  \coordinate (PZ) at (0,\PlaneLen);                        % (0,5,0)
-  % Derived corners
-  \coordinate (XY) at ($(X)+(Y)$);
-  \coordinate (XZ) at ($(X)+(Z)$);
-  \coordinate (YZ) at ($(Y)+(Z)$);
-  % Coordinate planes (positive orthant)
-  \fill[gray!12] (O) -- (X) -- (XY) -- (Y) -- cycle; % xy
-  \fill[gray!8]  (O) -- (X) -- (XZ) -- (Z) -- cycle; % xz
-  \fill[gray!18] (O) -- (Y) -- (YZ) -- (Z) -- cycle; % yz
-  % Plane a+b+c=5 (simplex face)
-  \fill[blue!25, opacity=0.7]
-    (PX) -- (PY) -- (PZ) -- cycle;
-  % Plane edges
-  \draw[thick, blue!70!black]
-    (PX) -- (PY) -- (PZ) -- cycle;
-  % Axes
-  \draw[->, very thick] (O) -- (X) node[above left] {$x$};
-  \draw[->, very thick] (O) -- (Y) node[below right] {$y$};
-  \draw[->, very thick] (O) -- (Z) node[above] {$z$};
-  % Labels for intercepts
-  \node[above left]  at (PX) {$5$};
-  \node[below right] at (PY) {$5$};
-  \node[above right] at (PZ) {$5$};
-  % Origin
-  \fill (O) circle (1.4pt) node[below left] {$0$};
-\end{tikzpicture}
-\begin{tikzpicture}[scale=1, line cap=round, line join=round]
-  \coordinate (O) at (0,0);
-  \coordinate (Y) at (\AxisLen,0);
-  \coordinate (Z) at (0,\AxisLen);
-  \coordinate (X) at ({\ForeshortenX*\AxisLen*cos(\AngleX)},{\ForeshortenX*\AxisLen*sin(\AngleX)});
-  \coordinate (PX) at ({\ForeshortenX*\PlaneLen*cos(\AngleX)},{\ForeshortenX*\PlaneLen*sin(\AngleX)});
-  \coordinate (PY) at (\PlaneLen,0);
-  \coordinate (PZ) at (0,\PlaneLen);
-  \coordinate (XY) at ($(X)+(Y)$);
-  \coordinate (XZ) at ($(X)+(Z)$);
-  \coordinate (YZ) at ($(Y)+(Z)$);
-  % coordinate planes
-  \fill[gray!12] (O) -- (X) -- (XY) -- (Y) -- cycle;
-  \fill[gray!8]  (O) -- (X) -- (XZ) -- (Z) -- cycle;
-  \fill[gray!18] (O) -- (Y) -- (YZ) -- (Z) -- cycle;
-  % plane a+b+c=5
-  \fill[blue!25, opacity=0.7] (PX) -- (PY) -- (PZ) -- cycle;
-  \draw[thick, blue!70!black] (PX) -- (PY) -- (PZ) -- cycle;
-  % axes
-  \draw[->, very thick] (O) -- (X) node[above left] {$x$};
-  \draw[->, very thick] (O) -- (Y) node[below right] {$y$};
-  \draw[->, very thick] (O) -- (Z) node[above] {$z$};
-  \node[above left]  at (PX) {$5$};
-  \node[below right] at (PY) {$5$};
-  \node[above right] at (PZ) {$5$};
-  \fill (O) circle (1.4pt) node[below left] {$0$};
-  % ---- lattice points (a,b,c) with a+b+c=5 ----
-  \foreach \a in {0,...,5} {
-    \foreach \b in {0,...,5} {
-      \pgfmathtruncatemacro{\c}{5-\a-\b}
-      \ifnum\c\lt 0\relax
-      \else
-        % weights as decimals
-        \pgfmathsetmacro{\wa}{\a/5}
-        \pgfmathsetmacro{\wb}{\b/5}
-        \pgfmathsetmacro{\wc}{\c/5}
-        \coordinate (P) at ($ \wa*(PX) + \wb*(PY) + \wc*(PZ) $);
-        \fill (P) circle (2pt);
-      \fi
-    }
-  }
-\end{tikzpicture}
-        </latex-image>
-      </image>
-    </figure>
-  </subsection>
-
-
-  <subsection xml:id="apportionment-polyhedra">
-    <title>Apportionment Polyhedra</title>
+  <subsection xml:id="simplex-geometry">
+    <title>Simplex Geometry and Barycentric Coordinates</title>
 
     <p>
-      An <term>apportionment polyhedron</term> is a geometric region within the space of all possible exact quota vectors <m>\mathbf{q}</m> that a particular apportionment method maps to a single, fixed integer seat allocation <m>\mathbf{m}</m>.
-      In mathematical terms, it consists of all fractional quota vectors that result in the same whole-number distribution of seats.
+      The set of all exact quota vectors is a geometric object called a simplex.
+      For three entities, it is a triangle; for four, a tetrahedron; and for
+      <m>n</m> entities, it is an <m>(n-1)</m>-dimensional simplex.
     </p>
 
-    <subsubsection xml:id="polyhedron-geometry">
-      <title>Geometric Representation</title>
-
-      <p>
-        The concept is best understood by visualizing the space of exact quotas.
-      </p>
-
-      <ul>
-        <li>
-          <em>The set <m>\mathcal{Q}</m>.</em> This set contains all possible fractional distributions of <m>M</m> items among <m>n</m> entities. For example, if there are three parties and <m>M = 5</m> seats, the set <m>\mathcal{Q}</m> forms an equilateral triangle in three-dimensional space with vertices at <m>(5,0,0)</m>, <m>(0,5,0)</m>, and <m>(0,0,5)</m>.
-        </li>
-
-        <li>
-          <em>Integer points.</em> Within this geometric space, the possible integer seat allocations are represented by discrete lattice points corresponding to integer vectors <m>\mathbf{m}</m>.
-        </li>
-
-        <li>
-          <em>Defining the polyhedra.</em> A valid apportionment method partitions the larger region <m>Q</m> into smaller regions, or polyhedra, each associated with a single integer allocation. Any exact quota vector lying inside a given polyhedron is rounded or mapped to the integer allocation corresponding to that region.
-        </li>
-      </ul>
-
-      <p>
-        The shape and size of apportionment polyhedra depend on the error function or rounding rule associated with the chosen apportionment method.
-      </p>
-
-      <ul>
-        <li>
-          <em>Mapping.</em> A desirable property of an apportionment method is that any exact quota vector that is already an integer vector is mapped to itself.
-        </li>
-
-        <li>
-          <em>Borders.</em> The boundaries between apportionment polyhedra correspond to tie situations, where an exact quota vector may be equally compatible with two or more integer seat allocations. In such cases, the method must include a rule for resolving ties along these boundaries.
-        </li>
-      </ul>
-
-      <p>
-        To find apportionment polyhedra given an apportionment function, it is useful to introduce <term>barycentric coordinates</term>.
-        Given a value <m>M</m>, a barycentric <m>n</m>-tuple <m>(q_1,q_2,\cdots,q_m)</m> satisfies the property that <m>q_i \geq 0</m> for each coordinate and <m>\sum_{i = 1}^n q_i = M</m>.
-        We can imagine each tuple with an <m>M</m> in one spot and zeros elsewhere to be sitting at the corner of an <m>n</m>-dimensional simplex, which results from treating the tuple like the end of a vector with tail at the original in <m>\mathbb{R}_{\geq 0}^n</m>.
-        Given a coordinate <m>q_i</m>, the face opposite its is the set of all barycentric coordinates with a zero in position <m>i</m>.
-      </p>
-
-      <figure>
-        <caption>
-        <p>
-          Moving around the triangle where the barycentric coordinates sum to five.
-          The barycentric tuple <m>P = (2,2,1)</m> lies on the line <m>q_2 = 2</m> (and the line <m>q_1 = 2</m>, and the line <m>q_3 = 1</m>).
-        </p>
-        </caption>
-
-        <image>
-          <latex-image>
-  \usetikzlibrary{calc}
-\begin{tikzpicture}[scale=1.1, line cap=round, line join=round]
-  \pgfmathsetmacro{\N}{5} % sum of coordinates
-  \pgfmathsetmacro{\S}{6} % side length (visual)
-  % Equilateral triangle vertices
-  \coordinate (A) at (0,0);                 % (N,0,0) i.e. q1=N
-  \coordinate (B) at (\S,0);                % (0,N,0) i.e. q2=N
-  \coordinate (C) at ({\S/2},{\S*sqrt(3)/2}); % (0,0,N) i.e. q3=N
-  % Barycentric placement helper:
-  % point with (q1,q2,q3) and q1+q2+q3 = N is
-  % (q1/N)*A + (q2/N)*B + (q3/N)*C
-  \newcommand{\Bary}[4]{%
-    \pgfmathsetmacro{\wone}{#1/\N}%
-    \pgfmathsetmacro{\wtwo}{#2/\N}%
-    \pgfmathsetmacro{\wthree}{#3/\N}%
-    \coordinate (#4) at ($ \wone*(A) + \wtwo*(B) + \wthree*(C) $);%
-  }
-  % Draw the simplex boundary
-  \draw[thick] (A) -- (B) -- (C) -- cycle;
-  % Label vertices
-  \node[below left]  at (A) {$(5,0,0)$};
-  \node[below right] at (B) {$(0,5,0)$};
-  \node[above]       at (C) {$(0,0,5)$};
-  % (Optional) label axes directions on edges
-  % \node[font=\small, below] at ($(A)!0.5!(B)$) {$q_3=0$};
-  % \node[font=\small, left]  at ($(A)!0.5!(C)$) {$q_2=0$};
-  % \node[font=\small, right] at ($(B)!0.5!(C)$) {$q_1=0$};
-  % Boundary for q1 - q3 = 1 intersects at (1,4,0) and (3,0,2)
-  \Bary{4}{1}{0}{P} % (4,1,0)
-  \Bary{0}{1}{4}{Q} % (0,1,4)
-  \Bary{0}{2}{3}{S} % (3,2,0)
-  \Bary{3}{2}{0}{T}
-  \Bary{2}{3}{0}{R} % (0,2,3)
-  \Bary{0}{3}{2}{L} % (2,3,0)
-  \Bary{1}{4}{0}{N} % (0,3,2)
-  \Bary{0}{4}{1}{M} % (1,4,0)
-  \Bary{2}{2}{1}{X} % (2,2,1)
-  \Bary{1.5}{1.5}{2}{Y}
-  % Draw the boundary line (dashed since strict inequality)
-  \draw[thick, dashed] (P) -- (Q) node[midway, above] {$q_2 = 1$};
-  \draw[thick, dashed] (S) -- (T) node[midway, above] {$q_2 = 2$};
-  \draw[thick, dashed] (R) -- (L) node[midway, above] {$q_2 = 3$};
-  \draw[thick, dashed] (M) -- (N) node[midway, above] {$q_2 = 4$};
-  \fill (X) circle (1.2pt) node[above left, font=\small] {$P$};
-  \end{tikzpicture}
-          </latex-image>
-        </image>
-      </figure>
-    </subsubsection>
-
-    <subsubsection xml:id="apportionment-axioms-again">
-      <title>Mathematical Constraints and Properties</title>
-
-      <p>
-        For an apportionment method to be considered fair or valid, it is often expected to satisfy certain mathematical axioms:
-      </p>
-
-      <ul>
-        <li>
-          <term>Symmetry.</term> The outcome should not depend on the order in which the entities are listed.
-        </li>
-
-        <li>
-          <term>Homogeneity.</term> If all input values <m>q_j</m> are multiplied by the same positive constant, the resulting apportionment should remain unchanged.
-        </li>
-
-        <li>
-          <term>The Quota Rule.</term> A method satisfies this rule if each allocation <m>m_j</m> is either <m>\lfloor q_j \rfloor</m> or <m>\lceil q_j \rceil</m>.
-        </li>
-
-        <li>
-          <term>House Monotonicity.</term> If the total number of units increases from <m>M</m> to <m>M+1</m>, no entity's allocation <m>m_j</m> should decrease. This property rules out paradoxes such as the Alabama Paradox.
-        </li>
-      </ul>
-
-      <p>
-        The Balinski-Young Theorem essentially says that there is no apportionment rule that satisfies all of these criteria all the time!
-      </p>
-    </subsubsection>
-
-    <subsubsection xml:id="example-hamilton-method">
-      <title>Hamilton's Method as an Apportionment Function</title>
-
-      <p>
-        Fix <m>M</m> seats and <m>n</m> entities.
-        Given an exact quota vector <m>\mathbf{q} \in \mathcal{Q}</m>, Hamilton's method proceeds as follows:
-      </p>
-
-      <ol>
-        <li>
-          Assign each entity its lower quota <m>m_j = \lfloor q_j \rfloor</m>.
-        </li>
-
-        <li>
-          Distribute the remaining seats, one at a time, to the entities with the largest fractional remainders <m>q_j - \lfloor q_j \rfloor</m>.
-        </li>
-      </ol>
-
-      <p>
-        This defines an apportionment method <m>F_{\text{Ham}} : \mathcal{Q} \to \mathcal{M}</m>, since every quota vector is mapped to a unique integer allocation.
-      </p>
-
-      <p>
-        Geometrically, the apportionment polyhedra for Hamilton's method are regions determined by inequalities comparing fractional parts of the quotas.
-        The boundaries between polyhedra occur where two or more remainders are equal, leading to ties in the final seat assignment.
-      </p>
-
-      <p>
-        Because these boundaries depend on global comparisons of remainders, the resulting polyhedra need not arise from minimizing a single global error function.
-        This explains why Hamilton's method can satisfy the Quota Rule while still exhibiting paradoxes such as the Alabama Paradox.
-      </p>
-
-      <example xml:id="example-hamilton-polyhedron-coffee-3-6-6">
-        <title>The Hamilton Polyhedron for an example.</title>
-
-        <p>
-          Suppose we have <m>M=15</m> boxes of coffee to distribute among three people (Ahmed, Gibbons, and Tripp) in proportion to their <q>need scores</q> <m>\mathbf{a}=(35,55,58)</m>.
-        </p>
-
-        <p>
-          The total is <m>A = 35+55+58 = 148</m>, so the exact quotas are <m>q_j = \dfrac{a_j}{A}M</m>.
-        </p>
-
-        <table xml:id="table-coffee-quotas">
-          <title>Exact quotas and remainders for 15 boxes</title>
-
-          <tabular>
-            <col align="left"/> <col align="right"/> <col align="right"/> <col align="right"/> <col align="right"/>
-            <row header="yes">
-              <cell>Person</cell>
-              <cell><m>a_j</m></cell>
-              <cell><m>q_j=\frac{a_j}{148}\cdot 15</m></cell>
-              <cell><m>\lfloor q_j\rfloor</m></cell>
-              <cell>Remainder</cell>
-            </row>
-
-            <row>
-              <cell>Ahmed</cell>
-              <cell><m>35</m></cell>
-              <cell><m>\frac{525}{148}\approx 3.547</m></cell>
-              <cell><m>3</m></cell>
-              <cell><m>\approx 0.547</m></cell>
-            </row>
-
-            <row>
-              <cell>Gibbons</cell>
-              <cell><m>55</m></cell>
-              <cell><m>\frac{825}{148}\approx 5.574</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>\approx 0.574</m></cell>
-            </row>
-
-            <row>
-              <cell>Tripp</cell>
-              <cell><m>58</m></cell>
-              <cell><m>\frac{870}{148}\approx 5.878</m></cell>
-              <cell><m>5</m></cell>
-              <cell><m>\approx 0.878</m></cell>
-            </row>
-          </tabular>
-        </table>
-
-        <p>
-          Using Hamilton's (largest remainder) method, we first assign lower quotas: <m>(3,5,5)</m>, which totals <m>13</m> boxes, leaving <m>2</m> boxes to distribute.
-          The two largest remainders are Tripp's and Gibbons's, so each receives one additional box.
-        </p>
-
-        <p>
-          The final allocation is
-          <me>
-            (m_{\text{Ahmed}},m_{\text{Gibbons}},m_{\text{Tripp}}) = (3,6,6).
-          </me>
-        </p>
-
-        <p>
-          Consider Hamilton’s method on the quota simplex <m>\mathcal{Q}=\{(q_A,q_G,q_T)\in\mathbb{R}_{\ge0}^3:\ q_A+q_G+q_T=15\}</m>.
-          We describe the region of quota vectors that Hamilton maps to the allocation <m>(3,6,6)</m>.
-        </p>
-
-        <p>
-          For Hamilton’s method to output <m>(3,6,6)</m>, the lower-quota step must first produce
-          <ul>
-            <li>
-              Two seats left: <m>(2,5,6)</m>, <m>(2,6,5)</m>, or <m>(3,5,5)</m>;
-            </li>
-
-            <li>
-              One seat left: <m>(2,6,6)</m>, <m>(3,5,6)</m>, or <m>(3,6,5)</m>;
-            </li>
-
-            <li>
-              No seats left: <m>(3,6,6)</m>.
-            </li>
-          </ul>
-        </p>
-
-        <p>
-          In our example, we have the scenario that the lower quotas produce <m>(3,5,5)</m>, and the remainders satisfy <m>r_G \gt r_A</m>, <m>r_T > r_A</m>:
-        </p>
-        <me>
-          3 \le q_A &lt; 4,\qquad 5 \le q_G &lt; 6,\qquad 5 \le q_T &lt; 6, \qquad q_A+q_G+q_T=15.
-        </me>
-
-        <p>
-          Write the remainders as <m>r_A=q_A-3</m>, <m>r_G=q_G-5</m>, and <m>r_T=q_T-5</m>.
-          To award the two remaining seats to Gibbons and Tripp (and not to Ahmed), we need the two inequalities
-        </p>
-        <me>
-          r_G &gt; r_A,\qquad r_T &gt; r_A.
-        </me>
-
-        <p>
-          Equivalently, these are linear conditions on the quotas:
-        </p>
-        <me>
-          q_G - q_A &gt; 2,\qquad q_T - q_A &gt; 2.
-        </me>
-
-        <p>
-          Therefore, part of the (open) Hamilton region mapping to <m>(3,6,6)</m> is
-        </p>
-        <me>
-          P(3,6,6) \supseteq \left\{ (q_A,q_G,q_T)\in Q: \begin{array}{l} 3 \le q_A &lt; 4,\ 5 \le q_G &lt; 6,\ 5 \le q_T &lt; 6,\\ q_G-q_A &gt; 2,\ q_T-q_A &gt; 2 \end{array} \right\}.
-        </me>
-
-        <p>
-          The boundary of this region consists of tie situations, such as <m>r_G=r_A</m> or <m>r_T=r_A</m>, together with the grid oundaries where a quota crosses an integer and a lower quota changes (for example, <m>q_G=6</m>).
-          A complete closed polyhedron requires a specified tie-breaking rule on these boundary sets.
-        </p>
-      </example>
-    </subsubsection>
-  </subsection>
-
-
-  <subsection xml:id="apportionment-polyhedra-again">
-    <title>Apportionment Polyhedra</title>
-
-    <p>
-      An <term>apportionment polyhedron</term> is a geometric region within the space of all possible exact quota vectors <m>\mathbf{q}</m> that a particular apportionment method maps to a single, fixed integer seat allocation <m>\mathbf{m}</m>.
-      In mathematical terms, it consists of all fractional quota vectors that result in the same whole-number distribution of seats.
-    </p>
-
-    <subsubsection xml:id="polyhedron-geometry-again">
-      <title>Geometric Representation</title>
-
-      <p>
-        The concept is best understood by visualizing the space of exact quotas.
-      </p>
-
-      <ul>
-        <li>
-          <em>The set <m>Q</m>.</em> This set contains all possible fractional distributions of <m>M</m> items among <m>n</m> entities. For example, if there are three parties and <m>M = 5</m> seats, the set <m>Q</m> forms an equilateral triangle in three-dimensional space with vertices at <m>(5,0,0)</m>, <m>(0,5,0)</m>, and <m>(0,0,5)</m>.
-        </li>
-
-        <li>
-          <em>Integer points.</em> Within this geometric space, the possible integer seat allocations are represented by discrete lattice points corresponding to integer vectors <m>\mathbf{m}</m>.
-        </li>
-
-        <li>
-          <em>Defining the polyhedra.</em> A valid apportionment method partitions the larger region <m>Q</m> into smaller regions, or polyhedra, each associated with a single integer allocation. Any exact quota vector lying inside a given polyhedron is rounded or mapped to the integer allocation corresponding to that region.
-        </li>
-      </ul>
-    </subsubsection>
-
-    <subsubsection xml:id="polyhedron-function">
-      <title>Function and Boundaries</title>
-
-      <p>
-        The shape and size of apportionment polyhedra depend on the error function or rounding rule associated with the chosen apportionment method.
-      </p>
-
-      <ul>
-        <li>
-          <em>Mapping.</em> A desirable property of an apportionment method is that any exact quota vector that is already an integer vector is mapped to itself.
-        </li>
-
-        <li>
-          <em>Borders.</em> The boundaries between apportionment polyhedra correspond to tie situations, where an exact quota vector may be equally compatible with two or more integer seat allocations. In such cases, the method must include a rule for resolving ties along these boundaries.
-        </li>
-      </ul>
-    </subsubsection>
-  </subsection>
-
-
-  <subsection xml:id="polyhedra-fairness">
-    <title>Using Apportionment Polyhedra to Assess Fairness</title>
-
-    <p>
-      The <term>apportionment polyhedron</term> provides a geometric framework for assessing the fairness of an apportionment method by describing how the method rounds exact quotas—the ideal fractional shares of seats—into whole-number allocations.
-      By analyzing the shapes and boundaries of these polyhedra, mathematicians and social scientists can determine which methods minimize rounding error and which are susceptible to representational paradoxes.
-    </p>
-
-    <subsubsection xml:id="visualizing-rounding-error">
-      <title>Visualizing Rounding and Error</title>
-
-      <p>
-        Geometrically, the space of all possible exact quota vectors <m>Q</m> is partitioned into regions, or polyhedra, each associated with a single integer seat allocation.
-      </p>
-
-      <ul>
-        <li>
-          <em>Mapping fairness.</em> A well-behaved apportionment method maps any exact quota vector lying inside a given polyhedron to the integer allocation at its center. Fairness can then be assessed by measuring the <term>gravity of the error</term>, defined as the distance or discrepancy between the ideal quota <m>q_j</m> and the resulting integer allocation <m>m_j</m>.
-        </li>
-
-        <li>
-          <em>Defining boundaries.</em> The boundaries between polyhedra correspond to tie situations, in which an exact quota vector may be equally compatible with more than one integer allocation. A fair method must resolve such ties using a consistent rule, rather than an arbitrary choice.
-        </li>
-      </ul>
-    </subsubsection>
-
-    <subsubsection xml:id="comparing-methods">
-      <title>Comparing Methodological Justness</title>
-
-      <p>
-        Different apportionment methods correspond to different error functions, and these choices lead to distinct polyhedral decompositions of the quota space.
-        This geometric perspective allows for direct mathematical comparison between methods.
-      </p>
-
-      <ul>
-        <li>
-          <em>Sainte-Lague versus Hare.</em> Different methods induce different polyhedral grids. The Sainte&#8209;Laguë method is designed to minimize relative error and, in three-entity settings, produces a hexagonal tiling that is often regarded as neutral with respect to entity size. In contrast, rounding methods such as Hare’s method focus on greatest remainders and are frequently analyzed using <m>\ell_p</m>-norms—such as Euclidean distance—to identify the integer point closest to a given exact quota.
-        </li>
-
-        <li>
-          <em>Bias detection.</em> Geometric analysis can reveal systematic biases in an apportionment method. For example, linear divisor methods may favor smaller entities or larger entities depending on the placement of their polyhedral boundaries, often parametrized by an initial divisor offset.
-        </li>
-      </ul>
-    </subsubsection>
-
-    <subsubsection xml:id="paradoxes">
-      <title>Identifying Paradoxes</title>
-
-      <p>
-        Apportionment polyhedra are also a useful tool for determining whether a method satisfies common axioms of fairness.
-      </p>
-
-      <ul>
-        <li>
-          <em>The Quota Rule.</em> Polyhedral analysis can be used to check whether allocations always lie between the floor and ceiling of the exact quotas.
-        </li>
-
-        <li>
-          <em>House monotonicity.</em> Examining how polyhedral boundaries change as the total number of seats <m>M</m> increases helps determine whether a method avoids decreases in allocation when additional seats are added.
-        </li>
-
-        <li>
-          <em>The Alabama Paradox.</em> Poorly aligned polyhedral boundaries can lead to paradoxical outcomes in which increasing the total number of seats causes an entity to lose a seat, a phenomenon observed in historical legislative apportionments.
-        </li>
-      </ul>
-
-      <p>
-        A contemporary illustration of these issues arose in the 2020 Iowa Democratic caucuses.
-        The use of Hamilton's method, which satisfies the Quota Rule but is geometrically vulnerable to paradoxes, produced several aggregation anomalies in which the sum of local allocations failed to align with statewide totals.
-      </p>
-    </subsubsection>
-  </subsection>
-
-
-  <subsection xml:id="affine-simplices-barycentric">
-    <title>Affine Sets, Simplices, and Barycentric Coordinates</title>
-
-    <p>
-      These notes assume familiarity with vectors, matrices, linear independence, and basic multivariable geometry.
-    </p>
-
-    <p>
-      In linear algebra, a subspace must contain the origin and be closed under linear combinations.
-      Many geometric objects we care about are shifted versions of subspaces.
-    </p>
-
-    <p>
-      This leads to the idea of an <term>affine set</term>.
-    </p>
-
-    <definition xml:id="affine-combination">
+    <definition xml:id="affine-combination-definition">
       <title>Affine Combination</title>
 
       <p>
         A vector of the form
       </p>
+
       <me>
-        \lambda_1 v_1 + \lambda_2 v_2 + \cdots + \lambda_k v_k
+        \lambda_1 v_1 + \cdots + \lambda_k v_k
       </me>
 
       <p>
-        is called an <term>affine combination</term> of <m>v_1,\dots,v_k</m> if
+        is an <term>affine combination</term> of <m>v_1,\dots,v_k</m> when
       </p>
+
       <me>
-        \lambda_1+\lambda_2+\cdots+\lambda_k = 1.
+        \sum_{i=1}^k \lambda_i = 1.
       </me>
     </definition>
-
-    <definition xml:id="affine-hull">
-      <title>Affine Hull</title>
-
-      <p>
-        The <term>affine hull</term> of points <m>v_1,\dots,v_k</m> is the set
-      </p>
-      <me>
-        \operatorname{aff}(v_1,\dots,v_k) = \left\{ \sum_{i=1}^k \lambda_i v_i : \sum_{i=1}^k \lambda_i = 1 \right\}.
-      </me>
-    </definition>
-
-    <example xml:id="affine-hull-example">
-      <p>
-        Two distinct points determine a line, three noncollinear points determine a plane, and four noncoplanar points determine a three-dimensional affine space.
-      </p>
-    </example>
-
-    <definition xml:id="affine-independence">
-      <title>Affine Independence</title>
-
-      <p>
-        Points <m>v_0,\dots,v_n</m> are <term>affinely independent</term> if the vectors
-        <me>
-          v_1-v_0,\; v_2-v_0,\; \dots,\; v_n-v_0
-        </me>
-        are linearly independent.
-      </p>
-    </definition>
-
-    <definition xml:id="convex-set">
-      <title>Convex Set</title>
-
-      <p>
-        A set <m>C \subseteq \mathbb{R}^n</m> is <term>convex</term> if for any <m>x,y \in C</m>,
-      </p>
-      <me>
-        (1-t)x+ty \in C \quad\text{for all }0\le t\le 1.
-      </me>
-    </definition>
-
-    <definition xml:id="convex-combination">
-      <title>Convex Combination</title>
-
-      <p>
-        A <term>convex combination</term> is an affine combination where all coefficients are nonnegative:
-      </p>
-      <me>
-        \lambda_i \ge 0, \qquad \sum_{i=1}^k \lambda_i = 1.
-      </me>
-    </definition>
-
-    <p>
-      A simplex is the higher-dimensional analogue of a triangle or tetrahedron.
-    </p>
 
     <definition xml:id="simplex-definition">
       <title>Simplex</title>
 
       <p>
-        If <m>v_0,\dots,v_n</m> are affinely independent points in <m>\mathbb{R}^m</m>, then the simplex they determine is
+        If <m>v_0,\dots,v_n</m> are affinely independent points in <m>\mathbb R^m</m>,
+        the <term>simplex</term> they determine is
       </p>
+
       <me>
-        \operatorname{conv}(v_0,\dots,v_n) = \left\{ \sum_{i=0}^n \lambda_i v_i : \lambda_i \ge 0, \; \sum_{i=0}^n \lambda_i = 1 \right\}.
+        \left\{\sum_{i=0}^n \lambda_i v_i : \lambda_i \ge 0,
+        \sum_{i=0}^n \lambda_i = 1\right\}.
       </me>
     </definition>
-
-    <example xml:id="simplex-examples">
-      <ol marker="1">
-        <li>
-          <p>
-            A line segment is a <m>1</m>-simplex.
-          </p>
-        </li>
-
-        <li>
-          <p>
-            A triangle is a <m>2</m>-simplex.
-          </p>
-        </li>
-
-        <li>
-          <p>
-            A tetrahedron is a <m>3</m>-simplex.
-          </p>
-        </li>
-      </ol>
-    </example>
-
-    <definition xml:id="standard-simplex">
-      <title>Standard Simplex</title>
-
-      <p>
-        The <term>standard <m>n</m>-simplex</term> is
-      </p>
-      <me>
-        \Delta_n = \left\{ (x_0,\dots,x_n)\in\mathbb{R}^{n+1} : x_i\ge0, \; \sum_{i=0}^n x_i = 1 \right\}.
-      </me>
-    </definition>
-
-    <p>
-      Barycentric coordinates express a point relative to the vertices of a simplex.
-    </p>
 
     <definition xml:id="barycentric-definition">
       <title>Barycentric Coordinates</title>
 
       <p>
-        Suppose <m>v_0,\dots,v_n</m> are affinely independent.
-        Every point <m>p</m> in the affine hull can be written uniquely as
-      </p>
-      <me>
-        p = \lambda_0 v_0 + \lambda_1 v_1 + \cdots + \lambda_n v_n
-      </me>
-
-      <p>
-        with
-      </p>
-      <me>
-        \lambda_0+\cdots+\lambda_n=1.
-      </me>
-
-      <p>
-        The numbers <m>\lambda_0,\dots,\lambda_n</m> are called the barycentric coordinates of <m>p</m>.
+        A point in a simplex can be expressed uniquely as an affine combination
+        of the simplex vertices. The coefficients are its <term>barycentric
+        coordinates</term>.
       </p>
     </definition>
-
-    <p>
-      If all barycentric coordinates are positive, then the point lies in the interior of the simplex.
-      If some coordinate is zero, then the point lies on a face of the simplex.
-    </p>
 
     <example xml:id="barycentric-example">
+      <title>Barycentric Coordinates in the Quota Simplex</title>
+
       <p>
-        Let
+        In the quota simplex for three entities and <m>M=5</m>, the point
       </p>
+
       <me>
-        v_0=(0,0), \qquad v_1=(1,0), \qquad v_2=(0,1).
+        (2,2,1)
       </me>
 
       <p>
-        Suppose
-      </p>
-      <me>
-        p=(0.2,0.3).
-      </me>
-
-      <p>
-        Then
-      </p>
-      <me>
-        p = 0.5v_0 + 0.2v_1 + 0.3v_2.
-      </me>
-
-      <p>
-        Since the coefficients are nonnegative and sum to <m>1</m>, the point lies inside the triangle.
+        lies inside the simplex because its coordinates are nonnegative and sum to
+        <m>5</m>. Relative to the vertices <m>(5,0,0), (0,5,0), (0,0,5)</m>, it has
+        barycentric coordinates <m>(2/5, 2/5, 1/5)</m>.
       </p>
     </example>
 
-    <p>
-      To compute barycentric coordinates, solve the system
-    </p>
-    <me>
-      p = \sum_{i=0}^n \lambda_i v_i
-    </me>
+    <discussion xml:id="simplex-interior-boundary">
+      <title>Interior and Boundary Points</title>
 
-    <p>
-      together with
-    </p>
-    <me>
-      \lambda_0+\cdots+\lambda_n=1.
-    </me>
+      <p>
+        A point is in the interior of the simplex when all barycentric coordinates
+        are strictly positive. If any coordinate is zero, the point lies on a face
+        of the simplex.
+      </p>
 
-    <p>
-      A convenient matrix form is
-    </p>
-    <me>
-      \begin{bmatrix} &amp; &amp; \\ v_0 &amp; v_1 &amp; \cdots v_n \\ &amp; &amp; \\ 1 &amp; 1 &amp; \cdots 1 \end{bmatrix} \begin{bmatrix} \lambda_0\\ \lambda_1\\ \vdots\\ \lambda_n \end{bmatrix} = \begin{bmatrix} p\\ 1 \end{bmatrix}.
-    </me>
-
-    <p>
-      Affine independence guarantees a unique solution.
-    </p>
+      <p>
+        For example, <m>(3,2,0)</m> lies on the edge between the first two
+        vertices and corresponds to a quota that gives no seats to the third entity.
+      </p>
+    </discussion>
   </subsection>
 
+  <subsection xml:id="apportionment-polyhedra">
+    <title>Apportionment Polyhedra</title>
 
-  <subsection>
-    <exercises xml:id="affine-simplex-exercises">
-    <title>Exercises</title>
+    <p>
+      Any apportionment function partitions the quota simplex into regions such
+      that all quotas in a given region map to the same integer allocation.
+      These regions are called <term>apportionment polyhedra</term>.
+    </p>
 
-    <exercise xml:id="affine-combination-check">
-      <statement>
-        <p>
-          Determine whether each expression is an affine combination of the given vectors.
-        </p>
+    <p>
+      The boundaries between polyhedra correspond to tie situations where a small
+      change in the quotas can change the allocation. These boundaries are where
+      paradoxes are most likely to arise.
+    </p>
 
-        <ol marker="a">
-          <li>
-            <me>
-              2v_1 - v_2
-            </me>
-          </li>
+    <subsubsection xml:id="hamilton-polyhedron">
+      <title>Hamilton's Polyhedron</title>
 
-          <li>
-            <me>
-              \frac12 v_1 + \frac12 v_2
-            </me>
-          </li>
+      <p>
+        Hamilton's method defines regions by the integer parts of quotas and the
+        ordering of their fractional remainders. In the quota simplex, these
+        conditions carve the simplex into a collection of polyhedral slabs.
+      </p>
+    </subsubsection>
 
-          <li>
-            <me>
-              3v_1 + 2v_2 - 4v_3
-            </me>
-          </li>
-        </ol>
-      </statement>
-    </exercise>
+    <subsubsection xml:id="divisor-polyhedra">
+      <title>Divisor Method Polyhedra</title>
 
-    <exercise xml:id="convex-combination-check">
-      <statement>
-        <p>
-          Determine whether each expression is a convex combination.
-        </p>
-
-        <ol marker="a">
-          <li>
-            <me>
-              \frac14 v_1 + \frac34 v_2
-            </me>
-          </li>
-
-          <li>
-            <me>
-              2v_1 - v_2
-            </me>
-          </li>
-
-          <li>
-            <me>
-              \frac13 v_1 + \frac13 v_2 + \frac13 v_3
-            </me>
-          </li>
-        </ol>
-      </statement>
-    </exercise>
-
-    <exercise xml:id="affine-independence-check">
-      <statement>
-        <p>
-          Determine whether the following points are affinely independent:
-        </p>
-        <me>
-          (0,0),\quad (1,2),\quad (3,1).
-        </me>
-      </statement>
-    </exercise>
-
-    <exercise xml:id="triangle-barycentric">
-      <statement>
-        <p>
-          Let
-        </p>
-        <me>
-          v_0=(0,0), \qquad v_1=(2,0), \qquad v_2=(0,2).
-        </me>
-
-        <p>
-          Find barycentric coordinates for the point
-        </p>
-        <me>
-          p=(1,0.5).
-        </me>
-
-        <p>
-          Is the point inside the simplex?
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise xml:id="standard-simplex-exercise">
-      <statement>
-        <p>
-          Describe geometrically the standard simplices <m>\Delta_1</m>, <m>\Delta_2</m>, and <m>\Delta_3</m>.
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise xml:id="matrix-barycentric">
-      <statement>
-        <p>
-          Let
-        </p>
-        <me>
-          v_0=(1,0), \qquad v_1=(3,1), \qquad v_2=(2,4).
-        </me>
-
-        <p>
-          Find barycentric coordinates for
-        </p>
-        <me>
-          p=(2,2).
-        </me>
-
-        <p>
-          Write the corresponding augmented matrix system.
-        </p>
-      </statement>
-    </exercise>
-    </exercises>
+      <p>
+        Divisor methods define regions using thresholds that depend on the rounding
+        rule. The choice of divisor and rounding preference changes the partition
+        of the simplex, and thus the possible integer allocations.
+      </p>
+    </subsubsection>
   </subsection>
 
+  <subsection xml:id="fairness-criteria">
+    <title>Fairness Criteria and Paradoxes</title>
 
-  <subsection xml:id="barycentric-compatible-functions">
-    <title>Barycentric-Compatible Functions</title>
-
-    <p>
-      Barycentric coordinates are especially useful because they allow us to interpolate between objects.
-      In many applications, we have two functions that assign points in a simplex, and we would like to move continuously between them.
-    </p>
-
-    <p>
-      Suppose
-    </p>
-    <me>
-      f,g : X \to \mathbb{R}^n
-    </me>
-
-    <p>
-      are functions whose outputs lie in a convex set, such as a simplex.
-      For any parameter <m>0 \le t \le 1</m>, define a new function
-    </p>
-    <me>
-      h_t(x) = (1-t)f(x) + tg(x).
-    </me>
-
-    <p>
-      Since the coefficients <m>1-t</m> and <m>t</m> are nonnegative and sum to <m>1</m>, the point <m>h_t(x)</m> is a convex combination of <m>f(x)</m> and <m>g(x)</m>.
-    </p>
-
-    <p>
-      Geometrically, for each fixed <m>x</m>, the point <m>h_t(x)</m> travels along the line segment joining <m>f(x)</m> and <m>g(x)</m>.
-    </p>
-
-    <definition xml:id="barycentric-compatible-functions-def">
-      <title>Barycentric-Compatible Functions</title>
+    <definition xml:id="quota-rule-definition">
+      <title>Quota Rule</title>
 
       <p>
-        Two functions
-      </p>
-      <me>
-        f,g : X \to \Delta_n
-      </me>
-
-      <p>
-        are called <term>barycentrically compatible</term> if for every <m>x \in X</m> and every <m>0 \le t \le 1</m>,
-      </p>
-      <me>
-        (1-t)f(x) + tg(x)
-      </me>
-
-      <p>
-        also lies in <m>\Delta_n</m>.
-      </p>
-
-      <p>
-        Equivalently, the line segment joining <m>f(x)</m> and <m>g(x)</m> remains entirely inside the simplex.
+        A method satisfies the <term>quota rule</term> if each allocation <m>m_j</m>
+        is either <m>\lfloor q_j \rfloor</m> or <m>\lceil q_j \rceil</m>.
       </p>
     </definition>
 
-    <remark xml:id="convexity-remark">
-      <p>
-        Because simplices are convex sets, any two functions whose values lie in the same simplex are automatically barycentrically compatible.
-      </p>
-    </remark>
-
-    <example xml:id="probability-example">
-      <title>Probability Distribution Example</title>
+    <definition xml:id="house-monotonicity-definition">
+      <title>House Monotonicity</title>
 
       <p>
-        Let
+        A method is <term>house monotone</term> if increasing the total number of
+        seats cannot decrease any entity's allocation.
       </p>
-      <me>
-        \Delta_2 = \left\{ (x,y,z)\in\mathbb{R}^3 : x+y+z=1,\; x,y,z \ge 0 \right\}.
-      </me>
+    </definition>
+
+    <definition xml:id="population-monotonicity-definition">
+      <title>Population Monotonicity</title>
 
       <p>
-        A point in <m>\Delta_2</m> can be interpreted as a probability distribution on three outcomes.
+        A method is <term>population monotone</term> if a growing entity never
+        loses a seat to an entity whose size does not grow.
       </p>
+    </definition>
+
+    <definition xml:id="alabama-paradox-definition">
+      <title>Alabama Paradox</title>
 
       <p>
-        Suppose
+        The <term>Alabama Paradox</term> occurs when increasing the total number
+        of seats causes some entity to lose a seat.
       </p>
-      <me>
-        f(x) = (0.7,0.2,0.1), \qquad g(x) = (0.1,0.3,0.6).
-      </me>
+    </definition>
+
+    <definition xml:id="population-paradox-definition">
+      <title>Population Paradox</title>
 
       <p>
-        Then
+        The <term>population paradox</term> occurs when one entity gains population
+        faster than another but still loses a seat while the other gains one.
       </p>
-      <me>
-        h_{1/2}(x) = \frac12 f(x) + \frac12 g(x) = (0.4,0.25,0.35).
-      </me>
+    </definition>
+
+    <definition xml:id="new-states-paradox-definition">
+      <title>New States Paradox</title>
 
       <p>
-        This point is still in the simplex because its coordinates remain nonnegative and sum to <m>1</m>.
+        The <term>new states paradox</term> occurs when adding a new entity changes
+        allocations among existing entities.
       </p>
-    </example>
-
-    <example xml:id="geometric-simplex-path">
-      <title>Paths Inside a Simplex</title>
-
-      <p>
-        Let <m>f,g : [0,1]\to\Delta_2</m>.
-        For each input value <m>x</m>, the interpolation
-      </p>
-      <me>
-        h_t(x) = (1-t)f(x)+tg(x)
-      </me>
-
-      <p>
-        determines a path inside the simplex connecting the two images.
-      </p>
-
-      <p>
-        As <m>t</m> varies from <m>0</m> to <m>1</m>, the point moves continuously from <m>f(x)</m> to <m>g(x)</m>.
-      </p>
-    </example>
-
-    <exercise xml:id="barycentric-interpolation-exercise">
-      <statement>
-        <p>
-          Let
-        </p>
-        <me>
-          f(x) = (0.2,0.5,0.3), \qquad g(x) = (0.6,0.1,0.3).
-        </me>
-
-        <p>
-          Compute
-        </p>
-        <me>
-          h_{1/4}(x) = \frac34 f(x) + \frac14 g(x).
-        </me>
-
-        <p>
-          Verify that the result lies in <m>\Delta_2</m>.
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise xml:id="simplex-line-segment">
-      <statement>
-        <p>
-          Explain why the line segment between any two points in a simplex remains entirely inside the simplex.
-        </p>
-      </statement>
-    </exercise>
-
-    <exercise xml:id="probability-interpolation">
-      <statement>
-        <p>
-          Suppose two probability distributions are given by
-        </p>
-        <me>
-          p=(0.8,0.1,0.1), \qquad q=(0.2,0.5,0.3).
-        </me>
-
-        <p>
-          Compute the halfway distribution
-        </p>
-        <me>
-          \frac12 p + \frac12 q.
-        </me>
-
-        <p>
-          Interpret the result geometrically inside the simplex.
-        </p>
-      </statement>
-    </exercise>
-  </subsection>
-
-
-  <subsection xml:id="solving-linear-functionals">
-    <title>A Practical Guide to Solving Systems of Linear Functionals</title>
+    </definition>
 
     <p>
-      Suppose we have several linear functionals
-    </p>
-    <me>
-      \varphi_1,\varphi_2,\dots,\varphi_m : \mathbb{R}^n \to \mathbb{R}.
-    </me>
-
-    <p>
-      A system of linear functionals asks us to find all vectors satisfying equations or inequalities involving these maps.
-    </p>
-
-    <p>
-      Geometrically, such systems describe intersections of hyperplanes and half-spaces.
+      Hamilton's method satisfies the quota rule but can violate house
+      monotonicity. Jefferson's method is house monotone but can violate the
+      quota rule. These tradeoffs show why different methods prioritize different
+      governance fairness principles.
     </p>
   </subsection>
 
+  <subsection xml:id="balinski-young">
+    <title>Balinski–Young Impossibility Theorem</title>
 
-  <subsection xml:id="functionals-dot-products">
-    <title>Writing Functionals as Dot Products</title>
-
-    <p>
-      Every linear functional on <m>\mathbb{R}^n</m> can be written as a dot product
-    </p>
-    <me>
-      \varphi(x)=a\cdot x
-    </me>
-
-    <p>
-      for some vector <m>a\in\mathbb{R}^n</m>.
-    </p>
-
-    <example xml:id="dot-product-functional-example">
-      <p>
-        The functional
-      </p>
-      <me>
-        \varphi(x,y,z)=2x-y+3z
-      </me>
+    <theorem xml:id="balinski-young-theorem">
+      <title>Balinski–Young</title>
 
       <p>
-        corresponds to the coefficient vector
+        No apportionment method can satisfy both the quota rule and house
+        monotonicity for every possible apportionment problem.
       </p>
-      <me>
-        (2,-1,3).
-      </me>
+    </theorem>
+
+    <discussion>
+      <title>Interpreting the Theorem</title>
 
       <p>
-        In matrix form,
+        The Balinski–Young Theorem formalizes an unavoidable tradeoff: a method can
+        be good at preserving quotas or good at avoiding paradoxes when the total
+        number of seats changes, but it cannot do both perfectly in all cases.
       </p>
-      <me>
-        \varphi(x,y,z) = \begin{bmatrix} 2 &amp; -1 &amp; 3 \end{bmatrix} \begin{bmatrix} x\\ y\\ z \end{bmatrix}.
-      </me>
-    </example>
-    <dl xml:id="matrix-form-step">
-    <li>
-      <title>Step 1: Convert to Matrix Form</title>
 
       <p>
-        Suppose we want to solve
+        From a governance perspective, this theorem says that choosing an
+        apportionment method is a choice between competing fairness objectives.
       </p>
-      <me>
-        \varphi_1(x,y,z)=1,
-      </me>
-      <me>
-        \varphi_2(x,y,z)=4,
-      </me>
-
-      <p>
-        where
-      </p>
-      <me>
-        \varphi_1(x,y,z)=x+y+z,
-      </me>
-      <me>
-        \varphi_2(x,y,z)=2x-y+z.
-      </me>
-
-      <p>
-        Place the coefficient vectors into a matrix:
-      </p>
-      <me>
-        A= \begin{bmatrix} 1 &amp; 1 &amp; 1\\ 2 &amp; -1 &amp; 1 \end{bmatrix}.
-      </me>
-
-      <p>
-        Then solve the matrix equation
-      </p>
-      <me>
-        A\mathbf{x}=\mathbf{b},
-      </me>
-
-      <p>
-        where
-      </p>
-      <me>
-        \mathbf{x}= \begin{bmatrix} x\\ y\\ z \end{bmatrix}, \qquad \mathbf{b}= \begin{bmatrix} 1\\ 4 \end{bmatrix}.
-      </me>
-    </li>
-
-    <li>
-      <title>Step 2: Row Reduce</title>
-
-      <p>
-        Form the augmented matrix
-      </p>
-      <me>
-        \left[ \begin{array}{ccc|c} 1 &amp; 1 &amp; 1 &amp; 1\\ 2 &amp; -1 &amp; 1 &amp; 4 \end{array} \right].
-      </me>
-
-      <p>
-        Perform the row operation
-      </p>
-      <me>
-        R_2 \to R_2 - 2R_1.
-      </me>
-
-      <p>
-        This gives
-      </p>
-      <me>
-        \left[ \begin{array}{ccc|c} 1 &amp; 1 &amp; 1 &amp; 1\\ 0 &amp; -3 &amp; -1 &amp; 2 \end{array} \right].
-      </me>
-
-      <p>
-        The second equation becomes
-      </p>
-      <me>
-        -3y-z=2.
-      </me>
-
-      <p>
-        Let <m>z=t</m>.
-        Then
-      </p>
-      <me>
-        y=-\frac{2+t}{3}.
-      </me>
-
-      <p>
-        Substitute into the first equation:
-      </p>
-      <me>
-        x+y+z=1.
-      </me>
-
-      <p>
-        Solving for <m>x</m> gives
-      </p>
-      <me>
-        x=\frac{5-2t}{3}.
-      </me>
-
-      <p>
-        The solution set is
-      </p>
-      <me>
-        \left( \frac{5-2t}{3}, -\frac{2+t}{3}, t \right).
-      </me>
-    </li>
-
-    <li>
-      <title>Geometric Interpretation</title>
-
-      <p>
-        Each equation
-      </p>
-      <me>
-        \varphi(x)=b
-      </me>
-
-      <p>
-        defines a hyperplane.
-      </p>
-
-      <ul>
-        <li>
-          <p>
-            One equation in <m>\mathbb{R}^3</m> defines a plane.
-          </p>
-        </li>
-
-        <li>
-          <p>
-            Two independent equations typically intersect in a line.
-          </p>
-        </li>
-
-        <li>
-          <p>
-            Three independent equations typically intersect in a point.
-          </p>
-        </li>
-      </ul>
-    </li>
-
-    <li>
-      <title>Inequalities and Half-Spaces</title>
-
-      <p>
-        Conditions such as
-      </p>
-      <me>
-        \varphi(x)\ge c
-      </me>
-
-      <p>
-        describe half-spaces.
-      </p>
-
-      <example xml:id="half-space-example">
-        <p>
-          The inequality
-        </p>
-        <me>
-          x+y+z \le 1
-        </me>
-
-        <p>
-          cuts space into two regions separated by the plane
-        </p>
-        <me>
-          x+y+z=1.
-        </me>
-      </example>
-
-      <p>
-        Systems of inequalities therefore describe convex regions.
-      </p>
-    </li>
-
-    <li>
-      <title>Systems Inside a Simplex</title>
-
-      <p>
-        Suppose we work in the standard simplex
-      </p>
-      <me>
-        \Delta_2 = \left\{ (x,y,z): x+y+z=1, \; x,y,z\ge0 \right\}.
-      </me>
-
-      <p>
-        Now add the inequalities
-      </p>
-      <me>
-        4x\ge1, \qquad 4y&lt;2.
-      </me>
-
-      <p>
-        Dividing by <m>4</m> gives
-      </p>
-      <me>
-        x\ge\frac14, \qquad y&lt;\frac12.
-      </me>
-
-      <p>
-        These inequalities carve out a smaller region inside the simplex.
-      </p>
-    </li>
-    </dl>
+    </discussion>
   </subsection>
 
-
-  <subsection xml:id="allocation-strategy">
-    <title>Strategy for Allocation Problems</title>
+  <subsection xml:id="us-house-case-study">
+    <title>Case Study: U.S. House Apportionment</title>
 
     <p>
-      In allocation problems, systems often involve:
+      In U.S. congressional apportionment, the total number of seats is fixed at
+      <m>435</m>, and each state must receive at least one seat.
+      Exact quotas are computed from the decennial census population counts.
     </p>
 
-    <ol marker="1">
-      <li>
-        <p>
-          The simplex equation
-        </p>
-        <me>
-          x_1+\cdots+x_n=1.
-        </me>
-      </li>
+    <p>
+      Current law specifies the Huntington–Hill method, a divisor method whose
+      rounding threshold is based on the geometric mean of successive integers.
+      This method was chosen to balance fairness principles and avoid the most
+      obvious paradoxes.
+    </p>
 
-      <li>
-        <p>
-          Nonnegativity conditions
-        </p>
-        <me>
-          x_i\ge0.
-        </me>
-      </li>
-
-      <li>
-        <p>
-          Floor constraints
-        </p>
-        <me>
-          m_i \le Mx_i &lt; m_i+1.
-        </me>
-      </li>
-
-      <li>
-        <p>
-          Remainder comparisons
-        </p>
-        <me>
-          Mx_i-\lfloor Mx_i\rfloor \ge Mx_j-\lfloor Mx_j\rfloor.
-        </me>
-      </li>
-    </ol>
+    <p>
+      The quota simplex for the United States is high-dimensional, and the
+      apportionment function partitions that simplex into regions corresponding to
+      different allocations for the states.
+    </p>
   </subsection>
 
-
-  <subsection xml:id="workflow">
-    <title>Practical Workflow</title>
-
-    <subsubsection xml:id="workflow-affine">
-      <title>Step A: Solve the Affine Constraints</title>
-
-      <p>
-        Usually begin with the equation
-      </p>
-      <me>
-        x_1+\cdots+x_n=1.
-      </me>
-
-      <p>
-        This reduces the dimension by one.
-      </p>
-    </subsubsection>
-
-    <subsubsection xml:id="workflow-slabs">
-      <title>Step B: Add Interval Constraints</title>
-
-      <p>
-        Suppose an allocation requires
-      </p>
-      <me>
-        m_i \le Mx_i &lt; m_i+1.
-      </me>
-
-      <p>
-        Dividing by <m>M</m> gives
-      </p>
-      <me>
-        \frac{m_i}{M} \le x_i &lt; \frac{m_i+1}{M}.
-      </me>
-
-      <p>
-        These inequalities define slabs bounded by parallel hyperplanes.
-      </p>
-    </subsubsection>
-
-    <subsubsection xml:id="workflow-remainders">
-      <title>Step C: Add Remainder Comparisons</title>
-
-      <p>
-        Compare the fractional parts of the quota coordinates.
-      </p>
-
-      <example xml:id="remainder-linearization">
-        <p>
-          Suppose
-        </p>
-        <me>
-          \lfloor4x\rfloor=1, \qquad \lfloor4y\rfloor=0.
-        </me>
-
-        <p>
-          Then the inequality
-        </p>
-        <me>
-          4x-\lfloor4x\rfloor \ge 4y-\lfloor4y\rfloor
-        </me>
-
-        <p>
-          becomes
-        </p>
-        <me>
-          4x-1 \ge 4y.
-        </me>
-
-        <p>
-          Rearranging gives
-        </p>
-        <me>
-          x-y\ge\frac14.
-        </me>
-
-        <p>
-          Inside a fixed slab region, the floor functions become constants, so the boundaries become linear.
-        </p>
-      </example>
-    </subsubsection>
-
-    <p>
-      Systems of linear functionals partition space into regions bounded by hyperplanes.
-    </p>
-
-    <p>
-      Inside each region:
-    </p>
-
-    <ul>
-      <li>
-        <p>
-          the inequalities are consistent,
-        </p>
-      </li>
-
-      <li>
-        <p>
-          the allocation rule is constant,
-        </p>
-      </li>
-
-      <li>
-        <p>
-          and the geometry is convex.
-        </p>
-      </li>
-    </ul>
-
-    <p>
-      This viewpoint turns allocation methods into geometric partitions of simplices.
-    </p>
-
-    <exercises xml:id="linear-functional-exercises">
+  <subsection xml:id="apportionment-exercises">
     <title>Exercises</title>
 
-    <exercise xml:id="convert-functional-exercise">
+    <exercise xml:id="coffee-quota-calculation">
       <statement>
         <p>
-          Write each linear functional as a row vector.
+          Using the coffee example, compute the exact quota vector
+          <m>\mathbf{q}</m>.
         </p>
 
         <ol marker="a">
           <li>
-            <me>
-              \varphi(x,y)=3x-2y
-            </me>
+            <p>Verify that the quotas sum to <m>45</m>.</p>
           </li>
-
           <li>
-            <me>
-              \psi(x,y,z)=x+4y-z
-            </me>
+            <p>Compute the lower quota vector <m>\lfloor \mathbf{q} \rfloor</m>.</p>
+          </li>
+          <li>
+            <p>How many boxes remain after assigning the lower quotas?</p>
           </li>
         </ol>
       </statement>
     </exercise>
 
-    <exercise xml:id="solve-functional-system">
+    <exercise xml:id="hamilton-allocation">
       <statement>
         <p>
-          Solve the system
+          Apply Hamilton's method to the coffee quotas from the example.
         </p>
-        <me>
-          x+y+z=2,
-        </me>
-        <me>
-          2x-y+z=1.
-        </me>
+
+        <ol marker="a">
+          <li>
+            <p>List the four largest fractional remainders.</p>
+          </li>
+          <li>
+            <p>Give the final allocation of the <m>45</m> boxes.</p>
+          </li>
+          <li>
+            <p>Does the allocation satisfy the quota rule? Explain.</p>
+          </li>
+        </ol>
       </statement>
     </exercise>
 
-    <exercise xml:id="simplex-region-exercise">
+    <exercise xml:id="simplex-membership">
       <statement>
         <p>
-          Describe geometrically the set of points in <m>\Delta_2</m> satisfying
+          Consider the simplex
         </p>
+
         <me>
-          x\ge\frac13.
+          \{(q_1,q_2,q_3) \in \mathbb R_{\ge0}^3 : q_1+q_2+q_3 = 10\}.
         </me>
+
+        <ol marker="a">
+          <li>
+            <p>Does the point <m>(3,4,3)</m> lie in this simplex?</p>
+          </li>
+          <li>
+            <p>Find the barycentric coordinates of the point
+              <m>(7,2,1)</m> with respect to the standard vertices.</p>
+          </li>
+          <li>
+            <p>Describe the face of the simplex where <m>q_3 = 0</m>.</p>
+          </li>
+        </ol>
       </statement>
     </exercise>
 
-    <exercise xml:id="allocation-slabs-exercise">
+    <exercise xml:id="balinski-young-explanation">
       <statement>
         <p>
-          Let <m>M=5</m>.
-        </p>
-
-        <p>
-          Rewrite the constraints
-        </p>
-        <me>
-          2 \le 5x &lt; 3
-        </me>
-
-        <p>
-          as inequalities involving only <m>x</m>.
+          Explain why the Balinski–Young Theorem shows that no single
+          apportionment method can satisfy both the quota rule and house
+          monotonicity for every possible problem.
         </p>
       </statement>
     </exercise>
 
-    <exercise xml:id="remainder-comparison-exercise">
+    <exercise xml:id="method-comparison">
       <statement>
         <p>
-          Suppose
+          Compare Jefferson's method and Hamilton's method on the coffee example.
         </p>
-        <me>
-          \lfloor6x\rfloor=2, \qquad \lfloor6y\rfloor=1.
-        </me>
 
-        <p>
-          Simplify the inequality
-        </p>
-        <me>
-          6x-\lfloor6x\rfloor \ge 6y-\lfloor6y\rfloor.
-        </me>
+        <ol marker="a">
+          <li>
+            <p>Which method satisfies the quota rule?</p>
+          </li>
+          <li>
+            <p>Which method is house monotone?</p>
+          </li>
+          <li>
+            <p>Which method is more likely to favor larger entities? Why?</p>
+          </li>
+        </ol>
       </statement>
     </exercise>
-    </exercises>
   </subsection>
 </section>

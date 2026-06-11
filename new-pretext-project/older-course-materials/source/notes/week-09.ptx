@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="notes">
+
+<section xml:id="notes-week-09">
+       <title>Districting Algorithms</title>
+
+      <definition>
+        <p>
+          A <term>graph</term> <m>G</m> is pair of sets: <m>V = \{v_1,\dots,v_n\}</m> (the <term>vertex set</term>) and <m>E \subseteq \{\{v_i,v_j\} \, \colon \, 1 \leq i,j \leq n\}</m> (the <term>edge set</term>). A <term>weighted graph</term> has a numerical value associated to each vertex.
+        </p>
+      </definition>
+
+      <example>
+        <p> 
+          an example of a graph goes here 
+        </p>
+      </example>
+
+      <p>Notice that the way we draw the graph is not part of the graph itself!</p>
+
+      <example>
+        <p> 
+          an example of the same graph drawn differently goes here 
+        </p>
+      </example>
+
+      <definition>
+        <p>
+          If <m> e = \{v,w\} \in E</m>, we say <m>e</m> is <term>incident</term> to <m>v</m> and <m>w</m> and that <m>v</m> and <m>w</m> are <term>adjacent</term>. The <term>degree</term> of a vertex is the number of edges incident to it.
+        </p>
+      </definition>
+
+
+      <definition> 
+        <p>
+          A <term>cycle</term> is a... , a <term>tree</term> is a graph without cycles; a vertex of degree one in a tree is called a <term>leaf</term>, a path is a tree with only two leaves.
+        </p>
+      </definition>
+
+      <p>Given a graph <m>G</m>, a <term>minimal spanning tree</term> is a tree that reaches all the vertices of <m>G</m>
+      
+    </section>
+
+
+</article>
+</pretext>

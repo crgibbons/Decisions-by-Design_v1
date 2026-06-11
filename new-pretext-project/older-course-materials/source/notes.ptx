@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pretext xmlns:xi="http://www.w3.org/2001/XInclude">
+  <xi:include href="./docinfo.ptx" />
+  <article xml:id="ch-course-notes" >
+    <title>Course Notes</title>
+
+    <introduction>
+      <p>
+        The following notes are intended to remind you what we covered each week. There may be other relevant resources on Blackboard.
+      </p>
+    </introduction>
+
+    <xi:include href="./notes/week-01.ptx" xpointer="notes/1" />
+    <xi:include href="./notes/week-02.ptx" xpointer="notes/1" />
+    <xi:include href="./notes/week-04.ptx" xpointer="notes/1" />
+    <!-- <xi:include href="./notes/week-06.ptx" xpointer="notes/1" /> -->
+    <xi:include href="./notes/week-07.ptx" xpointer="notes/1" />
+    <xi:include href="./notes/week-08.ptx" xpointer="notes/1" />
+
+    <!-- Add more xi:include files here to include them in the main course -->
+  </article>
+</pretext>

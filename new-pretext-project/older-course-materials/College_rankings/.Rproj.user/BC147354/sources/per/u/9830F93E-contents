@@ -1,0 +1,34 @@
+set.seed(2022)
+x = runif(10)
+zx = Zx(x)
+zx
+scale(x)
+tx = Tx(x)
+ztx = Zx(tx)
+ztx == zx
+prod(near(ztx, zx))
+zx
+ztx
+
+df %>% 
+  mutate(Comp = Comp*w[1])
+
+
+
+library("quadprog")
+X <- matrix(c(x1,x2,x3,x4,x5), ncol=5)
+Y <- y
+Rinv <- solve(chol(t(X) %*% X))
+C <- cbind(rep(1,5), diag(5)) # design matrix kind of
+b <- c(1,rep(0,5))
+d <- t(Y) %*% X  
+
+a =solve.QP(Dmat = Rinv, factorized = TRUE, dvec = d, Amat = C, bvec = b, meq = 1)
+sum(a$solution)
+a
+
+
+
+
+
+

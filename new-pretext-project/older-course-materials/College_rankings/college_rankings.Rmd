@@ -1,0 +1,73 @@
+---
+title: "College ranking"
+author: "Tural Sadigov"
+date: "2/3/2022"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = F, message = F)
+```
+
+
+# read data
+
+```{r}
+library(tidyverse)
+cr <- read.csv(file = 'data-BIe5s.csv')
+```
+
+Look at names and select some columns
+
+```{r}
+names(cr)[1] <- 'Rank'
+schools <- cr$School
+ranks <- cr$Rank
+cr_bloomberg <- cr %>% 
+  select(names(cr)[c(3,4,5,6,7,8)])
+```
+
+Weights from Bloomberg
+
+```{r}
+w = c(0.357, 0.258, 0.178, 0.12, 0.086)
+cr_bloomberg <- cr_bloomberg %>% 
+  mutate(my_overall_score = w[1]*Compen..sation + w[2]*Learning + w[3]*Network..ing 
+         + w[4]*Entrepre..neurship + w[5]*Diversity) %>% 
+  mutate(my_overall_scaled = 100*(my_overall_score - min(my_overall_score))/(max(my_overall_score)-min(my_overall_score)))%>% 
+  mutate(my_overall_scaled_main = round(my_overall_scaled))
+```
+
+Check it witj Ajain's work
+
+```{r}
+cr$Scaled.overall.score.with.BBW.weights == cr_bloomberg$my_overall_scaled_main 
+```
+create my own ranking according to BB weights
+
+```{r}
+cr_bloomberg <-  cr_bloomberg %>% 
+  mutate(my_rank_with_BB_weights = rank(-my_overall_scaled_main, ties.method = 'min'), 
+         official_ranking = ranks)
+```
+
+
+
+# lets get wrights from MLR
+
+```{r}
+m <- lm(formula = Overall.score ~ Compen..sation + Learning + 
+                                  Network..ing + Entrepre..neurship + Diversity - 1, data = cr_bloomberg)
+summary(m)
+sum(coef(m))
+```
+```{r}
+plot(m)
+```
+my calculations
+
+```{r}
+m2 <- lm(formula = my_overall_scaled ~ Overall.score + Learning + 
+                                  Network..ing + Entrepre..neurship + Diversity - 1, data = cr_bloomberg)
+summary(m)
+```

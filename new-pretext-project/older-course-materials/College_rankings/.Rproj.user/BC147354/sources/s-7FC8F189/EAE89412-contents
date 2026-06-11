@@ -1,0 +1,63 @@
+x <- as.data.frame(X)
+y
+xsc <- scale(x)
+cor(xsc)
+df <- cbind(xsc, y)
+df <- as.data.frame(df)
+lm(scale(y)~.-1, data = df)
+
+cor(x)
+df <- cbind(x, y)
+df <- as.data.frame(df)
+lm(y~-1+V2+V5, data = df)
+
+
+
+df_pca <- prcomp(df[,-1], center = TRUE,scale. = TRUE)
+
+summary(df_pca)
+library(devtools)
+install_github("vqv/ggbiplot")
+library(ggbiplot)
+
+ggbiplot(df_pca)
+ggbiplot(df_pca, labels=rownames(df))
+
+
+# === PCR
+
+require(pls)
+set.seed (1000)
+pcr_model <- pcr(y~., 
+                 data = df, 
+                 scale = TRUE, 
+                 validation = "CV")
+summary(pcr_model)
+validationplot(pcr_model)
+validationplot(pcr_model, val.type="MSEP")
+validationplot(pcr_model, val.type = "R2")
+predplot(pcr_model)
+coefplot(pcr_model)
+pcr_pred <- predict(pcr_model, ncomp = 5)
+mean((pcr_pred - y)^2)/var(y)
+a = data.frame(round(pcr_pred), y)
+mean((round(pcr_pred) - y)^2)/var(y)
+str(pcr_model)
+
+
+
+# tr-ts
+
+# Train-test split
+set.seed(2022)
+tr_ix = sample(84, 50)
+train <- df[tr_ix,]
+y_test <- df[-tr_ix, 6]
+test <- df[-tr_ix, 1:5]
+
+pcr_model <- pcr(y~., 
+                 data = train,
+                 scale =TRUE, validation = "CV")
+pcr_pred <- predict(pcr_model, test, ncomp = 5)
+mean((round(pcr_pred) - y_test)^2)/var(y_test)
+

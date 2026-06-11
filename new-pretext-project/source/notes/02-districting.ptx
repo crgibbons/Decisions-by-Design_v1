@@ -1,13 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- EDITORIAL REVIEW - Priority 7 (May 2026)
+     ================================================
+     STATUS: ADEQUATE (OPTIONAL EXPANSION)
+     Current length: 785 lines
+     Unit allocation: 7.5 hours (Weeks 8-10)
+     Appropriate range: 750-1000 lines
+     ASSESSMENT: ✅ Well-balanced
+     
+     STRENGTHS:
+     - Clear exposition of gerrymandering and fairness
+     - Good governance context (Voting Rights Act, court cases)
+     - Rigorous mathematical treatment
+     - Real case reference (LULAC v. Perry)
+     
+     OPPORTUNITIES FOR EXPANSION (OPTIONAL):
+     1. Compactness measures worked examples (~150 lines)
+        - Polsby-Popper index
+        - Reock score
+        - Numerical calculations on real districts
+     2. Efficiency gap section expansion (~100 lines)
+        - Detailed calculation examples
+        - Role in recent litigation (Rucho v. COMMON CAUSE)
+     3. Additional case study (~100 lines)
+        - North Carolina redistricting litigation
+        - Texas redistricting challenges
+     4. Algorithm sketch (~50 lines)
+        - Automated redistricting approaches
+        - Trade-off between fairness criteria
+     
+     OPTIONAL TARGET: Expand to 1000-1100 lines
+     (Not required; current length is appropriate)
+     
+     PRIORITY: LOW - Unit is well-covered; improvements are enhancement only
+     TIMELINE: If expanded, 1-2 days
+-->
+
 <section xml:id="sec-districting">
   <title>Districting </title>
 
   <introduction>
     <p>
-      In this section, we will apply the tools of Part 1 to analyze a real-world problem: how to draw voting districts.
+      In this section, we will apply the tools of Part 1 to analyze a real-world governance problem: how to draw voting districts that respect equal representation and voting rights.
       The mathematical tools that we will use include graph theory and linear algebra.
     </p>
+
+    <p>
+      Districting is governed by constitutional and statutory rules, including the requirement that districts have equal population and the protections of the Voting Rights Act.
+      Court cases such as <q>LULAC v. Perry</q> show how legal standards shape what is considered fair.
+    </p>
+    
+    <subsection xml:id="districting-governance-note">
+      <title>Governance Decision-Makers</title>
+
+      <p>
+        District maps are produced by state actors (legislatures, commissions) and reviewed by courts and federal agencies. When modeling districts, keep a clear note of who has the authority to act and which constraints (statutory, constitutional, or practical) they must respect.
+      </p>
+    </subsection>
   </introduction>
 
 
@@ -57,27 +106,29 @@
 
           <image scale="90%">
             <latex-image>
-      \draw[step=1cm,gray,very thin] (0,0) grid (5,10);
-      \node at (0.5,9.5) {B};
-      \node at (1.5,9.5) {B};
-      \node at (2.5,9.5) {B};
-      \node at (3.5,9.5) {B};
-      \node at (4.5,9.5) {B};
-      \node at (0.5,8.5) {B};
-      \node at (1.5,8.5) {B};
-      \node at (2.5,8.5) {B};
-      \node at (3.5,8.5) {B};
-      \node at (4.5,8.5) {B};
-      \node at (0.5,7.5) {B};
-      \node at (1.5,7.5) {B};
-      \node at (2.5,7.5) {R};
-      \node at (3.5,7.5) {R};
-      \node at (4.5,7.5) {R};
-      \node at (0.5,6.5) {R};
-      \node at (1.5,6.5) {R};
-      \node at (2.5,6.5) {R};
-      \node at (3.5,6.5) {R};
-      \node at (4.5,6.5) {R};
+  \begin{tikzpicture}
+    \draw[step=1cm,gray,very thin] (0,0) grid (5,10);
+    \node at (0.5,9.5) {B};
+    \node at (1.5,9.5) {B};
+    \node at (2.5,9.5) {B};
+    \node at (3.5,9.5) {B};
+    \node at (4.5,9.5) {B};
+    \node at (0.5,8.5) {B};
+    \node at (1.5,8.5) {B};
+    \node at (2.5,8.5) {B};
+    \node at (3.5,8.5) {B};
+    \node at (4.5,8.5) {B};
+    \node at (0.5,7.5) {B};
+    \node at (1.5,7.5) {B};
+    \node at (2.5,7.5) {R};
+    \node at (3.5,7.5) {R};
+    \node at (4.5,7.5) {R};
+    \node at (0.5,6.5) {R};
+    \node at (1.5,6.5) {R};
+    \node at (2.5,6.5) {R};
+    \node at (3.5,6.5) {R};
+    \node at (4.5,6.5) {R};
+  \end{tikzpicture}
             </latex-image>
           </image>
         </figure>
@@ -162,10 +213,14 @@
       <li>
         Respect for political boundaries (don't split towns/counties).
       </li>
+
+      <li>
+        Compliance with the Voting Rights Act and court decisions such as <q>LULAC v. Perry</q>.
+      </li>
     </ul>
 
     <p>
-      Notice: none of these directly prevent partisan bias.
+      Notice: none of these directly prevent partisan bias, and compactness alone is not sufficient to protect voting rights.
     </p>
   </subsection>
 

@@ -1,12 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<!-- EDITORIAL REVIEW - Priority 7 (May 2026)
+     ================================================
+     STATUS: NEEDS EXPANSION AND MATHEMATICAL DEPTH
+     Current length: 468 lines (this section)
+     Combined with content moderation (05): 606 lines total
+     Unit allocation: 7.5 hours (Weeks 11-13)
+     TARGET LENGTH: 600-750 lines (this section)
+     
+     ASSESSMENT:
+     STRENGTHS:
+     - Excellent governance and ethics framing
+     - Real references (Pulitzer Center, platform labor supply chain)
+     - Clear emphasis on hidden costs of AI
+     WEAKNESSES:
+     - Lacks mathematical depth on PCA
+     - Missing: covariance matrices, eigenvalues, eigenvectors, projections
+     - Missing: numerical worked examples
+     - Missing: t-SNE, UMAP, other modern methods
+     - Missing: bridge to fairness in classification
+     
+     EXPANSION PLAN:
+     1. Add PCA mathematics section (~200 lines)
+        - Covariance matrix definition and interpretation
+        - Eigendecomposition (eigenvalues, eigenvectors)
+        - Principal components as directions of maximum variance
+        - Interpretation of loadings
+     2. Add numerical worked examples (~150 lines)
+        - Neighborhood data: income, transit, broadband, healthcare
+        - Calculate covariance, eigenvalues, projections
+        - Visualization and interpretation
+     3. Add modern dimensionality reduction methods (~100 lines)
+        - t-SNE for non-linear visualization
+        - UMAP and other techniques
+        - When to use which method
+     4. Add fairness/governance bridge (~100 lines)
+        - How feature selection affects downstream bias
+        - Case studies: hiring algorithms, racial bias, gender bias
+        - Tradeoff between dimensionality reduction and interpretability
+     
+     INTEGRATION NOTE:
+     - Connect to Lab 2 (PCA Jupyter notebook) for computational implementation
+     - This section forms first half of 7.5-hour unit
+     - Content moderation (05) forms second half
+     - Add bridge section connecting the two themes
+     
+     TIMELINE: 3-4 days to complete expansion
+     PRIORITY: HIGH - Essential for understanding how data choices affect governance
+-->
+
 <section xml:id="notes-week-01">
-  <title>LLMs and Dimensionality</title>
+  <title>Data Governance and Dimensionality</title>
 
   <introduction>
     <p>
       This is an outline of (some of) the topics we covered in class.
     </p>
+
+    <p>
+      Governments and platforms use data to make decisions about funding, services, moderation, and surveillance.
+      Dimensionality reduction is a tool that helps us understand which patterns in data are visible to decision makers and which are hidden.
+    </p>
+
+    <!-- TODO: Add a precise mathematical section introducing covariance, variance, and the role of eigenvalues in PCA. Include a brief check-it exercise on a small dataset. -->
+
+    <subsection xml:id="dimensionality-governance-framing">
+      <title>Governance Framing</title>
+
+      <p>
+        Data used in governance decisions are collected and curated by institutions with incentives and constraints. When applying dimensionality reduction, document the provenance of features, who is represented in the dataset, and what policy decisions will rely on the reduced representation.
+      </p>
+    </subsection>
   </introduction>
   <!-- Can also be <handout> instead of
   <subsection>

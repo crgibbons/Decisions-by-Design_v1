@@ -1,0 +1,1371 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 720 1400"
+   version="1.1"
+   id="svg442"
+   sodipodi:docname="DifferingApportionment.svg"
+   inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs446" />
+  <sodipodi:namedview
+     id="namedview444"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     showgrid="false"
+     inkscape:zoom="0.59428571"
+     inkscape:cx="27.764423"
+     inkscape:cy="699.15865"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     inkscape:window-x="3832"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg442" />
+  <g
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     id="g42">
+    <path
+       fill="#19c819"
+       d="M28 400h36v36H28zm36 0h36v36H64z"
+       id="path2"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 400h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path4"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 436h36v36H28zm36 0h36v36H64z"
+       id="path6"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 436h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path8"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 472h36v36H28zm36 0h36v36H64z"
+       id="path10"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 472h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path12"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 508h36v36H28zm36 0h36v36H64z"
+       id="path14"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 508h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path16"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 544h36v36H28zm36 0h36v36H64z"
+       id="path18"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 544h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path20"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 580h36v36H28zm36 0h36v36H64z"
+       id="path22"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 580h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path24"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 616h36v36H28zm36 0h36v36H64z"
+       id="path26"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 616h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path28"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 652h36v36H28zm36 0h36v36H64z"
+       id="path30"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 652h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path32"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 688h36v36H28zm36 0h36v36H64z"
+       id="path34"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 688h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path36"
+       style="fill:#0c7bdc;fill-opacity:1" />
+    <path
+       fill="#19c819"
+       d="M28 724h36v36H28zm36 0h36v36H64z"
+       id="path38"
+       style="fill:#ffc20a;fill-opacity:1" />
+    <path
+       fill="#d2d200"
+       d="M100 724h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+       id="path40"
+       style="fill:#0c7bdc;fill-opacity:1" />
+  </g>
+  <switch
+     id="switch56">
+    <text
+       x="25.367"
+       y="47.198"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="28"
+       font-weight="400"
+       systemLanguage="fr"
+       id="text48"><tspan
+         x="25.367"
+         y="47.198"
+         id="tspan44">Gerrymandering : dessiner différentes cartes pour</tspan><tspan
+         x="25.367"
+         y="83.864"
+         id="tspan46">les circonscriptions produit des résultats différents</tspan></text>
+    <text
+       x="25.367"
+       y="47.198"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="28"
+       font-weight="400"
+       systemLanguage="en,*"
+       id="text54"><tspan
+         x="25.367"
+         y="47.198"
+         id="tspan50">Gerrymandering: drawing different maps for</tspan><tspan
+         x="25.367"
+         y="83.864"
+         id="tspan52">electoral districts produces different outcomes</tspan></text>
+  </switch>
+  <switch
+     id="switch74">
+    <text
+       x="24.522"
+       y="290.265"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="400"
+       systemLanguage="fr"
+       id="text64"><tspan
+         x="24.522"
+         y="290.265"
+         id="tspan58">50 circonscriptions</tspan><tspan
+         x="24.522"
+         y="326.932"
+         id="tspan60">60 % bleu</tspan><tspan
+         x="24.522"
+         y="363.598"
+         id="tspan62">40 % jaune</tspan></text>
+    <text
+       x="24.522"
+       y="290.265"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="29"
+       font-weight="400"
+       systemLanguage="en,*"
+       id="text72"><tspan
+         x="24.522"
+         y="290.265"
+         id="tspan66">50 Precincts</tspan><tspan
+         x="24.522"
+         y="326.932"
+         id="tspan68">60% Blue</tspan><tspan
+         x="24.522"
+         y="363.598"
+         id="tspan70">40% Yellow</tspan></text>
+  </switch>
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 200h36v36h-36zm36 0h36v36h-36z"
+     id="path76"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 200h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path78"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 236h36v36h-36zm36 0h36v36h-36z"
+     id="path80"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 236h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path82"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 272h36v36h-36zm36 0h36v36h-36z"
+     id="path84"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 272h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path86"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 308h36v36h-36zm36 0h36v36h-36z"
+     id="path88"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 308h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path90"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 344h36v36h-36zm36 0h36v36h-36z"
+     id="path92"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 344h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path94"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 380h36v36h-36zm36 0h36v36h-36z"
+     id="path96"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 380h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path98"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 416h36v36h-36zm36 0h36v36h-36z"
+     id="path100"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 416h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path102"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 452h36v36h-36zm36 0h36v36h-36z"
+     id="path104"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 452h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path106"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 488h36v36h-36zm36 0h36v36h-36z"
+     id="path108"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 488h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path110"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 524h36v36h-36zm36 0h36v36h-36z"
+     id="path112"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 524h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path114"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 200h36v36h-36zm36 0h36v36h-36z"
+     id="path116"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 200h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path118"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 236h36v36h-36zm36 0h36v36h-36z"
+     id="path120"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 236h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path122"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 272h36v36h-36zm36 0h36v36h-36z"
+     id="path124"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 272h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path126"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 308h36v36h-36zm36 0h36v36h-36z"
+     id="path128"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 308h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path130"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 344h36v36h-36zm36 0h36v36h-36z"
+     id="path132"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 344h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path134"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 380h36v36h-36zm36 0h36v36h-36z"
+     id="path136"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 380h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path138"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 416h36v36h-36zm36 0h36v36h-36z"
+     id="path140"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 416h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path142"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 452h36v36h-36zm36 0h36v36h-36z"
+     id="path144"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 452h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path146"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 488h36v36h-36zm36 0h36v36h-36z"
+     id="path148"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 488h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path150"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M490 524h36v36h-36zm36 0h36v36h-36z"
+     id="path152"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M562 524h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path154"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-miterlimit="10"
+     stroke-width="4.5"
+     d="M256 200h180v72H256zm0 72h180v72H256zm0 72h180v72H256zm0 72h180v72H256zm0 72h180v72H256z"
+     id="path156" />
+  <switch
+     id="switch162">
+    <text
+       x="290"
+       y="454"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="22"
+       font-weight="700"
+       systemLanguage="fr"
+       transform="translate(-6.678 130.44)"
+       id="text158">5 DISTRICTS</text>
+    <text
+       x="290"
+       y="454"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="en,*"
+       transform="translate(-6.678 130.44)"
+       id="text160">5 DISTRICTS</text>
+  </switch>
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-miterlimit="10"
+     stroke-width="4.5"
+     d="M526 308v36h-36V200h36v36h108v72z"
+     id="path164" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-miterlimit="10"
+     stroke-width="4.5"
+     d="M526 200v36h108v108h-72v36h108V200z"
+     id="path166" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-miterlimit="10"
+     stroke-width="4.5"
+     d="M634 416h-72v-72h72v-36H526v36h-36v72h36v36h108z"
+     id="path168" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-miterlimit="10"
+     stroke-width="4.5"
+     d="M634 452H526v-36h-36v144h36v-36h108z"
+     id="path170" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-miterlimit="10"
+     stroke-width="4.5"
+     d="M634 416v108H526v36h144V380H562v36z"
+     id="path172" />
+  <switch
+     id="switch178">
+    <text
+       x="520"
+       y="454"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="22"
+       font-weight="700"
+       systemLanguage="fr"
+       transform="translate(-6.678 130.44)"
+       id="text174">5 DISTRICTS</text>
+    <text
+       x="520"
+       y="454"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="en,*"
+       transform="translate(-6.678 130.44)"
+       id="text176">5 DISTRICTS</text>
+  </switch>
+  <switch
+     id="switch192">
+    <text
+       x="293.5"
+       y="488.216"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="fr"
+       transform="translate(-6.678 130.44)"
+       id="text184"><tspan
+         x="293.5"
+         y="488.216"
+         id="tspan180">5 bleus</tspan><tspan
+         x="293.581"
+         y="521.549"
+         id="tspan182">0 jaune</tspan></text>
+    <text
+       x="293.5"
+       y="488.216"
+       font-family="'DejaVu Sans Condensed', sans-serif"
+       font-size="26px"
+       font-weight="700"
+       systemLanguage="en,*"
+       transform="translate(-6.678,130.44)"
+       id="text190"><tspan
+         x="293.5"
+         y="488.216"
+         id="tspan186">5 Blue</tspan><tspan
+         x="293.58099"
+         y="521.54901"
+         id="tspan188">0 Yellow</tspan></text>
+  </switch>
+  <switch
+     id="switch206">
+    <text
+       x="524.37"
+       y="490.061"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="fr"
+       transform="translate(-6.678 130.44)"
+       id="text198"><tspan
+         x="524.37"
+         y="490.061"
+         id="tspan194">3 jaunes</tspan><tspan
+         x="524.37"
+         y="523.394"
+         id="tspan196">2 bleus</tspan></text>
+    <text
+       x="524.37"
+       y="490.061"
+       font-family="'DejaVu Sans Condensed', sans-serif"
+       font-size="26px"
+       font-weight="700"
+       systemLanguage="en,*"
+       transform="translate(-6.678,130.44)"
+       id="text204"><tspan
+         sodipodi:role="line"
+         id="tspan27106"
+         x="524.37"
+         y="490.061"><tspan
+           x="524.37"
+           y="490.061"
+           id="tspan200">3 Yellow</tspan></tspan><tspan
+         sodipodi:role="line"
+         id="tspan27108"
+         x="524.37"
+         y="522.56104">2 Blue</tspan></text>
+  </switch>
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 852h36v36h-36z"
+     id="path208"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 852h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path210"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 888h36v36h-36z"
+     id="path212"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 888h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path214"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 924h36v36h-36z"
+     id="path216"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 924h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path218"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 960h36v36h-36z"
+     id="path220"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 960h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path222"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 996h36v36h-36z"
+     id="path224"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 996h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path226"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 1032h36v36h-36z"
+     id="path228"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 1032h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path230"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 1068h36v36h-36z"
+     id="path232"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 1068h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path234"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 1104h36v36h-36z"
+     id="path236"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 1104h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path238"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M292 1140h36v36h-36z"
+     id="path240"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 1140h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path242"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M256 852h36v36h-36zm0 36h36v36h-36zm0 36h36v36h-36zm0 36h36v36h-36zm0 36h36v36h-36zm0 36h36v36h-36zm0 36h36v36h-36zm0 36h36v36h-36zm0 36h36v36h-36zm0 36h36v36h-36zm36 0h36v36h-36z"
+     id="path244"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M328 1176h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path246"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-width="4.5"
+     d="M256 852v360h36V852zm36 0v360h36V852zm36 0v360h36V852zm36 0v360h36V852zm36 0v360h36V852z"
+     id="path248" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 852h36v36h-36zm36 0h36v36h-36z"
+     id="path250"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 852h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path252"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 888h36v36h-36zm36 0h36v36h-36z"
+     id="path254"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 888h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path256"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 924h36v36h-36zm36 0h36v36h-36z"
+     id="path258"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 924h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path260"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 960h36v36h-36zm36 0h36v36h-36z"
+     id="path262"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 960h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path264"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 996h36v36h-36zm36 0h36v36h-36z"
+     id="path266"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 996h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path268"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 1032h36v36h-36zm36 0h36v36h-36z"
+     id="path270"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 1032h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path272"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 1068h36v36h-36zm36 0h36v36h-36z"
+     id="path274"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 1068h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path276"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 1104h36v36h-36zm36 0h36v36h-36z"
+     id="path278"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 1104h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path280"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 1140h36v36h-36zm36 0h36v36h-36z"
+     id="path282"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 1140h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path284"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="#19c819"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M494 1176h36v36h-36zm36 0h36v36h-36z"
+     id="path286"
+     style="fill:#ffc20a;fill-opacity:1" />
+  <path
+     fill="#d2d200"
+     stroke="#fff"
+     stroke-miterlimit="10"
+     stroke-width="3"
+     d="M566 1176h36v36h-36zm36 0h36v36h-36zm36 0h36v36h-36z"
+     id="path288"
+     style="fill:#0c7bdc;fill-opacity:1" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-width="4.5"
+     d="M494 852h180v108h-72v-36h-36v-36h-72z"
+     id="path290" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-width="4.5"
+     d="M494 888v108h180v-36h-72v-36h-36v-36zm0 108v72h180v-72zm0 72v36h72v36h36v36h72v-108z"
+     id="path292" />
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-width="4.5"
+     d="M494 1104v108h180v-36h-72v-36h-36v-36z"
+     id="path294" />
+  <switch
+     id="switch300">
+    <text
+       x="290"
+       y="1107"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="22"
+       font-weight="700"
+       systemLanguage="fr"
+       transform="translate(-6.678 130.44)"
+       id="text296">5 DISTRICTS</text>
+    <text
+       x="290"
+       y="1107"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="en,*"
+       transform="translate(-6.678 130.44)"
+       id="text298">5 DISTRICTS</text>
+  </switch>
+  <switch
+     id="switch306">
+    <text
+       x="520"
+       y="1107"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="22"
+       font-weight="700"
+       systemLanguage="fr"
+       transform="translate(-6.678 130.44)"
+       id="text302">5 DISTRICTS</text>
+    <text
+       x="520"
+       y="1107"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="en,*"
+       transform="translate(-6.678 130.44)"
+       id="text304">5 DISTRICTS</text>
+  </switch>
+  <switch
+     id="switch320">
+    <text
+       x="294.081"
+       y="970.716"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="fr"
+       transform="translate(-6 300)"
+       id="text312"><tspan
+         x="294.081"
+         y="970.716"
+         id="tspan308">3 bleus</tspan><tspan
+         x="294.081"
+         y="1004.049"
+         id="tspan310">2 jaunes</tspan></text>
+    <text
+       x="294.08099"
+       y="970.716"
+       font-family="'DejaVu Sans Condensed', sans-serif"
+       font-size="26px"
+       font-weight="700"
+       systemLanguage="en,*"
+       transform="translate(-6,300)"
+       id="text318"><tspan
+         x="294.08099"
+         y="970.716"
+         id="tspan314">3 Blue</tspan><tspan
+         x="294.08099"
+         y="1004.049"
+         id="tspan316">2 Yellow</tspan></text>
+  </switch>
+  <switch
+     id="switch334">
+    <text
+       x="530.081"
+       y="972.216"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="fr"
+       transform="translate(-6 300)"
+       id="text326"><tspan
+         x="530.081"
+         y="972.216"
+         id="tspan322">3 bleus</tspan><tspan
+         x="530.081"
+         y="1005.549"
+         id="tspan324">2 jaunes</tspan></text>
+    <text
+       x="530.08099"
+       y="972.216"
+       font-family="'DejaVu Sans Condensed', sans-serif"
+       font-size="26px"
+       font-weight="700"
+       systemLanguage="en,*"
+       transform="translate(-6,300)"
+       id="text332"><tspan
+         x="530.08099"
+         y="972.216"
+         id="tspan328">3 Blue</tspan><tspan
+         x="530.08099"
+         y="1005.549"
+         id="tspan330">2 Yellow</tspan></text>
+  </switch>
+  <path
+     fill="none"
+     stroke="#000"
+     stroke-width="2"
+     d="M260 760h420"
+     id="path336" />
+  <switch
+     id="switch350">
+    <text
+       x="457.604"
+       y="142.787"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       style="text-align:center"
+       systemLanguage="fr"
+       text-anchor="middle"
+       id="text342"><tspan
+         x="457.604"
+         y="142.787"
+         id="tspan338">Résultats disproportionnés</tspan><tspan
+         x="457.604"
+         y="176.12"
+         id="tspan340">“gerrymandering”</tspan></text>
+    <text
+       x="457.604"
+       y="142.787"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       style="text-align:center"
+       systemLanguage="en,*"
+       text-anchor="middle"
+       id="text348"><tspan
+         x="457.604"
+         y="142.787"
+         id="tspan344">Disproportionate Outcomes</tspan><tspan
+         x="457.604"
+         y="176.12"
+         id="tspan346">“gerrymandering”</tspan></text>
+  </switch>
+  <switch
+     id="switch360">
+    <text
+       x="275.578"
+       y="796.921"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="fr"
+       id="text354"><tspan
+         x="275.578"
+         y="796.921"
+         id="tspan352">Résultats proportionnés</tspan></text>
+    <text
+       x="275.578"
+       y="796.921"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="700"
+       systemLanguage="en,*"
+       id="text358"><tspan
+         x="275.578"
+         y="796.921"
+         id="tspan356">Proportionate Outcomes</tspan></text>
+  </switch>
+  <switch
+     id="switch394">
+    <text
+       x="117.88"
+       y="827.432"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="400"
+       style="text-align:center"
+       systemLanguage="fr"
+       text-anchor="middle"
+       id="text376"><tspan
+         x="117.88"
+         y="827.432"
+         id="tspan362">50 circonscriptions</tspan><tspan
+         x="117.88"
+         y="860.765"
+         id="tspan364">doivent être</tspan><tspan
+         x="117.88"
+         y="894.099"
+         id="tspan366">réparties</tspan><tspan
+         x="117.88"
+         y="927.432"
+         id="tspan368">en</tspan><tspan
+         x="117.88"
+         y="960.765"
+         id="tspan370">5 districts,</tspan><tspan
+         x="117.88"
+         y="994.099"
+         id="tspan372">10 circonscriptions</tspan><tspan
+         x="117.88"
+         y="1027.432"
+         id="tspan374">par district.</tspan></text>
+    <text
+       x="117.88"
+       y="827.432"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="29"
+       font-weight="400"
+       style="text-align:center"
+       systemLanguage="en,*"
+       text-anchor="middle"
+       id="text392"><tspan
+         x="117.88"
+         y="827.432"
+         id="tspan378">50 Precincts</tspan><tspan
+         x="117.88"
+         y="860.765"
+         id="tspan380">are to be</tspan><tspan
+         x="117.88"
+         y="894.099"
+         id="tspan382">apportioned</tspan><tspan
+         x="117.88"
+         y="927.432"
+         id="tspan384">into</tspan><tspan
+         x="117.88"
+         y="960.765"
+         id="tspan386">5 districts,</tspan><tspan
+         x="117.88"
+         y="994.099"
+         id="tspan388">10 precincts</tspan><tspan
+         x="117.88"
+         y="1027.432"
+         id="tspan390">per district.</tspan></text>
+  </switch>
+  <switch
+     id="switch412">
+    <text
+       x="271.056"
+       y="688.844"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="400"
+       systemLanguage="fr"
+       id="text402"><tspan
+         x="271.056"
+         y="688.844"
+         font-weight="700"
+         id="tspan396">Les bleus</tspan><tspan
+         x="271.056"
+         y="722.178"
+         id="tspan400"><tspan
+           font-weight="700"
+           id="tspan398">gagnent tout</tspan></tspan></text>
+    <text
+       x="271.056"
+       y="688.844"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="400"
+       systemLanguage="en,*"
+       id="text410"><tspan
+         x="271.056"
+         y="688.844"
+         font-weight="700"
+         id="tspan404">BLUE</tspan><tspan
+         x="271.056"
+         y="722.178"
+         id="tspan408"><tspan
+           font-weight="700"
+           id="tspan406">WINS ALL</tspan></tspan></text>
+  </switch>
+  <switch
+     id="switch426">
+    <text
+       x="482.311"
+       y="691.056"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="400"
+       systemLanguage="fr"
+       id="text418"><tspan
+         x="482.311"
+         y="691.056"
+         font-weight="700"
+         id="tspan414">Les jaunes gagnent</tspan><tspan
+         x="482.311"
+         y="724.389"
+         font-weight="700"
+         id="tspan416">la majorité</tspan></text>
+    <text
+       x="482.311"
+       y="691.056"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="26"
+       font-weight="400"
+       systemLanguage="en,*"
+       id="text424"><tspan
+         x="482.311"
+         y="691.056"
+         font-weight="700"
+         id="tspan420">YELLOW WINS</tspan><tspan
+         x="482.311"
+         y="724.389"
+         font-weight="700"
+         id="tspan422">MAJORITY</tspan></text>
+  </switch>
+  <switch
+     id="switch440">
+    <text
+       x="268.845"
+       y="1346.534"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="28"
+       font-weight="400"
+       systemLanguage="fr"
+       id="text432"><tspan
+         x="268.845"
+         y="1346.534"
+         font-weight="700"
+         id="tspan428">Les bleus et les jaunes gagnent</tspan><tspan
+         x="268.845"
+         y="1383.2"
+         font-weight="700"
+         id="tspan430">en proportion de leur vote</tspan></text>
+    <text
+       x="268.845"
+       y="1346.534"
+       font-family="DejaVu Sans Condensed, sans-serif"
+       font-size="28"
+       font-weight="400"
+       systemLanguage="en,*"
+       id="text438"><tspan
+         x="268.845"
+         y="1346.534"
+         font-weight="700"
+         id="tspan434">Blue and yellow win in</tspan><tspan
+         x="268.845"
+         y="1383.2"
+         font-weight="700"
+         id="tspan436">proportion to their voting</tspan></text>
+  </switch>
+</svg>

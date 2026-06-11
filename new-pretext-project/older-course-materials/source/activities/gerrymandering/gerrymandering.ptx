@@ -1,0 +1,4198 @@
+<pretext> 
+<chapter xml:id="gerrymandering" xmlns:xi="http://www.w3.org/2001/XInclude">
+	<title>Gerrymandering</title>
+	<introduction xml:id="gerrymandering-introduction">
+		<p>
+			This module on Gerrymandering was authored by <xref ref="sbryant"/>, <xref ref="bcampbell-hetrick"/>, and <xref ref="kevans"/>.
+		</p>
+		<p>Gerrymandering is the act of defining the boundaries of electoral districts to benefit a party or politician. In countries where there is a single voting district, such as Israel (see <xref ref="gerrymandering-Israel-voting"/>), or where electoral district boundaries are fixed, such as Sweden (see mention of constituencies in <xref ref="gerrymandering-Sweden-voting"/>), this practice is eliminated. However, in many countries it is an ongoing concern when evaluating the fairness of electoral representation. Though it is not a phenomenon unique to the United States of America, this chapter will focus on its history in that country. The term <em>gerrymandering</em> is named after American politician Elbridge Gerry (pronounced with a hard "g"), who, as then-Governor of Massachusetts, signed a bill in 1812 that created a partisan district in the Boston area that was compared to the shape of a salamander. (For more on Gerry and the Massachusetts map, see <xref ref="gerrymandering-history-Gerry"/>.)</p>
+		<p> The practice of gerrymandering is controversial and widely-opposed, but solutions are not easy to find. After all, what defines a <q>fair</q> map of electoral districts? How can citizens better understand the underlying issues and use mathematics to support more fairness in voting? In this chapter, we explore these ideas.  </p>
+	</introduction>
+	<section xml:id="gerrymandering-objectives">
+		<title>Objectives</title>
+		<p>
+			By the end of this module students will be able to:
+			<ol>
+				<li>
+					Describe the process of redistricting, different types of gerrymandering, and the social justice implications of gerrymandering.
+				</li>
+				<li>
+					Calculate and interpret three measures of compactness.
+				</li>
+				<li>
+					Describe the idea of partisan gerrymandering and compute and interpret it with different measures.
+				</li>
+				<li>
+					Explain the idea of racial gerrymandering and the use of statistics for its potential detection.
+				</li>
+				<li>
+					Explain outlier analysis in the context of comparing ensembles of possible district maps and apply in simple examples.
+				</li>
+				<li>
+					(Optional) Create and evaluate a district map using appropriate technology, mathematical tools, and political understanding.
+				</li>
+			</ol>
+		</p>
+	</section>
+	<section xml:id="gerrymandering-background">
+		<title>Understanding the Issue</title>
+		<assemblage>
+			<p> What is gerrymandering? When does it happen? Why is it controversial? </p></assemblage>
+
+			<p>Gerrymandering is the act of defining the boundaries of electoral districts to benefit a party or politician. Initial discussions of gerrymandering typically focus on the shape or geometry of districts, as these can be indicative of manipulation. How can the shape of districts affect voting outcomes, regardless of underlying population proportions? Consider the following example:  </p>
+
+			<figure>
+				<title>Basic gerrymandering example.</title>
+				<image source="gerrymandering/GerryEasy2.png" width = "95%"/>
+				<caption>Images of various ways to divide 50 people into 5 districts. In one, blue wins 3. In next, blue wins 5. In last, blue wins 2.
+				</caption>
+			</figure>
+
+			<p>The following clip from Washington Post provides an overview of gerrymandering in the United States that elaborates on the above images. </p>
+
+			<figure>
+				<video youtube="bGLRJ12uqmk"> </video>
+				<caption> Gerrymandering, Explained (Washington Post). </caption>
+			</figure>
+			<p>
+				<em>Redistricting</em> (in the United States) is the process of drawing new political districts (maps) every 10 years, as required by the U.S. Census. Political districts form the basis of our representative democracy, as each district corresponds to (at least one) representative in government, decided by elections among citizens living in that district.
+			</p>
+
+			<p>
+				Political districts exist at different levels of government. First, the 435 members of the U.S. House of Representatives each correspond to one district in one of the 50 states. The number of districts in each state is roughly proportional to that state's population, with the exact number determined by a mathematical algorithm known as the Huntington-Hill Method. As of the 2020 Census, the top six states in representatives are California (with 52), Texas (38), Florida (28), New York (26), Illinois (17), and Pennsylvania (17). Another six states have only a single representative (statewide district): Delaware, South Dakota, North Dakota, Alaska, Vermont, and Wyoming.
+			</p>
+
+			<p>
+				Much like the U.S. Congress is divided into a Senate and a House of Representatives, state legislatures (governments) are also divided into two <q>houses.</q> (Note: Nebraska is an exception as they are the only state with a single-house legislature.) The number of districts in state legislatures varies by state, but is also subject to decennial redistricting to account for population changes and shifts. For example, Connecticut's State Senate has 36 districts and their State House of Representatives has 151 districts. The full listings of the number of legislative districts by state is available online. <xref ref="gerrymandering-ballotpedia-table"/>.
+
+			</p>
+
+			<p>
+				There are a few rules that all states must abide by when drawing their districts:
+				<ul>
+					<li> Districts must be roughly equal in population ("one person, one vote").</li>
+					<li> Districts must be contiguous (one connected shape). </li>
+					<li> Districts must comply with racial fairness via the Voting Rights Act of 1965 (see <xref ref="gerrymandering-math-topic-statistics" /> for more information). </li>
+				</ul>
+
+				Redistricting can be controversial due to who draws the lines in each state. While some states have independent redistricting commissions comprised of citizens or politicians equally representing the two main political parties, other states' processes are controlled by the political party in power of the state government. When in control, this incentivizes a political party to manipulate the maps in an effort to maximize their own future representation. The manipulation of drawing districts to benefit one group is called <term>gerrymandering</term> and will be explored mathematically and politically in this module.
+			</p>
+
+
+
+		</section>
+
+		<section xml:id="gerrymandering-cui-bono">
+			<title>Cui Bono - Who Benefits?</title>
+			<p>
+				In this chapter we will explore two types of gerrymandering: partisan gerrymandering and racial gerrymandering.
+			</p>
+
+			<p>
+				<term>Partisan gerrymandering</term> is the practice of drawing district lines to maximize a political party's advantage in elected representatives. In this type of gerrymandering, voters and representatives of the party in power benefit as an increased delegation directly impacts the laws and policies that are able to pass in government, both on the state and national levels. On the other hand, voters and representatives of the party not in power suffer from being underrepresented in government and may be victims of a cycle where the opposing party maintains their power through the redistricting process.
+			</p>
+
+			<p>
+				<term>Racial gerrymandering</term> is the practice of drawing district lines to reduce the impact of racial minority voters by limiting their ability to elect candidates of their choice. This practice is illegal in the United States. Historically, in this type of gerrymandering, White people benefit from the drawing of districts that systematically stifle voters of color. On the other hand, people of color (POC) continue to be oppressed and are in a more difficult position to elect representatives to government that may fight for policies on their behalf.
+			</p>
+
+		</section>
+
+		<section xml:id="gerrymandering-big-problem">
+			<title>Big Problem: Using Mathematics to Determine Fairness</title>
+			<assemblage>
+				<p>
+					What is a <q>fair</q> district map?
+				</p>
+			</assemblage>
+
+			<p>
+				Even without partisan bias, the notion of a <q>fair</q> district map may take on different meanings depending on your state and point of view. Perhaps a fair map is one that reliably produces representatives which are proportional to the state's political party populations. Maybe a map with a high number of competitive districts keeps democracy flourishing. Or possibly a state's geography prioritizes compactness of district shapes.
+			</p>
+
+			<p>
+				The good news is that mathematics provides tools to measure various forms of <q>fairness</q> in addition to ways to detect both forms of gerrymandering. We begin in <xref ref="gerrymandering-math-topic-compactness" /> by introducing compactness formulas to quantify the geometry of districts. Then in <xref ref="gerrymandering-math-topic-partisan-gerrymandering" />, we use a couple of different mathematical approaches to investigate partisan gerrymandering. Next, in <xref ref="gerrymandering-math-topic-statistics" />, we unpack the ways statistics can be used to unveil racial gerrymandering. Finally, in <xref ref="gerrymandering-math-topic-outlier" /> we introduce the concept of outlier analysis as a way to identify unfair maps.
+			</p>
+
+		</section>
+
+		<section xml:id="gerrymandering-math-topic-compactness">
+			<title>Geometry and Compactness</title>
+			<introduction>
+				<p>As mentioned in the chapter overview, the term <q>gerrymander</q> originated from a critique of an unusual district shape in Massachusetts in 1812. Since then, many discussions about manipulation of district boundaries have focused on the shapes of the districts. Take a look at the shapes of some recent congressional districts, as presented in a <em>Washington Post</em> article <xref ref="gerrymandering-Post-images-districts" />:
+				<figure>
+					<title>Oddly shaped districts.</title>
+					<image source="gerrymandering/compactness.jpg" />
+					<caption>Collection of images of 6 different districts. The districts have squiggly borders and narrow regions spread over a wide area.
+					</caption>
+				</figure>
+				This is only a sampling of bizarre district shapes; in fact, some people even created a computer font called Ugly Gerry (see <xref ref="gerrymandering-ugly-gerry" />) using real district shapes!
+			</p>
+
+			<p>
+				But what is <em> compactness</em>, and why should we care about districts having nice shapes? <term>Compactness </term> is a quantitative measure of a district's shape and how tightly packed, or compact, the region is. Remember that the function of a political district is to elect someone that <em>represents</em> the people, needs, and interests of an area. A district over a more compact area is likely to include towns and communities with similar interests, while a district that zigs and zags across a state is more likely to intentionally exclude certain groups of people and connect regions with different local interests. In fact, most states include language emphasizing the importance of <q>compactness</q> of their districts but lack a definition or a way to measure this characteristic.
+			</p>
+
+		</introduction>
+		<assemblage>
+			<p>Motivating Questions: To what extent can or should we use the shapes of districts to determine a potential gerrymander? Can we agree on an accepted way to measure compactness since many states specifically include it as a consideration for district plans?
+			</p>
+		</assemblage>
+		<subsection> <title>Packing and Cracking: How drawing lines can change outcomes</title>
+			<p>
+				Why might districts be drawn in squiggly shapes stretching over large areas? How can the shape of a district matter if we count all votes equally? Consider this brief introduction to two key terms: <em>packing</em> and <em>cracking</em>.
+			</p>
+		<figure>
+			<title>TedEd video introducing packing and cracking.</title>
+			<video youtube="YcUDBgYodIE"> </video>
+			<description>
+				Introduces packing and cracking. Images show cartoon examples of plans that use these techniques to achieve desired outcomes.
+			</description>
+			<caption>
+				TedEd video introducing packing and cracking.
+			</caption>
+		</figure>
+	</subsection>
+
+
+	<subsection>
+		<title> Three Ways to Measure Compactness of a District </title>
+
+		<remark> There are many different mathematical and geometric approaches for measuring the compactness of a shape. It is important to note that these measures are based entirely on district shapes and do not factor in geography, racial demographics, political party affiliation, or election results. While the shape of a district alone is not indicative of gerrymandering, it can be worthwhile to consider as one potential indicator. We examine a few measures here. </remark>
+
+		<p>To allow for more straighforward computations, we work in <em>square</em> grids in this section, noting that this is a simplification from real-life applications. We start with our square grid and a district plan drawn on the grid:
+		<figure xml:id="gerrymandering-square-grid-district">
+			<title>District plan on square grid.</title>
+			<image source="gerrymandering/square-grid-district.png">
+				Image of district drawn on square grid with edges following grid lines. Region encloses 18 squares and is an irregular shape.
+			</image>
+			<caption>
+				Square grid with district plan.
+			</caption>
+		</figure>
+
+	</p>
+
+
+	<p>We defined <term>compactness</term> above as a measure of how tightly packed a district is. The most compact district, then, is one that is as tightly packed as possible. If we are constructing our districts from squares in the grid, what shape would be as tightly packed as possible? We would want smooth edges, without any parts sticking out, so we might try to arrange our squares into a rectangular region. But a long, skinny rectangle would not be considered as tightly packed as possible: we could tighten it up even more by getting the side lengths to all be the same. Our most compact shape, then, is a square.
+</p>
+
+<p>	The first measure of compactness we discuss, the <term>Polsy-Popper </term> measure, is found by comparing the shape of a given district to the <q>ideal</q> shape, a square - more specifically, a square that has the same perimeter as our district.
+
+</p>
+<definition xml:id="gerrymandering-PPdef"> The <term> Polsby-Popper score </term> is a ratio that compares the area of a district to the area of a square with the same perimeter as the district. Thus we have
+
+<me> PP =\displaystyle\frac{\text{Area of district}}{\text{Area of a square with the same perimeter as the district}}  </me>.
+</definition>
+
+<p> In the following example, we calculate the Polsby-Popper score for the district above. </p>
+
+<example> Find the Polsby-Popper score for the district above in <xref ref="gerrymandering-square-grid-district" />.
+<hint> Once you have the perimeter of the district (26), what dimensions would a square have with the same perimeter? </hint>
+<answer> <m> PP = \frac{72}{169} \approx 0.426.</m> </answer>
+
+<solution> <p> Omitting units and simply counting, we note the area of the district is <m>18</m> and its perimeter is <m>26</m>.  Since all sides must be equal in length in a square, any square that has perimeter <m>26</m> must have sides of length <m> \frac{26}{4}</m> or <m> \frac{13}{2} </m>. Therefore the area of this square would be <m>\left ( \frac{13}{2} \right )^2 = \frac{169}{4}</m>.  Now we find the ratio: <m> PP = \frac{18}{(169/4)}=\frac{72}{169} \approx 0.426.</m></p>  </solution>
+</example>
+
+<p>
+	Our second measure of compactness, the <term>Reock score</term>, again compares the given district shape to a square. However, instead of using a square with the same perimeter as the district, the Reock score compares to a <em>minimum-bounding square</em>, which is the smallest square that fully contains the district.
+</p>
+
+<definition xml:id="gerrymandering-Rdef"> The <term>Reock score</term> is a ratio that compares the district's shape to the minimum-bounding square, the smallest square that fully contains the district. We have
+<me> R =\displaystyle\frac{\text{Area of district}}{\text{Area of the smallest square containing the district}} </me>.
+</definition>
+<p> In the image below, we show the district plan together with the smallest square containing the district.
+	<figure xml:id="gerrymandering-district-with-smallest-square">
+		<title>District plan with minimum-bounding square.</title>
+		<image source="gerrymandering/district-with-smallest-square.png">
+			Image of district together with outline of smallest square containing the district.
+		</image>
+		<caption>
+			District plan with minimum-bounding square. The minimum-bounding square is outlined in dashed line. Because the district is 6 squares wide at its widest point, the minimum-bounding square is 6 units by 6 units.
+		</caption>
+	</figure>
+</p>
+
+<p>
+	In the next example, we calculate the Reock score for the district above. </p>
+
+	<example> Find the Reock score for the district above.
+		<hint>As noted above, the smallest square that contains the district is 6 units by 6 units. Find its area. </hint>
+		<answer> <m> R = 0.5 </m> </answer>
+		<solution>
+			<p> Omitting units and simply counting, we note the area of the district is <m>18</m> and area of the smallest square that contains the district is <m>36</m>. In this case, we have <m> R = \frac{18}{36}=\frac{1}{2}=0.5</m>.</p>
+		</solution>
+	</example>
+
+	<p>
+		Finally, the <term> Convex Hull score </term> is a ratio that measures how <q>convex</q> a district shape is. In geometry, a <em> convex </em> shape is one in which any two points in the interior of the shape can be connected by a straight line that stays inside the shape. If there is any pair of interior points connected by a straight line that partially falls outside of the shape, then the shape is known as <em>concave</em>. The picture below shows an example of a convex shape (image a) versus concave shape (image b):
+		<figure xml:id="gerrymandering-ConvexConcave1">
+			<title>Convex and concave shapes.</title>
+			<image source="gerrymandering/ConvexConcave1.png" width= "50%">
+				Image of two shapes. One has a line segment entirely inside the shape; the other shows a line segment partly outside the shape.
+			</image>
+			<caption>
+				Convex and concave shapes.
+			</caption>
+		</figure>
+	</p>
+
+	<p>
+		The <em> convex hull </em> of a shape is the original shape together with the minimum additional area needed to make it convex. To visualize the convex hull, imagine placing a rubber band tightly around the perimeter of the shape. If the shape is a square, or a rectangle, the rubber band will fit exactly along the edges of the shape. If the shape is not rectangular, the rubber band will stretch across any gaps created between corners of the shape. This region enclosed by the rubber band is the convex hull. The picture below shows our district together with its convex hull:
+		<figure xml:id="gerrymandering-district-with-convex-hull">
+			<title>District with its convex hull.</title>
+			<image source="gerrymandering/district-with-convex-hull.png" >
+				Image of district plan with convex hull, which has an outline like a rubber band stretched around the district border.
+			</image>
+			<caption>
+				District plan with convex hull. The convex hull is outlined in dashed line, and can be thought of like a rubber band stretched around the district border.
+			</caption>
+		</figure>
+
+	</p>
+	<definition xml:id="gerrymandering-CHdef"> The <term>Convex Hull score</term> is a ratio that compares the district's shape to its convex hull. It is defined as
+	<me> CH =\displaystyle\frac{\textnormal{Area of district}}{\textnormal{Area of convex hull of district}}</me>.
+</definition>
+
+<p> In the following example, we compute the Convex Hull score for the given district. </p>
+
+<example> Find the Convex Hull score for the district above.
+	<hint>The convex hull around the district is outlined in a dashed line. Find the area of this region by combining the area of the enclosed squares with the areas of the triangular regions formed. </hint>
+	<answer> <m> CH \approx 0.74 </m>. </answer>
+
+	<solution>
+		<p> Omitting units and simply counting, we note the area of the district is <m>18</m>. The area of the convex hull that contains the district is found in pieces, combining the area of the squares with the areas of the triangular regions formed. For area of the convex hull we get <m>20 + 4 + 0.5</m>.
+		This yields <m> CH = \frac{18}{24.5} \approx  0.74 </m></p>
+	</solution>
+</example>
+
+<remark>
+	The actual formulas for these scores (based in the real world rather than districts composed of squares) vary slightly from those we use here. In particular, the <q>ideal</q> compact shape used for comparison in the first two measures is a circle. In the Polsby-Popper ratio, the ideal shape is a circle with the same perimeter (circumference) as the district. In the Reock ratio, the ideal shape is the minimum-bounding circle, which is the smallest circle containing the district. Our definitions and compactness scores are <em>consistent</em> with the formal scores and allow for more straightforward computations.
+</remark>
+
+
+</subsection>
+
+<subsection>
+	<title> Compactness Criteria </title>
+	<p> In these three measures, compactness is a geometric measure that compares the area of a district to some <q>ideal</q> compact shape. In each case we consider, the compactness score is a number between 0 and 1 that measures the compactness of the shape relative to the ideal. Districts close in shape to the ideal shape (more compact) have scores closer to 1, while those less compact (farther from the ideal) score closer to 0. When a district has much greater perimeter than we would expect for the region's area (as happens when the shape has long, skinny pieces branching off or strung together), we may suspect gerrymandering. At this time, 37 states include a compactness requirement for state legislative districts, and 18 establish similar requirements for congressional districts. However, there is no universal measure, and different states have different laws that regulate compactness. In Idaho the redistricting commission is expected to <q>avoid drawing distorted boundaries</q> <xref ref="gerrymandering-idaho-law"/>, while in other states with extensive coastlines (such as Maryland) this is impossible. In fact, most states do not provide details on compactness measures but adopt a  <q>you know it when you see it</q> approach in determinations. </p>
+
+	<assemblage><p> 	Compactness in the Courts: Pennsylvania's 7th congressional district adopted in 2011 (shown below) has been widely cited as an example of a district that is far from compact as a result of gerrymandering. In 2018, the state's Supreme Court ruled this (and the rest of the district plan) to be an unconstitutional gerrymander, and required the state to create a new map. <xref ref="gerrymandering-LWV-PA-remedial-plan"/>
+</p>
+</assemblage>
+
+<figure xml:id="gerrymandering-paGoofy">
+	<title>PA 7th district, 2011 ("Goofy kicking Donald Duck").</title>
+	<image source="gerrymandering/paGoofy.png" >
+		Image of PA congressional district along with picture of two cartoon characters to which the shape has been compared.
+	</image>
+	<caption>
+		PA 7th district, 2011 (<q>Goofy kicking Donald Duck</q>). For more on this district, see <xref ref="gerrymandering-PA-goofy-district" />.
+	</caption>
+</figure>
+
+
+<p> Among mathematicians and political scientists, the debate about best measures of compactness continues, but consensus has arisen around a few guiding principles:
+
+
+
+	<ul>
+		<li> There is no number threshold for a district being deemed <q>compact</q> - the numbers are used in comparison, not for their standalone values.</li>
+		<li>Compactness measures should be used across an entire districting plan, not just a single district. </li>
+		<li>Comparisons should be made between districts and plans within the same state, and not across different states as each state's geography is unique. </li>
+		<li>  Compactness tests should measure the shape and not the size of the district.</li>
+		<li> Multiple compactness tests should be used whenever possible. </li>
+		<li> Compactness tests should not be the sole factor used to judge district plans. </li>
+	</ul>
+</p>
+
+</subsection>
+
+
+<subsection> <title> Caution: Fairness Goes Beyond Geometry </title>
+
+
+<p> We have repeatedly mentioned that geometry cannot be a sole measure of fairness, though many states do require it to be a consideration in redistricting. There are many different factors possibly contributing to a district's shape, as summarized in the following quote: </p>
+
+<blockquote> <q>But sometimes boundaries that look odd at first glance just follow a natural geographic feature, like a river or a mountain range. Or they could be necessary to unite communities that live in different areas but share similar representational needs, like communities of color that have been subject to residential discrimination. Other times, odd boundaries are very much the product of gerrymandering. [...]
+	The reality is that visual inspection can be a helpful, but ultimately very incomplete, analysis. It is a good first test that can help identify where a deeper dive is needed. In other words, don’t judge a book by its cover.</q> <xref ref="gerrymandering-bc-shape"/> </blockquote>
+
+	<p>The Brennan Center has gathered several examples of situations like these in this useful analysis: <url href="https://www.brennancenter.org/our-work/analysis-opinion/dont-judge-district-its-shape">Don't judge a district by its shape (opens new tab)</url>. In fact, as the article points out, it is possible for a compact shape to be the result of a gerrymander too! In the following sections, we explore issues of fairness that go beyond geometry. </p>
+</subsection>
+
+</section>
+<section xml:id="gerrymandering-math-topic-partisan-gerrymandering">
+	<title>Partisan Gerrymandering</title>
+	<introduction>
+		<p>
+			<term>Partisan gerrymandering</term> is the practice of drawing district lines to maximize a political party's advantage in elected representatives. This can often be seen in states where the representatives by party are vastly disproportionate from the voter affiliations. For example, consider Pennsylvania's 2012 elections, the first statewide elections following the 2011 redistricting. Almost 58% of voters registered with one of the two major parties (Democratic and Republican) were registered as Democrats <xref ref="gerrymandering-PA-2012-voter-registration"/>, but Republicans (who controlled the redistricting process) won 13 of the 18 House elections, just over 72% of the seats. This extreme difference led to a 2018 challenge in court and in <em>League of Women Voters of Pennsylvania v. the Commonwealth of Pennsylvania</em>, the Pennsylvania Supreme Court ruled that this was a case of partisan gerrymandering that violated the state constitution and thus a new map needed to be drawn <xref ref="gerrymandering-LWV-PA-remedial-plan"/>. Notably, the November 2018 elections using the new map yielded 9 representatives for each party, demonstrating the impact of the previous map.
+		</p>
+
+	
+
+
+	<p>
+		Similarly, in North Carolina, a state whose votes are nearly evenly split between the two major parties (see the <url href="https://er.ncsbe.gov/"> North Carolina Election Results Dashboard (opens in new tab)</url> for specific information), the congressional plan was challenged due to the Republicans winning 10 of the 13 districts in the 2016 elections. The case made it all the way to the Supreme Court, who ruled in 2019 in <em>Rucho v. Common Cause</em> that the constitutionality of partisan gerrymandering was not a federal issue and left it to states to decide. (For more information, see <xref ref="gerrymandering-Rucho" />.) Following this ruling, a state court in North Carolina ruled in <em>Common Cause v. Lewis</em> (2019) that their map was unconstitutional and needed to be redrawn ahead of the 2020 elections. The new map immediately changed the outcomes as Democrats won 2 additional seats (5 rather than 3) in 2020.
+	</p>
+
+	<p>
+		Although these examples of disproportionality <em>seem</em> unfair, how can we determine whether the outcomes are a result of partisan gerrymandering or a reflection of some other factors? We turn to mathematics to help us explore this issue.
+	</p>
+
+	<assemblage>
+		<p>Motivating Questions: Can we quantify partisan advantage? Can we define a threshold for <q>too much</q> partisan advantage?
+	</p>
+</assemblage>
+
+
+<p>
+	We look at two different metrics to answer these questions. Keep in mind that these metrics use only party affiliation and election results and do not consider geography or voter demographics, and note that there are other measures of partisan advantage.
+</p>
+</introduction>
+
+<subsection> <title>Efficiency Gap </title>
+<p>
+	From our earlier examples, we know that maximizing representation requires a combination of <q>packing</q> and <q>cracking</q> strategies with the idea that one party's voters are best utilized through narrow wins and wide losses. The <term>efficiency gap</term> calculation is based on the idea of <em>wasted votes</em>:
+	<ul>
+		<li>
+			If a party wins a district, any votes for that party above the minimum needed to win are considered <q>wasted.</q>
+		</li>
+		<li>
+			If a party loses a district, all votes for that party are considered <q>wasted.</q>
+		</li>
+	</ul>
+	Following an election, we can determine the total number of wasted votes for each party (across all districts) and calculate the efficiency gap:
+	<me>
+		\textrm{efficiency gap} = \frac{\textrm{wasted votes for party A } - \textrm{wasted votes for party B}}{\textrm{total votes cast}}.
+	</me>
+	This formula will produce a value between 0 and 1 and can be converted to an advantage in actual number of representatives through multiplying by the number of districts.
+</p>
+
+
+<example >
+	<statement>
+		Consider the district plan given below. The symbols denote votes for either Heart party (<m> \heartsuit </m>) or Club party (<m> \clubsuit</m>).
+
+		<table xml:id="gerrymandering-efficiency-gap-example-district-plan">
+			<tabular >
+				<row>
+					<cell>
+					</cell>
+					<cell bottom="medium">
+					</cell>
+					<cell bottom="medium">
+					</cell>
+					<cell bottom="medium">
+					</cell>
+					<cell bottom="medium">
+					</cell>
+					<cell bottom="medium">
+						2
+					</cell>
+					<cell bottom="medium">
+					</cell>
+					<cell bottom="medium">
+					</cell>
+					<cell bottom="medium">
+					</cell>
+					<cell bottom="medium">
+					</cell>
+					<cell>
+					</cell>
+				</row>
+				<row >
+					<cell right="medium">
+					</cell>
+					<cell >
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+					</cell>
+				</row>
+				<row >
+					<cell right="medium">
+						1
+					</cell>
+					<cell left="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						3
+					</cell>
+				</row>
+				<row  >
+					<cell right="medium">
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+					</cell>
+				</row>
+				<row >
+					<cell right="medium">
+					</cell>
+					<cell >
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+					</cell>
+				</row>
+				<row >
+					<cell right="medium">
+						5
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						4
+					</cell>
+				</row>
+			</tabular>
+		</table>
+
+		Complete the table below, computing the wasted votes for each party in each district. Then compute the efficiency gap.
+
+		<table>
+			<tabular halign="center">
+				<row bottom="medium">
+					<cell >
+						District
+					</cell>
+					<cell >
+						<m> \heartsuit </m> wasted
+					</cell>
+					<cell>
+						<m> \clubsuit </m> wasted
+					</cell>
+				</row>
+				<row>
+					<cell >
+						1
+					</cell>
+					<cell >
+
+					</cell>
+					<cell>
+
+					</cell>
+				</row>
+				<row>
+					<cell >
+						2
+					</cell>
+					<cell >
+
+					</cell>
+					<cell >
+
+					</cell>
+				</row>
+				<row>
+					<cell >
+						3
+					</cell>
+					<cell >
+
+					</cell>
+					<cell>
+
+					</cell>
+				</row>
+				<row>
+					<cell >
+						4
+					</cell>
+					<cell >
+
+					</cell>
+					<cell>
+
+					</cell>
+				</row>
+				<row  bottom="medium">
+					<cell >
+						5
+					</cell>
+					<cell >
+
+					</cell>
+					<cell>
+
+					</cell>
+				</row>
+				<row>
+					<cell >
+						total
+					</cell>
+					<cell >
+
+					</cell>
+					<cell>
+
+					</cell>
+				</row>
+			</tabular>
+		</table>
+
+	</statement>
+
+
+	<hint> Since each district has 9 voters, the minimum number of votes needed to win is 5. Any votes over 5 for the winning party are considered <q>wasted</q> votes for that party. In District 1, the Heart party wins with 6 votes, thus the Heart party has 1 wasted vote in that district. All votes for the losing party in a district are classified as wasted votes.
+</hint>
+<answer>
+	<table>
+		<tabular halign="center">
+			<row bottom="medium">
+				<cell >
+					District
+				</cell>
+				<cell >
+					<m> \heartsuit </m> wasted
+				</cell>
+				<cell>
+					<m> \clubsuit </m> wasted
+				</cell>
+			</row>
+			<row>
+				<cell >
+					1
+				</cell>
+				<cell >
+					1
+				</cell>
+				<cell>
+					3
+				</cell>
+			</row>
+			<row>
+				<cell >
+					2
+				</cell>
+				<cell >
+					4
+				</cell>
+				<cell >
+					0
+				</cell>
+			</row>
+			<row>
+				<cell >
+					3
+				</cell>
+				<cell >
+					4
+				</cell>
+				<cell>
+					0
+				</cell>
+			</row>
+			<row>
+				<cell >
+					4
+				</cell>
+				<cell >
+					1
+				</cell>
+				<cell>
+					3
+				</cell>
+			</row>
+			<row  bottom="medium">
+				<cell >
+					5
+				</cell>
+				<cell >
+					1
+				</cell>
+				<cell>
+					3
+				</cell>
+			</row>
+			<row>
+				<cell >
+					total
+				</cell>
+				<cell >
+					11
+				</cell>
+				<cell>
+					9
+				</cell>
+			</row>
+		</tabular>
+	</table>
+
+	<p>
+		<me>
+			\textrm{efficiency gap} = \frac{(11 - 9)}{45} \approx 4 \%
+		</me>
+		in favor of Clubs (<m> \clubsuit </m>) since the Club party has fewer wasted votes
+	</p>
+
+</answer>
+<solution>
+	<p>
+		Each district has 9 voters, so the minimum number of votes needed to win is 5. Any votes over 5 for the winning party (in that district) are considered <q>wasted</q> votes for that party. In District 1, the Heart party wins with 6 votes, thus the Heart party has 1 wasted vote in that district. All votes for the losing party in a district are classified as wasted votes, so the Club party has 3 wasted votes in District 1. In District 2, Club wins with exactly 5 votes, so Club party has no wasted votes. Heart party, then, has 4 wasted votes. The computations for the other districts are done in the same manner.
+	</p>
+
+	<p>
+		To compute the efficiency gap, find the total wasted votes for each party, then use the formula given above. Since the Club party has fewer wasted votes, we calculate the efficiency gap from their perspective (subtracting their wasted votes from the other party's in the formula):
+		<me>
+			\textrm{efficiency gap} = \frac{\textrm{wasted votes for } \heartsuit - \textrm{wasted votes for }\clubsuit }{\textrm{total votes cast}} = \frac{(11 - 9)}{45} \approx 4 \%.
+		</me>
+	</p>
+
+
+</solution>
+
+
+</example>
+
+<p>
+	In the example above, we calculate that the efficiency gap is approximately <m>4 \% </m>. But what does that mean? Does it suggest gerrymandering occurred? What does the model consider to be <q>fair</q>? If both parties waste the same number of votes, the efficiency gap would be <m>0</m>. This is considered <q>perfectly fair</q>. The farther the percentage from <m>0</m>, the more unfair the map. If we multiply the percentage by the number of districts, we get the advantage for the dominant party in terms of seats. In the above example, there are 5 districts, so the advantage for the Club party is <m>4 \% \times 5</m> districts <m> = 0.2</m> seats. In the original paper introducing the efficiency gap <xref ref="gerrymandering-gerrymandering-efficiency-gap" />, the authors defined a threshold for partisan gerrymandering as an advantage of at least two seats for congressional plans and at least 8 percent for legislative plans. Following that guideline, the district plan and election above do not show evidence of gerrymandering.
+</p>
+
+<p>
+	NOTE: Since its introduction, some shortcomings of the efficiency gap have been raised (see <xref ref="gerrymandering-formula-to-court" /> for some discussion). Importantly, it sets the <m>
+	75 \% / 25 \%</m> vote split as the ideal outcome - but is that appropriate? The efficiency gap uses only wasted votes totals in its computation, without regard to how competitive elections were in each district or the geography of the region.  Also, the +2 seat advantage is much more likely in larger states. How useful, then, is the calculation of the efficiency gap? As with other measures, note that it is one of many tools that could be used.
+</p>
+
+
+
+</subsection>
+
+<subsection> <title> Mean-Median Difference</title>
+<assemblage><p>The <term>mean</term> of a set of numbers is also known as the average. We find this value by adding all of the numbers and dividing by the number of values in the set. </p>
+<p> The <term>median</term> of a set of numbers is found by listing all values from least to greatest and finding the middle number. If there is an even number of values in the set, the median is the mean of the middle two numbers.</p>
+</assemblage>
+Let's find the mean and median of some sets of numbers. You are free to change the numbers and re-calculate as often as you wish.
+<sage>
+	<input language="python">
+		# compute mean of set of numbers
+
+		import numpy as np
+		np.mean([1,2,4,1,6,2,6,7,1])
+	</input>
+</sage>
+
+<sage>
+	<input language="python">
+		# compute median of set of numbers
+
+		import numpy as np
+		np.median([1,2,4,1,6,2,6,7,1])
+	</input>
+</sage>
+
+<p>
+	The <term>mean-median difference</term> takes a statistical approach to measuring partisan advantage. If there was a lot of packing and cracking in a map, we would expect to see one party win many districts with just over 50% of the votes and lose a few districts with a small share of the votes. If we looked at the collection of these vote shares of districts as a set of data, we would expect the median to be higher than the mean. This skewness represents an advantage for that political party.
+</p>
+
+
+<example> <statement>
+	The following table gives the vote share by district for the Heart (<m>
+	\heartsuit </m>) and Club (<m> \clubsuit</m>) parties.
+
+	<table>
+		<tabular halign="center">
+			<row bottom="medium">
+				<cell >
+					district
+				</cell>
+				<cell >
+					Heart (<m> \heartsuit </m>)
+				</cell>
+				<cell>
+					Club (<m> \clubsuit</m>)
+				</cell>
+			</row>
+			<row>
+				<cell >
+					1
+				</cell>
+				<cell >
+					53
+				</cell>
+				<cell>
+					47
+				</cell>
+			</row>
+			<row>
+				<cell >
+					2
+				</cell>
+				<cell >
+					55
+				</cell>
+				<cell >
+					45
+				</cell>
+			</row>
+			<row>
+				<cell >
+					3
+				</cell>
+				<cell >
+					52
+				</cell>
+				<cell>
+					48
+				</cell>
+			</row>
+			<row>
+				<cell >
+					4
+				</cell>
+				<cell >
+					54
+				</cell>
+				<cell>
+					46
+				</cell>
+			</row>
+			<row>
+				<cell >
+					5
+				</cell>
+				<cell >
+					27
+				</cell>
+				<cell>
+					73
+				</cell>
+			</row>
+		</tabular>
+	</table>
+	Compute the following:
+
+	<ul>
+		<li> the mean of the votes cast for the Heart party in each district</li>
+		<li> the median of the votes cast for the Heart party in each district </li>
+		<li> subtract to find the difference: mean <m>-</m> median </li>
+	</ul>
+</statement>
+<hint> To find the mean, add up all of the Heart district vote shares and divide by the number of districts. To find the median, list the district vote shares from smallest to largest and then choose the middle number.
+</hint>
+<answer>
+	<p>
+		mean = <m>48.2</m> %
+	</p>
+
+	<p>
+		median = <m>53</m> %
+	</p>
+
+	<p>
+		mean <m>-</m> median <m>= -4.8 \%</m>
+	</p>
+</answer>
+<solution>
+	<p>
+		To compute the mean vote share, we add the vote share for Heart for each of the five districts, then divide by the total number of districts.
+		<me>
+			\textrm{mean} = \frac{53 + 55 + 52 + 54 + 27}{5} = 48.2
+		</me>
+	</p>
+
+	<p>
+		To find the median vote share for Heart, first we order the individual vote shares from least to greatest: <m>27, 52, 53, 54, 55	</m>. Then we find the number in the middle of the list - in this case, the third number: <m>53 </m>.
+	</p>
+
+	<p>
+		Thus mean <m>-</m> median <m>= 48.2 - 53 = -4.8.</m>
+	</p>
+
+</solution>
+</example>
+<p>
+	We see in the above example that the median is larger than the mean. Is this a significant difference? Does it indicate that the Heart party has a meaningful advantage over the Club party? How do we decide? In <xref ref="gerrymandering-gerrymandering-Wang-Three-Tests"/> (p. 1307), Wang proposes the following formula to compute the significance level, <m>t</m>, in a closely divided state:
+
+	<me>
+		t=\frac{(mean-median)\times \sqrt{\# \textnormal{ of districts}}}{0.756\times \textnormal{standard deviation}}
+	</me>
+
+	We say that the difference between the mean and median is statistically significant and qualifies as partisan gerrymandering if <m>|t|>1.75</m>. (Note: this threshold follows from a significance level set to <m>0.05</m>, or <m>5\%</m>, meaning that the likelihood of a value of <m>|t|</m> above <m>1.75</m> occuring by chance is <m>5\%</m> or lower. The exact threshold varies depending on the number of districts; we follow Wang in using the value <m>1.75	</m>. For more discussion, see <xref ref="gerrymandering-gerrymandering-Wang-Three-Tests"/>).
+</p>
+
+<p>
+	Returning to our example above, we have (mean <m>-</m> median) = <m>-4.8</m> and number of districts is <m>5</m>. Using technology, we compute <m>t</m>:
+
+	<sage>
+		<input language="python">
+			# compute standard deviation of Heart vote share
+			import numpy as np
+			sd = np.std([53, 55, 52, 54, 27])
+
+			# use formula to compute t
+			t = ((-4.8)*(sqrt(5)))/(0.756*sd)
+			print (N(t))
+		</input>
+	</sage>
+
+
+	Since <m>|t| = 1.33 &lt; 1.75</m>, we conclude here that there is no statistically significant evidence of gerrymandering.
+
+</p>
+
+</subsection>
+<subsection> <title> Caution </title>
+<p>Because we could expect the mean and median to be close in a state that has not been gerrymandered, the mean-median difference produces a measure of skew between the two. The mean-median difference can help to identify district plans that are likely to have been crafted with partisan influence. The test for significance presented here is more effective in states where the vote is closely divided (<xref ref="gerrymandering-gerrymandering-Wang-Three-Tests"/>, with some discussion of this in <xref ref="gerrymandering-extreme-maps"/>). Unlike the efficiency gap, this test does not indicate how many more seats the gerrymandering party won. We note here again that both of these measures only use party affiliation and election results, with no accounting for other factors that may be influential. </p>
+</subsection>
+
+
+</section>
+
+<section xml:id="gerrymandering-math-topic-statistics">
+	<title>Racial Gerrymandering and Statistics</title>
+	<introduction>
+		Although the 15th Amendment in 1870 established that U.S. citizens cannot be denied the right to vote <q>on the basis of race, color, or previous condition of servitude,</q> it was not effectively enforced until almost 100 years later with the passage of the Voting Rights Act (VRA) of 1965 in the Civil Rights movement. In the meantime, many Black citizens (particularly in the South) had faced tremendous obstacles to voting, including literacy tests, poll taxes, intimidation, and violence. The VRA now made it illegal for states to pass any laws that discriminate against racial or language minorities through vote denial or vote dilution. This includes anything that <q>diminishes the ability to elect their candidate(s) of choice</q> which would be applied to district plans and serves as the legal basis for <term>racial gerrymandering</term>.
+	
+
+	<assemblage>
+		<p>Motivating Questions: Does racially polarized voting exist in a certain area? How can statistics help us decide?
+		</p>
+	</assemblage>
+
+
+	<assemblage>
+		<p>
+			In 1986, the Supreme Court case <em>Thornburg v. Gingles (1986)</em> further established what constitues an illegal racial gerrymander by adding a set of criteria known as the <em>Gingles test</em>:
+
+			<ul>
+				<li>
+					a racial minority group forms a numerical majority of voting-age population in a compact geographic area
+				</li>
+				<li>
+					the minority group is <q>politically cohesive</q> (members of the group vote similiarly)
+				</li>
+				<li>
+					the racial majority group is also politically cohesive but for a different political party (their preferred candidate defeats minority group's preferred candidate)
+				</li>
+			</ul>
+
+			The last two criteria are collectively known as <em>racially polarized voting</em>. If all three criteria are met, the law requires states to draw a <em>majority-minority district</em> in that geographic area. This means that the majority of a district's population are of a minority race, ethnic, or language group. These required districts are often referred to as <em>VRA districts</em>.
+
+		</p>
+
+	</assemblage>
+
+	<p>
+		To determine if the conditions are met, ask the following questions:
+		<ol>
+			<li>
+				Is it possible to draw a geographically compact district that includes the majority of the racial or language minority’s members?
+			</li>
+			<li>
+				Does the racial or language minority tend to vote as a bloc and back the same preferred candidate?
+			</li>
+			<li>
+				Does the remaining population also generally vote as a bloc and in doing so defeat the candidate backed by the racial or language minority?
+			</li>
+		</ol>
+		Satisfying the first of the <em>Gingles</em> criteria requires analyzing maps and demographic data, and determining if racially polarized voting exists requires the use of statistics. In this section, we follow an approach similar to that outlined in <xref ref="gerrymandering-gerrymandering-MGGG-inference"/>.
+
+	</p>
+	</introduction>
+	<subsection> <title> Inference</title>
+
+	<p>
+		Voting in the United States is done by secret ballot, so although we cannot know the votes of individuals, we can use statistics to infer the voting behavior of different groups based on election results in various precincts. In the following example, we consider two different voting scenarios that have the same aggregate data (i.e. the same vote totals).
+	</p>
+
+	<example>
+		<statement>
+			Suppose a city's voting population is 55% White and 45% non-White, and suppose that in an election, a candidate from the Heart Party receives 60% of the votes and a candidate from the Club Party receives 40% of the votes. We can summarize this information in a two-way table as shown below.
+
+
+			<table>
+				<tabular>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell >
+							<m> \heartsuit </m> voters
+						</cell>
+						<cell >
+							<m> \clubsuit </m> voters
+						</cell>
+						<cell>
+							totals
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							White voters
+						</cell>
+						<cell halign="center" >
+							??
+						</cell>
+						<cell halign="center" >
+							??
+						</cell>
+						<cell halign="right">
+							55
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-White voters
+						</cell>
+						<cell halign="center" >
+							??
+						</cell>
+						<cell halign="center" >
+							??
+						</cell>
+						<cell halign="right">
+							45
+						</cell>
+					</row>
+					<row>
+						<cell >
+							totals
+						</cell>
+						<cell halign="center" >
+							60
+						</cell>
+						<cell halign="center" >
+							40
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+
+
+			<p>
+				The challenge is that due to the secret ballot, there are many possibilities for the inside of the table. Here we consider two different possibilities. For each table below, fill in the missing values. (Note that once we choose one value, the rest are determined.)
+			</p>
+
+			<table>
+				<tabular>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell >
+							<m> \heartsuit </m> voters
+						</cell>
+						<cell >
+							<m> \clubsuit </m> voters
+						</cell>
+						<cell>
+							totals
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							White voters
+						</cell>
+						<cell halign="center" >
+							45
+						</cell>
+						<cell halign="center" >
+
+						</cell>
+						<cell halign="right">
+							55
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-White voters
+						</cell>
+						<cell halign="center" >
+
+						</cell>
+						<cell halign="center" >
+
+						</cell>
+						<cell halign="right">
+							45
+						</cell>
+					</row>
+					<row>
+						<cell >
+							totals
+						</cell>
+						<cell halign="center" >
+							60
+						</cell>
+						<cell halign="center" >
+							40
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+			<table>
+				<tabular>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell >
+							<m> \heartsuit </m> voters
+						</cell>
+						<cell >
+							<m> \clubsuit </m> voters
+						</cell>
+						<cell>
+							totals
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							White voters
+						</cell>
+						<cell halign="center" >
+							30
+						</cell>
+						<cell halign="center" >
+
+						</cell>
+						<cell halign="right">
+							55
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-White voters
+						</cell>
+						<cell halign="center" >
+
+						</cell>
+						<cell halign="center" >
+
+						</cell>
+						<cell halign="right">
+							45
+						</cell>
+					</row>
+					<row>
+						<cell >
+							totals
+						</cell>
+						<cell halign="center" >
+							60
+						</cell>
+						<cell halign="center" >
+							40
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+
+		</statement>
+
+		<hint> To complete the table, use the information on White voters who voted for the Heart candidate to complete the first row of data. In the first table, we have 45 White voters for Heart out of 55 total White Voters. That means there must be 10 White voters who voted for the Club candidate. In a similar way, fill in the other values in the table.
+		</hint>
+		<answer>
+			<table>
+				<tabular>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell >
+							<m> \heartsuit </m> voters
+						</cell>
+						<cell >
+							<m> \clubsuit </m> voters
+						</cell>
+						<cell>
+							totals
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							White voters
+						</cell>
+						<cell halign="center" >
+							45
+						</cell>
+						<cell halign="center" >
+							10
+						</cell>
+						<cell halign="right">
+							55
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-White voters
+						</cell>
+						<cell halign="center" >
+							15
+						</cell>
+						<cell halign="center" >
+							30
+						</cell>
+						<cell halign="right">
+							45
+						</cell>
+					</row>
+					<row>
+						<cell >
+							totals
+						</cell>
+						<cell halign="center" >
+							60
+						</cell>
+						<cell halign="center" >
+							40
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+			<table>
+				<tabular>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell >
+							<m> \heartsuit </m> voters
+						</cell>
+						<cell >
+							<m> \clubsuit </m> voters
+						</cell>
+						<cell>
+							totals
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							White voters
+						</cell>
+						<cell halign="center" >
+							30
+						</cell>
+						<cell halign="center" >
+							25
+						</cell>
+						<cell halign="right">
+							55
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-White voters
+						</cell>
+						<cell halign="center" >
+							30
+						</cell>
+						<cell halign="center" >
+							15
+						</cell>
+						<cell halign="right">
+							45
+						</cell>
+					</row>
+					<row>
+						<cell >
+							totals
+						</cell>
+						<cell halign="center" >
+							60
+						</cell>
+						<cell halign="center" >
+							40
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+		</answer>
+		<solution>
+			<p>
+				In the first scenario, when 45 of the White voters voted for the Heart candidate, we had 10 White voters vote for the Club candidate (since the total number of White voters is 55). Furthermore, since there are 60 total Heart voters and 45 of them are White voters, we must have <m> 60 - 45 = 15 </m> non-White Heart voters. To complete the second row of data, note that we now have 15 non-White voters who voted for the Heart candidate and 45 total non-White voters, so we must have <m> 45 - 15 = 30</m> non-White voters who chose the Club candidate.
+			</p>
+
+			<p>
+				In the second scenario, we have 30 of the White voters choosing the Heart candidate. Thus we have <m>55 - 30 = 25</m> White Club voters (total White voters - White Heart voters = White Club voters). Similarly, since there are 60 total Heart voters and 30 of them are White voters, we must have <m> 60 - 30 = 30 </m> non-White Heart voters. To complete the second row of data, note that we now have 30 non-White voters who voted for the Heart candidate and 45 total non-White voters, so we must have <m> 45 - 30 = 15</m> non-White voters who voted for the Club candidate.
+			</p>
+
+		</solution>
+
+	</example>
+
+	<p>
+		Notice that in the first table, <m>45/55</m>, or <m>82\%</m>, of White voters voted for the Heart (<m> \heartsuit </m>) candidate while only <m>15/45 = 33 \%</m> of non-White voters voted for the Heart candidate, suggesting that there is a significant difference in the voting patterns by racial group(s). The second table tells a different story: <m>30/55 = 55 \%</m> of White voters voted for the Heart candidate and <m>30/45 = 67 \%</m> of non-White voters voted for the Heart candidate. The closeness of these percentages suggests that there is no relationship between race and political party in this scenario.
+	</p>
+
+	<p>
+		Given that both of the scenarios above are possible (knowing only the vote totals), how can we determine potential racially polarized voting? First, we can analyze <term>homogeneous precincts </term>, precincts where the vast majority of people are of the same racial group. For example, consider a voting precinct in which <m>90 \%</m> of the voters are White and <m>95 \%</m> of the votes went to the Heart (<m> \heartsuit </m>) candidate in a recent election, as shown below.
+	</p>
+
+	<table>
+		<tabular>
+			<row bottom="medium">
+				<cell >
+				</cell>
+				<cell >
+					<m> \heartsuit </m> voters
+				</cell>
+				<cell >
+					<m> \clubsuit </m> voters
+				</cell>
+				<cell>
+					totals
+				</cell>
+			</row>
+			<row bottom="medium">
+				<cell >
+					White voters
+				</cell>
+				<cell halign="center" >
+					??
+				</cell>
+				<cell halign="center" >
+					??
+				</cell>
+				<cell halign="right">
+					90
+				</cell>
+			</row>
+			<row bottom="medium">
+				<cell >
+					non-White voters
+				</cell>
+				<cell halign="center" >
+					??
+				</cell>
+				<cell halign="center" >
+					??
+				</cell>
+				<cell halign="right">
+					10
+				</cell>
+			</row>
+			<row>
+				<cell  >
+					totals
+				</cell>
+				<cell halign="center" >
+					95
+				</cell>
+				<cell halign="center" >
+					5
+				</cell>
+				<cell halign="right">
+					100
+				</cell>
+			</row>
+		</tabular>
+	</table>
+
+	<p>
+		In this scenario, there is a much narrower range of possibilities as we know that <em>at least</em> 85 of White voters voted for the Heart  candidate in this precinct. (Why? Check: since there are only 5 total votes for the Club candidate, there could be at most 5 votes for the Club candidate that came from White voters.) That means at least <m>85/90 = 94 \%</m> of White voters voted for the Heart candidate, so it appears that White voters have a strong preference for the Heart candidate. We could then investigate precincts with a small percentage of White voters to estimate the vote choice of other racial groups.
+	</p>
+
+</subsection>
+
+
+<subsection> <title> Scatterplots and linear regression</title>
+<p>
+	Another statistical tool is to create a <term>scatterplot</term> with all precincts and perform a <term>linear regression</term> to estimate voter support by race. We can place the percentage of voters of a particular racial group on the horizontal axis and place the percentage of voters of a particular political party on the vertical axis and then the information from each voting precinct becomes a point on the graph.
+</p>
+
+<example>
+	<statement>
+		The table below shows hypothetical data from the 15 voting precincts in a given town. For each precinct, the percentage of White voters and the percentage of votes for the Heart candidate are shown. Each of those pairs becomes a point on the scatterplot.
+
+		<table>
+			<tabular halign="center" top="medium">
+				<row bottom="medium">
+					<cell >
+						precinct
+					</cell>
+					<cell >
+						% White
+					</cell>
+					<cell >
+						% <m> \heartsuit </m>
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						1
+					</cell>
+					<cell >
+						80
+					</cell>
+					<cell >
+						72
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						2
+					</cell>
+					<cell >
+						45
+					</cell>
+					<cell >
+						55
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						3
+					</cell>
+					<cell >
+						64
+					</cell>
+					<cell >
+						69
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						4
+					</cell>
+					<cell >
+						78
+					</cell>
+					<cell >
+						65
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						5
+					</cell>
+					<cell >
+						50
+					</cell>
+					<cell >
+						47
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						6
+					</cell>
+					<cell >
+						59
+					</cell>
+					<cell >
+						57
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						7
+					</cell>
+					<cell >
+						61
+					</cell>
+					<cell >
+						62
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						8
+					</cell>
+					<cell >
+						35
+					</cell>
+					<cell >
+						46
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						9
+					</cell>
+					<cell >
+						41
+					</cell>
+					<cell >
+						52
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						10
+					</cell>
+					<cell >
+						24
+					</cell>
+					<cell >
+						32
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						11
+					</cell>
+					<cell >
+						52
+					</cell>
+					<cell >
+						60
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						12
+					</cell>
+					<cell >
+						28
+					</cell>
+					<cell >
+						42
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						13
+					</cell>
+					<cell >
+						46
+					</cell>
+					<cell >
+						60
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						14
+					</cell>
+					<cell >
+						37
+					</cell>
+					<cell >
+						45
+					</cell>
+				</row>
+				<row bottom="medium">
+					<cell >
+						15
+					</cell>
+					<cell >
+						55
+					</cell>
+					<cell >
+						60
+					</cell>
+				</row>
+			</tabular>
+		</table>
+
+		<p>
+			Now we plot the points. Note that this can be done using any spreadsheet program. Click the Evaluate button to display the scatterplot.
+		</p>
+
+
+		<sage >
+			<input >
+
+				s = scatter_plot([[80, 72],[45,55],[64, 69], [78, 65], [50, 47], [59, 57], [61, 62], [35, 46], [41, 52], [24, 32], [52, 60], [28, 42], [46, 60],[37, 45], [55, 60] ])
+				show(s)
+
+			</input >
+		</sage >
+
+		<p>
+			Next we determine the <em>line of best fit</em>, a line that approximates the data points that we have entered. This is done through a process called <term>linear regression</term>, in which we find the line that minimizes the total distance from the data points to the line. We are looking for an equation of the form <m>y = ax + b</m>, where <m>y</m> represents the percentage of votes for the Heart candidate and <m>x</m> represents the percentage of voters in the precinct who are White. We use technology to determine the values of <m>a</m> and <m>b</m>. Here we use Sage, although any spreadsheet program is able to do the same analysis. Our code below follows this <url href="http://sage.brandoncurtis.com/data-fitting.html">Sage tutorial by Brandon Curtis (opens in new tab)</url>.
+		</p>
+
+		<sage>
+			<input >
+				# enter the data from the precincts as ordered pairs, where the first coordinate is the percentage of White voters and the second coordinate is the percentage of Heart votes
+				precincts = [[80, 72],[45,55],[64, 69], [78, 65], [50, 47], [59, 57], [61, 62], [35, 46], [41, 52], [24, 32], [52, 60], [28, 42], [46, 60],[37, 45], [55, 60]]
+
+				# set up a linear model with adjustable parameters a and b that describes the data
+				var('a, b, x')
+				model(x) = a * x + b
+
+				# use find_fit command to calculate the values of the parameters that best fit the model to the data
+				sol = find_fit(precincts,model)
+				show(sol)
+
+				# define f(x), the model with the parameters set to the fitted values
+				f(x) = model(a=sol[0].rhs(),b=sol[1].rhs())
+
+				# create an empty plot object
+				a = plot([])
+				# add a plot of the model, displaying x values from 0 to 85
+				a += plot(f(x),x,[0,85])
+
+				# add a scatterplot of the precinct data, in red
+				a += list_plot(precincts,color='red')
+				show(a)
+
+
+			</input>
+		</sage>
+
+		<p>
+			How do we interpret the output? In our example, we found <m>a \approx 0.6</m> and <m>b \approx 24.7</m>, so our line of best fit is given approximately by <m>y = 0.6x + 24.7</m>. In other words,
+			<me>
+				\text{(\% of votes for Heart) } = 0.6 \text{ (\% of voters who are White) } + 24.7.
+			</me>
+			We can use this to predict the voting patterns of each group. Suppose in a given precinct, 100% of voters are White. Then using our model, our prediction is that
+			<me>
+				\text{(\% of votes for Heart) } = 0.6 (100) + 24.7 = 84.7\%.
+			</me>
+			Now consider a precinct in which 0% of voters are White. Then using our model, our prediction is that
+			<me>
+				\text{(\% of votes for Heart) } = 0.6 (0) + 24.7 = 24.7\%.
+			</me>
+			In other words, we predict that the Heart candidate is the candidate of choice for 24.7% of the non-White voters. Do the White voters appear to be a politically cohesive group? What about the non-White voters?
+		</p>
+
+
+	</statement>
+
+
+</example>
+</subsection>
+
+
+<subsection><title>Caution</title>
+<p>
+	Additional statistical analysis, including calculation of correlation and confidence intervals, can be done to further analyze the situation. We note again that all individual ballots are secret, so we are relying here on group totals (aggregate data) to draw conclusions about voting patterns of different groups. Technology tools are available to perform calculations, but any interpretation should be done carefully, with a solid understanding of the VRA criteria and careful consideration of the data used for analysis.
+</p>
+
+</subsection>
+
+
+
+
+</section>
+
+<section xml:id="gerrymandering-math-topic-outlier">
+	<title> Outlier Analysis</title>
+	<p> In the previous section on partisan gerrymandering, each measure compared election results to some version of proportional representation, but in many states proportionality may not be the appropriate baseline.</p>
+
+	<p>Consider the recent history of congressional districts in the state of Massachusetts. As of 2021, Massachusetts has 9 House districts, all of which have been represented by Democrats for over 25 years. In fact, the last time a Republican represented Massachusetts was in 1994 and Democrats have won 125 consecutive House elections! Despite the lopsided nature of the state's representation, their map is not controversial and has not been challenged for any type of gerrymandering. </p>
+
+
+	<p> <term>Why is this result not controversial?</term> Republicans do exist in Massachusetts and regularly receive between 30 and 40 percent of the vote in statewide elections (President, Governor, Senate). Proportional representation would give Republicans 3 of the 9 congressional districts; however, even though the possible number of valid districting plans exceeds the number of particles in the universe, it is impossible to come up a plan that yields even one Republican district! <xref ref="gerrymandering-gerrymandering-Mass-MGGG"/> This is simply due to the geography and the fact that there are no large Republican enclaves within the state. Due to the natural distribution of their voters, <em>they do not form a majority in any region of Massachusetts</em>, leading to their prolonged lack of representation in Congress. </p>
+	<figure>
+		<title>Illustration of voting patterns in Massachusetts. </title>
+		<image source="gerrymandering/Mass_R_areas_ELJ.jpeg" >
+			Two pictures of MA. In both, most regions are colored blue, with some red, orange, and yellow areas scattered around the state.
+		</image>
+		<caption>These figures are taken from <xref ref="gerrymandering-gerrymandering-Mass-MGGG"/> (Figure 4). As described there, they show the voting pattern for Republicans George W. Bush in the 2000 presidential race (left, by town) and Kenneth Chase in the 2006 senate race (right, by precinct). Regions shaded dark red voted in favor of the Republican candidate, while regions in orange and yellow were the most "Republican favorable" available to collect enough population to create a congressional district. Even in assembling districts this way, the Democratic candidate would have won more of the vote share.
+	</caption>
+</figure>
+
+<assemblage>
+	<p>Motivating Question: If proportionality isn't necessarily an appropriate benchmark, what should we measure a district plan against? Can we determine if a plan produces an unlikely result? </p>
+</assemblage>
+
+
+One approach to take is to analyze a set, or <term>ensemble</term>, of possible district plans and see how a particular plan compares (on any metric) to those in the ensemble. If the plan in question is unusual relative to the ensemble, this may be due to a form of gerrymandering.
+<definition xml:id="gerrymandering-outlier"> An <term>  outlier </term>  is an observation that is unusual within a given context.
+In a large set of possible district plans, those with unlikely outcomes relative to the rest may be outliers, hence the term <term>outlier analysis</term>.
+There are many different criteria for determining outliers (or potential outliers) in statistics; we will not cover those in depth here. </definition>
+
+
+<p>Let's suppose a state with 7 districts has a proposed district plan in which the Heart Party is favored to win 6 of the 7 districts. A computer program generates 1,000,000 possible district plans and in only 100 of the plans is the Heart Party favored to win as many as 6 of the districts. Due to the unlikely nature of this outcome (occurring in only 0.01% of plans), there is evidence that the proposed plan may have been manipulated to benefit the Heart Party. That is, it represents a potential outlier.</p>
+
+<p>
+	Consider the following distribution of voters.
+</p>
+
+<table xml:id="gerrymandering-voter-distribution">
+	<tabular >
+		<row >
+			<cell >
+				<m> \heartsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+		</row>
+		<row >
+			<cell >
+				<m> \heartsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m> \heartsuit </m>
+			</cell>
+			<cell >
+				<m> \heartsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+		</row>
+		<row >
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m> \heartsuit </m>
+			</cell>
+			<cell >
+				<m> \heartsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m> \heartsuit </m>
+			</cell>
+		</row>
+		<row  >
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m> \heartsuit </m>
+			</cell>
+		</row>
+		<row  >
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+			<cell >
+				<m>\clubsuit </m>
+			</cell>
+		</row>
+	</tabular>
+</table>
+
+<p>
+	Suppose we want to create 5 districts of 5 voters each. Some quick math shows the best outcome for the Heart Party (with 8 total voters) is to win 2 districts and it would take some intentional packing and cracking to achieve that outcome. In the example below, we create plans that lead to this outcome.
+</p>
+
+<example xml:id="gerrymandering-outlier-analysis-example">
+	<p>
+		Draw district lines for the map given above so that the Heart party wins two disticts. Create 5 districts of 5 voters each.
+	</p>
+
+	<hint>
+		Note that since there are 5 voters in each district, the Heart party needs at least 3 voters in a district to win the district. How can you draw the lines so that the Heart party wins two districts?
+	</hint>
+
+	<answer >
+		<table xml:id="gerrymandering-answer-outlier-analysis-example">
+			<tabular top="medium">
+				<row left="medium">
+					<cell left="medium" right="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m>\clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+				</row>
+				<row left="medium">
+					<cell left="medium" right="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+				</row>
+				<row left="medium">
+					<cell left="medium" bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \heartsuit </m>
+					</cell>
+				</row>
+				<row left="medium">
+					<cell left="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell>
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m> \heartsuit </m>
+					</cell>
+				</row>
+				<row left="medium" bottom="medium">
+					<cell left="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell>
+						<m>\clubsuit </m>
+					</cell>
+					<cell>
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+				</row>
+			</tabular>
+		</table>
+
+	</answer>
+
+
+	<solution>
+		Note that there are multiple possibilities! As an alternative to the plan given as the <q>answer</q>, we could also use the plan given here.
+
+		<table>
+			<tabular top="medium">
+				<row left="medium">
+					<cell left="medium" right="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+				</row>
+				<row left="medium">
+					<cell left="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell right="medium" bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+				</row>
+				<row left="medium" bottom="medium">
+					<cell left="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \heartsuit </m>
+					</cell>
+				</row>
+				<row left="medium">
+					<cell left="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell bottom="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell>
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m> \heartsuit </m>
+					</cell>
+				</row>
+				<row left="medium" bottom="medium">
+					<cell left="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell>
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+					<cell>
+						<m>\clubsuit </m>
+					</cell>
+					<cell right="medium">
+						<m>\clubsuit </m>
+					</cell>
+				</row>
+			</tabular>
+		</table>
+	</solution>
+
+
+
+</example>
+
+
+<p>
+	While the Heart Party achieves their best possible outcome, can we say that gerrymandering is present? In other words, is the outcome of this plan an <em>outlier</em> relative to other possible plans?
+</p>
+
+<p>
+	We can look at this from a couple of different perspectives. We turn to technology to help us, using the MGGG grid tool found here: <url href="https://mggg.org/metagraph/5x5.html"> MGGG grid tool (opens in new tab)</url>. It turns out that there are 4,006 ways to divide a 5x5 grid into 5 contiguous districts of 5 blocks each. The MGGG grid tool determines all 4,006 plans with the same location of voters shown here:
+
+	<figure>
+		<title>Voter distribution grid from MGGG tool. </title>
+		<image source="gerrymandering/MGGG_vote_dist.png" />
+		<caption>Image of Hearts and Clubs voter distribution grid from MGGG tool, matching distribution given in <xref ref="gerrymandering-voter-distribution"/>.
+	</caption>
+</figure>
+
+
+It then provides the results shown in the histogram below.
+<figure>
+	<title>Histogram from MGGG tool of seat share won by Hearts, given voter distribution. </title>
+	<image source="gerrymandering/histogram_8_heart-star.png" />
+	<caption>Bar chart showing number of plans in which Heart party wins particular number of seats.
+	</caption>
+</figure>
+As shown in the histogram, the Heart party wins 0 districts (seats) in 961 plans (24%), 1 district in 2,421 plans (60%), and 2 districts in 624 plans (16%). (Our event, the Heart party winning 2 districts, falls in the green bar to the right.)
+</p>
+
+<p>
+	Alternatively, there are 1,081,575 different ways to place 8 Hearts and 17 Clubs in a 5x5 grid. This time, we consider all of these arrangements with the same district plan given above in <xref ref="gerrymandering-answer-outlier-analysis-example"/> (the answer to <xref ref="gerrymandering-outlier-analysis-example"/>), shown here. (Different colors denote different districts.)
+
+
+	<figure>
+		<title>District plan matching <xref ref="gerrymandering-answer-outlier-analysis-example"/>.</title>
+		<image source="gerrymandering/MGGG_district_plan.png" />
+		<caption>District plan matching boundaries in <xref ref="gerrymandering-answer-outlier-analysis-example"/>. In the image, colors are used to distinguish different districts.
+	</caption>
+</figure>
+
+The MGGG tool provides the following analysis:
+<figure>
+	<title>Histogram from MGGG tool of seat share won by 8 Hearts, given district boundaries.  </title>
+	<image source="gerrymandering/histogram_8_heart-star_bottom_hist.png" />
+	<caption>Bar chart showing number of plans in which Heart party wins certain number of seats, given 8 Heart voters and a district plan.
+	</caption>
+</figure>
+
+In this case, the Heart party wins 2 districts in 120,450 out of the possible 1,081,575 plans, which is 11% of plans.
+</p>
+
+<p>
+	Either way, even though the Heart Party has maximum representation (2 seats), something happening more than 10% of the time is not all that uncommon. In research that uses statistics, 5% (1 in 20) is the most common threshold for determining whether an occurrence is considered an outlier. (Sometimes lower values such as 1% are used to capture only <q>stronger</q> outliers.)
+</p>
+
+<p>
+	Now suppose a ninth Heart is added to the district plan above (replacing any one of the Clubs). Mathematically, it is now possible for the Heart Party to win 3 districts, but even if they do, would it be considered an outlier and potential gerrymandering?
+</p>
+
+<example>
+	<p>
+		Go to the <url href="https://mggg.org/metagraph/5x5.html"> MGGG grid tool (opens in new tab)</url> and scroll down to the section with bar graphs. Create a grid that matches <xref ref="gerrymandering-voter-distribution"/>, then change one of the Clubs to a Heart so that there are exactly 9 Hearts. Then create a district plan (using <q>Build a Plan <m>
+		\mathcal{D}</m></q>) in which Hearts win 3 of the 5 districts. Observe the distributions to determine if your plan is an outlier.
+	</p>
+
+	<solution>
+		The specific information depends on which square in the grid is changed to a Heart. Choose different possibilities to see the different results! As one example, place a Heart in row 5, column 5. This is shown below:
+
+		<figure>
+			<title>Voter distribution grid from MGGG tool with 9 Hearts. </title>
+			<image source="gerrymandering/MGGG_new_distribution_9_hearts.png" />
+			<caption>Vote distribution grid from MGGG tool, modified from <xref ref="gerrymandering-voter-distribution"/> to have 9 Hearts. Plan drawn so that Hearts win 3 seats.
+		</caption>
+	</figure>
+
+	Then 38 plans out of 4,006 possible plans, or 0.9%, yield 3 seats for the Heart party, as shown in histogram below:
+	<figure>
+		<title>Histogram from MGGG tool of seat share won by 9 Hearts.</title>
+		<image source="gerrymandering/MGGG_histogram_9_hearts.png" />
+		<caption>Bar chart showing number of plans in which Heart party wins some number of seats; reveals chance of winning 3 seats is small.
+		</caption>
+	</figure>
+
+	This outcome of Hearts winning 3 seats is an outcome occuring in less than 5% of the possible outcomes - in fact, less than 1% of possible outcomes. It appears to be an outlier when compared to the ensemble of all possible outcomes.
+</solution>
+
+</example>
+
+<p>
+	Although we can analyze all possible plans and distributions on a 5x5 grid, this is nowhere near possible with precincts on a real map. However, there are algorithmic techniques which can quickly generate thousands or millions of valid districting plans for the purpose of comparing a particular district plan of interest to an ensemble.
+</p>
+
+</section>
+<section xml:id="gerrymandering-solving-for-change">
+	<title>Solving for Change</title>
+	<introduction>
+		<p>
+			Let's return to our guiding question for this module: What makes a <q>fair</q> district map? We have learned some mathematical tools to analyze various components of maps: their shapes, the level of partisan advantage, the presence of racially polarized voting, and the concept of outliers to see how a district plan compares to other potential plans. The next step is to put all of these ideas together to create your own district plan and advocate for fair maps in a state!
+		</p>
+	</introduction>
+
+
+	<subsection> <title> Learn a state's redistricting process. </title> <p> First, make sure you are aware of how the redistricting process works in a specific state. Here are some key questions:</p>
+	<ul>
+		<li> Who draws the lines? (Is it the party in power, independent commission, etc.?) If an independent commission exists, who comprises the group? (How many people? Are they citizens and/or politicians? How are they selected?) </li>
+		<li>  Are there additional requirements or emphases in the state, such as limiting the splitting of counties or towns? </li>
+		<li> Are the processes different for congressional and state legislative plans? </li>
+		<li>  What is required for a map to pass the state legislature? (Related: What is the current balance of power in the state government?) </li>
+		<li>  Does the governor have veto power over district plans? </li>
+		<li>  Is there a history of gerrymandering in the state? </li>
+	</ul>
+
+	<remark> Two excellent resources for answering these questions are  <url href="https://ballotpedia.org/State-by-state_redistricting_procedures">Ballotpedia's pages on redistricting procedures </url> and <url href="https://redistricting.lls.edu">All About Redistricting </url>, run through Loyola (Marymount) Law School. </remark>
+</subsection>
+<subsection> <title> Use a redistricting mapping program (website) to draw a "fair" map for a state. </title> <url href="https://davesredistricting.org"> Dave's Redistricting</url> and <url href="https://districtr.org">DistrictR</url>  are free, user-friendly, and powerful online tools designed specifically for the purposing of redistricting. Key features common to both tools include:
+<ul>
+	<li>  the actual 2020 U.S. Census data </li>
+	<li>  tracking population and deviation from ideal while drawing districts </li>
+	<li>  viewing demographic information across your districts </li>
+	<li>  viewing voting history across your districts </li>
+	<li>  checking for contiguity of your districts </li>
+	<li>  checking for (and zooming to) any unassigned population areas </li>
+	<li>  viewing the existing district plans (congressional and legislative) </li>
+	<li>  editing with multiple people (at the same time) </li>
+	<li>  exporting to other file types, including .csv and .json </li>
+</ul>
+<p> Additional features (as of September 2021) in Dave's Redistricting include:</p>
+<ul>
+	<li>  editing district plans at the block level (smallest possible Census unit)  </li>
+	<li>  computing Polsby-Popper and Reock compactness scores  </li>
+	<li>  computing the efficiency gap, mean-median difference, and other partisan bias measures  </li>
+	<li>  creating a scatterplot and regression to look for racially polarized voting  </li>
+	<li>  comparing metrics across different district plans  </li>
+</ul>
+</subsection>
+<subsection><title> Learn about ways you can get involved </title>
+<p> Many states have opportunities for public input and transparency in their process. This can include electronic portals to submit full or district plans or to identify a community of interest, public hearings on proposed plans, and the ability to legally challenge approved plans. In addition, advocacy groups such as <url href="https://www.commoncause.org/our-work/gerrymandering-and-representation"> Common Cause </url> and <url href="https://www.fairvote.org/redistricting">FairVote</url>, along with local groups, can help to amplify and mobilize voices and provide information to the public and media.</p>
+</subsection>
+
+<conclusion xml:id="gerrymandering-conclusion">
+
+</conclusion>
+
+
+</section>
+
+
+
+
+<reading-questions xml:id="gerrymandering-reflection">
+	<exercise> <p>Some countries, like Canada, have outlawed gerrymandering and all redistricting is done by independent commissions. You can read more about this at Vox using this link: <url href=" https://www.vox.com/2014/4/15/5604284/us-elections-are-rigged-but-canada-knows-how-to-fix-them"> How Canada Ended Gerrymandering.</url> Should this be done in the United States, too? What are some barriers in place that may prevent such a change? </p></exercise>
+
+
+
+	<exercise> <p>Research the composition of independent redistricting commissions across different states. What differences can you find in the number of members on commissions, the types of people (such as citizens and/or politicians), and the number of votes needed to pass a map (and from whom)? What pros and cons exist in the different structures? Do you think it is possible for a redistricting commission to truly be "independent"?</p> </exercise>
+
+	<exercise>  <p>A related issue in redistricting is that of <term>prison gerrymandering</term>, which is the longstanding Census practice of counting people who are incarcerated as "residents" of the town of the prison facility as opposed to residents of the town in which they are from. Maryland and New York became the first two states to ban this practice and adjust their Census data in the 2011 redistricting cycle and a handful of states followed suit for the 2021 cycle. From a voting perspective, why is prison gerrymandering an issue? (What laws exist regarding <term>felony disenfranchisement</term>, the right of incarcerated people to vote?) Furthermore, why is prison gerrymandering a social justice issue? </p> </exercise>
+
+	<exercise> <p>Thomas Hofeller was known as the mastermind behind Republican gerrymandering efforts for at least four decades. Following his death in 2018, his daughter publicly released his private computer files. Read the following 2019 article from <url href="https://www.newyorker.com/news/news-desk/the-secret-files-of-the-master-of-modern-republican-gerrymandering"> The New Yorker </url> and answer the following questions: What tactics did Hofeller employ to maximize Republican representation? What aspects of his work were illegal? What is the connection between Hofeller's work and prison gerrymandering?</p> </exercise>
+
+	<exercise> <p> Where people live and the evolution of neighborhoods in the United States are greatly impacted by the history of <term>redlining</term> and housing/zoning policies. Written by Richard Rothstein in 2017, <em>The Color of Law</em> covers the history of policies that have contributed to housing discrimination such as restrictive covenants, blockbusting, access to government loans, racial zoning, the Interstate Highway System, and the location of schools. Research redlining and some of these policies and answer the following questions: How have our neighborhoods become racially segregated? What is the history of housing discrimination in your own town? How does this relate to redistricting?</p> </exercise>
+
+
+
+
+
+</reading-questions>
+
+
+
+<exercises xml:id="gerrymandering-exercises">
+	<subsection> <title>Geometry Exercises</title>
+	<exercisegroup> <introduction><p> (Squaretopia grid and challenges are adapted from <q>Gerrymandering in Squaretopia</q>, an exercise created by and licensed to the Metric Geometry and Gerrymandering Group) </p>
+
+	<p>
+		Squaretopia consists of 90 blocks: 54 vote for the Heart (<m> \heartsuit </m>) party and
+		36 vote for the Club (<m> \clubsuit </m>) party. Consider the following challenges that reveal the power of <q>cracking</q> and <q>packing</q> districts.</p>
+	</introduction>
+	<exercise><p> The grid is to be divided into 10 districts that must be contiguous and contain an equal number of voters.</p>
+	<ol>
+		<li> What is the minimum number of voters needed to win all 10 districts?</li>
+		<li> What is the maximum number of districts that can be won by the Heart party? (Mathematically, not based on location of voters.)</li>
+		<li>What is the maximum number of districts that can be won by the Club party? (Mathematically, not based on location of voters.)</li>
+	</ol>
+</exercise>
+
+<exercise>
+	<title>Challenge 1: Compactness</title>
+	<introduction>
+		<p>
+			Divide Squaretopia (given below in <xref ref="gerrymandering-squaretopia-hearts" />) into 10 equal districts that are as <q>compact</q> as possible. How many districts does the Heart party win?
+		</p>
+	</introduction> <p>
+
+	<table xml:id="gerrymandering-squaretopia-hearts">
+		<tabular>
+			<row >
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+			<row>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+		</tabular>
+	</table>
+
+</p></exercise>
+
+<exercise>
+	<title>Challenge 2: Proportionality</title>
+	<introduction>
+		<p>Divide Squaretopia into 10 equal districts so that Heart's seat share is proportional to its overall vote share. Try to keep the districts as <q>compact</q> as possible.
+	</p> </introduction>
+
+	<p>
+
+		<table>
+			<tabular>
+				<row >
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+				</row>
+				<row>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \heartsuit </m>
+					</cell>
+					<cell>
+						<m> \clubsuit </m>
+					</cell>
+				</row>
+			</tabular>
+		</table>
+
+
+	</p></exercise>
+	<exercise>
+		<title>Challenge 3: Gerrymander for Hearts</title>
+		<introduction>
+			<p>Divide Squaretopia into 10 equal districts so that the Heart party wins as many districts as possible. Try to keep the districts as <q>compact</q> as possible. How many districts does the Heart party win?
+		</p> </introduction>
+
+		<p>
+
+			<table>
+				<tabular>
+					<row >
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+					</row>
+					<row>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \heartsuit </m>
+						</cell>
+						<cell>
+							<m> \clubsuit </m>
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+
+		</p></exercise>
+
+		<exercise>
+			<title>Challenge 4: Gerrymander for Clubs</title>
+			<introduction>
+				<p>Divide Squaretopia into 10 equal districts so that the Heart party wins as <em>few</em> districts as possible. Try to keep the districts as <q>compact</q> as possible. How many districts does the Heart party win?
+			</p> </introduction>
+
+			<p>
+
+				<table>
+					<tabular>
+						<row >
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+						</row>
+						<row>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \heartsuit </m>
+							</cell>
+							<cell>
+								<m> \clubsuit </m>
+							</cell>
+						</row>
+					</tabular>
+				</table>
+
+
+			</p></exercise>
+		</exercisegroup>
+
+		<exercise><p>When using grid examples, it is often easy for populations to be equal in every district, but on real maps, some deviation is allowed. The <term>population deviation</term> of a district plan is the percentage difference between the most populous and least populous districts, relative to the <em>ideal population</em> (the population if all districts were equal).</p>
+		<p> For example, suppose a state with 1,000,000 people was divided into 10 districts. The most populous district contains 102,300 people and the least populous district contains 98,400 people. This means that the ideal population is 100,000 and the population deviation is 3.9%.</p>
+		<m>\frac{102,300-98,400}{100,000}=.039=3.9\%</m>
+		<p>Courts have dictated that the maximum allowed population deviation is 0.75% for congressional plans and 10% for state legislative plans.</p>
+		<ol><li> <p>Suppose a state is planning to create new congressional districts and proposes a plan in which their 3 districts have the following populations:</p>
+		<ol> <li>District #1: 232,934</li>
+		<li>District #2: 231,956 </li>
+		<li>District #3: 231,158</li>
+	</ol>
+	<p>Calculate the ideal population and the population deviation for this plan. Would this proposal be allowed to move forward based on population alone?</p></li>
+	<li><p>  Suppose a state with a population of 2,300,000 is set to create new district plans for 8 congressional districts and 40 state legislative districts</p>
+	<ol><li> The congressional proposal's least populous district has a population of 286,790. What is the maximum population allowed for another district?</li>
+	<li>The state legislative proposal's most populous district has a population of 59,440. What is the minimum population allowed for another district?</li> </ol></li>
+</ol>
+</exercise>
+
+
+
+
+
+<exercisegroup> <introduction> <p> The grid below represents a districting plan.  <image source="gerrymandering/M4TPCompact.png" width="90%" /> </p></introduction>
+
+<exercise> <p>Calculate the Reock score for each district. </p></exercise>
+<exercise> <p>Calculate the Polsby-Popper score for each district. </p></exercise>
+<exercise> <p>Calculate the Convex Hull score for each district. </p></exercise>
+</exercisegroup>
+<exercise> <p> For each statement, explain why the statement is not an appropriate interpretation of compactness scores.</p>
+<ol><li> The average Polsby-Popper score of districts in Maryland is 0.115, thus the districts are not compact.</li>
+<li>  The Reock score of Massachusetts' 6th district is 0.45 while the Reock score of its 5th district is 0.23, thus the 6th district is more compact.</li>
+<li>  The average Polsby-Popper score of New Jersey's congressional districts is 0.20 while the average Polsby-Popper score of Pennsylvania's congressional districts is 0.33, thus Pennsylvania is more compact.</li> </ol></exercise>
+</subsection>
+<subsection> <title>Partisan Gerrymandering Exercises</title>
+
+<exercise xml:id="gerrymandering-first-efficiency-gap-exercise">
+	<title>Efficiency Gap</title>
+	<introduction>
+		<p>
+			The grid below represents a districting plan. Note that <m>
+			\heartsuit_2 = 2 </m> voters for <m> \heartsuit </m>, and <m>
+			\clubsuit = 1 </m> voter for <m> \clubsuit </m>.
+		</p>
+	</introduction>
+
+	<table xml:id="gerrymandering-district-plan-EG-exercise">
+		<tabular top="medium">
+			<row left="medium">
+				<cell >
+					<m> \heartsuit_2 </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell right="medium" bottom="medium">
+					<m> \clubsuit_3 </m>
+				</cell>
+				<cell bottom="medium">
+					<m> \clubsuit_2 </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \heartsuit </m>
+				</cell>
+			</row>
+			<row left="medium">
+				<cell >
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit_2 </m>
+				</cell>
+				<cell right="medium">
+					<m> \heartsuit </m>
+				</cell>
+				<cell bottom="medium">
+					<m> \clubsuit </m>
+				</cell>
+				<cell bottom="medium">
+					<m> \clubsuit_2 </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit_2 </m>
+				</cell>
+			</row>
+			<row left="medium">
+				<cell  bottom="medium">
+					<m> \clubsuit_2 </m>
+				</cell>
+				<cell right="medium" bottom="medium">
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \heartsuit_4 </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium" bottom="medium">
+					<m> \heartsuit </m>
+				</cell>
+			</row>
+			<row left="medium">
+				<cell  bottom="medium">
+					<m> \clubsuit </m>
+				</cell>
+				<cell bottom="medium">
+					<m> \heartsuit </m>
+				</cell>
+				<cell bottom="medium">
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium" bottom="medium">
+					<m> \heartsuit_3 </m>
+				</cell>
+				<cell right="medium">
+					<m> \heartsuit_3 </m>
+				</cell>
+				<cell>
+					<m> \heartsuit_2 </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+			<row left="medium">
+				<cell >
+					<m> \clubsuit_2 </m>
+				</cell>
+				<cell right="medium">
+					<m> \heartsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit_2 </m>
+				</cell>
+				<cell bottom="medium">
+					<m> \heartsuit_2 </m>
+				</cell>
+				<cell right="medium" bottom="medium">
+					<m> \heartsuit_2 </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+			<row left="medium">
+				<cell >
+					<m> \clubsuit_3 </m>
+				</cell>
+				<cell right="medium">
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit_3 </m>
+				</cell>
+				<cell>
+					<m> \clubsuit_3 </m>
+				</cell>
+				<cell right="medium" bottom="medium">
+					<m> \clubsuit </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \heartsuit </m>
+				</cell>
+			</row>
+			<row left="medium" bottom="medium">
+				<cell >
+					<m> \clubsuit_2 </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit_2 </m>
+				</cell>
+				<cell>
+					<m> \clubsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell>
+					<m> \heartsuit </m>
+				</cell>
+				<cell right="medium">
+					<m> \clubsuit </m>
+				</cell>
+			</row>
+		</tabular>
+	</table>
+
+
+	<ol>
+		<li>Calculate vote totals for each district.</li>
+		<li>  Calculate wasted vote totals for each district.</li>
+		<li>Compute the efficiency gap.</li>
+		<li> Interpret the efficiency gap answer. Which party holds the advantage in this plan? How significant is their advantage?</li>
+	</ol>
+</exercise>
+<!-- </worksheet> -->
+
+<exercise><p>There is an alternative <q>shortcut</q> formula to calculate the efficiency gap in a districting plan:</p>
+
+<p> Efficiency Gap = (% of Districts won <m>-</m> 50%) <m>-</m> 2 * (% of Votes <m>-</m> 50%)
+</p>
+<p>For example, in the district plan in Example 1.6.1 (given in <xref ref="gerrymandering-efficiency-gap-example-district-plan" />), Heart wins 3/5 = 60% of districts and has 26/45 = 57.8% of voters.</p>
+
+<p>Using the formula: Efficiency Gap = (60% <m>-</m> 50%) <m>-</m> 2 * (57.8% <m>-</m> 50%) = <m>-5.6</m>%. Since we used values for Heart, the negative number here represents that the Club party holds the advantage in this map.</p>
+<p> <em>Note:</em> This answer is slightly different from the original calculation due to rounding error and the fact that our grid districts needed at least 5/9 = 55.6% of voters to win (rather than 50% +1 vote).</p>
+<ol>
+	<li> Use this alternative formula to calculate and interpret the efficiency gap in <xref ref="gerrymandering-first-efficiency-gap-exercise"/>. Are your answers close?</li>
+	<li> Suppose a party has 60% of votes on an entire map. The <q>most fair</q> outcome according to the efficiency gap formula is that this party wins what percentage of districts? What does your answer tell you about the efficiency gap formula and proportionality?</li>
+</ol>
+</exercise>
+
+<exercise>
+	<title>Efficiency Gap and Mean-Median</title>
+	<introduction>
+		<p>
+			The tables below show the results of the North Carolina congressional elections in 2018 (prior to the state ruling that partisan gerrymandering is illegal, forcing a new map to be drawn and used) and 2020. For purposes of calculations, assume that an equal number of people voted in each district. NOTE: Do not include the 100-0 districts in the calculations as candidates ran unopposed, so it does not make sense to say votes are <q>wasted</q> when voters did not have a choice on candidates.
+		</p>
+	</introduction>
+
+	<image source="gerrymandering/NC_Congressional_elections_district_vote_share_2018_2020.png" />
+
+	<task>
+		<statement>
+			<p>
+				Calculate and interpret the efficiency gap for each set of election results. Does either district plan give more than a +2 seat advantage to the Republicans? (Reminder: Do not include the 100-0 districts in the calculations.)
+			</p>
+
+		</statement>
+	</task>
+
+	<task>
+		<statement>
+			<p>
+				Calculate and interpret the Mean-Median Difference for each set of election results. Do the elections show a significant partisan bias to the Republicans under each district plan? (Again, do not include 100-0 districts in the calculations.) Use the calculator below to compute standard deviation and find <m>t</m>.
+
+				<sage>
+					<input language="python">
+						import numpy as np
+						#compute standard deviation, mean, median, mean-median, t of Republican vote share
+
+						######### ONLY ENTER DATA HERE #########
+						numb = #list R vote share here, separated by commas
+						######### ######### ######### #########
+
+						print ("The standard deviation of the given numbers is ")
+						sd = np.std([numb])
+						print(N(sd))
+
+						print ("The mean of the given numbers is ")
+						mean = np.mean(numb)
+						print(N(mean))
+
+						print ("The median of the given numbers is ")
+						median = np.median(numb)
+						print(N(median))
+
+						print ("The difference between mean and median is ")
+						difference = mean-median
+						print(N(difference))
+
+						#use formula to compute t.
+
+						print ("t = ")
+						t = ((difference)*(sqrt(len(numb))))/(0.756*sd)
+						print(N(t))
+					</input>
+				</sage>
+
+
+			</p>
+		</statement>
+	</task>
+</exercise>
+
+
+
+<exercise>
+	<introduction>
+		<p>
+			Explore the Gerryminder redistricting simulation <url href="https://phobos.ramapo.edu/~jteigen/gerry.html">Gerryminder: A Redistricting Game (opens a new tab)</url>.
+		</p>
+	</introduction>
+
+	<task>
+		<statement>
+			<p>
+				Adjust the district boundaries to get each district to ideal size.
+			</p>
+
+		</statement>
+	</task>
+
+	<task>
+		<statement>
+			<p>
+				Consider the seats-to-votes ratio calculation. If the election outcome (seats) is proportional to voter party (votes), what number will the seats-to-votes ratio be close to?
+			</p>
+
+		</statement>
+	</task>
+</exercise>
+
+
+
+
+</subsection>
+
+<subsection> <title>Racial Gerrymandering Exercises</title>
+<exercise>
+
+	<task>
+		<statement>
+			<p>
+				Suppose a voting precinct has <m>80 \%</m> White voters and in a recent election, <m>75 \% </m> of voters in the precinct supported a Heart (<m> \heartsuit </m>) party candidate. What is the maximum and minimum percentage of White voters that could have voted for the Heart candidate in the district? Complete the tables below.
+			</p>
+
+			<table>
+				<tabular >
+					<row bottom="medium">
+						<cell halign="center" colspan="4" >
+							maximum White for <m> \heartsuit </m>
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell halign="center">
+							<m> \heartsuit </m> votes
+						</cell>
+						<cell halign="center">
+							<m> \clubsuit </m> votes
+						</cell>
+						<cell >
+							total
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							White
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+						<cell halign="right">
+							80
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-White
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							total
+						</cell>
+						<cell halign="center">
+							75
+						</cell>
+						<cell >
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+			<table>
+				<tabular >
+					<row bottom="medium">
+						<cell halign="center" colspan="4" >
+							minimum White for <m> \heartsuit </m>
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell halign="center">
+							<m> \heartsuit </m> votes
+						</cell>
+						<cell halign="center">
+							<m> \clubsuit </m> votes
+						</cell>
+						<cell >
+							total
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							White
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+						<cell halign="right">
+							80
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-White
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							total
+						</cell>
+						<cell halign="center">
+							75
+						</cell>
+						<cell >
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+			<p>
+				maximum White for <m> \heartsuit  =  \; \; \; \; /80 = \; \; \; \%</m>
+			</p>
+
+			<p>
+				minimum White for <m> \heartsuit  =  \; \; \; \; /80 = \; \; \; \%</m>
+			</p>
+
+		</statement>
+	</task>
+
+	<task>
+		<statement>
+			<p>
+				Suppose a voting precinct has <m>68 \%</m> Hispanic voters and in a recent election, <m>36 \% </m> of voters in the precinct supported a Heart  (<m> \heartsuit </m>) party candidate. What is the maximum and minimum percentage of Hispanic voters that could have voted for the Heart candidate in the precinct? Complete the tables below.
+			</p>
+
+			<table>
+				<tabular >
+					<row bottom="medium">
+						<cell halign="center" colspan="4" >
+							maximum Hispanic for <m> \heartsuit </m>
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell halign="center">
+							<m> \heartsuit </m> votes
+						</cell>
+						<cell halign="center">
+							<m> \clubsuit </m> votes
+						</cell>
+						<cell >
+							total
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							Hispanic
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+						<cell halign="right">
+							68
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-Hispanic
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							total
+						</cell>
+						<cell halign="center">
+							36
+						</cell>
+						<cell >
+
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+			<table>
+				<tabular >
+					<row bottom="medium">
+						<cell halign="center" colspan="4" >
+							minimum Hispanic for <m> \heartsuit </m>
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+						</cell>
+						<cell halign="center">
+							<m> \heartsuit </m> votes
+						</cell>
+						<cell halign="center">
+							<m> \clubsuit </m> votes
+						</cell>
+						<cell >
+							total
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							Hispanic
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+						<cell halign="right">
+							68
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							non-Hispanic
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+						<cell >
+						</cell>
+					</row>
+					<row bottom="medium">
+						<cell >
+							total
+						</cell>
+						<cell halign="center">
+							36
+						</cell>
+						<cell >
+
+						</cell>
+						<cell halign="right">
+							100
+						</cell>
+					</row>
+				</tabular>
+			</table>
+
+			<p>
+				maximum Hispanic for <m> \heartsuit  =  \; \; \; \; /68 = \; \; \; \%</m>
+			</p>
+
+			<p>
+				minimum Hispanic for <m> \heartsuit   =  \; \; \; \; /68 = \; \; \; \%</m>
+			</p>
+
+
+		</statement>
+	</task>
+
+
+</exercise>
+
+<exercise>
+	<p>
+		Suppose we collected data from all precincts from the scenarios in the previous exercise, then created a scatterplot and found the line of best fit.
+	</p>
+
+	<task>
+		<p>We obtain the following regression line equation for the relationship between White voters and Heart voters among precincts in a district:
+			<me>
+				\text{(\% of votes for Heart) } = 0.34 \text{ (\% of voters who are White) } + 39
+			</me>
+
+			Using the equation above, what percentage of votes would you predict that Heart would receive from a precinct with all White voters?
+
+		</p>
+	</task>
+
+	<task>
+		<p>We obtain the following regression line equation for the relationship between Hispanic voters and Heart voters among precincts in a district:
+			<me>
+				\text{(\% of votes for Heart) } = -0.23 \text{ (\% of voters who are Hispanic) } + 57
+			</me>
+
+			Using the equation above, what percentage of votes would you predict that Heart would receive from a precinct with all Hispanic voters?
+
+		</p>
+	</task>
+
+	<task>
+		<p>
+			Do the answers above suggest racially polarized voting among White and Hispanic voters in this particular district? Explain.
+		</p>
+
+	</task>
+
+</exercise>
+
+<exercise> <p>Use the <url href="https://mggg.org/metagraph/5x5.html"> MGGG 5x5 grid interactive tool (opens new tab)</url> to answer the following questions.</p>
+<ol>
+	<li> Place 9 Hearts in the center of the grid and 16 Clubs around the outside. Given that there are 5 districts of 5 voters each, do you think it is more likely that Hearts wins 0 districts or 3 districts? Test this by creating an example of each scenario and comparing the bar graphs of results.</li>
+	<li> Now place 9 Hearts on the border of the grid and use Clubs for the remaining 16 positions. Does this position of Hearts make it easier or harder for them to win districts compared to clustering them in the center (in the previous question)? Use the bar graphs to support your answer.</li>
+</ol>
+</exercise>
+<exercise> <p> Use the <url href="https://mggg.org/metagraph/7x7.html"> MGGG 7x7 grid interactive tool (opens new tab)</url> to answer the following questions.</p><p>Even though the 7x7 grid is only roughly double the amount of spaces as a 5x5 grid, the number of possible district plans vastly increases. While it might not be practical to consider all possibilities, we can use the grid simulation to take a sample of possible district plans and obtain a distribution of results (similar to the previous exercise) among the sample.</p>
+<ol>
+	<li> Create a valid district plan (7 districts of 7 voters each) with exactly 22 Hearts in which Hearts wins 4 out of 7 districts. Is your plan an outlier for the distribution of voters that you chose? Use the <q>sample with MCMC</q> button to create a bar graph of results. What happens when you change nothing on your district plan but click the sample button again?</li>
+	<li> Change your district plan by changing 4 Hearts to Clubs which do not change the outcome of any district. You should now have exactly 18 Hearts and a plan in which Hearts wins 4 out of 7 districts. Is your plan an outlier for the distribution of voters that you chose?</li>
+	<li>Create multiple grids of exactly 18 Hearts but arrange the Hearts in different ways. For example, you might arrange them together in one large group, in two groups in opposite corners, or randomly scattered in the grid. For each arrangement, create the distribution of districts won by Hearts. Are there certain arrangements of the 18 Hearts that tend to result in winning more districts?</li>
+</ol>
+</exercise>
+
+
+
+
+
+
+</subsection>
+
+
+</exercises>
+<section xml:id="gerrymandering-references">
+	<title>References</title>
+
+
+
+	<biblio xml:id="gerrymandering-formula-to-court">
+		M. Bernstein and M. Duchin, <em>A formula goes to court: Partisan gerrymandering and the efficiency gap </em>, <url href="https://doi.org/10.48550/arXiv.1705.10812" />, 2017.
+	</biblio>
+
+
+	<biblio xml:id="gerrymandering-bc-shape">
+		J. Boland and Y. Rudensky, Brennan Center for Justice. <em>Don’t Judge a District by Its Shape</em> September 2021. <url href="https://www.brennancenter.org/our-work/analysis-opinion/dont-judge-district-its-shape" />
+	</biblio>
+
+	<!-- <biblio xml:id="gerrymandering-PA-2012-election-results"> -->
+	<!-- Commonwealth of Pennsylvania Department of State, 2012 General Election Official Results, Representative in Congress. November 6, 2012. <url href="https://www.electionreturns.pa.gov/General/OfficeResults?OfficeID=11&ElectionID=27&ElectionType=G&IsActive=0" />. -->
+	<!-- </biblio> -->
+
+	<biblio xml:id="gerrymandering-Lewis">
+		"Common Cause v. Lewis." <em>Brennan Center for Justice</em>, 16 April 2020. <url href="https://www.brennancenter.org/our-work/court-cases/common-cause-v-lewis" />.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-PA-2012-voter-registration">
+		Commonwealth of Pennsylvania Department of State, 2012 Voter Registration Statistics. November 6, 2012. <url href="https://www.dos.pa.gov/VotingElections/Documents/Elections%20Division/Voter%20Registration%20Statistics/2012%20election%20GenElectionVoterRegisTotals.pdf" />.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-LWV-PA-remedial-plan">
+		Commonwealth of Pennsylvania, Supreme Court. <em> League of Women Voters, et al v. Commonwealth of Pennsylvania, et al. </em> Docket No. 159 MM 2017, 19 February 2018. Commonwealth of Pennsylvania Supreme Court, <url href="https://www.pacourts.us/Storage/media/pdfs/20211214/194537-feb.19,2018-opinionandorderadoptingremedialplan.pdf" />. PDF download.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-gerrymandering-Mass-MGGG">
+		M. Duchin, T. Gladkova, E. Henninger-Voss, B. Klingensmith, H. Newman, H. Wheelan, <em> Locating the Representational Baseline: Republicans in Massachusetts </em>, Elect.  Law J., 18 (2019) 388--401, <url href="http://doi.org/10.1089/elj.2018.0537"/>.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-Sweden-voting">
+		"Elections to the Riksdag."	<em>Sveriges Riksdag</em>, <url href="https://www.riksdagen.se/en/how-the-riksdag-works/democracy/elections-to-the-riksdag/#72b8294da4f1ddb982e4ab5a9d550307" />.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-Israel-voting">
+		"Electoral System in Israel."	<em>The Knesset</em>, <url href="https://m.knesset.gov.il/en/about/lexicon/pages/electoralsystem.aspx" />.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-ugly-gerry">
+		K. Epstein. <q>How do you spell 'gerrymandering is bad?' With a font made out of preposterous districts</q>. <em>Washington Post</em>, 2 August 2019. <url href="https://www.washingtonpost.com/politics/2019/08/02/how-do-you-spell-gerrymandering-is-bad-with-font-made-out-preposterous-districts/" />
+	</biblio>
+
+	<biblio xml:id="gerrymandering-PA-goofy-district">
+		T. Gabriel. <q>In a comically drawn Pennsylvania district, the voters are not amused</q>. <em>New York Times</em>, 26 January 2018. <url href="https://www.nytimes.com/2018/01/26/us/pennsylvania-gerrymander-goofy-district.html" />
+	</biblio>
+
+	<biblio xml:id="gerrymandering-idaho-law">
+		Idaho Statute 72-1506
+		<url href="http://legislature.idaho.gov/statutesrules/idstat/Title72/T72CH15/SECT72-1506/" />
+	</biblio>
+
+	<biblio xml:id="gerrymandering-Post-images-districts">
+		C. Ingraham. <q>America's most gerrymandered congressional districts</q>. <em>Washington Post</em>, 15 May 2014. <url href="https://www.washingtonpost.com/news/wonk/wp/2014/05/15/americas-most-gerrymandered-congressional-districts/" />
+	</biblio>
+
+	<!-- <biblio xml:id="gerrymandering-pa-cracking"> -->
+	<!-- M. Jones, <em>Packing, Cracking And The Art Of Gerrymandering Around Milwaukee </em> Wiscontext, June 2018. <url href="http://www.wiscontext.org/packing-cracking-and-art-gerrymandering-around-milwaukee" /> -->
+	<!-- </biblio> -->
+
+	<biblio xml:id="gerrymandering-extreme-maps">
+		M. Li and L. Royden, <em> Extreme Maps</em>, Brennan Center for Justice (2017), <url href="https://www.brennancenter.org/our-work/research-reports/extreme-maps"/>.
+	</biblio>
+
+
+	<biblio xml:id="gerrymandering-gerrymandering-MGGG-inference">
+		Metric Geometry and Gerrymandering Group (MGGG), Ecological Inference, <url href="https://www.arcgis.com/apps/Cascade/index.html?appid=87b6e6348fef491ebf1dee83059cbc1f"/>.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-NC-2012-voter-registration">
+		North Carolina State Board of Elections, Voter Registration Statistics. November 6, 2012. <url href="https://vt.ncsbe.gov/RegStat/Results/?date=11%2F06%2F2012" />.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-Rucho">
+		"Rucho v. Common Cause." <em>Ballotpedia</em>, <url href="https://ballotpedia.org/Rucho_v._Common_Cause" />.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-ballotpedia-table">
+		"State Legislative Districts."	<em>Ballotpedia</em>, <url href="https://ballotpedia.org/State_Legislative_Districts" />.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-gerrymandering-efficiency-gap">
+		N. Stephanopoulus and E. McGhee, <em> Partisan Gerrymandering and the Efficiency Gap </em>, Univ Chic Law Rev, 82 (2015) 831--900, <url href="http://ssrn.com/abstract=2457468"/>.
+	</biblio>
+
+	<biblio xml:id="gerrymandering-history-Gerry">
+		E. Trickey. <q>Where did the term 'gerrymander' come from?</q> <em>Smithsonian Magazine</em>, 20 July 2017. <url href="https://www.smithsonianmag.com/history/where-did-term-gerrymander-come-180964118/" />
+	</biblio>
+
+	<biblio xml:id="gerrymandering-gerrymandering-Wang-Three-Tests">
+		S. S.-H. Wang, <em> Three Tests for Practical Evaluation of Partisan Gerrymandering </em>, Stanford Law Rev, 68 (2016) 1263--1321, <url href="http://www.stanfordlawreview.org/wp-content/uploads/sites/3/2016/06/3_-_Wang_-_Stan._L._Rev.pdf"/>.
+	</biblio>
+
+
+
+
+
+</section>
+</chapter>
+

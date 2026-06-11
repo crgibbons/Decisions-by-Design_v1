@@ -1,0 +1,26 @@
+{
+    "id": "D5428670",
+    "path": "/Library/Frameworks/R.framework/Versions/4.4-arm64/Resources/library/reticulate/python/rpytools/loader.py",
+    "project_path": null,
+    "type": "python",
+    "hash": "3351041433",
+    "contents": "",
+    "dirty": false,
+    "created": 1742854163920.0,
+    "source_on_save": false,
+    "relative_order": 4,
+    "properties": {
+        "source_window_id": "",
+        "Source": "Source",
+        "cursorPosition": "121,4",
+        "scrollLine": "0"
+    },
+    "folds": "",
+    "lastKnownWriteTime": 1741508475,
+    "encoding": "UTF-8",
+    "collab_server": "",
+    "source_window": "",
+    "last_content_update": 1741508475,
+    "read_only": false,
+    "read_only_alternatives": []
+}

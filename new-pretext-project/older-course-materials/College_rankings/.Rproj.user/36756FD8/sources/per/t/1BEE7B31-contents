@@ -1,0 +1,226 @@
+import boolmat
+from boolmat import BoolMat
+
+### Create a Boolean Matrix from a list
+A = BoolMat.fromList([[0,0,1],[1,0,0],[1,1,0]])
+B = BoolMat.fromList([[1,0,0],[0,0,1],[1,1,0]])
+C = BoolMat.fromList([[1,0,1],[1,0,0],[1,1,1]])
+Id = BoolMat.makeId(3) ## ones on diag, zero elsewhere
+One = BoolMat.makeOne(3,3) ## all ones
+Zero = BoolMat.makeZero(3,3) ## all zeros
+
+### Transposes and Complements
+
+A.getTranspose(), A.getComplement()
+A.T
+A.C
+
+### Equality
+
+A == A
+A == B
+
+### "Inclusion" (entrywise <=)
+
+A <= A
+A <= B
+A <= C
+C <= A 
+
+A <= One
+Zero <= A
+
+### Addition, Intersection, Multiplication, Residuals
+
+A + B ## entrywise max (union)
+A - B ## entrywise min (intersection)
+A*B ## via Boolean dot product
+
+X = B/A ## left residual B:A (largest X where XA < B)
+X*A == B ## in this case a solution to XA = B
+Y = B//A ## right residual B::A (largest X where AX < B)
+A*Y == B ## not a solution to AX = B
+
+A * A
+A ** 2
+
+A * A * A
+A ** 3
+
+### Check for symmetry, skew symmetry
+A.isSym()
+A.isSkew()
+Id.isSym()
+Zero.isSkew()
+
+### Decompose into sum of symmetric and skew symmetric matrices
+A.sym() ## the symmetric summand
+A.skew() ## the skew symmetric summand
+A == A.sym() + A.skew()
+A.decomp() ## both summands at once in case you want them
+
+### Here's a lovely mess:
+A.sym() ** 3 + (A.sym() ** 2) * A.skew() + A.sym() * A.skew() * A.sym() + A.skew() * (A.sym() ** 2) + A.sym() * (A.skew() ** 2) + A.skew() * A.sym() * A.skew() + (A.skew() ** 2) * A.sym()
+
+A ** 3
+
+### Check row and column consistency
+
+A*One == One
+One*A == One
+
+C*One == One
+One*C == One
+
+### A Boolean Matrix is Invertible IFF it is orthogonal
+
+A*A.T == Id
+
+### Some 4x4 for fun
+
+## revisit(D) = 10
+### A is n x n:
+  ### max(rev(A)) = (n-1)^2
+  ### number of "good" A: n!
+  ### something to do with deranging the identity columns
+    #### n-cycle: sigma
+  ### put in one more one in a good place
+    #### the "good" ones come from picking a 1 from sigma^2(cols(I))
+
+D = BoolMat.fromList([[0,0,0,1],[1,0,0,0],[0,1,0,0],[0,1,1,0]])
+D*D.getTranspose()
+OneF = BoolMat.makeOne(D.m,D.n)
+
+## D is row and column consistent, which is necessary but
+## not sufficient for max revisiting number
+OneF*D == OneF
+D*OneF == OneF
+
+D.sym()
+D.skew()
+D.skew() == D
+
+## rev(E) < 10
+
+E = BoolMat.fromList([[0,1,0,1],[1,0,0,0],[0,1,0,0],[0,0,1,0]])
+E.sym()
+E.skew()
+E ** 4 == E ** 6
+
+E.sym() ** 3 ## revisit is 2
+
+E.skew() ** 4 ## zeros out early! womp womp
+
+E*E.getTranspose()
+
+OneF * E == OneF
+E * OneF == OneF
+
+###
+
+Id4 = BoolMat.makeId(4)
+Id4
+
+basis = [ BoolMat.fromList([row]).getTranspose() for row in Id4.rows ]
+basis[0]
+basis[1]
+basis[2]
+basis[3]
+
+basis = [ BoolMat.fromList([row]).getTranspose() for row in Id4.rows ]
+vec = basis
+mult = BoolMat.fromList([[0,0,0,1],[1,0,0,0],[0,1,0,0],[1,0,1,0]])
+for i in range(10):
+  vec[0], vec[1], vec[2], vec[3] = mult*vec[0], mult*vec[1], mult*vec[2], mult*vec[3]
+  print(i+1, vec)
+
+
+basis = [ BoolMat.fromList([row]).getTranspose() for row in Id4.rows ]
+vec = basis
+mult = BoolMat.fromList([[0,0,0,1],[1,0,0,1],[0,1,0,0],[0,0,1,0]])
+for i in range(10):
+  vec[0], vec[1], vec[2], vec[3] = mult*vec[0], mult*vec[1], mult*vec[2], mult*vec[3]
+  print(i+1, vec)
+  
+#### 4-cycle C applied to Id4, then a 1 from any of the 1s in C^2 applied to Id4
+### EX: (1243) 
+
+basis = [ BoolMat.fromList([row]).getTranspose() for row in Id4.rows ]
+vec = basis
+mult = BoolMat.fromList([[0,0,1,0],[1,0,0,0],[0,0,0,1],[1,1,0,0]])
+for i in range(10):
+  vec[0], vec[1], vec[2], vec[3] = mult*vec[0], mult*vec[1], mult*vec[2], mult*vec[3]
+  print(i+1, vec)
+
+basis = [ BoolMat.fromList([row]).getTranspose() for row in Id4.rows ]
+vec = basis
+mult = BoolMat.fromList([[0,0,1,0],[1,0,0,0],[0,1,0,1],[0,1,0,0]])
+for i in range(10):
+  vec[0], vec[1], vec[2], vec[3] = mult*vec[0], mult*vec[1], mult*vec[2], mult*vec[3]
+  print(i+1, vec)
+  
+basis = [ BoolMat.fromList([row]).getTranspose() for row in Id4.rows ]
+vec = basis
+mult = BoolMat.fromList([[0,0,1,0],[1,0,1,0],[0,0,0,1],[0,1,0,0]])
+for i in range(10):
+  vec[0], vec[1], vec[2], vec[3] = mult*vec[0], mult*vec[1], mult*vec[2], mult*vec[3]
+  print(i+1, vec)
+
+basis = [ BoolMat.fromList([row]).getTranspose() for row in Id4.rows ]
+vec = basis
+mult = BoolMat.fromList([[0,0,1,1],[1,0,0,0],[0,0,0,1],[0,1,0,0]])
+for i in range(10):
+  vec[0], vec[1], vec[2], vec[3] = mult*vec[0], mult*vec[1], mult*vec[2], mult*vec[3]
+  print(i+1, vec)
+
+Id5 = BoolMat.makeId(5)
+basis = [ BoolMat.fromList([row]).getTranspose() for row in Id5.rows ]
+vec = basis
+mult = BoolMat.fromList([[0,0,0,0,1],[1,0,0,0,0],[0,0,0,1,0],[0,1,0,0,0],[0,0,1,1,0]])
+for i in range(20):
+  vec[0], vec[1], vec[2], vec[3], vec[4] = mult*vec[0], mult*vec[1], mult*vec[2], mult*vec[3], mult*vec[4]
+  print(i+1, vec)
+  
+### using SymPy
+  
+from sympy.combinatorics.permutations import Permutation
+sigma = Permutation(0,1,3,2,4) 
+sigma ** 2
+
+n = len(sigma.array_form)
+Id = BoolMat.makeId(n)
+A = BoolMat.fromList([Id[sigma.array_form[i]] for i in range(n)])
+Aplus = BoolMat.fromList([Id[(sigma**2).array_form[i]] for i in range(n)])
+
+A
+B = A + BoolMat.fromList([[0,0,0,1,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0],[0,0,0,0,0]])
+B
+
+for i in range(1,18):
+  print((i,B**i))
+  
+
+gamma = Permutation(0,1,3,2,5,4,7,6)
+g2 = gamma**2
+g3 = gamma**3
+
+n = len(gamma.array_form)
+Id = BoolMat.makeId(n)
+A = BoolMat.fromList([Id[gamma.array_form[i]] for i in range(n)])
+Aplus = BoolMat.fromList([Id[g2.array_form[i]] for i in range(n)])
+Aplus[0]
+Applus = BoolMat.fromList([Id[g3.array_form[i]] for i in range(n)])
+Applus[0]
+
+B = A + BoolMat.fromList([[0, 0, 0, 1, 0, 0, 0, 0],[0]*n,[0]*n,[0]*n,[0]*n,[0]*n,[0]*n,[0]*n])
+C = A + BoolMat.fromList([[0, 0, 1, 0, 0, 0, 0, 0],[0]*n,[0]*n,[0]*n,[0]*n,[0]*n,[0]*n,[0]*n])
+
+for i in range(1,51):
+  print((i,B**i))
+
+
+for i in range(1,50):
+  print((i,C**i))
+
+C.sym()
+C.skew() == C

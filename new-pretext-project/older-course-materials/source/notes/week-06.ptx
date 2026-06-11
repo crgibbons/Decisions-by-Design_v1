@@ -1,0 +1,290 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<pretext>
+    <article xml:id="notes">
+        <section xml:id="notes-week-06">
+            <title>Gerrymandering Introduction</title>
+
+  <p>
+    These notes follow the structure of a public lecture (by Prof. Gibbons) on the mathematics of gerrymandering,
+    adapted for our class introduction to the topic.
+  </p>
+
+  <subsection xml:id="what-is-gerrymandering">
+    <title>What Is Gerrymandering?</title>
+
+    <definition>
+      <term>Gerrymander (verb)</term>
+      <statement>
+        To manipulate the boundaries of an electoral constituency so as to favor
+        one party or class.
+      </statement>
+    </definition>
+
+    <p>
+      Why is a mathematician talking about this?
+    </p>
+
+    <p>
+      The American Mathematical Society (AMS) and the American Statistical Association (ASA)
+      have issued statements noting:
+    </p>
+
+    <ul>
+      <li>Existing districting requirements do not prevent partisan gerrymandering.</li>
+      <li>Modern data and computing make partisan manipulation easier.</li>
+      <li>Mathematical and statistical tools can detect unfair advantage.</li>
+    </ul>
+
+    <p>
+      Our goal: understand what <q>fair</q> might mean — and how mathematics helps test it.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="tiny-state">
+    <title>A Tiny State Example</title>
+
+    <p>
+      Suppose a state has 50 voters and 5 districts.
+    </p>
+
+    <ul>
+      <li>30 voters (60%) prefer Blue.</li>
+      <li>20 voters (40%) prefer Red.</li>
+    </ul>
+
+    <p>
+      Depending on how we draw district lines, we can get very different outcomes.
+    </p>
+
+    <example>
+      <title>Possible Outcomes</title>
+
+      <ul>
+        <li>1 Blue, 4 Red (<q>Anything Goes</q>)</li>
+        <li>3 Blue, 2 Red (Proportional Representation)</li>
+        <li>5 Blue, 0 Red (Blue Gerrymander)</li>
+        <li>2 Blue, 3 Red (Red Gerrymander)</li>
+      </ul>
+    </example>
+
+    <p>
+      Same voters. Same preferences. Different district lines.
+    </p>
+
+    <p>
+      Question: what should <q>fair</q> mean here?
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="social-criteria">
+    <title>Social and Legal Criteria for Fairness</title>
+
+    <p>
+      Federal requirement (Reynolds v. Sims, 1964):
+    </p>
+
+    <blockquote>
+      The Equal Protection Clause demands substantially equal state legislative
+      representation for all citizens.
+    </blockquote>
+
+    <p>
+      In practice: districts must have roughly equal population (often within 10%).
+    </p>
+
+    <p>
+      Common state-level criteria:
+    </p>
+
+    <ul>
+      <li>Contiguity (districts must be connected).</li>
+      <li>Compactness (residents should live reasonably close together).</li>
+      <li>Communities of interest.</li>
+      <li>Respect for political boundaries (don’t split towns/counties).</li>
+    </ul>
+
+    <p>
+      Notice: none of these directly prevent partisan bias.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="mathematical-criteria">
+    <title>Mathematical Criteria for Partisan Fairness</title>
+
+    <ul>
+      <li>Proportionality</li>
+      <li>Convexity and Compactness</li>
+      <li>Efficiency Gap</li>
+      <li>Sampling Methods</li>
+    </ul>
+  </subsection>
+
+
+  <subsection xml:id="proportionality">
+    <title>Proportionality</title>
+
+    <p>
+      If 67% of voters prefer Party X, then roughly 67% of seats
+      should go to Party X.
+    </p>
+
+    <p>
+      In the tiny state example:
+    </p>
+
+    <ul>
+      <li>60% Blue → 3 out of 5 seats seems reasonable.</li>
+    </ul>
+
+    <p>
+      But proportionality is not guaranteed in single-member districts.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="convexity">
+    <title>Convexity and Compactness</title>
+
+    <p>
+      Hope: Convex, compact maps are harder to gerrymander.
+    </p>
+
+    <p>
+      Reality: You can gerrymander using convex districts.
+    </p>
+
+    <theorem xml:id="ham-sandwich">
+      <title>Ham Sandwich Theorem (Planar Version)</title>
+      <statement>
+        Given two finite sets of points in the plane (blue and red),
+        each with an even number of points and no three collinear,
+        there exists a line that simultaneously bisects both sets.
+      </statement>
+    </theorem>
+
+    <p>
+      This theorem implies that even convex cuts can be used strategically.
+      Compactness alone does not guarantee fairness.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="efficiency-gap">
+    <title>The Efficiency Gap</title>
+
+    <p>
+      The Efficiency Gap measures wasted votes.
+    </p>
+
+    <definition>
+      <term>Wasted Votes</term>
+      <statement>
+        <ul>
+          <li>All votes for the losing candidate.</li>
+          <li>All votes beyond 50% for the winning candidate.</li>
+        </ul>
+      </statement>
+    </definition>
+
+    <p>
+      Efficiency Gap:
+    </p>
+
+    <me>
+      EG = \frac{\text{Wasted Votes}_A - \text{Wasted Votes}_B}{\text{Total Votes}}
+    </me>
+
+    <p>
+      Rough guideline: ±8% is considered the acceptable range.
+    </p>
+
+    <p>
+      In our tiny state:
+    </p>
+
+    <ul>
+      <li>Proportional plan → small EG (~8%).</li>
+      <li>Blue gerrymander → large positive EG (~40%).</li>
+      <li>Red gerrymander → large negative EG (~32%).</li>
+    </ul>
+
+    <p>
+      Drawbacks:
+    </p>
+
+    <ul>
+      <li>Only measures partisan bias.</li>
+      <li>False positives/negatives possible.</li>
+      <li>Not fully compatible with proportionality.</li>
+    </ul>
+  </subsection>
+
+
+  <subsection xml:id="sampling">
+    <title>Sampling the Space of District Plans</title>
+
+    <p>
+      Instead of scoring a single map, we:
+    </p>
+
+    <ol>
+      <li>Generate many valid district plans (subject to constraints).</li>
+      <li>Compute election outcomes for each plan.</li>
+      <li>Compare the proposed plan to the distribution.</li>
+    </ol>
+
+    <p>
+      By the Central Limit Theorem, outcomes across many plans
+      tend to form a normal distribution.
+    </p>
+
+    <p>
+      A plan that lies far in the tail is statistically suspicious.
+    </p>
+
+    <p>
+      This approach can test racial, socioeconomic, and partisan hypotheses.
+    </p>
+  </subsection>
+
+
+  <subsection xml:id="whos-who">
+    <title>Who’s Who in Mathematical Districting</title>
+
+    <ul>
+      <li>
+        Mira Bernstein &amp; Moon Duchin (Tufts) — convex geometry and districting.
+      </li>
+      <li>
+        Jonathan Mattingly (Duke) — quantifying gerrymandering.
+      </li>
+      <li>
+        Princeton Gerrymandering Project — sampling software.
+      </li>
+      <li>
+        AMS Capital Currents Blog (Karen Saxe).
+      </li>
+    </ul>
+  </subsection>
+
+
+  <subsection xml:id="closing">
+    <title>Closing Question</title>
+
+    <p>
+      What should fairness mean in representative democracy?
+    </p>
+
+    <p>
+      Mathematics cannot answer that normative question —
+      but it can reveal when something is statistically extreme.
+    </p>
+  </subsection>
+
+</section>
+</article>
+</pretext>

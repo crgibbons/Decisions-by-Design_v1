@@ -1,0 +1,489 @@
+---
+title: "Bloomberg Businessweek's College Rankings - 2021"
+author: "Tural Sadigov (and Courtney Gibbons)"
+date: "2/3/2022 (updated 2/12/2025)"
+output:
+  slidy_presentation: default
+  ioslides_presentation: default
+  beamer_presentation: default
+  powerpoint_presentation: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warning = F, message = F)
+```
+
+## Question of interest
+
+- **Can we reproduce Bloomberg Businessweek's MBA college ranking?**
+- Dr. Anjani Jain (Yale)
+
+
+## Bloomberg data & methodology - 2021 ranking
+
+- 119 MBA programs (we will look at the first 84)
+- Five variables: Compensation, Learning, Networking, Entrepreneurship, Diversity
+- Weights for the categories are crowd-sourced
+- Surveys: students, alumni, recruiters
+- Key claim: It is intentionally not reproducible! 
+- <https://www.bloomberg.com/business-schools/methodology>
+
+
+
+```{r}
+library(tidyverse)
+cr <- read.csv(file = 'data-BIe5s.csv')
+names(cr)[1] <- 'Rank'
+schools <- cr$School
+ranks <- cr$Rank
+cr_bloomberg <- cr %>% 
+  select(names(cr)[c(1,2,4,5,6,7,8)]) %>% 
+  mutate(Rank) %>% 
+  relocate(Rank, .after = last_col()) 
+```
+```{r}
+names(cr_bloomberg)[2] = 'Compensation'
+names(cr_bloomberg)[4] = 'Networking'
+names(cr_bloomberg)[5] = 'Entrepreneurship'
+```
+
+
+## Data collection and variable creation
+
+- Survey - each variable: 1-7
+- Raw scores weighted
+- Weighted sum: 1-7
+- Weighted sum is scaled to 0 - 100 ('normalized')
+- Minimum --> 0, Maximum --> 100
+- Transformation: $T(x) = \frac{100}{x_{(n)} - x_{(1)}} (x - x_{(1)})$
+- Crowd-sourced weights are
+```{r}
+weights <- c(.357, .258, .178, .120, .086)
+names(weights) <- c('Compensation', 'Learning','Networking', 
+                    'Entrepreneurship', 'Diversity')
+options(tibble.width = Inf)
+
+weights
+```
+
+## Toy example - do transformations as Businessweek
+
+```{r}
+options(tibble.width = Inf)
+Tx <- function(x){
+  (100/(max(x)-min(x)))*(x - min(x))
+}
+Comp = c(2, 3, 4)
+Lear = c(5, 6, 5)
+w_comp = .60
+w_lear = .40
+df <- data.frame(Comp, Lear)
+df <- df %>% 
+  mutate(Comp_weigthed = Comp*w_comp, Lear_weighted = Lear*w_lear) %>% 
+  mutate(w_sum = Comp_weigthed + Lear_weighted) %>% 
+  mutate(scaled_w_sum = Tx(w_sum))
+print(df, row.names = F)
+ws <-  c(w_comp, w_lear)
+names(ws) <- c('Compensation', 'Learning')
+ws
+cat('Variance of Compensation is ', var(Comp), '\n')
+cat('Variance of Learning is ', var(Lear), '\n')
+```
+
+## Toy example - do transformations differently
+
+$$T(x) = \frac{100}{x_{(n)} - x_{(1)}} (x-x_{(1)})$$
+
+
+```{r}
+Comp = c(2, 3, 4)
+Lear = c(5, 6, 5)
+w_comp = .60
+w_lear = .40
+df <- data.frame(Comp, Lear)
+df <- df %>% 
+  mutate(Comp_scaled = Tx(Comp), Lear_scaled = Tx(Lear)) %>% 
+  mutate(Comp_weigthed = Comp_scaled*w_comp, Lear_weighted = Lear_scaled*w_lear) %>% 
+  mutate(w_sum = Comp_weigthed + Lear_weighted)
+print(df, row.names = F)
+ws
+cat('Variance of Scaled Compensation is ', var(df$Comp_scaled), '\n')
+cat('Variance of Scaled Learning is ', var(df$Lear_scaled), '\n')
+```
+
+## Toy example - do transformations as Businessweek but use z-scores instead
+
+$$Z(x) = \frac{x - \mu_x}{\sigma_X}$$
+
+
+```{r}
+Zx <- function(x){
+  (x-mean(x))/sd(x)
+}
+Comp = c(2, 3, 4)
+Lear = c(5, 6, 5)
+w_comp = .60
+w_lear = .40
+df <- data.frame(Comp, Lear)
+df <- df %>% 
+  mutate(Comp_z = Zx(Comp), Lear_z = Zx(Lear)) %>% 
+  mutate(Comp_weigthed = Comp_z*w_comp, Lear_weighted = Lear_z*w_lear) %>% 
+  mutate(w_sum = Comp_weigthed + Lear_weighted) %>% 
+  mutate(scaled_w_sum = Tx(w_sum))
+print(df, row.names = F)
+```
+<!-- ## Toy example - do transformations as Dr. Jain but use z-scores instead -->
+
+```{r eval=F}
+Zx <- function(x){
+  (x-mean(x))/sd(x)
+}
+Comp = c(2, 3, 4)
+Lear = c(5, 6, 5)
+w_comp = .60
+w_lear = .40
+df <- data.frame(Tx(Comp), Tx(Lear))
+df <- df %>% 
+  mutate(Comp_z = Zx(Comp), Lear_z = Zx(Lear)) %>% 
+  mutate(Comp_weigthed = Comp_z*w_comp, Lear_weighted = Lear_z*w_lear) %>% 
+  mutate(w_sum = Comp_weigthed + Lear_weighted) %>% 
+  mutate(scaled_w_sum = Tx(w_sum))
+print(df, row.names = F)
+ws
+```
+
+## Dataset 
+
+<https://www.bloomberg.com/business-schools/regions/us>
+
+```{r}
+names(cr)[4] = 'Compensation'
+names(cr)[6] = 'Networking'
+names(cr)[7] = 'Entrepreneurship'
+options(tibble.width = Inf)
+print(cr[1:6,1:5], row.names = F)
+```
+
+## Transformation $T$ is not one-to-one
+
+```{r}
+x = c(1,2,3)
+y = Tx(x)
+print(data.frame(x = x, Tx = y), row.names = F)
+```
+
+```{r}
+x = c(2,3,4)
+y = Tx(x)
+print(data.frame(x = x, Tx = y), row.names = F)
+```
+
+## Dr. Jain's main point
+
+Transformation from 1-7 to 0-100 is linear (but he meant affine, not linear). 
+
+$$T(x) = \frac{100}{x_{(n)} - x_{(1)}} (x-x_{(1)})$$
+$$Z(x) = \frac{x - \mu_x}{\sigma_X}$$
+Dr. Jain's claim:
+
+$$Z(T(x)) = Z(x)$$
+Let's see if that is correct. 
+
+## Proof of Dr.Jain's claim
+
+For $a>0$,
+
+$$Z(ax) = \frac{ax - \mu_{ax}}{\sigma_{ax}} = \frac{ax - a\mu_{x}}{a\sigma_{x}} = Z(x)$$
+and for any $c\in \mathbb{R}$,
+$$Z(x + c) = \frac{x+c - \mu_{x+c}}{\sigma_{x+c}} = \frac{x+c - \mu_{x}-c}{\sigma_{x}} = Z(x)$$
+Thus,
+$$Z(T(x)) = Z(\frac{100}{x_{(n)} - x_{(1)}} (x-x_{(1)})) = Z(x-x_{(1)}) = Z(x)$$
+
+
+## Dr. Jain's main point is CORRECT.
+
+"If the published ‘normalized scores’ on each index are simply a 0-100 linear re-scaling of the 1-7 raw data, as BBW’s email response indicates, then the published index scores can still be standardized before applying the index weights to them."
+
+We hope to have this:
+
+$$ x_i \rightarrow Z(x_i) \rightarrow w_iZ(x_i) \rightarrow\sum_{i=1}^{5}w_iZ(x_i) \rightarrow T\left(\sum_{i=1}^{5}w_iZ(x_i)\right)$$
+$$(1,7) \rightarrow (-3,3)\rightarrow (-3w, 3w) \rightarrow (-3, 3) \rightarrow (0, 100)$$
+But, we only have scaled data (in the range of 0-100)
+
+
+## Dataset
+
+<https://www.bloomberg.com/business-schools/regions/us>
+
+
+```{r}
+options(tibble.width = Inf)
+print(cr[1:6,1:5], row.names = F)
+```
+
+
+
+## One can still standartize
+
+
+$$T(x_i) \rightarrow Z(T(x_i)) = Z(x_i)$$
+$$ Z(x_i)\rightarrow w_iZ(x_i) \rightarrow \sum_{i=1}^{5}w_iZ(x_i) \rightarrow T\left(\sum_{i=1}^{5}w_iZ(x_i)\right)$$
+
+
+
+## Standartized columns
+
+```{r}
+cr2 <- cr_bloomberg %>% 
+  mutate_at(2:6, funs(c(scale(.))))
+head(cr2[, -c(1,7)])
+```
+
+## My anking according to provided BB weights
+
+```{r}
+w = weights
+cr2 <- cr2 %>% 
+  mutate(Compensation = Compensation*w[1], 
+         Learning = Learning *w[2], 
+         Networking  = Networking*w[3],
+         Entrepreneurship = Entrepreneurship*w[4],
+         Diversity = Diversity*w[5]) %>% 
+  mutate(w_sum = Compensation + Learning + Networking + Entrepreneurship +Diversity) %>% 
+  mutate(w_sum_normalized = round(Tx(w_sum))) %>% 
+  mutate(my_rank = rank(-w_sum_normalized, ties.method = 'min')) %>% 
+  mutate(BB_rank = Rank) %>% 
+  select(-Rank)
+head(cr2[, 7:10])
+```
+
+## Compare rankings
+```{r}
+cr2[c(1:5, 41:45, 80:84), c(9, 10)]
+```
+
+## How many schools have ranking error of more than 3? 5? 10?
+
+```{r}
+a = sum(abs(cr2[, 9] - cr2[, 10])>3)
+cat('# of schools with ranking error of more than three is', a)
+a = sum(abs(cr2[, 9] - cr2[, 10])>5)
+cat('# of schools with ranking error of more than five is', a)
+a = sum(abs(cr2[, 9] - cr2[, 10])>10)
+cat('# of schools with ranking error of more than ten is', a)
+
+```
+
+## What is going on here? 
+
+- no standartization?
+- true weights are not given?
+
+## Can we back-engineer the weights? 
+
+- Apply Multiple Linear Regression (MLR) without intercept
+- MLR assumes independent variables
+
+
+
+## Correlation matrix
+
+MLR will NOT give accurate estimates of true weights
+
+
+```{r}
+names(cr_bloomberg)[2] = 'Compensation'
+names(cr_bloomberg)[4] = 'Networking'
+names(cr_bloomberg)[5] = 'Entrepreneurship'
+par(mfrow = c(1, 2))
+library(psych)
+corPlot(cr_bloomberg[, c(-1, -7)], cex = 1.2)
+```
+
+
+## Multiple Linear Regression without intercept
+
+```{r}
+names(cr)[4] = 'Compensation'
+names(cr)[6] = 'Networking'
+names(cr)[7] = 'Entrepreneurship'
+m <- lm(formula = Overall.score ~ Compensation + Learning + 
+                                  Networking + Entrepreneurship + Diversity - 1, data = cr)
+df <- as.data.frame(coef(m))
+colnames(df) = 'MLR_weights'
+df <- df %>% 
+  mutate(pr_weights = weights[row.names(df)]) %>% 
+  relocate(pr_weights)
+round(df, 2)
+cat('the sum of the coefficents = ', sum(coef(m)), '\n')
+m_sum = summary(m)
+cat('R square = ',m_sum$r.squared, '\n')
+cat('Adjusted R square = ', m_sum$adj.r.squared, '\n')
+```
+
+##  Dr. Jain: "a constrained optimization model that minimizes variances from the published ranking"
+
+Model
+
+$$y = w_1x_1 + w_2x_2 + w_3x_3 + w_4x_4 + w_5x_5 + \epsilon$$
+with $\sum_i w_i = 1$ and $w_i \geq 0$. Then minimize
+
+$$\sum_i (y_i - (w_1x_1 + w_2x_2 + w_3x_3 + w_4x_4 + w_5x_5))^2$$
+
+## Quadratic Optimization
+
+This problem is a quadratic optimization problem and it is well studied in mathematics
+
+##  Back-engineered weights through constrained optimization
+
+```{r}
+x1 = cr$Compensation
+x2 = cr$Learning
+x3 = cr$Networking
+x4 = cr$Entrepreneurship
+x5 = cr$Diversity
+y = cr$Overall.score
+
+library("quadprog")
+X <- matrix(c(x1,x2,x3,x4,x5), ncol=5)
+Y <- y
+Rinv <- solve(chol(t(X) %*% X))
+C <- cbind(rep(1,5), diag(5)) # design matrix kind of
+b <- c(1,rep(0,5))
+d <- t(Y) %*% X  
+
+a = solve.QP(Dmat = Rinv, factorized = TRUE, dvec = d, Amat = C, bvec = b, meq = 1)
+df <- data.frame(pr_weights = weights, 
+           const_weights = a$solution)
+round(df, 2)
+```
+
+## Can we counter against multicollinearity?
+
+- Regularization: artifical shrikange of the coefficients
+
+## LASSO model - regularization
+
+```{r}
+library(glmnet)
+X = as.matrix(cr[, 4:8])
+y = cr$Overall.score
+lambdas = 10^seq(3, -3, by = -.1)
+fit <- glmnet(X, y, alpha = 1, lambda = lambdas) # alpha=1 in lasso
+cv_fit <- cv.glmnet(X, y, alpha = 1, lambda = lambdas, intercept = F)
+optlambda <- cv_fit$lambda.min
+y_predicted <- predict(fit, s = optlambda, newx = X) # newx contanins the matrix of the predicted values
+
+# Sum of Squares Total and Error
+sst <- sum(y^2)
+sse <- sum((y_predicted - y)^2)
+
+# R squared
+rsq <- 1 - sse / sst
+cat("R square is ", rsq, '\n')
+df2 <- data.frame(lasso_weights = coef(cv_fit)[2:6,1])
+df2 <- df2 %>% 
+  mutate(pr_weights = weights[row.names(df2)])
+round(df2, 2)
+```
+
+## Ridge regression model - regularization
+
+```{r}
+library(glmnet)
+X = as.matrix(cr[, 4:8])
+y = cr$Overall.score
+lambdas = 10^seq(3, -3, by = -.1)
+fit_ridge <- glmnet(X, y, alpha = 0, lambda = lambdas) # alpha=1 in lasso
+cv_fit_ridge <- cv.glmnet(X, y, alpha = 0, lambda = lambdas, intercept = F)
+optlambda <- cv_fit_ridge$lambda.min
+y_predicted <- predict(fit_ridge, s = optlambda, newx = X) # newx contanins the matrix of the predicted values
+
+# Sum of Squares Total and Error
+sst <- sum(y^2)
+sse <- sum((y_predicted - y)^2)
+
+# R squared
+rsq <- 1 - sse / sst
+cat("R square is ", rsq, '\n')
+df2 <- data.frame(ridge_weights = coef(cv_fit_ridge)[2:6,1])
+df2 <- df2 %>% 
+  mutate(pr_weights = weights[row.names(df2)])
+round(df2, 2)
+```
+
+## Compare many models
+
+```{r}
+df <- data.frame(pr_weights = weights, 
+           Jain_weights = c(0.585, .077, 0.105, .079, 0.1538),
+           lasso_weights = coef(cv_fit)[2:6,1],
+           ridge_weights = coef(cv_fit_ridge)[2:6,1], 
+           const_weights = a$solution,
+           MLR_weights = m$coefficients)
+round(df, 2)
+```
+
+
+## Decision Tree
+
+
+```{r}
+library(rpart)
+library(rpart.plot)
+names(cr)[4] = 'Compensation'
+names(cr)[6] = 'Networking'
+names(cr)[7] = 'Entrepreneurship'
+m1 = rpart(formula = Overall.score ~ Compensation + 
+             Learning + Networking + Entrepreneurship + Diversity, 
+           data = cr,
+           method = 'anova', 
+           control = rpart.control(minsplit = 1, 
+                                   minbucket = 1))
+
+rpart.plot(m1)
+```
+
+## Decision Tree - important variables
+
+```{r}
+df <- as.data.frame(m1$variable.importance)
+df <- df %>% 
+  mutate(perc = m1$variable.importance/sum(m1$variable.importance)) %>% 
+  mutate(provided_weights = weights[row.names(df)])
+df
+```
+
+
+## Bagged (Bootstrap Aggregated) model - important variables
+
+```{r}
+library(ISLR)
+library(randomForest)
+# ==== 1000 TREES
+B = 1000
+set.seed(2022)
+bagged_ranking = randomForest(formula = Overall.score ~ Compensation + 
+             Learning + Networking + Entrepreneurship + Diversity,
+                                data = cr, 
+                                mtry = 5, 
+                                importance = TRUE, 
+                                ntree = B)
+#plot(bagged_ranking)
+varImpPlot(bagged_ranking, 
+           sort = TRUE, 
+           n.var = 5, 
+           scale = TRUE)
+```
+
+## Conclusion: what happened?
+
+Few possibilities
+
+- BB did not standardize the data (2018, 2019, 2020, 2021)
+- Weights provided were not the true weights used
+- Methodology is not accurately described
+- Provided data is not accurate
+- Final score is not linear combination of variables
+- What else?
+
