@@ -373,6 +373,5 @@ The problems we want to solve naturally involve points in (scaled) simplices, so
 
 We will use <term>convex coordinates</m>, denoted <m>(a \, : \, b \, : c)</m>, to describe the point on the simplex with traditional coordinates(traditional coordinates).
 
-(intuitive definition of barycenter)
-
+(intuitive definition of barycenter
 --
